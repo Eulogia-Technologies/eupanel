@@ -3,6 +3,14 @@ import 'dart:io';
 
 import 'package:backend/services/system_user_service.dart';
 
+/// FTP credentials returned by the agent at creation time.
+/// The password is only available once — store it immediately.
+class FtpCredentials {
+  final String username;
+  final String password;
+  const FtpCredentials({required this.username, required this.password});
+}
+
 /// Calls the EuPanel Agent to create/delete FTP users.
 class FtpUserService {
   final String agentBaseUrl;
@@ -11,8 +19,8 @@ class FtpUserService {
   FtpUserService({required this.agentBaseUrl, required this.agentSecret});
 
   /// Creates an FTP user tied to a home directory.
-  /// Returns the FTP username on success.
-  Future<String> create({
+  /// Returns [FtpCredentials] with the username and one-time plaintext password.
+  Future<FtpCredentials> create({
     required String username,
     required String homeDirectory,
   }) async {
@@ -38,7 +46,10 @@ class FtpUserService {
         );
       }
 
-      return data['username']?.toString() ?? username;
+      return FtpCredentials(
+        username: data['username']?.toString() ?? username,
+        password: data['password']?.toString() ?? '',
+      );
     } on SocketException catch (e) {
       throw ProvisioningException(
         'Cannot reach agent at $agentBaseUrl — is the agent running? $e',
