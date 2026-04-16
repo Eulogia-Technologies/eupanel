@@ -1,0 +1,30 @@
+# Secrets — never commit real credentials
+*.env.local
+*.env.production
+*.env.staging
+backend/.env.local
+backend/.env.production
+
+# Dart/Flutter build artifacts
+backend/.dart_tool/pub/bin/
+backend/.dart_tool/pub/cache/
+backend/build/
+backend/.dart_tool/*.snapshot
+
+# Go build output
+eupanel-agent/bin/
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+frontend/.env.production
+frontend/out/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+*.swp
