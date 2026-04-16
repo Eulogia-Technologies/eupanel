@@ -22,6 +22,8 @@ void main(_, SendPort? sendPort) {
     // Phase 1
     Plan().table,
     Subscription().table,
+    // Phase 2
+    Domain().table,
     // Infrastructure
     Server().table,
     Site().table,
