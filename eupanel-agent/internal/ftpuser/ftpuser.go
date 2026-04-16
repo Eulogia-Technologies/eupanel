@@ -27,7 +27,7 @@ func Create(username, homeDirectory string) (string, string, error) {
 
 	// Ensure vsftpd is installed
 	if _, err := exec.LookPath("vsftpd"); err != nil {
-		return "", fmt.Errorf("vsftpd is not installed — run: apt install vsftpd")
+		return "", "", fmt.Errorf("vsftpd is not installed — run: apt install vsftpd")
 	}
 
 	// Generate a random password for this FTP user
@@ -36,7 +36,7 @@ func Create(username, homeDirectory string) (string, string, error) {
 	// Create per-user config directory
 	userConfDir := filepath.Join(vsftpdUserDir, username)
 	if err := os.MkdirAll(userConfDir, 0700); err != nil {
-		return "", fmt.Errorf("failed to create vsftpd user dir: %w", err)
+		return "", "", fmt.Errorf("failed to create vsftpd user dir: %w", err)
 	}
 
 	// Write per-user vsftpd config
@@ -46,19 +46,19 @@ download_enable=YES
 `, homeDirectory)
 	confPath := filepath.Join(vsftpdUserDir, username+".conf")
 	if err := os.WriteFile(confPath, []byte(userConf), 0600); err != nil {
-		return "", fmt.Errorf("failed to write vsftpd user config: %w", err)
+		return "", "", fmt.Errorf("failed to write vsftpd user config: %w", err)
 	}
 
 	// Add to virtual users password db
 	if err := addVirtualUser(username, password); err != nil {
 		os.Remove(confPath)
-		return "", fmt.Errorf("failed to add virtual FTP user: %w", err)
+		return "", "", fmt.Errorf("failed to add virtual FTP user: %w", err)
 	}
 
 	// Reload vsftpd
 	reloadVsftpd()
 
-	return username, nil
+	return username, password, nil
 }
 
 // Delete removes a virtual FTP user.
