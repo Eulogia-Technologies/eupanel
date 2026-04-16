@@ -52,6 +52,12 @@ class Subscription extends Model<Subscription> {
             isNullable: true,
           ),
           Column(
+            name: 'ftp_password',
+            type: ColumnType.string,
+            length: 64,
+            isNullable: true,
+          ),
+          Column(
             name: 'home_directory',
             type: ColumnType.string,
             length: 255,
