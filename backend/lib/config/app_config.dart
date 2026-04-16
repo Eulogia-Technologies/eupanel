@@ -39,6 +39,12 @@ class AppConfig {
   // ── Server ──────────────────────────────────────────────────────────────
   static int get appPort => int.tryParse(_env('APP_PORT', '4054')) ?? 4054;
 
+  // ── GitHub OAuth ────────────────────────────────────────────────────────
+  static String get githubClientId     => _env('GITHUB_CLIENT_ID', '');
+  static String get githubClientSecret => _env('GITHUB_CLIENT_SECRET', '');
+  static String get panelBaseUrl       => _env('PANEL_BASE_URL', 'http://localhost:4054');
+  static String get panelFrontendUrl   => _env('PANEL_FRONTEND_URL', 'http://localhost:3000');
+
   // ── Storage ─────────────────────────────────────────────────────────────
   static String get storagePath => _env('STORAGE_PATH', 'storage');
 
