@@ -18,8 +18,9 @@ const (
 )
 
 // Create creates a virtual FTP user for vsftpd.
-// Returns the generated FTP username.
-func Create(username, homeDirectory string) (string, error) {
+// Returns the FTP username and the generated plaintext password.
+// The password is only available at creation time — store it securely.
+func Create(username, homeDirectory string) (string, string, error) {
 	if !isValidFTPUsername(username) {
 		return "", fmt.Errorf("invalid FTP username: %q", username)
 	}
