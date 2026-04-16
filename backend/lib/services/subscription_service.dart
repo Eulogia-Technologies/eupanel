@@ -1,6 +1,5 @@
 import 'package:backend/models/plan_model.dart';
 import 'package:backend/models/subscription_model.dart';
-import 'package:backend/services/plan_service.dart';
 import 'package:backend/services/provisioning_service.dart';
 
 import 'package:flint_dart/flint_dart.dart';
