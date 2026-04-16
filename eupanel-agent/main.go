@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/eucloudhost/eupanel-agent/internal/api"
 	"github.com/eucloudhost/eupanel-agent/internal/config"
