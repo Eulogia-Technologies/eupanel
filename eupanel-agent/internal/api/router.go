@@ -49,6 +49,19 @@ func NewRouter(cfg *config.Config) http.Handler {
 		r.Get("/status", h.NginxStatus)
 	})
 
+	// Databases
+	r.Route("/databases", func(r chi.Router) {
+		r.Get("/", h.ListDatabases)
+		r.Post("/", h.CreateDatabase)
+		r.Delete("/{db}", h.DeleteDatabase)
+	})
+
+	// phpMyAdmin
+	r.Route("/phpmyadmin", func(r chi.Router) {
+		r.Get("/url", h.PMAUrl)
+		r.Post("/install", h.PMAInstall)
+	})
+
 	// System
 	r.Route("/system", func(r chi.Router) {
 		r.Get("/info", h.SystemInfo)
