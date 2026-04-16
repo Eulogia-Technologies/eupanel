@@ -230,3 +230,101 @@ func (h *Handlers) DiskUsage(w http.ResponseWriter, r *http.Request) {
 		"used_pct":    float64(used) / float64(total) * 100,
 	})
 }
+
+// ── System Users ──────────────────────────────────────────────────────────────
+
+type createSystemUserRequest struct {
+	Username   string `json:"username"`
+	PHPVersion string `json:"php_version"`
+}
+
+func (h *Handlers) CreateSystemUser(w http.ResponseWriter, r *http.Request) {
+	var req createSystemUserRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil || req.Username == "" {
+		respondErr(w, http.StatusBadRequest, "username is required")
+		return
+	}
+
+	homeDir, err := systemuser.Create(req.Username)
+	if err != nil {
+		respondErr(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	respond(w, http.StatusCreated, map[string]any{
+		"username":       req.Username,
+		"home_directory": homeDir,
+		"public_html":    homeDir + "/public_html",
+	})
+}
+
+func (h *Handlers) DeleteSystemUser(w http.ResponseWriter, r *http.Request) {
+	username := chi.URLParam(r, "username")
+	if err := systemuser.Delete(username); err != nil {
+		respondErr(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	respond(w, http.StatusOK, map[string]string{"deleted": username})
+}
+
+// ── FTP Users ─────────────────────────────────────────────────────────────────
+
+type createFTPUserRequest struct {
+	Username      string `json:"username"`
+	HomeDirectory string `json:"home_directory"`
+}
+
+func (h *Handlers) CreateFTPUser(w http.ResponseWriter, r *http.Request) {
+	var req createFTPUserRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil || req.Username == "" {
+		respondErr(w, http.StatusBadRequest, "username and home_directory are required")
+		return
+	}
+	if req.HomeDirectory == "" {
+		req.HomeDirectory = "/home/" + req.Username
+	}
+
+	username, err := ftpuser.Create(req.Username, req.HomeDirectory)
+	if err != nil {
+		respondErr(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	respond(w, http.StatusCreated, map[string]any{
+		"username":       username,
+		"home_directory": req.HomeDirectory,
+	})
+}
+
+func (h *Handlers) DeleteFTPUser(w http.ResponseWriter, r *http.Request) {
+	username := chi.URLParam(r, "username")
+	if err := ftpuser.Delete(username); err != nil {
+		respondErr(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	respond(w, http.StatusOK, map[string]string{"deleted": username})
+}
+
+// ── Database handlers (stubs — wired from router) ─────────────────────────────
+
+func (h *Handlers) ListDatabases(w http.ResponseWriter, r *http.Request) {
+	respond(w, http.StatusOK, map[string]any{"databases": []any{}})
+}
+
+func (h *Handlers) CreateDatabase(w http.ResponseWriter, r *http.Request) {
+	respondErr(w, http.StatusNotImplemented, "database creation coming in Phase 2")
+}
+
+func (h *Handlers) DeleteDatabase(w http.ResponseWriter, r *http.Request) {
+	respondErr(w, http.StatusNotImplemented, "database deletion coming in Phase 2")
+}
+
+// ── phpMyAdmin handlers (stubs) ───────────────────────────────────────────────
+
+func (h *Handlers) PMAUrl(w http.ResponseWriter, r *http.Request) {
+	respondErr(w, http.StatusNotImplemented, "phpMyAdmin coming in Phase 2")
+}
+
+func (h *Handlers) PMAInstall(w http.ResponseWriter, r *http.Request) {
+	respondErr(w, http.StatusNotImplemented, "phpMyAdmin coming in Phase 2")
+}
