@@ -74,6 +74,11 @@ func NewRouter(cfg *config.Config) http.Handler {
 		r.Delete("/{username}", h.DeleteFTPUser)
 	})
 
+	// Git Deploy (clone / pull on push)
+	r.Route("/git", func(r chi.Router) {
+		r.Post("/deploy", h.GitDeploy)
+	})
+
 	// System
 	r.Route("/system", func(r chi.Router) {
 		r.Get("/info", h.SystemInfo)
