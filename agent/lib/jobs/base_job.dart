@@ -13,7 +13,7 @@ abstract class BaseJob {
 
   /// Run a shell command, stream output to the job log, and throw on failure.
   Future<void> shell(String command, {String? workingDir}) async {
-    await api.logJob(jobId, '$ $command');
+    await api.logJob(jobId, r'$ ' + command);
 
     final result = await Process.run(
       'bash',
