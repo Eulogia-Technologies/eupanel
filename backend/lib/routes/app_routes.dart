@@ -41,6 +41,9 @@ class AppRoutes extends RouteGroup {
     app.routes(PlanRoutes());
     app.routes(SubscriptionRoutes());
 
+    // Phase 2: Domains
+    app.routes(DomainRoutes());
+
     app.routes(ServerRoutes());
     app.routes(SiteRoutes());
     app.routes(RuntimeRoutes());
