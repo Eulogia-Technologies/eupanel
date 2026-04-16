@@ -6,6 +6,7 @@ import 'package:backend/models/dns_record_model.dart';
 import 'package:backend/models/dns_zone_model.dart';
 import 'package:backend/models/job_model.dart';
 import 'package:backend/models/mail_account_model.dart';
+import 'package:backend/models/domain_model.dart';
 import 'package:backend/models/plan_model.dart';
 import 'package:backend/models/server_model.dart';
 import 'package:backend/models/site_model.dart';
