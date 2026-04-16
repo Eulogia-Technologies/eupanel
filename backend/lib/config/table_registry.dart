@@ -6,16 +6,22 @@ import 'package:backend/models/dns_record_model.dart';
 import 'package:backend/models/dns_zone_model.dart';
 import 'package:backend/models/job_model.dart';
 import 'package:backend/models/mail_account_model.dart';
+import 'package:backend/models/plan_model.dart';
 import 'package:backend/models/server_model.dart';
 import 'package:backend/models/site_model.dart';
 import 'package:backend/models/site_runtime_model.dart';
 import 'package:backend/models/ssl_certificate_model.dart';
+import 'package:backend/models/subscription_model.dart';
 import 'package:flint_dart/schema.dart';
 import 'package:backend/models/user_model.dart';
 
 void main(_, SendPort? sendPort) {
   runTableRegistry([
     User().table,
+    // Phase 1
+    Plan().table,
+    Subscription().table,
+    // Infrastructure
     Server().table,
     Site().table,
     SiteRuntime().table,
