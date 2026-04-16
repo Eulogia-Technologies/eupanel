@@ -1,0 +1,10 @@
+name: eupanel_agent
+description: Eupanel Agent — runs on managed servers and executes provisioning jobs.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.2.0
+
+dependencies:
+  http: ^1.2.0
