@@ -393,6 +393,12 @@ AGENT_SECRET=${AGENT_SECRET}
 AGENT_BASE_URL=http://127.0.0.1:${AGENT_PORT}
 
 STORAGE_PATH=${INSTALL_DIR}/backend/storage
+
+# GitHub OAuth (fill in after creating your OAuth App at github.com/settings/developers)
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+PANEL_BASE_URL=${PANEL_BASE_URL}
+PANEL_FRONTEND_URL=${PANEL_BASE_URL}
 ENV
 chmod 600 "${INSTALL_DIR}/backend/.env"
 
