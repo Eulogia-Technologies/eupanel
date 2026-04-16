@@ -35,11 +35,10 @@ class SubscriptionService {
     }
 
     // 2. Check user doesn't already have an active subscription on this plan
-    final existing = await Subscription().where({
-      'user_id': userId,
-      'plan_id': planId,
-      'status': 'active',
-    });
+    final userSubs = await Subscription().whereSimple('user_id', userId);
+    final existing = userSubs.where((s) =>
+        s.getAttribute('plan_id')?.toString() == planId &&
+        s.getAttribute('status')?.toString() == 'active').toList();
     if (existing.isNotEmpty) {
       throw ValidationException({
         'plan_id': ['You already have an active subscription to this plan.']
