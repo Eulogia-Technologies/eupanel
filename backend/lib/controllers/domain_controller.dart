@@ -1,12 +1,10 @@
 import 'package:flint_dart/flint_dart.dart';
 import 'package:backend/services/domain_service.dart';
-import 'package:backend/services/plan_service.dart';
 
 class DomainController extends Controller {
   final DomainService _service = DomainService();
 
-  /// GET /domains
-  /// Admin: all domains. User: pass ?subscription_id= to filter.
+  /// GET /domains?subscription_id=xxx
   Future<Response> index() async {
     try {
       final user = await req.user;
@@ -26,7 +24,6 @@ class DomainController extends Controller {
           userId: userId,
         );
       } else {
-        // No subscription_id — return empty rather than error
         domains = [];
       }
 
@@ -62,7 +59,6 @@ class DomainController extends Controller {
   }
 
   /// POST /domains
-  /// Body: { subscription_id, domain }
   Future<Response> create() async {
     try {
       final user = await req.user;
@@ -84,21 +80,18 @@ class DomainController extends Controller {
         adminEmail: email,
       );
 
-      // 201 if fully active, 202 if SSL failed but nginx is up
       final statusCode = domain['status'] == 'active' ? 201 : 202;
 
       return res.status(statusCode).json({
         'status': domain['status'] == 'failed' ? 'provisioning_failed' : 'success',
         'data': domain,
         if (domain['ssl_status'] == 'failed')
-          'warning': 'Domain is live on HTTP but SSL provisioning failed. Check provisioning_log.',
+          'warning': 'Domain is live on HTTP but SSL failed. See provisioning_log.',
       });
     } on ValidationException catch (e) {
       return res.status(422).json({'status': 'errors', 'errors': e.errors});
     } on NotFoundException catch (e) {
       return res.status(404).json({'status': 'error', 'message': e.message});
-    } on flint_ValidationException catch (e) {
-      return res.status(422).json({'status': 'errors', 'errors': e.errors});
     } catch (e) {
       return res.status(500).json({'status': 'error', 'message': e.toString()});
     }
@@ -127,6 +120,3 @@ class DomainController extends Controller {
   Response _unauthorized() =>
       res.status(401).json({'status': 'error', 'message': 'Unauthorized'});
 }
-
-// Alias to avoid name collision with our custom ValidationException
-typedef flint_ValidationException = ValidationException;

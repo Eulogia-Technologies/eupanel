@@ -113,7 +113,7 @@ class SubscriptionService {
   /// Cancels a subscription and deprovisions it from the server.
   Future<void> cancel(String id, {String? ownerId}) async {
     final sub = await Subscription().find(id);
-    if (sub == null) throw NotFoundException('Subscription not found.');
+    if (sub == null) throw NotFoundException(message: , 'Subscription not found.');
 
     if (ownerId != null && sub.userId != ownerId) {
       throw NotFoundException('Subscription not found.');
