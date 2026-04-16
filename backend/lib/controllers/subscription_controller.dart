@@ -111,6 +111,6 @@ class SubscriptionController extends Controller {
     }
   }
 
-  Response _unauthorized() =>
+  Future<Response> _unauthorized() =>
       res.status(401).json({'status': 'error', 'message': 'Unauthorized'});
 }
