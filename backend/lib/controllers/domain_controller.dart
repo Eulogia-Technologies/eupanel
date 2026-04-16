@@ -45,9 +45,12 @@ class DomainController extends Controller {
       final isAdmin = user['role']?.toString() == 'admin';
       final userId = user['id'].toString();
 
-      final domain = await _service.findById(id, ownerId: isAdmin ? null : userId);
+      final domain =
+          await _service.findById(id, ownerId: isAdmin ? null : userId);
       if (domain == null) {
-        return res.status(404).json({'status': 'error', 'message': 'Domain not found.'});
+        return res
+            .status(404)
+            .json({'status': 'error', 'message': 'Domain not found.'});
       }
 
       return res.json({'status': 'success', 'data': domain});
@@ -83,10 +86,12 @@ class DomainController extends Controller {
       final statusCode = domain['status'] == 'active' ? 201 : 202;
 
       return res.status(statusCode).json({
-        'status': domain['status'] == 'failed' ? 'provisioning_failed' : 'success',
+        'status':
+            domain['status'] == 'failed' ? 'provisioning_failed' : 'success',
         'data': domain,
         if (domain['ssl_status'] == 'failed')
-          'warning': 'Domain is live on HTTP but SSL failed. See provisioning_log.',
+          'warning':
+              'Domain is live on HTTP but SSL failed. See provisioning_log.',
       });
     } on ValidationException catch (e) {
       return res.status(422).json({'status': 'errors', 'errors': e.errors});

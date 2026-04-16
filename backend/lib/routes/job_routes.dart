@@ -1,5 +1,4 @@
 import 'package:backend/controllers/job_controller.dart';
-import 'package:backend/middlewares/auth_middleware.dart';
 import 'package:backend/middlewares/agent_middleware.dart';
 import 'package:flint_dart/flint_dart.dart';
 
