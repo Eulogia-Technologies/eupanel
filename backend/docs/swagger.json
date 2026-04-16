@@ -1187,6 +1187,19 @@
           }
         ]
       }
+    },
+    "/webhooks/github": {
+      "post": {
+        "summary": "",
+        "tags": [
+          "Default"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

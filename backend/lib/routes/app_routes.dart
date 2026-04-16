@@ -14,6 +14,8 @@ import 'site_routes.dart';
 import 'ssl_routes.dart';
 import 'subscription_routes.dart';
 import 'user_routes.dart';
+import 'github_routes.dart';
+import 'webhook_routes.dart';
 
 /// Main route group for the entire app
 class AppRoutes extends RouteGroup {
