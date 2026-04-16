@@ -56,8 +56,9 @@ func (h *Handlers) ListDomains(w http.ResponseWriter, r *http.Request) {
 }
 
 type createDomainRequest struct {
-	Domain string `json:"domain"`
-	PHP    string `json:"php_version"` // e.g. "8.3"
+	Domain     string `json:"domain"`
+	RootPath   string `json:"root_path"`   // optional — if empty, defaults to /var/www/{domain}/public
+	PHP        string `json:"php_version"` // e.g. "8.3"
 }
 
 func (h *Handlers) CreateDomain(w http.ResponseWriter, r *http.Request) {
@@ -67,17 +68,24 @@ func (h *Handlers) CreateDomain(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// 1. Create web root
-	webRoot := filepath.Join(h.cfg.WebRoot, req.Domain, "public")
+	// 1. Resolve web root
+	// If root_path is provided (subscription-based flow), use it directly.
+	// Otherwise fall back to /var/www/{domain}/public for standalone use.
+	webRoot := req.RootPath
+	if webRoot == "" {
+		webRoot = filepath.Join(h.cfg.WebRoot, req.Domain, "public")
+	}
+
+	// Ensure the directory exists (it may already exist from subscription provisioning)
 	if err := os.MkdirAll(webRoot, 0755); err != nil {
 		respondErr(w, http.StatusInternalServerError, "failed to create web root: "+err.Error())
 		return
 	}
 
-	// 2. Write index.html placeholder
+	// 2. Write index.html placeholder only if directory is empty
 	index := filepath.Join(webRoot, "index.html")
 	if _, err := os.Stat(index); os.IsNotExist(err) {
-		placeholder := "<!DOCTYPE html><html><body><h1>" + req.Domain + " is live on EuPanel</h1></body></html>"
+		placeholder := "<!DOCTYPE html><html><head><title>" + req.Domain + "</title></head><body><h1>" + req.Domain + " is live on EuPanel</h1></body></html>"
 		os.WriteFile(index, []byte(placeholder), 0644)
 	}
 
