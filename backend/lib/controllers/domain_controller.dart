@@ -117,6 +117,6 @@ class DomainController extends Controller {
     }
   }
 
-  Future<Response>esponse> _unauthorized() =>
+  Future<Response> _unauthorized() =>
       res.status(401).json({'status': 'error', 'message': 'Unauthorized'});
 }
