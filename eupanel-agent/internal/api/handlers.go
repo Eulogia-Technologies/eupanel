@@ -342,6 +342,43 @@ func (h *Handlers) DeleteFTPUser(w http.ResponseWriter, r *http.Request) {
 	respond(w, http.StatusOK, map[string]string{"deleted": username})
 }
 
+// ── Git Deploy ────────────────────────────────────────────────────────────────
+
+type gitDeployRequest struct {
+	RepoURL    string `json:"repo_url"`
+	Branch     string `json:"branch"`
+	DeployPath string `json:"deploy_path"`
+}
+
+func (h *Handlers) GitDeploy(w http.ResponseWriter, r *http.Request) {
+	var req gitDeployRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		respondErr(w, http.StatusBadRequest, "invalid request body")
+		return
+	}
+	if req.RepoURL == "" || req.DeployPath == "" {
+		respondErr(w, http.StatusBadRequest, "repo_url and deploy_path are required")
+		return
+	}
+	if req.Branch == "" {
+		req.Branch = "main"
+	}
+
+	result, err := gitdeploy.Deploy(req.RepoURL, req.Branch, req.DeployPath)
+	if err != nil {
+		respondErr(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	respond(w, http.StatusOK, map[string]any{
+		"repo_url":    req.RepoURL,
+		"branch":      req.Branch,
+		"deploy_path": req.DeployPath,
+		"cloned":      result.Cloned,
+		"log":         result.Log,
+	})
+}
+
 // ── Database handlers (stubs — wired from router) ─────────────────────────────
 
 func (h *Handlers) ListDatabases(w http.ResponseWriter, r *http.Request) {
