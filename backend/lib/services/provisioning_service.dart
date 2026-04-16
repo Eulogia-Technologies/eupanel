@@ -62,7 +62,7 @@ class ProvisioningService {
 
       // ── Step 2: Create FTP user ─────────────────────────────────────────
       stdout.writeln('[Provisioning] Creating FTP user: ${sub.ftpUsername}');
-      await ftpUserSvc.create(
+      final ftpCreds = await ftpUserSvc.create(
         username: sub.ftpUsername!,
         homeDirectory: homeDirectory,
       );
@@ -70,6 +70,7 @@ class ProvisioningService {
       // ── Step 3: Mark active ─────────────────────────────────────────────
       await sub.update(id: subscriptionId, data: {
         'home_directory': homeDirectory,
+        'ftp_password': ftpCreds.password, // only time this is available
         'status': 'active',
         'provisioning_status': 'success',
         'provisioning_log':
