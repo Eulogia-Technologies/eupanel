@@ -55,5 +55,9 @@ class AppRoutes extends RouteGroup {
     app.routes(JobRoutes());
     app.routes(BackupRoutes());
     app.routes(MailRoutes());
+
+    // GitHub OAuth + auto-deploy
+    app.routes(GithubRoutes());
+    app.routes(WebhookRoutes());
   }
 }
