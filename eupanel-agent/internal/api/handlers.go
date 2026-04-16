@@ -143,7 +143,9 @@ func (h *Handlers) DeleteDomain(w http.ResponseWriter, r *http.Request) {
 // ── SSL ───────────────────────────────────────────────────────────────────────
 
 type sslRequest struct {
-	Email string `json:"email"`
+	Email    string `json:"email"`
+	RootPath string `json:"root_path"`   // must match the path used when the domain was created
+	PHP      string `json:"php_version"` // e.g. "8.3"
 }
 
 func (h *Handlers) IssueSSL(w http.ResponseWriter, r *http.Request) {
@@ -156,11 +158,23 @@ func (h *Handlers) IssueSSL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Update nginx vhost to SSL
+	// Resolve web root — use provided path or fall back to convention.
+	// IMPORTANT: must match the path used when the domain was first created,
+	// otherwise the rewritten vhost will serve from the wrong directory.
+	webRoot := req.RootPath
+	if webRoot == "" {
+		webRoot = filepath.Join(h.cfg.WebRoot, d, "public")
+	}
+	phpVersion := req.PHP
+	if phpVersion == "" {
+		phpVersion = "8.3"
+	}
+
+	// Rewrite nginx vhost with SSL enabled
 	vhostCfg := nginx.VhostConfig{
 		Domain:     d,
-		WebRoot:    filepath.Join(h.cfg.WebRoot, d, "public"),
-		PHPVersion: "8.3",
+		WebRoot:    webRoot,
+		PHPVersion: phpVersion,
 		SSL:        true,
 	}
 	nginx.WriteVhost(h.cfg.NginxSitesDir, vhostCfg)
