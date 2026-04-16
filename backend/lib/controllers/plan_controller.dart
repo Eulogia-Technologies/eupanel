@@ -21,19 +21,17 @@ class PlanController extends Controller {
     }
   }
 
-  /// GET /plans/:id — single plan
+  /// GET /plans/:id
   Future<Response> show() async {
     try {
       final id = req.params['id'];
       if (id == null) {
         return res.status(400).json({'status': 'error', 'message': 'Plan id is required.'});
       }
-
       final plan = await _service.findById(id);
       if (plan == null) {
         return res.status(404).json({'status': 'error', 'message': 'Plan not found.'});
       }
-
       return res.json({'status': 'success', 'data': plan});
     } catch (e) {
       return res.status(500).json({'status': 'error', 'message': e.toString()});
@@ -60,7 +58,6 @@ class PlanController extends Controller {
       if (id == null) {
         return res.status(400).json({'status': 'error', 'message': 'Plan id is required.'});
       }
-
       final body = await req.json();
       final plan = await _service.update(id, body);
       return res.json({'status': 'success', 'data': plan});
@@ -80,7 +77,6 @@ class PlanController extends Controller {
       if (id == null) {
         return res.status(400).json({'status': 'error', 'message': 'Plan id is required.'});
       }
-
       await _service.delete(id);
       return res.json({'status': 'success', 'message': 'Plan deleted.'});
     } on NotFoundException catch (e) {
