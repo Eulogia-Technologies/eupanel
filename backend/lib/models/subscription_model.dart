@@ -9,6 +9,7 @@ class Subscription extends Model<Subscription> {
   String? get serverId => getAttribute("server_id");
   String? get systemUsername => getAttribute("system_username");
   String? get ftpUsername => getAttribute("ftp_username");
+  String? get ftpPassword => getAttribute("ftp_password");
   String? get homeDirectory => getAttribute("home_directory");
   String? get status => getAttribute("status");
   String? get provisioningStatus => getAttribute("provisioning_status");
