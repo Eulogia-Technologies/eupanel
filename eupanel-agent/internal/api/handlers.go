@@ -13,7 +13,9 @@ import (
 	"github.com/eucloudhost/eupanel-agent/internal/certbot"
 	"github.com/eucloudhost/eupanel-agent/internal/config"
 	"github.com/eucloudhost/eupanel-agent/internal/domain"
+	"github.com/eucloudhost/eupanel-agent/internal/ftpuser"
 	"github.com/eucloudhost/eupanel-agent/internal/nginx"
+	"github.com/eucloudhost/eupanel-agent/internal/systemuser"
 )
 
 type Handlers struct {
