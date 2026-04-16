@@ -1,6 +1,8 @@
 import 'dart:isolate';
 
 import 'package:backend/models/backup_model.dart';
+import 'package:backend/models/git_deploy_model.dart';
+import 'package:backend/models/github_token_model.dart';
 import 'package:backend/models/database_model.dart';
 import 'package:backend/models/dns_record_model.dart';
 import 'package:backend/models/dns_zone_model.dart';
