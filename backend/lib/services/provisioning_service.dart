@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flint_dart/flint_dart.dart';
 
 import 'package:backend/models/server_model.dart';
 import 'package:backend/models/subscription_model.dart';
@@ -52,7 +53,8 @@ class ProvisioningService {
 
     try {
       // ── Step 1: Create system user ──────────────────────────────────────
-      stdout.writeln('[Provisioning] Creating system user: ${sub.systemUsername}');
+      stdout.writeln(
+          '[Provisioning] Creating system user: ${sub.systemUsername}');
       homeDirectory = await systemUserSvc.create(
         username: sub.systemUsername!,
       );
@@ -70,10 +72,12 @@ class ProvisioningService {
         'home_directory': homeDirectory,
         'status': 'active',
         'provisioning_status': 'success',
-        'provisioning_log': 'Provisioned at ${DateTime.now().toIso8601String()}',
+        'provisioning_log':
+            'Provisioned at ${DateTime.now().toIso8601String()}',
       });
 
-      stdout.writeln('[Provisioning] ✓ Subscription $subscriptionId is active.');
+      stdout
+          .writeln('[Provisioning] ✓ Subscription $subscriptionId is active.');
       return true;
     } catch (e) {
       final errorMsg = e.toString();
@@ -112,8 +116,10 @@ class ProvisioningService {
     final agentUrl = await _resolveAgentUrl(sub.serverId);
     final agentSecret = await _resolveAgentSecret(sub.serverId);
 
-    final systemUserSvc = SystemUserService(agentBaseUrl: agentUrl, agentSecret: agentSecret);
-    final ftpUserSvc = FtpUserService(agentBaseUrl: agentUrl, agentSecret: agentSecret);
+    final systemUserSvc =
+        SystemUserService(agentBaseUrl: agentUrl, agentSecret: agentSecret);
+    final ftpUserSvc =
+        FtpUserService(agentBaseUrl: agentUrl, agentSecret: agentSecret);
 
     // Best-effort: log but don't throw
     try {
@@ -123,7 +129,8 @@ class ProvisioningService {
     }
 
     try {
-      if (sub.systemUsername != null) await systemUserSvc.delete(sub.systemUsername!);
+      if (sub.systemUsername != null)
+        await systemUserSvc.delete(sub.systemUsername!);
     } catch (e) {
       stderr.writeln('[Deprovisioning] System user removal warning: $e');
     }
@@ -162,6 +169,7 @@ class ProvisioningService {
       }
     }
     // Fallback to env
-    return Platform.environment['AGENT_SECRET'] ?? 'change-me-before-production';
+    return Platform.environment['AGENT_SECRET'] ??
+        'change-me-before-production';
   }
 }

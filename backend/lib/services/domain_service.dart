@@ -2,6 +2,7 @@ import 'package:backend/models/domain_model.dart';
 import 'package:backend/models/subscription_model.dart';
 import 'package:backend/services/domain_provisioning_service.dart';
 import 'package:backend/services/plan_service.dart';
+import 'package:flint_dart/flint_dart.dart';
 
 /// Handles domain CRUD, validation, and provisioning orchestration.
 class DomainService {
@@ -22,7 +23,9 @@ class DomainService {
     // 1. Validate domain format
     final cleanDomain = domain.trim().toLowerCase();
     if (!_isValidDomain(cleanDomain)) {
-      throw ValidationException({'domain': ['Invalid domain format. Use example.com or sub.example.com']});
+      throw ValidationException({
+        'domain': ['Invalid domain format. Use example.com or sub.example.com']
+      });
     }
 
     // 2. Check subscription exists and user owns it
@@ -34,17 +37,22 @@ class DomainService {
       throw NotFoundException('Subscription not found.');
     }
     if (sub.status != 'active') {
-      throw ValidationException({'subscription_id': ['Subscription is not active. Provision it first.']});
+      throw ValidationException({
+        'subscription_id': ['Subscription is not active. Provision it first.']
+      });
     }
 
     // 3. Check domain doesn't already exist globally
     final existing = await Domain().whereSimple('domain', cleanDomain);
     if (existing.isNotEmpty) {
-      throw ValidationException({'domain': ['This domain is already registered.']});
+      throw ValidationException({
+        'domain': ['This domain is already registered.']
+      });
     }
 
     // 4. Root path comes from the subscription's home directory
-    final rootPath = '${sub.homeDirectory ?? '/home/${sub.systemUsername}'}/public_html';
+    final rootPath =
+        '${sub.homeDirectory ?? '/home/${sub.systemUsername}'}/public_html';
 
     // 5. Create domain record (starts as pending)
     final domainRecord = await Domain().create({
@@ -87,7 +95,8 @@ class DomainService {
       throw NotFoundException('Subscription not found.');
     }
 
-    final domains = await Domain().whereSimple('subscription_id', subscriptionId);
+    final domains =
+        await Domain().whereSimple('subscription_id', subscriptionId);
     return domains.map((d) => d.toMap()).toList();
   }
 

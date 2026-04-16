@@ -3,6 +3,8 @@ import 'package:backend/models/subscription_model.dart';
 import 'package:backend/services/plan_service.dart';
 import 'package:backend/services/provisioning_service.dart';
 
+import 'package:flint_dart/flint_dart.dart';
+
 /// Handles subscription creation, lookup, and cancellation.
 /// Delegates provisioning to ProvisioningService.
 class SubscriptionService {
@@ -27,7 +29,9 @@ class SubscriptionService {
       throw NotFoundException('Plan not found.');
     }
     if (plan.status != 'active') {
-      throw ValidationException({'plan_id': ['This plan is not available.']});
+      throw ValidationException({
+        'plan_id': ['This plan is not available.']
+      });
     }
 
     // 2. Check user doesn't already have an active subscription on this plan
@@ -72,7 +76,8 @@ class SubscriptionService {
     final result = updated?.toMap() ?? sub.toMap();
 
     if (!success) {
-      result['_warning'] = 'Provisioning failed. See provisioning_log for details.';
+      result['_warning'] =
+          'Provisioning failed. See provisioning_log for details.';
     }
 
     return result;
@@ -116,7 +121,9 @@ class SubscriptionService {
     }
 
     if (sub.status == 'cancelled') {
-      throw ValidationException({'status': ['Subscription is already cancelled.']});
+      throw ValidationException({
+        'status': ['Subscription is already cancelled.']
+      });
     }
 
     await _provisioning.deprovision(id);
@@ -133,7 +140,8 @@ class SubscriptionService {
 
     while (true) {
       final candidate = 'eu$shortId${counter.toString().padLeft(3, '0')}';
-      final existing = await Subscription().whereSimple('system_username', candidate);
+      final existing =
+          await Subscription().whereSimple('system_username', candidate);
       if (existing.isEmpty) return candidate;
       counter++;
       if (counter > 999) {

@@ -5,6 +5,7 @@ import 'package:backend/models/server_model.dart';
 import 'package:backend/models/subscription_model.dart';
 import 'package:backend/services/nginx_service.dart';
 import 'package:backend/services/ssl_service.dart';
+import 'package:flint_dart/flint_dart.dart';
 
 /// Orchestrates the full domain provisioning flow:
 ///   1. Create nginx vhost via agent
@@ -26,21 +27,25 @@ class DomainProvisioningService {
     required String adminEmail,
   }) async {
     final domainRecord = await Domain().find(domainId);
-    if (domainRecord == null) throw ArgumentError('Domain $domainId not found.');
+    if (domainRecord == null)
+      throw ArgumentError('Domain $domainId not found.');
 
     final sub = await Subscription().find(domainRecord.subscriptionId!);
-    if (sub == null) throw ArgumentError('Subscription not found for domain $domainId.');
+    if (sub == null)
+      throw ArgumentError('Subscription not found for domain $domainId.');
 
     final agentUrl = await _resolveAgentUrl(sub.serverId);
     final agentSecret = await _resolveAgentSecret(sub.serverId);
 
-    final nginxSvc = NginxService(agentBaseUrl: agentUrl, agentSecret: agentSecret);
+    final nginxSvc =
+        NginxService(agentBaseUrl: agentUrl, agentSecret: agentSecret);
     final sslSvc = SslService(agentBaseUrl: agentUrl, agentSecret: agentSecret);
 
     // ── Step 1: Nginx vhost ───────────────────────────────────────────────────
     String nginxConfigPath;
     try {
-      stdout.writeln('[DomainProvisioning] Creating nginx vhost: ${domainRecord.domain}');
+      stdout.writeln(
+          '[DomainProvisioning] Creating nginx vhost: ${domainRecord.domain}');
       nginxConfigPath = await nginxSvc.createVhost(
         domain: domainRecord.domain!,
         rootPath: domainRecord.rootPath!,
@@ -64,7 +69,8 @@ class DomainProvisioningService {
 
     // ── Step 2: SSL certificate ───────────────────────────────────────────────
     try {
-      stdout.writeln('[DomainProvisioning] Issuing SSL for: ${domainRecord.domain}');
+      stdout.writeln(
+          '[DomainProvisioning] Issuing SSL for: ${domainRecord.domain}');
       await sslSvc.issue(domain: domainRecord.domain!, email: adminEmail);
 
       await domainRecord.update(id: domainId, data: {
@@ -94,7 +100,8 @@ class DomainProvisioningService {
     final agentUrl = await _resolveAgentUrl(sub?.serverId);
     final agentSecret = await _resolveAgentSecret(sub?.serverId);
 
-    final nginxSvc = NginxService(agentBaseUrl: agentUrl, agentSecret: agentSecret);
+    final nginxSvc =
+        NginxService(agentBaseUrl: agentUrl, agentSecret: agentSecret);
     try {
       await nginxSvc.removeVhost(domainRecord.domain!);
     } catch (e) {
@@ -123,9 +130,11 @@ class DomainProvisioningService {
       final server = await Server().find(serverId);
       if (server != null) {
         final secret = server.getAttribute('agent_secret');
-        if (secret != null && secret.toString().isNotEmpty) return secret.toString();
+        if (secret != null && secret.toString().isNotEmpty)
+          return secret.toString();
       }
     }
-    return Platform.environment['AGENT_SECRET'] ?? 'change-me-before-production';
+    return Platform.environment['AGENT_SECRET'] ??
+        'change-me-before-production';
   }
 }
