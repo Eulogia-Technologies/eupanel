@@ -143,7 +143,7 @@ func (h *Handlers) DeleteDomain(w http.ResponseWriter, r *http.Request) {
 
 	// Only remove files for standalone domains that explicitly request it.
 	// Never delete subscription home directories (under /home/).
-	if req.RemoveFiles && req.RootPath != "" && !filepath.HasPrefix(req.RootPath, "/home/") {
+	if req.RemoveFiles && req.RootPath != "" && !strings.HasPrefix(req.RootPath, "/home/") {
 		os.RemoveAll(req.RootPath)
 	}
 
