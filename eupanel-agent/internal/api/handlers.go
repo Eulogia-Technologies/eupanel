@@ -317,14 +317,17 @@ func (h *Handlers) CreateFTPUser(w http.ResponseWriter, r *http.Request) {
 		req.HomeDirectory = "/home/" + req.Username
 	}
 
-	username, err := ftpuser.Create(req.Username, req.HomeDirectory)
+	username, password, err := ftpuser.Create(req.Username, req.HomeDirectory)
 	if err != nil {
 		respondErr(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
+	// Return the password here — this is the only time it is ever visible.
+	// The backend must store it securely; the agent does not persist it.
 	respond(w, http.StatusCreated, map[string]any{
 		"username":       username,
+		"password":       password,
 		"home_directory": req.HomeDirectory,
 	})
 }
