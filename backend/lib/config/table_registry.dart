@@ -37,5 +37,8 @@ void main(_, SendPort? sendPort) {
     Job().table,
     Backup().table,
     MailAccount().table,
+    // GitHub integration
+    GithubToken().table,
+    GitDeploy().table,
   ], _, sendPort);
 }
