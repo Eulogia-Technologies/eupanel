@@ -6,6 +6,7 @@ import 'database_routes.dart';
 import 'dns_routes.dart';
 import 'job_routes.dart';
 import 'mail_routes.dart';
+import 'domain_routes.dart';
 import 'plan_routes.dart';
 import 'runtime_routes.dart';
 import 'server_routes.dart';
