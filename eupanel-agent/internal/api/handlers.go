@@ -15,6 +15,7 @@ import (
 	"github.com/eucloudhost/eupanel-agent/internal/config"
 	"github.com/eucloudhost/eupanel-agent/internal/domain"
 	"github.com/eucloudhost/eupanel-agent/internal/ftpuser"
+	"github.com/eucloudhost/eupanel-agent/internal/gitdeploy"
 	"github.com/eucloudhost/eupanel-agent/internal/nginx"
 	"github.com/eucloudhost/eupanel-agent/internal/systemuser"
 )
