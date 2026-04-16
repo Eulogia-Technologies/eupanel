@@ -122,6 +122,11 @@ func (h *Handlers) CreateDomain(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+type deleteDomainRequest struct {
+	RemoveFiles bool   `json:"remove_files"` // only true for standalone (non-subscription) domains
+	RootPath    string `json:"root_path"`    // only used when remove_files=true
+}
+
 func (h *Handlers) DeleteDomain(w http.ResponseWriter, r *http.Request) {
 	d := chi.URLParam(r, "domain")
 	if d == "" {
@@ -129,13 +134,18 @@ func (h *Handlers) DeleteDomain(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Remove nginx config
+	var req deleteDomainRequest
+	json.NewDecoder(r.Body).Decode(&req) // ignore decode error — body is optional
+
+	// Always remove nginx config and reload
 	nginx.RemoveVhost(h.cfg.NginxSitesDir, d)
 	nginx.Reload(h.cfg.NginxBin)
 
-	// Remove web root
-	webRoot := filepath.Join(h.cfg.WebRoot, d)
-	os.RemoveAll(webRoot)
+	// Only remove files for standalone domains that explicitly request it.
+	// Never delete subscription home directories (under /home/).
+	if req.RemoveFiles && req.RootPath != "" && !filepath.HasPrefix(req.RootPath, "/home/") {
+		os.RemoveAll(req.RootPath)
+	}
 
 	respond(w, http.StatusOK, map[string]string{"deleted": d})
 }
