@@ -19,49 +19,14 @@ class Plan extends Model<Plan> {
         name: 'plans',
         columns: [
           Column(name: 'name', type: ColumnType.string, length: 100),
-          Column(
-            name: 'description',
-            type: ColumnType.text,
-            isNullable: true,
-          ),
-          Column(
-            name: 'disk_limit',
-            type: ColumnType.integer,
-            comment: 'Disk limit in MB',
-          ),
-          Column(
-            name: 'bandwidth_limit',
-            type: ColumnType.integer,
-            comment: 'Bandwidth limit in MB',
-          ),
-          Column(
-            name: 'ftp_accounts_limit',
-            type: ColumnType.integer,
-            defaultValue: 1,
-          ),
-          Column(
-            name: 'database_limit',
-            type: ColumnType.integer,
-            defaultValue: 1,
-          ),
-          Column(
-            name: 'domain_limit',
-            type: ColumnType.integer,
-            defaultValue: 1,
-          ),
-          Column(
-            name: 'price',
-            type: ColumnType.decimal,
-            isNullable: true,
-            comment: 'Monthly price — optional in Phase 1',
-          ),
-          Column(
-            name: 'status',
-            type: ColumnType.string,
-            length: 20,
-            defaultValue: 'active',
-            comment: 'active | inactive',
-          ),
+          Column(name: 'description', type: ColumnType.text, isNullable: true),
+          Column(name: 'disk_limit', type: ColumnType.integer),
+          Column(name: 'bandwidth_limit', type: ColumnType.integer),
+          Column(name: 'ftp_accounts_limit', type: ColumnType.integer, defaultValue: 1),
+          Column(name: 'database_limit', type: ColumnType.integer, defaultValue: 1),
+          Column(name: 'domain_limit', type: ColumnType.integer, defaultValue: 1),
+          Column(name: 'price', type: ColumnType.double, isNullable: true),
+          Column(name: 'status', type: ColumnType.string, length: 20, defaultValue: 'active'),
         ],
       );
 }

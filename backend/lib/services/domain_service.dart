@@ -31,10 +31,10 @@ class DomainService {
     // 2. Check subscription exists and user owns it
     final sub = await Subscription().find(subscriptionId);
     if (sub == null) {
-      throw NotFoundException('Subscription not found.');
+      throw NotFoundException(message: 'Subscription not found.');
     }
     if (sub.userId != userId) {
-      throw NotFoundException('Subscription not found.');
+      throw NotFoundException(message: 'Subscription not found.');
     }
     if (sub.status != 'active') {
       throw ValidationException({
@@ -92,7 +92,7 @@ class DomainService {
     // Verify ownership
     final sub = await Subscription().find(subscriptionId);
     if (sub == null || sub.userId != userId) {
-      throw NotFoundException('Subscription not found.');
+      throw NotFoundException(message: 'Subscription not found.');
     }
 
     final domains =
@@ -114,7 +114,7 @@ class DomainService {
     if (ownerId != null) {
       final sub = await Subscription().find(domainRecord.subscriptionId!);
       if (sub == null || sub.userId != ownerId) {
-        throw NotFoundException('Domain not found.');
+        throw NotFoundException(message: 'Domain not found.');
       }
     }
 
@@ -124,12 +124,13 @@ class DomainService {
   /// Deletes a domain and removes its nginx config from the server.
   Future<void> delete(String id, {String? ownerId}) async {
     final domainRecord = await Domain().find(id);
-    if (domainRecord == null) throw NotFoundException('Domain not found.');
+    if (domainRecord == null)
+      throw NotFoundException(message: 'Domain not found.');
 
     if (ownerId != null) {
       final sub = await Subscription().find(domainRecord.subscriptionId!);
       if (sub == null || sub.userId != ownerId) {
-        throw NotFoundException('Domain not found.');
+        throw NotFoundException(message: 'Domain not found.');
       }
     }
 

@@ -52,7 +52,7 @@ class PlanService {
   Future<Map<String, dynamic>> update(
       String id, Map<String, dynamic> data) async {
     final plan = await Plan().find(id);
-    if (plan == null) throw NotFoundException('Plan not found.');
+    if (plan == null) throw NotFoundException(message: 'Plan not found.');
 
     final updateData = <String, dynamic>{};
     if (data.containsKey('name'))
@@ -93,7 +93,7 @@ class PlanService {
   /// Deletes a plan. Throws if plan has active subscriptions.
   Future<void> delete(String id) async {
     final plan = await Plan().find(id);
-    if (plan == null) throw NotFoundException('Plan not found.');
+    if (plan == null) throw NotFoundException(message: 'Plan not found.');
     await plan.delete(id);
   }
 

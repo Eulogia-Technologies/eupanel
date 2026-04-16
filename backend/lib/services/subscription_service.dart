@@ -26,7 +26,7 @@ class SubscriptionService {
     // 1. Validate plan exists and is active
     final plan = await Plan().find(planId);
     if (plan == null) {
-      throw NotFoundException('Plan not found.');
+      throw NotFoundException(message: 'Plan not found.');
     }
     if (plan.status != 'active') {
       throw ValidationException({
@@ -36,9 +36,11 @@ class SubscriptionService {
 
     // 2. Check user doesn't already have an active subscription on this plan
     final userSubs = await Subscription().whereSimple('user_id', userId);
-    final existing = userSubs.where((s) =>
-        s.getAttribute('plan_id')?.toString() == planId &&
-        s.getAttribute('status')?.toString() == 'active').toList();
+    final existing = userSubs
+        .where((s) =>
+            s.getAttribute('plan_id')?.toString() == planId &&
+            s.getAttribute('status')?.toString() == 'active')
+        .toList();
     if (existing.isNotEmpty) {
       throw ValidationException({
         'plan_id': ['You already have an active subscription to this plan.']
@@ -104,7 +106,7 @@ class SubscriptionService {
 
     // Ownership check
     if (ownerId != null && sub.userId != ownerId) {
-      throw NotFoundException('Subscription not found.');
+      throw NotFoundException(message: 'Subscription not found.');
     }
 
     return sub.toMap();
@@ -113,10 +115,11 @@ class SubscriptionService {
   /// Cancels a subscription and deprovisions it from the server.
   Future<void> cancel(String id, {String? ownerId}) async {
     final sub = await Subscription().find(id);
-    if (sub == null) throw NotFoundException(message: , 'Subscription not found.');
+    if (sub == null)
+      throw NotFoundException(message: 'Subscription not found.');
 
     if (ownerId != null && sub.userId != ownerId) {
-      throw NotFoundException('Subscription not found.');
+      throw NotFoundException(message: 'Subscription not found.');
     }
 
     if (sub.status == 'cancelled') {
