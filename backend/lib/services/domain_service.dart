@@ -1,7 +1,6 @@
 import 'package:backend/models/domain_model.dart';
 import 'package:backend/models/subscription_model.dart';
 import 'package:backend/services/domain_provisioning_service.dart';
-import 'package:backend/services/plan_service.dart';
 import 'package:flint_dart/flint_dart.dart';
 
 /// Handles domain CRUD, validation, and provisioning orchestration.
