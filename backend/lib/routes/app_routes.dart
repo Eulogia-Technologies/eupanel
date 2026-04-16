@@ -36,6 +36,10 @@ class AppRoutes extends RouteGroup {
       children: [],
     );
 
+    // Phase 1: Plans + Subscriptions
+    app.routes(PlanRoutes());
+    app.routes(SubscriptionRoutes());
+
     app.routes(ServerRoutes());
     app.routes(SiteRoutes());
     app.routes(RuntimeRoutes());
