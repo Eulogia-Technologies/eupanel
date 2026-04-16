@@ -62,6 +62,18 @@ func NewRouter(cfg *config.Config) http.Handler {
 		r.Post("/install", h.PMAInstall)
 	})
 
+	// System Users (Phase 1 — provisioning)
+	r.Route("/system-users", func(r chi.Router) {
+		r.Post("/", h.CreateSystemUser)
+		r.Delete("/{username}", h.DeleteSystemUser)
+	})
+
+	// FTP Users (Phase 1 — provisioning)
+	r.Route("/ftp-users", func(r chi.Router) {
+		r.Post("/", h.CreateFTPUser)
+		r.Delete("/{username}", h.DeleteFTPUser)
+	})
+
 	// System
 	r.Route("/system", func(r chi.Router) {
 		r.Get("/info", h.SystemInfo)
