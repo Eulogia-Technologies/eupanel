@@ -34,6 +34,5 @@ func main() {
 
 	if err := http.ListenAndServe(addr, router); err != nil {
 		log.Fatalf("Server failed: %v", err)
-		os.Exit(1)
 	}
 }
