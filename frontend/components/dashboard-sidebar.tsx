@@ -15,6 +15,8 @@ import {
 type SidebarProps = {
   role: DashboardRole;
   onLogout: () => void;
+  open?: boolean;
+  onClose?: () => void;
 };
 
 // Map nav labels to icons
@@ -45,7 +47,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: 
 
 type StoredUser = { name?: string; email?: string; role?: string };
 
-export function DashboardSidebar({ role, onLogout }: SidebarProps) {
+export function DashboardSidebar({ role, onLogout, open, onClose }: SidebarProps) {
   const groups = sidebarByRole[role];
   const pathname = usePathname();
   const [user, setUser] = useState<StoredUser | null>(null);
@@ -56,6 +58,12 @@ export function DashboardSidebar({ role, onLogout }: SidebarProps) {
       if (raw) setUser(JSON.parse(raw) as StoredUser);
     } catch { /* ignore */ }
   }, []);
+
+  // Close sidebar on navigation (mobile)
+  useEffect(() => {
+    if (onClose) onClose();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   function isActive(href: string) {
     if (href === "/dashboard" && role === "customer") return pathname === "/dashboard";
@@ -70,7 +78,13 @@ export function DashboardSidebar({ role, onLogout }: SidebarProps) {
   const profileHref = role === "customer" ? "/dashboard/profile" : `/dashboard/${role}/profile`;
 
   return (
-    <aside className="ep-sidebar">
+    <aside
+      className="ep-sidebar"
+      style={{
+        transform: open === false ? "translateX(-100%)" : undefined,
+      }}
+      data-open={open ?? true}
+    >
       {/* Brand */}
       <div className="ep-sidebar-brand">
         <span className="ep-sidebar-brand-name">eupanel</span>
@@ -107,24 +121,19 @@ export function DashboardSidebar({ role, onLogout }: SidebarProps) {
 
       {/* Footer */}
       <div className="ep-sidebar-footer">
-        {/* User info */}
         {user && (
           <div className="ep-sidebar-footer-user">
             <div className="ep-sidebar-avatar">{initials}</div>
             <div className="ep-sidebar-user-info">
-              <div className="ep-sidebar-user-name ep-truncate">
-                {user.name ?? "User"}
-              </div>
+              <div className="ep-sidebar-user-name ep-truncate">{user.name ?? "User"}</div>
               <div className="ep-sidebar-user-role">{role}</div>
             </div>
           </div>
         )}
-
         <Link href={profileHref} className="ep-sidebar-btn">
           <IconUser size={14} />
           My Profile
         </Link>
-
         <button className="ep-sidebar-btn" onClick={onLogout}>
           <IconLogout size={14} />
           Sign out
