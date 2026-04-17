@@ -73,14 +73,26 @@ info "Compiling eupanel-agent…"
 )
 log "Agent binary updated."
 
-# ── Fix permissions & restart ─────────────────────────────────────────────────
+# ── Run any new migrations ────────────────────────────────────────────────────
+section "DB Migration"
+info "Syncing database tables…"
+set -a; source /opt/eupanel/backend/.env; set +a
+(cd /opt/eupanel/backend && /usr/lib/dart/bin/dart run lib/config/table_registry.dart) \
+    && log "Database tables up to date." \
+    || warn "Migration warning — check logs if backend fails."
+
+# ── Fix permissions & stop services cleanly ───────────────────────────────────
 chown -R www-data:www-data /opt/eupanel/backend /opt/eupanel/frontend
 chmod 600 /opt/eupanel/backend/.env /opt/eupanel/frontend/.env.local 2>/dev/null || true
 
-info "Restarting services…"
-systemctl restart eupanel-agent
-systemctl restart eupanel-backend
-systemctl restart eupanel-frontend
+info "Stopping services…"
+systemctl stop eupanel-frontend eupanel-backend eupanel-agent 2>/dev/null || true
+sleep 2
+
+info "Starting services…"
+systemctl start eupanel-agent
+systemctl start eupanel-backend
+systemctl start eupanel-frontend
 sleep 3
 
 # ── Status ────────────────────────────────────────────────────────────────────
