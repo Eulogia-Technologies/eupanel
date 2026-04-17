@@ -111,6 +111,8 @@ PMA_TOKEN="pma_$(gen_hex 10)"
 section "1 / 12 — System update & base packages"
 
 export DEBIAN_FRONTEND=noninteractive
+# Remove any broken Dart repo left from a previous install attempt
+rm -f /usr/share/keyrings/dart.gpg /etc/apt/sources.list.d/dart_stable.list
 apt-get update -qq
 apt-get upgrade -y -qq
 apt-get install -y -qq \
