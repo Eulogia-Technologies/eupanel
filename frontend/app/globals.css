@@ -1431,3 +1431,58 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   background: var(--ep-accent);
   flex-shrink: 0;
 }
+
+/* ── Dark Admin Shell ──────────────────────────────────────────────────── */
+.ep-shell-admin { background: #06080f; }
+
+.ep-main-admin {
+  background: transparent;
+}
+
+.ep-topbar-admin {
+  background: rgba(6,8,15,0.85) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  backdrop-filter: blur(16px);
+}
+
+.ep-topbar-admin .ep-hamburger {
+  border-color: rgba(255,255,255,0.1);
+  color: #64748b;
+}
+
+/* ── Plan Card Animations ──────────────────────────────────────────────── */
+@keyframes planSlideUp {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes planGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+@keyframes planPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.7); }
+  50%       { box-shadow: 0 0 0 4px rgba(16,185,129,0); }
+}
+
+/* Skeleton shimmer for plan cards */
+@keyframes planShimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+.plan-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.04) 25%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 75%
+  );
+  background-size: 600px 100%;
+  animation: planShimmer 1.6s infinite linear;
+}
+
+/* Scrollbar styling for plan modal */
+.plan-modal-scroll::-webkit-scrollbar { width: 4px; }
+.plan-modal-scroll::-webkit-scrollbar-track { background: transparent; }
+.plan-modal-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
