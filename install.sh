@@ -609,8 +609,9 @@ SVC
 
 # ── Fix permissions ────────────────────────────────────────────────────────
 mkdir -p "${INSTALL_DIR}/backend/storage"
-chown -R www-data:www-data "${INSTALL_DIR}/backend" "${INSTALL_DIR}/frontend"
-chmod -R 755 "${INSTALL_DIR}/backend" "${INSTALL_DIR}/frontend"
+# Include .pub-cache so www-data (the service user) can access Dart packages
+chown -R www-data:www-data "${INSTALL_DIR}/backend" "${INSTALL_DIR}/frontend" "${INSTALL_DIR}/.pub-cache"
+chmod -R 755 "${INSTALL_DIR}/backend" "${INSTALL_DIR}/frontend" "${INSTALL_DIR}/.pub-cache"
 chmod 600 "${INSTALL_DIR}/backend/.env" "${INSTALL_DIR}/frontend/.env.local"
 
 # ── Stop any existing services / free up ports ─────────────────────────────
