@@ -602,15 +602,15 @@ sleep 1
 section "DB Migration"
 info "Creating tables in MariaDB (eupanel database)…"
 
-# Load the .env so dart can connect
+# Load the .env vars so Dart can connect to the database
 set -a; source "${INSTALL_DIR}/backend/.env"; set +a
 
-# Flint Dart runs the table registry to create/sync all tables
 (
   cd "${INSTALL_DIR}/backend"
-  /usr/lib/dart/bin/dart run lib/config/table_registry.dart
+  # Flint Dart migrate command — creates/syncs all registered tables
+  /usr/lib/dart/bin/dart run flint_dart:migrate
 ) && log "Database tables created." \
-  || warn "Migration had warnings — check logs if the backend fails to start."
+  || warn "Migration had warnings — check: journalctl -u eupanel-backend -n 30"
 
 # ── Enable + start ─────────────────────────────────────────────────────────
 systemctl daemon-reload
