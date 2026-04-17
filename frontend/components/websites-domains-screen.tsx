@@ -218,7 +218,7 @@ export function WebsitesDomainsScreen({ role }: WebsitesDomainsScreenProps) {
         setLoading(false);
       }
     })();
-  }, [apiBase, role, router]);
+  }, [apiBase]);
 
   // Sync runtime editor with selected record
   useEffect(() => {
@@ -228,12 +228,6 @@ export function WebsitesDomainsScreen({ role }: WebsitesDomainsScreenProps) {
   }, [selectedRecord]);
 
   // ── Actions ────────────────────────────────────────────────────────────────
-
-  function logout() {
-    localStorage.removeItem("eupanel_token");
-    localStorage.removeItem("eupanel_user");
-    router.replace("/");
-  }
 
   function toggleExpand(id: string) {
     setSelectedId(id);
