@@ -18,8 +18,6 @@ type WebsitesDomainsScreenProps = {
   role: "admin" | "customer";
 };
 
-type DashboardUser = { role?: string };
-
 // ─── Static config ────────────────────────────────────────────────────────────
 
 const SITE_STATUS: Record<string, { cls: string; label: string }> = {
