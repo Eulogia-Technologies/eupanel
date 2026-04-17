@@ -452,12 +452,6 @@ export PATH="$PATH:/usr/lib/dart/bin"
 log "Dart dependencies resolved."
 
 # ── Frontend (.env.local) ──────────────────────────────────────────────────
-if [[ "${USE_SSL,,}" == "y" ]]; then
-    PANEL_BASE_URL="https://${PANEL_DOMAIN}"
-else
-    PANEL_BASE_URL="http://${PANEL_DOMAIN}"
-fi
-
 cat > "${INSTALL_DIR}/frontend/.env.local" <<ENV
 NEXT_PUBLIC_API_URL=${PANEL_BASE_URL}/api
 NEXT_PUBLIC_PANEL_URL=${PANEL_BASE_URL}
