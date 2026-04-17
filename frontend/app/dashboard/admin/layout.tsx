@@ -31,7 +31,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!ready) return <div className="ep-shell ep-shell-loading" />;
 
   return (
-    <div className="ep-shell ep-shell-admin">
+    <div className="ep-shell">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -47,10 +47,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         onClose={() => setSidebarOpen(false)}
       />
 
-      <main className="ep-main ep-main-admin">
+      <main className="ep-main">
         {/* Admin topbar */}
-        <div className="ep-topbar ep-topbar-admin">
-          {/* Hamburger (mobile only) */}
+        <div className="ep-topbar" style={{ justifyContent: "space-between" }}>
+          {/* Hamburger – mobile only, hidden via CSS on desktop */}
           <button
             className="ep-hamburger"
             onClick={() => setSidebarOpen(true)}
@@ -58,8 +58,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             <Menu size={20} />
           </button>
-
-          <div style={{ flex: 1 }} />
           <SystemUpdateButton />
         </div>
         {children}
