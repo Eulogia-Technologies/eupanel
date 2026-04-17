@@ -80,10 +80,7 @@ export function DashboardSidebar({ role, onLogout, open, onClose }: SidebarProps
   return (
     <aside
       className="ep-sidebar"
-      style={{
-        transform: open === false ? "translateX(-100%)" : undefined,
-      }}
-      data-open={open ?? true}
+      data-open={open === true ? "true" : "false"}
     >
       {/* Brand */}
       <div className="ep-sidebar-brand">
