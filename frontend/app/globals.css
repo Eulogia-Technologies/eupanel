@@ -275,6 +275,32 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
 }
 .ep-sidebar-btn:hover { background: var(--ep-sidebar-item); color: #F1F5F9; }
 
+/* ── Hamburger button ──────────────────────────────────────────────────── */
+.ep-hamburger {
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #94a3b8;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.ep-hamburger:hover { background: rgba(255,255,255,0.08); color: #f1f5f9; }
+
+/* Mobile overlay */
+.ep-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  z-index: 39;
+  animation: ep-fade-in 0.2s ease;
+}
+
 /* ── Main Content ──────────────────────────────────────────────────────── */
 .ep-main {
   min-height: 100vh;
