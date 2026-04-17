@@ -117,6 +117,15 @@ printf "Proceed? (y/N): " > $TTY
 read -r _CONFIRM < $TTY
 [[ "${_CONFIRM,,}" != "y" && "${_CONFIRM,,}" != "yes" ]] && exit 0
 
+# ── Persist answers for next run (shown as defaults) ─────────────────────────
+mkdir -p /etc/eupanel
+cat > /etc/eupanel/install.conf <<CONF
+SAVED_DOMAIN="${PANEL_DOMAIN}"
+SAVED_EMAIL="${ADMIN_EMAIL}"
+SAVED_USER="${ADMIN_USER}"
+CONF
+chmod 600 /etc/eupanel/install.conf
+
 # ── Generate secrets ──────────────────────────────────────────────────────────
 DB_PASS=$(gen_pass)
 JWT_SECRET=$(gen_hex 32)
