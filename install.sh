@@ -268,7 +268,7 @@ apt-get install -y -qq pdns-server pdns-backend-mysql
 mysql -u root <<EOF
 CREATE DATABASE IF NOT EXISTS \`pdns\`
     CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-CREATE USER IF NOT EXISTS 'pdns'@'localhost' IDENTIFIED BY '${DB_PASS}';
+CREATE OR REPLACE USER 'pdns'@'localhost' IDENTIFIED BY '${DB_PASS}';
 GRANT ALL PRIVILEGES ON \`pdns\`.* TO 'pdns'@'localhost';
 FLUSH PRIVILEGES;
 EOF
