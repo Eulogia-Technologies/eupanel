@@ -395,12 +395,9 @@ export function WebsitesDomainsScreen({ role }: WebsitesDomainsScreenProps) {
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <div className="ep-shell">
-      <DashboardSidebar role={role} onLogout={logout} />
+    <div>
 
-      <main className="ep-main">
-
-        {/* Topbar */}
+      {/* Topbar */}
         <div className="ep-topbar">
           <div className="ep-topbar-breadcrumb">
             <span>Dashboard</span>
