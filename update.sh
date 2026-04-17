@@ -52,8 +52,9 @@ log "Code updated."
 # ── 2. Backend ────────────────────────────────────────────────────────────────
 section "2 / 4 — Backend (Dart)"
 info "Installing Dart dependencies…"
-export PUB_CACHE="/opt/eupanel/.pub-cache"
 (cd /opt/eupanel/backend && dart pub get)
+dart pub global activate flint_dart
+ln -sf /root/.pub-cache/bin/flint /usr/local/bin/flint 2>/dev/null || true
 log "Backend dependencies ready."
 
 # ── 3. Frontend ───────────────────────────────────────────────────────────────
