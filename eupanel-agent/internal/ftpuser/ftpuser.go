@@ -22,7 +22,7 @@ const (
 // The password is only available at creation time — store it securely.
 func Create(username, homeDirectory string) (string, string, error) {
 	if !isValidFTPUsername(username) {
-		return "", fmt.Errorf("invalid FTP username: %q", username)
+		return "", "", fmt.Errorf("invalid FTP username: %q", username)
 	}
 
 	// Ensure vsftpd is installed
