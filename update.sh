@@ -17,6 +17,9 @@ section() { echo -e "\n${BOLD}${CYAN}━━━  $*  ━━━${NC}\n"; }
 [[ ! -d /opt/eupanel ]] && die "EuPanel is not installed. Run install.sh first."
 
 export PATH="$PATH:/usr/local/go/bin:/usr/lib/dart/bin"
+export GOPATH="/root/go"
+# Load profile paths if available
+[[ -f /etc/profile.d/eupanel-paths.sh ]] && source /etc/profile.d/eupanel-paths.sh
 
 section "EuPanel Update"
 echo -e "  Repo    : /opt/eupanel"
