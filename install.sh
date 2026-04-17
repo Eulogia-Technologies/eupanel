@@ -633,8 +633,8 @@ set -a; source "${INSTALL_DIR}/backend/.env"; set +a
 
 (
   cd "${INSTALL_DIR}/backend"
-  # Flint Dart migrate command — creates/syncs all registered tables
-  /usr/lib/dart/bin/dart run flint_dart:migrate
+  # Sync all registered tables using the project's own table registry
+  /usr/lib/dart/bin/dart run lib/config/table_registry.dart
 ) && log "Database tables created." \
   || warn "Migration had warnings — check: journalctl -u eupanel-backend -n 30"
 
