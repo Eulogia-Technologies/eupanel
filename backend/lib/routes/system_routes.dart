@@ -1,4 +1,5 @@
 import 'package:backend/controllers/system_controller.dart';
+import 'package:backend/middlewares/auth_middleware.dart';
 import 'package:flint_dart/flint_dart.dart';
 
 class SystemRoutes extends RouteGroup {
@@ -6,7 +7,7 @@ class SystemRoutes extends RouteGroup {
   String get prefix => '/admin/system';
 
   @override
-  List<Middleware> get middlewares => [AuthMiddleware()];
+  List<Middleware> get middlewares => [AuthMiddleware(allowedRoles: ['admin'])];
 
   @override
   void register(Flint app) {
