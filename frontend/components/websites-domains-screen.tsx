@@ -168,22 +168,11 @@ export function WebsitesDomainsScreen({ role }: WebsitesDomainsScreenProps) {
     return true;
   }, [deployStep, deploySource, gitConnected, gitRepo, uploadFile, appTemplate, deployRuntime]);
 
-  // ── Auth + data load ───────────────────────────────────────────────────────
+  // ── Data load ─────────────────────────────────────────────────────────────
 
   useEffect(() => {
-    const token   = localStorage.getItem("eupanel_token");
-    const rawUser = localStorage.getItem("eupanel_user");
-    if (!token || !rawUser) { router.replace("/"); return; }
-
-    const parsed   = JSON.parse(rawUser) as DashboardUser;
-    const userRole = parsed.role?.toLowerCase();
-    if (userRole !== role) {
-      router.replace(
-        userRole === "admin"    ? "/dashboard/admin" :
-        userRole === "reseller" ? "/dashboard/reseller" : "/dashboard",
-      );
-      return;
-    }
+    const token = localStorage.getItem("eupanel_token");
+    if (!token) return;
 
     void (async () => {
       try {
