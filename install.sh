@@ -781,19 +781,26 @@ log "Firewall enabled."
 # =============================================================================
 section "Creating admin account"
 
-# Wait for backend to be ready (max 30s)
-for i in $(seq 1 15); do
+# Wait for backend to be ready (max 60s)
+info "Waiting for backend to come up…"
+_BACKEND_UP=0
+for i in $(seq 1 30); do
     if curl -sf "http://127.0.0.1:${BACKEND_PORT}/" > /dev/null 2>&1; then
-        break
+        _BACKEND_UP=1; break
     fi
     sleep 2
 done
 
-curl -sf -X POST "http://127.0.0.1:${BACKEND_PORT}/users" \
-    -H "Content-Type: application/json" \
-    -d "{\"name\":\"${ADMIN_USER}\",\"email\":\"${ADMIN_EMAIL}\",\"password\":\"${ADMIN_PASS}\",\"role\":\"admin\"}" \
-    > /dev/null 2>&1 && log "Admin account created." \
-    || warn "Could not auto-create admin — do it manually after install."
+if [[ "$_BACKEND_UP" == "1" ]]; then
+    curl -sf -X POST "http://127.0.0.1:${BACKEND_PORT}/auth/register" \
+        -H "Content-Type: application/json" \
+        -d "{\"name\":\"${ADMIN_USER}\",\"email\":\"${ADMIN_EMAIL}\",\"password\":\"${ADMIN_PASS}\",\"role\":\"admin\"}" \
+        > /dev/null 2>&1 && log "Admin account created." \
+        || warn "Could not auto-create admin — do it manually: POST /auth/register"
+else
+    warn "Backend did not start in time — check: journalctl -u eupanel-backend -n 50"
+    warn "Then create admin manually: POST /auth/register {name, email, password, role: admin}"
+fi
 
 # =============================================================================
 #  SAVE CREDENTIALS
