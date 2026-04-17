@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import {
   IconGlobe, IconDatabase, IconShield, IconQueue,
   IconServer, IconArchive, IconMail, IconDns,
@@ -11,7 +9,7 @@ import {
 } from "@/components/ui/icons";
 
 type RoleDashboardProps = {
-  expectedRole: "admin" | "customer" | "reseller";
+  expectedRole: "admin" | "customer";
   title: string;
   modules: string[];
 };
@@ -71,18 +69,9 @@ const QUICK_ACTIONS: Record<string, QuickAction[]> = {
     { label: "SSL",        desc: "Certificates",    href: "/dashboard/ssl-certificates", Icon: IconShield,   color: "#16A34A" },
     { label: "Backups",    desc: "Snapshots",       href: "/dashboard/backups",          Icon: IconArchive,  color: "#DC2626" },
   ],
-  reseller: [
-    { label: "Websites",   desc: "Sites & domains", href: "/dashboard/reseller/websites-domains", Icon: IconGlobe,    color: "#2563EB" },
-    { label: "Databases",  desc: "DB instances",    href: "/dashboard/reseller/databases",        Icon: IconDatabase, color: "#7C3AED" },
-    { label: "Mail",       desc: "Email accounts",  href: "/dashboard/reseller/mail",             Icon: IconMail,     color: "#0D9970" },
-    { label: "DNS",        desc: "Zone records",    href: "/dashboard/reseller/dns-settings",     Icon: IconDns,      color: "#D97706" },
-    { label: "SSL",        desc: "Certificates",    href: "/dashboard/reseller/ssl-certificates", Icon: IconShield,   color: "#16A34A" },
-    { label: "Backups",    desc: "Snapshots",       href: "/dashboard/reseller/backups",          Icon: IconArchive,  color: "#DC2626" },
-  ],
 };
 
 export function RoleDashboard({ expectedRole, title, modules }: RoleDashboardProps) {
-  const router = useRouter();
   const [user, setUser] = useState<StoredUser | null>(null);
   const [recentJobs, setRecentJobs] = useState<Job[]>([]);
   const [jobsLoading, setJobsLoading] = useState(true);
@@ -92,17 +81,9 @@ export function RoleDashboard({ expectedRole, title, modules }: RoleDashboardPro
   useEffect(() => {
     const token = localStorage.getItem("eupanel_token");
     const raw = localStorage.getItem("eupanel_user");
-    if (!token || !raw) { router.replace("/"); return; }
+    if (!token || !raw) return;
 
     const parsed = JSON.parse(raw) as StoredUser;
-    const role = parsed.role?.toLowerCase();
-    if (role !== expectedRole) {
-      router.replace(
-        role === "admin" ? "/dashboard/admin" :
-        role === "reseller" ? "/dashboard/reseller" : "/dashboard"
-      );
-      return;
-    }
     setUser(parsed);
 
     fetch(`${apiBase}/jobs`, { headers: { Authorization: `Bearer ${token}` } })
@@ -110,13 +91,7 @@ export function RoleDashboard({ expectedRole, title, modules }: RoleDashboardPro
       .then((d: { data?: Job[] }) => setRecentJobs((d.data ?? []).slice(0, 8)))
       .catch(() => {})
       .finally(() => setJobsLoading(false));
-  }, [apiBase, expectedRole, router]);
-
-  function logout() {
-    localStorage.removeItem("eupanel_token");
-    localStorage.removeItem("eupanel_user");
-    router.replace("/");
-  }
+  }, [apiBase]);
 
   const actions = QUICK_ACTIONS[expectedRole] ?? [];
   const displayName = user?.name ?? expectedRole;
@@ -126,144 +101,140 @@ export function RoleDashboard({ expectedRole, title, modules }: RoleDashboardPro
   });
 
   return (
-    <div className="ep-shell">
-      <DashboardSidebar role={expectedRole} onLogout={logout} />
+    <div>
+      {/* Topbar */}
+      <div className="ep-topbar">
+        <div className="ep-topbar-breadcrumb">
+          <strong>{title}</strong>
+        </div>
+        <div className="ep-topbar-right">
+          <span className="ep-badge ep-badge-success">
+            <span
+              className="ep-badge-dot ep-dot-pulse"
+              style={{ background: "var(--ep-success)" }}
+            />
+            All systems operational
+          </span>
+        </div>
+      </div>
 
-      <main className="ep-main">
-        {/* Topbar */}
-        <div className="ep-topbar">
-          <div className="ep-topbar-breadcrumb">
-            <strong>{title}</strong>
-          </div>
-          <div className="ep-topbar-right">
-            <span className="ep-badge ep-badge-success">
-              <span
-                className="ep-badge-dot ep-dot-pulse"
-                style={{ background: "var(--ep-success)" }}
-              />
-              All systems operational
+      <div className="ep-content">
+
+        {/* Welcome hero */}
+        <div className="ep-dashboard-hero">
+          <h1 className="ep-dashboard-greeting">
+            {greeting()}, {firstName}
+          </h1>
+          <p className="ep-dashboard-date">
+            <span>{today}</span>
+            <span className="ep-dashboard-date-sep">·</span>
+            <span className="ep-dashboard-module-count">
+              {modules.length} modules available
             </span>
-          </div>
+          </p>
         </div>
 
-        <div className="ep-content">
+        {/* Quick Access */}
+        <section>
+          <p className="ep-section-label">Quick Access</p>
+          <div className="ep-action-grid">
+            {actions.map((a) => (
+              <Link key={a.href} href={a.href} className="ep-action-card">
+                <div
+                  className="ep-action-icon"
+                  style={{
+                    background: `${a.color}18`,
+                    border: `1px solid ${a.color}2a`,
+                    color: a.color,
+                  }}
+                >
+                  <a.Icon size={16} />
+                </div>
+                <div>
+                  <div className="ep-action-label">{a.label}</div>
+                  <div className="ep-action-desc">{a.desc}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-          {/* Welcome hero */}
-          <div className="ep-dashboard-hero">
-            <h1 className="ep-dashboard-greeting">
-              {greeting()}, {firstName}
-            </h1>
-            <p className="ep-dashboard-date">
-              <span>{today}</span>
-              <span className="ep-dashboard-date-sep">·</span>
-              <span className="ep-dashboard-module-count">
-                {modules.length} modules available
+        {/* Recent Jobs */}
+        <section>
+          <div className="ep-card">
+            <div className="ep-card-header">
+              <span className="ep-card-title ep-card-title-icon">
+                <span style={{ color: "var(--ep-text-muted)", display: "flex" }}>
+                  <IconQueue size={15} />
+                </span>
+                Recent Jobs
               </span>
-            </p>
-          </div>
-
-          {/* Quick Access */}
-          <section>
-            <p className="ep-section-label">Quick Access</p>
-            <div className="ep-action-grid">
-              {actions.map((a) => (
-                <Link key={a.href} href={a.href} className="ep-action-card">
-                  <div
-                    className="ep-action-icon"
-                    style={{
-                      background: `${a.color}18`,
-                      border: `1px solid ${a.color}2a`,
-                      color: a.color,
-                    }}
-                  >
-                    <a.Icon size={16} />
-                  </div>
-                  <div>
-                    <div className="ep-action-label">{a.label}</div>
-                    <div className="ep-action-desc">{a.desc}</div>
-                  </div>
+              {expectedRole === "admin" && (
+                <Link href="/dashboard/admin/jobs" className="ep-btn ep-btn-ghost ep-btn-sm">
+                  View all
                 </Link>
-              ))}
+              )}
             </div>
-          </section>
 
-          {/* Recent Jobs */}
-          <section>
-            <div className="ep-card">
-              <div className="ep-card-header">
-                <span className="ep-card-title ep-card-title-icon">
-                  <span style={{ color: "var(--ep-text-muted)", display: "flex" }}>
-                    <IconQueue size={15} />
-                  </span>
-                  Recent Jobs
-                </span>
-                {expectedRole === "admin" && (
-                  <Link href="/dashboard/admin/jobs" className="ep-btn ep-btn-ghost ep-btn-sm">
-                    View all
-                  </Link>
-                )}
-              </div>
-
-              <div className="ep-table-wrap">
-                {jobsLoading ? (
-                  <div className="ep-skeleton-list">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="ep-skeleton ep-skeleton-row" />
-                    ))}
+            <div className="ep-table-wrap">
+              {jobsLoading ? (
+                <div className="ep-skeleton-list">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="ep-skeleton ep-skeleton-row" />
+                  ))}
+                </div>
+              ) : recentJobs.length === 0 ? (
+                <div className="ep-empty">
+                  <div className="ep-empty-icon"><IconCheck size={18} /></div>
+                  <div className="ep-empty-title">No jobs yet</div>
+                  <div className="ep-empty-desc">
+                    Jobs appear here when sites, databases, or SSL certs are provisioned.
                   </div>
-                ) : recentJobs.length === 0 ? (
-                  <div className="ep-empty">
-                    <div className="ep-empty-icon"><IconCheck size={18} /></div>
-                    <div className="ep-empty-title">No jobs yet</div>
-                    <div className="ep-empty-desc">
-                      Jobs appear here when sites, databases, or SSL certs are provisioned.
-                    </div>
-                  </div>
-                ) : (
-                  <table className="ep-table">
-                    <thead>
-                      <tr>
-                        <th>Type</th>
-                        <th>Target</th>
-                        <th>Status</th>
-                        <th>Job ID</th>
+                </div>
+              ) : (
+                <table className="ep-table">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Target</th>
+                      <th>Status</th>
+                      <th>Job ID</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {recentJobs.map((job) => (
+                      <tr key={job.id}>
+                        <td><span className="ep-text-mono">{job.type}</span></td>
+                        <td className="ep-table-muted">{job.targetType ?? "—"}</td>
+                        <td><StatusBadge status={job.status} /></td>
+                        <td>
+                          <span className="ep-text-mono ep-text-faint">
+                            {job.id.slice(0, 8)}…
+                          </span>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {recentJobs.map((job) => (
-                        <tr key={job.id}>
-                          <td><span className="ep-text-mono">{job.type}</span></td>
-                          <td className="ep-table-muted">{job.targetType ?? "—"}</td>
-                          <td><StatusBadge status={job.status} /></td>
-                          <td>
-                            <span className="ep-text-mono ep-text-faint">
-                              {job.id.slice(0, 8)}…
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
-              </div>
+                    ))}
+                  </tbody>
+                </table>
+              )}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Modules */}
-          <section>
-            <p className="ep-section-label">All Modules</p>
-            <div className="ep-module-grid">
-              {modules.map((mod) => (
-                <span key={mod} className="ep-module-chip">
-                  <span className="ep-module-dot" />
-                  {mod}
-                </span>
-              ))}
-            </div>
-          </section>
+        {/* Modules */}
+        <section>
+          <p className="ep-section-label">All Modules</p>
+          <div className="ep-module-grid">
+            {modules.map((mod) => (
+              <span key={mod} className="ep-module-chip">
+                <span className="ep-module-dot" />
+                {mod}
+              </span>
+            ))}
+          </div>
+        </section>
 
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
