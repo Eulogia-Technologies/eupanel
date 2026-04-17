@@ -27,9 +27,10 @@ class WebhookController extends Controller {
         return res.json({'status': 'ok', 'message': 'Event "$event" ignored.'});
       }
 
-      final rawBody    = await req.rawBody();
+      final bodyString = await req.body();
+      final rawBody    = utf8.encode(bodyString);
       final signature  = req.headers['x-hub-signature-256'] ?? req.headers['X-Hub-Signature-256'] ?? '';
-      final payload    = jsonDecode(utf8.decode(rawBody)) as Map<String, dynamic>;
+      final payload    = jsonDecode(bodyString) as Map<String, dynamic>;
 
       // Extract repo and branch from payload
       final repoFullName  = (payload['repository'] as Map?)?['full_name']?.toString() ?? '';
