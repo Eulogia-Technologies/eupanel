@@ -578,16 +578,53 @@ SVC
 mkdir -p "${INSTALL_DIR}/backend/storage"
 chown -R www-data:www-data "${INSTALL_DIR}/backend" "${INSTALL_DIR}/frontend"
 chmod -R 755 "${INSTALL_DIR}/backend" "${INSTALL_DIR}/frontend"
-# .env files stay private
 chmod 600 "${INSTALL_DIR}/backend/.env" "${INSTALL_DIR}/frontend/.env.local"
+
+# ── Stop any existing services / free up ports ─────────────────────────────
+info "Stopping any existing EuPanel services…"
+systemctl stop eupanel-agent    2>/dev/null || true
+systemctl stop eupanel-backend  2>/dev/null || true
+systemctl stop eupanel-frontend 2>/dev/null || true
+
+# Kill anything still holding the ports (previous manual runs, etc.)
+for PORT in ${BACKEND_PORT} ${FRONTEND_PORT} ${AGENT_PORT}; do
+    PIDS=$(lsof -ti tcp:${PORT} 2>/dev/null || true)
+    if [[ -n "$PIDS" ]]; then
+        warn "Killing process(es) on port ${PORT}: $PIDS"
+        kill -9 $PIDS 2>/dev/null || true
+    fi
+done
+sleep 1
+
+# ── Run database migration ─────────────────────────────────────────────────
+section "DB Migration"
+info "Creating tables in MariaDB (eupanel database)…"
+
+# Load the .env so dart can connect
+set -a; source "${INSTALL_DIR}/backend/.env"; set +a
+
+# Flint Dart runs the table registry to create/sync all tables
+(
+  cd "${INSTALL_DIR}/backend"
+  /usr/lib/dart/bin/dart run lib/config/table_registry.dart
+) && log "Database tables created." \
+  || warn "Migration had warnings — check logs if the backend fails to start."
 
 # ── Enable + start ─────────────────────────────────────────────────────────
 systemctl daemon-reload
 systemctl enable --now eupanel-agent
 systemctl enable --now eupanel-backend
 systemctl enable --now eupanel-frontend
+sleep 3
 
-log "All three EuPanel services started."
+# Verify all three are actually running
+for SVC in eupanel-agent eupanel-backend eupanel-frontend; do
+    if systemctl is-active --quiet "$SVC"; then
+        log "$SVC is running."
+    else
+        warn "$SVC failed to start — check: journalctl -u $SVC -n 30"
+    fi
+done
 
 # =============================================================================
 #  NGINX CONFIGURATION
