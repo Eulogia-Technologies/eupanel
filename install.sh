@@ -107,6 +107,13 @@ AGENT_SECRET=$(gen_hex 32)
 PDNS_API_KEY=$(gen_hex 16)
 PMA_TOKEN="pma_$(gen_hex 10)"
 
+# ── Resolve panel URL (needed by both backend + frontend .env) ────────────────
+if [[ "${USE_SSL,,}" == "y" ]]; then
+    PANEL_BASE_URL="https://${PANEL_DOMAIN}"
+else
+    PANEL_BASE_URL="http://${PANEL_DOMAIN}"
+fi
+
 # =============================================================================
 #  1. SYSTEM UPDATE + BASE PACKAGES
 # =============================================================================
