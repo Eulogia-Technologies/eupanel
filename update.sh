@@ -79,7 +79,7 @@ log "Agent binary updated."
 section "DB Migration"
 info "Syncing database tables…"
 set -a; source /opt/eupanel/backend/.env; set +a
-(cd /opt/eupanel/backend && /usr/lib/dart/bin/dart run flint_dart migrate) \
+(cd /opt/eupanel/backend && dart run flint_dart migrate) \
     && log "Database tables up to date." \
     || warn "Migration warning — check logs if backend fails."
 
