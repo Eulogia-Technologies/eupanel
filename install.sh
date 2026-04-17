@@ -572,11 +572,10 @@ After=network.target mariadb.service
 
 [Service]
 Type=simple
-User=www-data
+User=root
 WorkingDirectory=${INSTALL_DIR}/backend
 EnvironmentFile=${INSTALL_DIR}/backend/.env
-Environment=PUB_CACHE=${INSTALL_DIR}/.pub-cache
-ExecStart=/usr/lib/dart/bin/dart run lib/main.dart
+ExecStart=/usr/local/bin/dart run flint_dart run
 Restart=always
 RestartSec=5
 StandardOutput=journal
