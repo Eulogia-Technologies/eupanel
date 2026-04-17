@@ -445,6 +445,11 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   font-size: 0.8125rem;
   border-radius: var(--ep-r-sm);
 }
+.ep-btn-xs {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: var(--ep-r-sm);
+}
 .ep-btn-icon {
   padding: 0.4rem;
   border-radius: var(--ep-r-sm);
