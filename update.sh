@@ -52,6 +52,7 @@ log "Code updated."
 # ── 2. Backend ────────────────────────────────────────────────────────────────
 section "2 / 4 — Backend (Dart)"
 info "Installing Dart dependencies…"
+export PUB_CACHE="/opt/eupanel/.pub-cache"
 (cd /opt/eupanel/backend && dart pub get)
 log "Backend dependencies ready."
 
