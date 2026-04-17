@@ -58,6 +58,10 @@ SERVER_IP=$(curl -4 -fsSL --max-time 5 ifconfig.me 2>/dev/null \
 echo -e "${BOLD}Detected server IP: ${CYAN}${SERVER_IP}${NC}"
 echo ""
 
+# Always read from /dev/tty so the prompts work whether the script is run
+# directly (bash install.sh) or piped (curl ... | bash).
+exec </dev/tty
+
 read -rp "Panel domain (e.g. panel.example.com) — blank to use IP: " PANEL_DOMAIN
 PANEL_DOMAIN="${PANEL_DOMAIN:-$SERVER_IP}"
 
@@ -79,7 +83,11 @@ fi
 echo ""
 echo -e "${BOLD}Summary${NC}"
 echo "  Install dir : $INSTALL_DIR"
-echo "  Panel URL   : http${USE_SSL,,}://${PANEL_DOMAIN}  (SSL: ${USE_SSL^^})"
+if [[ "${USE_SSL,,}" == "y" ]]; then
+    echo "  Panel URL   : https://${PANEL_DOMAIN}  (SSL: YES)"
+else
+    echo "  Panel URL   : http://${PANEL_DOMAIN}  (SSL: NO)"
+fi
 echo "  Admin user  : $ADMIN_USER  <$ADMIN_EMAIL>"
 echo ""
 read -rp "Proceed? (y/N): " _CONFIRM
