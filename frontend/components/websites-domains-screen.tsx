@@ -1,8 +1,6 @@
 "use client";
 
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { ActionButton } from "@/components/websites-domains/action-button";
 import {
   AppTemplate,
