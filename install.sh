@@ -58,26 +58,30 @@ SERVER_IP=$(curl -4 -fsSL --max-time 5 ifconfig.me 2>/dev/null \
 echo -e "${BOLD}Detected server IP: ${CYAN}${SERVER_IP}${NC}"
 echo ""
 
-# Always read from /dev/tty so the prompts work whether the script is run
-# directly (bash install.sh) or piped (curl ... | bash).
-exec </dev/tty
+# Write prompts directly to /dev/tty and read from /dev/tty so questions are
+# always visible whether the script is run directly or piped via curl | bash.
+TTY=/dev/tty
 
-read -rp "Panel domain (e.g. panel.example.com) — blank to use IP: " PANEL_DOMAIN
+printf "Panel domain (e.g. panel.example.com) — blank to use IP: " > $TTY
+read -r PANEL_DOMAIN < $TTY
 PANEL_DOMAIN="${PANEL_DOMAIN:-$SERVER_IP}"
 
-read -rp "Admin e-mail (used for SSL + first admin account): " ADMIN_EMAIL
+printf "Admin e-mail (used for SSL + first admin account): " > $TTY
+read -r ADMIN_EMAIL < $TTY
 [[ -z "$ADMIN_EMAIL" ]] && die "Admin e-mail is required."
 
-read -rp "Admin username [admin]: " ADMIN_USER
+printf "Admin username [admin]: " > $TTY
+read -r ADMIN_USER < $TTY
 ADMIN_USER="${ADMIN_USER:-admin}"
 
-echo -n "Admin password (blank = auto-generate): "
-read -rs ADMIN_PASS; echo
+printf "Admin password (blank = auto-generate): " > $TTY
+read -rs ADMIN_PASS < $TTY; echo > $TTY
 ADMIN_PASS="${ADMIN_PASS:-$(gen_pass)}"
 
 USE_SSL="n"
 if [[ "$PANEL_DOMAIN" != "$SERVER_IP" ]]; then
-    read -rp "Issue Let's Encrypt SSL for $PANEL_DOMAIN? (y/N): " USE_SSL
+    printf "Issue Let's Encrypt SSL for %s? (y/N): " "$PANEL_DOMAIN" > $TTY
+    read -r USE_SSL < $TTY
 fi
 
 echo ""
@@ -90,7 +94,8 @@ else
 fi
 echo "  Admin user  : $ADMIN_USER  <$ADMIN_EMAIL>"
 echo ""
-read -rp "Proceed? (y/N): " _CONFIRM
+printf "Proceed? (y/N): " > $TTY
+read -r _CONFIRM < $TTY
 [[ "${_CONFIRM,,}" != "y" ]] && exit 0
 
 # ── Generate secrets ──────────────────────────────────────────────────────────
