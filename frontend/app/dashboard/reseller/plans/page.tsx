@@ -1,5 +1,2 @@
-import { PlansScreen } from "@/components/plans-screen";
-
-export default function ResellerPlansPage() {
-  return <PlansScreen />;
-}
+import { redirect } from "next/navigation";
+export default function Page() { redirect("/"); }
