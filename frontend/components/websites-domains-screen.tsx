@@ -705,7 +705,6 @@ export function WebsitesDomainsScreen({ role }: WebsitesDomainsScreenProps) {
           )}
 
         </div>
-      </main>
 
       {/* ════════════════════════════════════════════════
           Modals
