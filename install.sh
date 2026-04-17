@@ -403,7 +403,10 @@ if ! command -v dart &>/dev/null; then
 fi
 # Symlink dart into /usr/local/bin so it's on PATH everywhere (scripts, systemd, ssh)
 ln -sf /usr/lib/dart/bin/dart /usr/local/bin/dart
-log "Dart $(dart --version 2>&1 | head -1)."
+# Install flint_dart globally so the `flint` CLI is available system-wide
+dart pub global activate flint_dart
+ln -sf /root/.pub-cache/bin/flint /usr/local/bin/flint
+log "Dart $(dart --version 2>&1 | head -1) — flint CLI installed."
 
 # ── Node.js ────────────────────────────────────────────────────────────────
 if ! command -v node &>/dev/null; then
