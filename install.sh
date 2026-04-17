@@ -421,6 +421,7 @@ cat > /etc/profile.d/eupanel-paths.sh <<'PATHFILE'
 # EuPanel runtime paths — added by installer
 export PATH="$PATH:/usr/local/go/bin"        # Go
 export PATH="$PATH:/usr/lib/dart/bin"         # Dart
+export PATH="$PATH:$HOME/.pub-cache/bin"     # Dart global tools (flint, etc.)
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 PATHFILE
