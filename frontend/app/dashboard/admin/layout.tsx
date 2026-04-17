@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
+import { SystemUpdateButton } from "@/components/system-update-modal";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
