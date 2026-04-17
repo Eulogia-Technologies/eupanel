@@ -207,7 +207,7 @@ DROP DATABASE IF EXISTS test;
 DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 CREATE DATABASE IF NOT EXISTS \`eupanel\`
     CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER IF NOT EXISTS 'eupanel'@'localhost' IDENTIFIED BY '${DB_PASS}';
+CREATE OR REPLACE USER 'eupanel'@'localhost' IDENTIFIED BY '${DB_PASS}';
 GRANT ALL PRIVILEGES ON \`eupanel\`.* TO 'eupanel'@'localhost';
 FLUSH PRIVILEGES;
 EOF
