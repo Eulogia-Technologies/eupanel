@@ -1,4 +1,4 @@
-export type DashboardRole = "admin" | "customer" | "reseller";
+export type DashboardRole = "admin" | "customer";
 
 export type SidebarItem = {
   label: string;
@@ -83,34 +83,6 @@ const customerGroups: SidebarGroup[] = [
   },
 ];
 
-const resellerGroups: SidebarGroup[] = [
-  {
-    items: [
-      { label: "Home", href: "/dashboard/reseller" },
-    ],
-  },
-  {
-    title: "Hosting",
-    items: [
-      { label: "Websites & Domains", href: "/dashboard/reseller/websites-domains" },
-      { label: "Mail", href: "/dashboard/reseller/mail" },
-      { label: "Databases", href: "/dashboard/reseller/databases" },
-      { label: "DNS Settings", href: "/dashboard/reseller/dns-settings" },
-      { label: "SSL/TLS Certificates", href: "/dashboard/reseller/ssl-certificates" },
-      { label: "File Manager", href: "/dashboard/reseller/file-manager" },
-    ],
-  },
-  {
-    title: "Operations",
-    items: [
-      { label: "Backups", href: "/dashboard/reseller/backups" },
-      { label: "Scheduled Tasks", href: "/dashboard/reseller/scheduled-tasks" },
-      { label: "Jobs Queue", href: "/dashboard/reseller/jobs-queue" },
-      { label: "Monitoring", href: "/dashboard/reseller/monitoring" },
-    ],
-  },
-];
-
 const sections: Record<DashboardRole, Record<string, string>> = {
   admin: {
     mail: "Mail",
@@ -148,25 +120,11 @@ const sections: Record<DashboardRole, Record<string, string>> = {
     monitoring: "Monitoring",
     profile: "My Profile",
   },
-  reseller: {
-    "websites-domains": "Websites & Domains",
-    mail: "Mail",
-    databases: "Databases",
-    "dns-settings": "DNS Settings",
-    "ssl-certificates": "SSL/TLS Certificates",
-    "file-manager": "File Manager",
-    backups: "Backups",
-    "scheduled-tasks": "Scheduled Tasks",
-    "jobs-queue": "Jobs Queue",
-    monitoring: "Monitoring",
-    profile: "My Profile",
-  },
 };
 
 export const sidebarByRole: Record<DashboardRole, SidebarGroup[]> = {
   admin: adminGroups,
   customer: customerGroups,
-  reseller: resellerGroups,
 };
 
 export function getSectionTitle(role: DashboardRole, section: string): string {
