@@ -62,17 +62,34 @@ echo ""
 # always visible whether the script is run directly or piped via curl | bash.
 TTY=/dev/tty
 
-printf "Panel domain (e.g. panel.example.com) — blank to use IP: " > $TTY
-read -r PANEL_DOMAIN < $TTY
-PANEL_DOMAIN="${PANEL_DOMAIN:-$SERVER_IP}"
+# ── Load previously saved values (shown as defaults) ──────────────────────
+PREV_DOMAIN=""; PREV_EMAIL=""; PREV_USER="admin"
+if [[ -f /etc/eupanel/install.conf ]]; then
+    # shellcheck source=/dev/null
+    source /etc/eupanel/install.conf 2>/dev/null || true
+    PREV_DOMAIN="${SAVED_DOMAIN:-}"
+    PREV_EMAIL="${SAVED_EMAIL:-}"
+    PREV_USER="${SAVED_USER:-admin}"
+fi
 
-printf "Admin e-mail (used for SSL + first admin account): " > $TTY
+# ── Prompts — press Enter to keep the suggested default ───────────────────
+_DOM_DEFAULT="${PREV_DOMAIN:-$SERVER_IP}"
+printf "Panel domain [%s]: " "$_DOM_DEFAULT" > $TTY
+read -r PANEL_DOMAIN < $TTY
+PANEL_DOMAIN="${PANEL_DOMAIN:-$_DOM_DEFAULT}"
+
+if [[ -n "$PREV_EMAIL" ]]; then
+    printf "Admin e-mail [%s]: " "$PREV_EMAIL" > $TTY
+else
+    printf "Admin e-mail (used for SSL + first admin account): " > $TTY
+fi
 read -r ADMIN_EMAIL < $TTY
+ADMIN_EMAIL="${ADMIN_EMAIL:-$PREV_EMAIL}"
 [[ -z "$ADMIN_EMAIL" ]] && die "Admin e-mail is required."
 
-printf "Admin username [admin]: " > $TTY
+printf "Admin username [%s]: " "$PREV_USER" > $TTY
 read -r ADMIN_USER < $TTY
-ADMIN_USER="${ADMIN_USER:-admin}"
+ADMIN_USER="${ADMIN_USER:-$PREV_USER}"
 
 printf "Admin password (blank = auto-generate): " > $TTY
 read -rs ADMIN_PASS < $TTY; echo > $TTY
