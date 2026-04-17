@@ -366,6 +366,22 @@ if ! command -v node &>/dev/null; then
 fi
 log "Node.js $(node --version)  npm $(npm --version)."
 
+# ── Permanent PATH for all runtimes ───────────────────────────────────────────
+cat > /etc/profile.d/eupanel-paths.sh <<'PATHFILE'
+# EuPanel runtime paths — added by installer
+export PATH="$PATH:/usr/local/go/bin"        # Go
+export PATH="$PATH:/usr/lib/dart/bin"         # Dart
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+PATHFILE
+chmod 644 /etc/profile.d/eupanel-paths.sh
+
+# Also apply to current session right now
+export PATH="$PATH:/usr/local/go/bin:/usr/lib/dart/bin"
+export GOPATH="/root/go"
+
+log "Runtime paths written to /etc/profile.d/eupanel-paths.sh"
+
 # =============================================================================
 #  10. CLONE + BUILD EUPANEL
 # =============================================================================
