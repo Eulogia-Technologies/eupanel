@@ -833,7 +833,7 @@ Server IP : ${SERVER_IP}
   Host     : 127.0.0.1:3306
   Database : eupanel
   User     : eupanel
-  Password : ${DB_PASS}
+  Password : ${DB_PASS}    ← stored as DB_PASSWORD in .env
 
 ── PowerDNS API ─────────────────────────────────────────────────
   URL      : http://127.0.0.1:8081
