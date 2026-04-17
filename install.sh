@@ -466,7 +466,8 @@ log "Frontend built."
 info "Building eupanel-agent…"
 (
   cd "${INSTALL_DIR}/eupanel-agent"
-  GOPATH="/root/go" go mod download
+  GOPATH="/root/go" go mod tidy          # generates go.sum if missing
+  GOPATH="/root/go" go mod download      # cache all dependencies
   GOPATH="/root/go" CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
       go build -ldflags="-s -w" -o /usr/local/bin/eupanel-agent .
 )
