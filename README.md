@@ -40,10 +40,20 @@ A lightweight hosting control panel built on Flint Dart (backend), Next.js (fron
 SSH into your server as root, then run:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/install.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/install.sh | bash
 ```
 
-The script will ask you three questions, then handle everything else.
+The script will ask you a few questions, then handle everything else.
+
+## Update
+
+Already installed? One command updates everything — backend, frontend, and agent:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/update.sh | bash
+```
+
+It pulls the latest code, rebuilds only what changed, restarts all services, and shows the status. If you're already on the latest version it exits immediately without doing anything.
 
 ---
 
