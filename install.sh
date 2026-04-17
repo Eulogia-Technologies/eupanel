@@ -82,6 +82,8 @@ USE_SSL="n"
 if [[ "$PANEL_DOMAIN" != "$SERVER_IP" ]]; then
     printf "Issue Let's Encrypt SSL for %s? (y/N): " "$PANEL_DOMAIN" > $TTY
     read -r USE_SSL < $TTY
+    # Accept "yes", "y", "Y", "YES"
+    [[ "${USE_SSL,,}" == "yes" ]] && USE_SSL="y"
 fi
 
 echo ""
