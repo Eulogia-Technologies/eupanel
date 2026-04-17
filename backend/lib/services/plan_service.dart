@@ -74,9 +74,12 @@ class PlanService {
     if (data.containsKey('domain_limit'))
       updateData['domain_limit'] =
           _parseInt(data['domain_limit'], 'domain_limit');
-    if (data.containsKey('price'))
-      updateData['price'] = data['price'] != null
-          ? double.tryParse(data['price'].toString())
+    if (data.containsKey('subdomain_limit'))
+      updateData['subdomain_limit'] =
+          _parseInt(data['subdomain_limit'], 'subdomain_limit');
+    if (data.containsKey('ram_limit'))
+      updateData['ram_limit'] = data['ram_limit'] != null
+          ? _parseInt(data['ram_limit'], 'ram_limit')
           : null;
     if (data.containsKey('status')) {
       _validateStatus(data['status'].toString());
