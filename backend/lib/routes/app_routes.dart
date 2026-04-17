@@ -60,5 +60,8 @@ class AppRoutes extends RouteGroup {
     // GitHub OAuth + auto-deploy
     app.routes(GithubRoutes());
     app.routes(WebhookRoutes());
+
+    // System management (admin only)
+    app.routes(SystemRoutes());
   }
 }
