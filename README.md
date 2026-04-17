@@ -171,11 +171,9 @@ systemctl restart eupanel-agent
 
 **Update EuPanel to the latest version:**
 ```bash
-cd /opt/eupanel
-git pull
-cd frontend && npm ci && npm run build
-systemctl restart eupanel-backend eupanel-frontend eupanel-agent
+curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/update.sh | bash
 ```
+This pulls the latest code, rebuilds the backend, frontend, and agent, then restarts all three services automatically. If already up to date it exits immediately.
 
 **Issue SSL manually** (if you skipped it during install):
 ```bash
