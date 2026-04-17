@@ -98,7 +98,7 @@ echo "  Admin user  : $ADMIN_USER  <$ADMIN_EMAIL>"
 echo ""
 printf "Proceed? (y/N): " > $TTY
 read -r _CONFIRM < $TTY
-[[ "${_CONFIRM,,}" != "y" ]] && exit 0
+[[ "${_CONFIRM,,}" != "y" && "${_CONFIRM,,}" != "yes" ]] && exit 0
 
 # ── Generate secrets ──────────────────────────────────────────────────────────
 DB_PASS=$(gen_pass)
