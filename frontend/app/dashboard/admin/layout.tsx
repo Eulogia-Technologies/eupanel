@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { SystemUpdateButton } from "@/components/system-update-modal";
+import { Menu } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [ready, setReady] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("eupanel_token");
@@ -29,11 +31,35 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!ready) return <div className="ep-shell ep-shell-loading" />;
 
   return (
-    <div className="ep-shell">
-      <DashboardSidebar role="admin" onLogout={logout} />
-      <main className="ep-main">
-        {/* Admin topbar with update button */}
-        <div className="ep-topbar" style={{ justifyContent: "flex-end" }}>
+    <div className="ep-shell ep-shell-admin">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="ep-sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <DashboardSidebar
+        role="admin"
+        onLogout={logout}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+
+      <main className="ep-main ep-main-admin">
+        {/* Admin topbar */}
+        <div className="ep-topbar ep-topbar-admin">
+          {/* Hamburger (mobile only) */}
+          <button
+            className="ep-hamburger"
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu size={20} />
+          </button>
+
+          <div style={{ flex: 1 }} />
           <SystemUpdateButton />
         </div>
         {children}
