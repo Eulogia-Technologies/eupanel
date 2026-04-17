@@ -401,6 +401,8 @@ if ! command -v dart &>/dev/null; then
     apt-get update -qq
     apt-get install -y -qq dart
 fi
+# Symlink dart into /usr/local/bin so it's on PATH everywhere (scripts, systemd, ssh)
+ln -sf /usr/lib/dart/bin/dart /usr/local/bin/dart
 log "Dart $(dart --version 2>&1 | head -1)."
 
 # ── Node.js ────────────────────────────────────────────────────────────────
