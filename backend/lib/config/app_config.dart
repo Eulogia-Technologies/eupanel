@@ -24,7 +24,7 @@ class AppConfig {
   static int get dbPort => int.tryParse(_env('DB_PORT', '3306')) ?? 3306;
   static String get dbName => _env('DB_NAME', 'eupanel');
   static String get dbUser => _env('DB_USER', 'root');
-  static String get dbPass => _env('DB_PASS', '');
+  static String get dbPass => _env('DB_PASSWORD', '');
 
   // ── JWT ─────────────────────────────────────────────────────────────────
   static String get jwtSecret => _env('JWT_SECRET', 'change-me-in-production');
