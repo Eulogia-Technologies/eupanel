@@ -1,8 +1,6 @@
 "use client";
 
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { DashboardRole } from "@/lib/dashboard-nav";
 import {
   IconPlus, IconX, IconSearch, IconRefresh, IconTrash,
@@ -162,11 +160,9 @@ export function CustomerResourceScreen({
   title,
   endpoint,
   createEndpoint,
-  expectedRole = "customer",
   columns,
   createFields = [],
 }: Props) {
-  const router = useRouter();
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_FRONTEND_API_BASE ?? "/api", []);
 
   const [rows, setRows]           = useState<Array<Record<string, unknown>>>([]);
@@ -197,21 +193,9 @@ export function CustomerResourceScreen({
 
   useEffect(() => {
     const token = localStorage.getItem("eupanel_token");
-    const raw   = localStorage.getItem("eupanel_user");
-    if (!token || !raw) { router.replace("/"); return; }
-    const role = (JSON.parse(raw) as { role?: string }).role?.toLowerCase();
-    if (role !== expectedRole) {
-      router.replace(role === "admin" ? "/dashboard/admin" : role === "reseller" ? "/dashboard/reseller" : "/dashboard");
-      return;
-    }
+    if (!token) return;
     void loadRows(token);
-  }, [expectedRole, loadRows, router]);
-
-  function logout() {
-    localStorage.removeItem("eupanel_token");
-    localStorage.removeItem("eupanel_user");
-    router.replace("/");
-  }
+  }, [loadRows]);
 
   async function handleCreate(data: Record<string, string>) {
     const token = localStorage.getItem("eupanel_token");
@@ -263,153 +247,149 @@ export function CustomerResourceScreen({
   const showDelete = columns.some((c) => c.key === "id") || rows[0]?.id !== undefined;
 
   return (
-    <div className="ep-shell">
-      <DashboardSidebar role={expectedRole} onLogout={logout} />
-
-      <main className="ep-main">
-        {/* Top bar */}
-        <div className="ep-topbar">
-          <div className="ep-topbar-breadcrumb">
-            <span style={{ color: "var(--ep-text-faint)" }}>Dashboard</span>
-            <span style={{ margin: "0 0.35rem", color: "var(--ep-text-faint)" }}>/</span>
-            <strong>{title}</strong>
-          </div>
-          <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-            <button
-              className="ep-btn-icon"
-              onClick={() => { const t = localStorage.getItem("eupanel_token"); if (t) void loadRows(t); }}
-              title="Refresh"
-            >
-              <IconRefresh size={14} />
+    <div>
+      {/* Top bar */}
+      <div className="ep-topbar">
+        <div className="ep-topbar-breadcrumb">
+          <span style={{ color: "var(--ep-text-faint)" }}>Dashboard</span>
+          <span style={{ margin: "0 0.35rem", color: "var(--ep-text-faint)" }}>/</span>
+          <strong>{title}</strong>
+        </div>
+        <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+          <button
+            className="ep-btn-icon"
+            onClick={() => { const t = localStorage.getItem("eupanel_token"); if (t) void loadRows(t); }}
+            title="Refresh"
+          >
+            <IconRefresh size={14} />
+          </button>
+          {createFields.length > 0 && (
+            <button className="ep-btn ep-btn-primary ep-btn-sm" onClick={() => { setCreateError(""); setShowModal(true); }}>
+              <IconPlus size={13} />
+              New {title.replace(/s$/, "")}
             </button>
-            {createFields.length > 0 && (
-              <button className="ep-btn ep-btn-primary ep-btn-sm" onClick={() => { setCreateError(""); setShowModal(true); }}>
-                <IconPlus size={13} />
-                New {title.replace(/s$/, "")}
-              </button>
-            )}
+          )}
+        </div>
+      </div>
+
+      <div className="ep-content">
+        {/* Page header */}
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+          <div>
+            <h1 style={{ fontSize: "1.375rem", fontWeight: 700, letterSpacing: "-0.02em" }}>{title}</h1>
+            <p style={{ fontSize: "0.84rem", color: "var(--ep-text-muted)", marginTop: "0.2rem" }}>
+              {loading ? "Loading…" : `${filtered.length} of ${rows.length} record${rows.length !== 1 ? "s" : ""}`}
+            </p>
           </div>
         </div>
 
-        <div className="ep-content">
-          {/* Page header */}
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
-            <div>
-              <h1 style={{ fontSize: "1.375rem", fontWeight: 700, letterSpacing: "-0.02em" }}>{title}</h1>
-              <p style={{ fontSize: "0.84rem", color: "var(--ep-text-muted)", marginTop: "0.2rem" }}>
-                {loading ? "Loading…" : `${filtered.length} of ${rows.length} record${rows.length !== 1 ? "s" : ""}`}
-              </p>
+        {/* Table Card */}
+        <div className="ep-card">
+          {/* Search bar */}
+          <div style={{ padding: "0.875rem 1.25rem", borderBottom: "1px solid var(--ep-border)", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <div className="ep-search-wrap" style={{ flex: 1, maxWidth: 320 }}>
+              <IconSearch size={14} className="ep-search-icon" />
+              <input
+                className="ep-search"
+                placeholder={`Search ${title.toLowerCase()}…`}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
+            <span className="ep-badge ep-badge-neutral" style={{ flexShrink: 0 }}>
+              {rows.length} total
+            </span>
           </div>
 
-          {/* Table Card */}
-          <div className="ep-card">
-            {/* Search bar */}
-            <div style={{ padding: "0.875rem 1.25rem", borderBottom: "1px solid var(--ep-border)", display: "flex", alignItems: "center", gap: "0.75rem" }}>
-              <div className="ep-search-wrap" style={{ flex: 1, maxWidth: 320 }}>
-                <IconSearch size={14} className="ep-search-icon" />
-                <input
-                  className="ep-search"
-                  placeholder={`Search ${title.toLowerCase()}…`}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-              </div>
-              <span className="ep-badge ep-badge-neutral" style={{ flexShrink: 0 }}>
-                {rows.length} total
-              </span>
+          {/* Error */}
+          {error && (
+            <div style={{ padding: "0.75rem 1.25rem" }}>
+              <div className="ep-alert ep-alert-error">{error}</div>
             </div>
+          )}
 
-            {/* Error */}
-            {error && (
-              <div style={{ padding: "0.75rem 1.25rem" }}>
-                <div className="ep-alert ep-alert-error">{error}</div>
+          {/* Table */}
+          <div className="ep-table-wrap">
+            {loading ? (
+              <div style={{ padding: "1.25rem", display: "grid", gap: "0.6rem" }}>
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="ep-skeleton" style={{ height: "2.75rem", borderRadius: "var(--ep-r-md)" }} />
+                ))}
               </div>
+            ) : filtered.length === 0 ? (
+              <div className="ep-empty">
+                <div className="ep-empty-icon">
+                  <IconSearch size={18} />
+                </div>
+                <div className="ep-empty-title">
+                  {search ? "No matches found" : `No ${title.toLowerCase()} yet`}
+                </div>
+                <div className="ep-empty-desc">
+                  {search
+                    ? `Try a different search term.`
+                    : createFields.length > 0
+                      ? `Click "New ${title.replace(/s$/, "")}" to get started.`
+                      : "Records will appear here once they are created."}
+                </div>
+                {!search && createFields.length > 0 && (
+                  <button className="ep-btn ep-btn-primary ep-btn-sm" style={{ marginTop: "0.5rem" }} onClick={() => setShowModal(true)}>
+                    <IconPlus size={13} />
+                    New {title.replace(/s$/, "")}
+                  </button>
+                )}
+              </div>
+            ) : (
+              <table className="ep-table">
+                <thead>
+                  <tr>
+                    {columns.map((col) => (
+                      <th key={col.key}>{col.label}</th>
+                    ))}
+                    {showDelete && <th style={{ width: "3rem" }} />}
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.map((row, idx) => {
+                    const rowId = String(row.id ?? idx);
+                    return (
+                      <tr key={rowId}>
+                        {columns.map((col) => (
+                          <td key={col.key}>
+                            <CellValue col={col} value={row[col.key]} />
+                          </td>
+                        ))}
+                        {showDelete && (
+                          <td>
+                            <button
+                              className="ep-btn-icon"
+                              title="Delete"
+                              disabled={deletingId === rowId}
+                              onClick={() => {
+                                if (confirm(`Delete this ${title.replace(/s$/, "").toLowerCase()}?`)) {
+                                  void handleDelete(rowId);
+                                }
+                              }}
+                              style={{ color: "var(--ep-error)" }}
+                            >
+                              {deletingId === rowId ? (
+                                <svg className="ep-spin" width="12" height="12" viewBox="0 0 14 14" fill="none">
+                                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" strokeDasharray="26" strokeDashoffset="10" />
+                                </svg>
+                              ) : (
+                                <IconTrash size={13} />
+                              )}
+                            </button>
+                          </td>
+                        )}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             )}
-
-            {/* Table */}
-            <div className="ep-table-wrap">
-              {loading ? (
-                <div style={{ padding: "1.25rem", display: "grid", gap: "0.6rem" }}>
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="ep-skeleton" style={{ height: "2.75rem", borderRadius: "var(--ep-r-md)" }} />
-                  ))}
-                </div>
-              ) : filtered.length === 0 ? (
-                <div className="ep-empty">
-                  <div className="ep-empty-icon">
-                    <IconSearch size={18} />
-                  </div>
-                  <div className="ep-empty-title">
-                    {search ? "No matches found" : `No ${title.toLowerCase()} yet`}
-                  </div>
-                  <div className="ep-empty-desc">
-                    {search
-                      ? `Try a different search term.`
-                      : createFields.length > 0
-                        ? `Click "New ${title.replace(/s$/, "")}" to get started.`
-                        : "Records will appear here once they are created."}
-                  </div>
-                  {!search && createFields.length > 0 && (
-                    <button className="ep-btn ep-btn-primary ep-btn-sm" style={{ marginTop: "0.5rem" }} onClick={() => setShowModal(true)}>
-                      <IconPlus size={13} />
-                      New {title.replace(/s$/, "")}
-                    </button>
-                  )}
-                </div>
-              ) : (
-                <table className="ep-table">
-                  <thead>
-                    <tr>
-                      {columns.map((col) => (
-                        <th key={col.key}>{col.label}</th>
-                      ))}
-                      {showDelete && <th style={{ width: "3rem" }} />}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filtered.map((row, idx) => {
-                      const rowId = String(row.id ?? idx);
-                      return (
-                        <tr key={rowId}>
-                          {columns.map((col) => (
-                            <td key={col.key}>
-                              <CellValue col={col} value={row[col.key]} />
-                            </td>
-                          ))}
-                          {showDelete && (
-                            <td>
-                              <button
-                                className="ep-btn-icon"
-                                title="Delete"
-                                disabled={deletingId === rowId}
-                                onClick={() => {
-                                  if (confirm(`Delete this ${title.replace(/s$/, "").toLowerCase()}?`)) {
-                                    void handleDelete(rowId);
-                                  }
-                                }}
-                                style={{ color: "var(--ep-error)" }}
-                              >
-                                {deletingId === rowId ? (
-                                  <svg className="ep-spin" width="12" height="12" viewBox="0 0 14 14" fill="none">
-                                    <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" strokeDasharray="26" strokeDashoffset="10" />
-                                  </svg>
-                                ) : (
-                                  <IconTrash size={13} />
-                                )}
-                              </button>
-                            </td>
-                          )}
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              )}
-            </div>
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Create Modal */}
       {showModal && (
