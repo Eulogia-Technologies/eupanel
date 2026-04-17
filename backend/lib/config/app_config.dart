@@ -10,7 +10,7 @@ import 'dart:io';
 ///   DB_PORT=3306
 ///   DB_NAME=eupanel
 ///   DB_USER=eupanel
-///   DB_PASS=secret
+///   DB_PASSWORD=secret
 ///   JWT_SECRET=change-me-in-production
 ///   PDNS_API_URL=http://localhost:8081
 ///   PDNS_API_KEY=pdns-secret
