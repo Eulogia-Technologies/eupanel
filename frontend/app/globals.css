@@ -1444,12 +1444,24 @@ h1, h2, h3, h4, h5, h6, p { margin: 0; }
   background: transparent;
 }
 
+/* Dark topbar for admin */
 .ep-topbar-admin {
-  background: rgba(6,8,15,0.85) !important;
+  background: rgba(6,8,15,0.9) !important;
   border-bottom: 1px solid rgba(255,255,255,0.06) !important;
   backdrop-filter: blur(16px);
 }
-
+.ep-topbar-admin .ep-btn {
+  color: #94a3b8;
+}
+.ep-topbar-admin .ep-btn-ghost {
+  border-color: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+}
+.ep-topbar-admin .ep-btn-ghost:hover:not(:disabled) {
+  background: rgba(255,255,255,0.08);
+  color: #f1f5f9;
+  box-shadow: none;
+}
 .ep-topbar-admin .ep-hamburger {
   border-color: rgba(255,255,255,0.1);
   color: #64748b;
