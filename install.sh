@@ -476,6 +476,8 @@ chmod 600 "${INSTALL_DIR}/backend/.env"
 # ── Backend: dart pub get ──────────────────────────────────────────────────
 info "Installing Dart dependencies…"
 export PATH="$PATH:/usr/lib/dart/bin"
+# Store pub cache inside install dir so www-data can access it at runtime
+export PUB_CACHE="${INSTALL_DIR}/.pub-cache"
 (cd "${INSTALL_DIR}/backend" && dart pub get)
 log "Dart dependencies resolved."
 
