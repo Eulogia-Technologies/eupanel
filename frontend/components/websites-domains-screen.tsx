@@ -15,7 +15,7 @@ import {
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 type WebsitesDomainsScreenProps = {
-  role: "admin" | "customer" | "reseller";
+  role: "admin" | "customer";
 };
 
 type DashboardUser = { role?: string };
