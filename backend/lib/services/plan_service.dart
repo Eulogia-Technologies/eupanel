@@ -36,8 +36,9 @@ class PlanService {
       'database_limit':
           _parseInt(data['database_limit'] ?? 1, 'database_limit'),
       'domain_limit': _parseInt(data['domain_limit'] ?? 1, 'domain_limit'),
-      'price': data['price'] != null
-          ? double.tryParse(data['price'].toString())
+      'subdomain_limit': _parseInt(data['subdomain_limit'] ?? 10, 'subdomain_limit'),
+      'ram_limit': data['ram_limit'] != null
+          ? _parseInt(data['ram_limit'], 'ram_limit')
           : null,
       'status': data['status']?.toString() ?? 'active',
     });
