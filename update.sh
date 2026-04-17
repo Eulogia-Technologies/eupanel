@@ -68,6 +68,8 @@ section "4 / 4 — Agent (Go)"
 info "Compiling eupanel-agent…"
 (
   cd /opt/eupanel/eupanel-agent
+  GOPATH="/root/go" go mod tidy
+  GOPATH="/root/go" go mod download
   GOPATH="/root/go" CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
       go build -ldflags="-s -w" -o /usr/local/bin/eupanel-agent .
 )
