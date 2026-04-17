@@ -99,7 +99,6 @@ const RUNTIMES: { id: DeployRuntime; label: string }[] = [
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function WebsitesDomainsScreen({ role }: WebsitesDomainsScreenProps) {
-  const router = useRouter();
   const apiBase = process.env.NEXT_PUBLIC_FRONTEND_API_BASE ?? "/api";
 
   // Data
