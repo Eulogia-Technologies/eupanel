@@ -32,6 +32,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="ep-shell">
       <DashboardSidebar role="admin" onLogout={logout} />
       <main className="ep-main">
+        {/* Admin topbar with update button */}
+        <div className="ep-topbar" style={{ justifyContent: "flex-end" }}>
+          <SystemUpdateButton />
+        </div>
         {children}
       </main>
     </div>
