@@ -575,6 +575,7 @@ Type=simple
 User=www-data
 WorkingDirectory=${INSTALL_DIR}/backend
 EnvironmentFile=${INSTALL_DIR}/backend/.env
+Environment=PUB_CACHE=${INSTALL_DIR}/.pub-cache
 ExecStart=/usr/lib/dart/bin/dart run lib/main.dart
 Restart=always
 RestartSec=5
