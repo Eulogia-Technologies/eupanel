@@ -799,8 +799,11 @@ curl -sf -X POST "http://127.0.0.1:${BACKEND_PORT}/users" \
 #  SAVE CREDENTIALS
 # =============================================================================
 CREDS_FILE="/root/eupanel-credentials.txt"
-PANEL_URL="http${USE_SSL,,}://${PANEL_DOMAIN}"
-[[ "${USE_SSL,,}" != "y" ]] && PANEL_URL="http://${PANEL_DOMAIN}"
+if [[ "${USE_SSL,,}" == "y" ]]; then
+    PANEL_URL="https://${PANEL_DOMAIN}"
+else
+    PANEL_URL="http://${PANEL_DOMAIN}"
+fi
 
 cat > "$CREDS_FILE" <<CREDS
 ╔══════════════════════════════════════════════════════════════════╗
