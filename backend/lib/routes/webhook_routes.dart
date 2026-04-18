@@ -11,7 +11,10 @@ class WebhookRoutes extends RouteGroup {
 
   @override
   void register(Flint app) {
-    // GitHub push webhook — verified via HMAC-SHA256 signature
+    // GitHub push webhook for site auto-deploys — verified via per-site HMAC secret
     app.post('/github', useController(WebhookController.new, (c) => c.githubPush()));
+
+    // GitHub push webhook for eupanel self-update — verified via DEPLOY_WEBHOOK_SECRET
+    app.post('/deploy', useController(WebhookController.new, (c) => c.selfDeploy()));
   }
 }
