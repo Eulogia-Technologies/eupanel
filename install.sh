@@ -862,6 +862,13 @@ Server IP : ${SERVER_IP}
 ── JWT Secret ───────────────────────────────────────────────────
   ${JWT_SECRET}
 
+── Auto-Deploy Webhook ──────────────────────────────────────────
+  GitHub repo → Settings → Webhooks → Add webhook
+  Payload URL : ${PANEL_BASE_URL}/api/webhooks/deploy
+  Content type: application/json
+  Secret      : ${DEPLOY_SECRET}
+  Events      : Just the push event
+
 ── Service status ───────────────────────────────────────────────
   systemctl status eupanel-backend
   systemctl status eupanel-frontend
