@@ -88,6 +88,91 @@ class WebhookController extends Controller {
     }
   }
 
+  // ── POST /webhooks/deploy — EuPanel self-update via GitHub push ──────────
+
+  /// Called by GitHub on every push to the eupanel repo.
+  /// Validates the signature using DEPLOY_WEBHOOK_SECRET, then runs update.sh
+  /// in detached mode (same mechanism as the admin UI "Update Panel" button).
+  Future<Response> selfDeploy() async {
+    try {
+      final secret = Platform.environment['DEPLOY_WEBHOOK_SECRET'] ?? '';
+      if (secret.isEmpty) {
+        stderr.writeln('[Deploy] DEPLOY_WEBHOOK_SECRET not set — ignoring webhook.');
+        return res.json({'status': 'ok', 'message': 'Deploy not configured.'});
+      }
+
+      final bodyString = await req.body();
+      final rawBody    = utf8.encode(bodyString);
+      final signature  = req.headers['x-hub-signature-256']
+                      ?? req.headers['X-Hub-Signature-256']
+                      ?? '';
+
+      // Verify signature
+      if (!_verifySignature(rawBody, secret, signature)) {
+        stderr.writeln('[Deploy] Signature mismatch — possible forgery, ignoring.');
+        return res.status(403).json({'status': 'error', 'message': 'Invalid signature.'});
+      }
+
+      final event = req.headers['x-github-event'] ?? req.headers['X-GitHub-Event'] ?? '';
+
+      // Accept ping from GitHub (sent when webhook is first created)
+      if (event == 'ping') {
+        return res.json({'status': 'ok', 'message': 'pong'});
+      }
+
+      if (event != 'push') {
+        return res.json({'status': 'ok', 'message': 'Event "$event" ignored.'});
+      }
+
+      // Only deploy on master branch
+      final payload = jsonDecode(bodyString) as Map<String, dynamic>;
+      final ref     = payload['ref']?.toString() ?? '';
+      if (!ref.endsWith('/master') && ref != 'refs/heads/master') {
+        return res.json({'status': 'ok', 'message': 'Branch "$ref" skipped — only master deploys.'});
+      }
+
+      // Prevent concurrent updates
+      if (File(_lockFile).existsSync()) {
+        return res.json({'status': 'ok', 'message': 'Update already in progress — skipped.'});
+      }
+
+      if (!File(_updateScript).existsSync()) {
+        return res.status(500).json({'status': 'error', 'message': 'Update script not found.'});
+      }
+
+      // Clear previous log and mark running
+      File(_logFile).writeAsStringSync('');
+      File(_statusFile).writeAsStringSync('running');
+      File(_lockFile).writeAsStringSync('${DateTime.now().toIso8601String()} (webhook)\n');
+
+      // Spawn detached — survives backend restart during update
+      await Process.start(
+        'bash',
+        [
+          '-c',
+          'bash $_updateScript >> $_logFile 2>&1; '
+          'echo \$? > $_statusFile; '
+          'rm -f $_lockFile',
+        ],
+        mode: ProcessStartMode.detached,
+      );
+
+      final sha     = (payload['head_commit'] as Map?)?['id']?.toString().substring(0, 7) ?? '?';
+      final message = (payload['head_commit'] as Map?)?['message']?.toString() ?? '';
+      stdout.writeln('[Deploy] Triggered by push $sha: $message');
+
+      return res.json({
+        'status':  'started',
+        'message': 'Self-update triggered by push to master.',
+        'commit':  sha,
+      });
+    } catch (e) {
+      stderr.writeln('[Deploy] Error: $e');
+      // Always return 200 so GitHub does not disable the webhook
+      return res.json({'status': 'error', 'message': e.toString()});
+    }
+  }
+
   // ── HMAC-SHA256 signature verification ───────────────────────────────────
 
   bool _verifySignature(List<int> body, String secret, String signatureHeader) {
