@@ -475,6 +475,10 @@ GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
 PANEL_BASE_URL=${PANEL_BASE_URL}
 PANEL_FRONTEND_URL=${PANEL_BASE_URL}
+
+# Auto-deploy webhook — used by POST /webhooks/deploy
+# Set this as the Secret when adding the webhook in your GitHub repo settings
+DEPLOY_WEBHOOK_SECRET=${DEPLOY_SECRET}
 ENV
 chmod 600 "${INSTALL_DIR}/backend/.env"
 
