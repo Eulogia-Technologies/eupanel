@@ -6,6 +6,12 @@ import 'package:backend/services/github_service.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flint_dart/flint_dart.dart';
 
+// Shared with system_controller
+const _updateScript = '/opt/eupanel/update.sh';
+const _lockFile     = '/tmp/eupanel-update.lock';
+const _logFile      = '/tmp/eupanel-update.log';
+const _statusFile   = '/tmp/eupanel-update.status';
+
 /// Receives and verifies inbound GitHub webhook push events.
 ///
 /// GitHub POST → POST /webhooks/github
