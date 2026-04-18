@@ -15,7 +15,7 @@ class DomainRoutes extends RouteGroup {
 
     // GET /domains?subscription_id=xxx
     app.get(
-      '/domains',
+      '/',
       auth.handle(
         useController(DomainController.new, (c) => c.index()),
       ),
@@ -23,7 +23,7 @@ class DomainRoutes extends RouteGroup {
 
     // GET /domains/:id
     app.get(
-      '/domains/:id',
+      '/:id',
       auth.handle(
         useController(DomainController.new, (c) => c.show()),
       ),
@@ -31,7 +31,7 @@ class DomainRoutes extends RouteGroup {
 
     // POST /domains  — create domain + provision nginx + SSL
     app.post(
-      '/domains',
+      '/',
       auth.handle(
         useController(DomainController.new, (c) => c.create()),
       ),
@@ -39,7 +39,7 @@ class DomainRoutes extends RouteGroup {
 
     // DELETE /domains/:id  — remove domain + nginx config
     app.delete(
-      '/domains/:id',
+      '/:id',
       auth.handle(
         useController(DomainController.new, (c) => c.delete()),
       ),
