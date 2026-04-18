@@ -132,6 +132,7 @@ JWT_SECRET=$(gen_hex 32)
 AGENT_SECRET=$(gen_hex 32)
 PDNS_API_KEY=$(gen_hex 16)
 PMA_TOKEN="pma_$(gen_hex 10)"
+DEPLOY_SECRET=$(gen_hex 32)
 
 # ── Resolve panel URL (needed by both backend + frontend .env) ────────────────
 if [[ "${USE_SSL,,}" == "y" ]]; then
