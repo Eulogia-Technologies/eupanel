@@ -15,7 +15,7 @@ class SubscriptionRoutes extends RouteGroup {
 
     // GET /subscriptions — own subs (customer) or all (admin)
     app.get(
-      '/subscriptions',
+      '/',
       auth.handle(
         useController(SubscriptionController.new, (c) => c.index()),
       ),
@@ -23,7 +23,7 @@ class SubscriptionRoutes extends RouteGroup {
 
     // GET /subscriptions/:id
     app.get(
-      '/subscriptions/:id',
+      '/:id',
       auth.handle(
         useController(SubscriptionController.new, (c) => c.show()),
       ),
@@ -31,7 +31,7 @@ class SubscriptionRoutes extends RouteGroup {
 
     // POST /subscriptions — create subscription + trigger provisioning
     app.post(
-      '/subscriptions',
+      '/',
       auth.handle(
         useController(SubscriptionController.new, (c) => c.create()),
       ),
@@ -39,7 +39,7 @@ class SubscriptionRoutes extends RouteGroup {
 
     // DELETE /subscriptions/:id — cancel + deprovision
     app.delete(
-      '/subscriptions/:id',
+      '/:id',
       auth.handle(
         useController(SubscriptionController.new, (c) => c.cancel()),
       ),
