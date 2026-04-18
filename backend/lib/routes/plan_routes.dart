@@ -11,12 +11,12 @@ class PlanRoutes extends RouteGroup {
 
   @override
   void register(Flint app) {
-    final auth = AuthMiddleware();
+    final auth      = AuthMiddleware();
     final adminOnly = AuthMiddleware(allowedRoles: ['admin']);
 
     // GET /plans — authenticated users see active plans; admin sees all
     app.get(
-      '/plans',
+      '/',
       auth.handle(
         useController(PlanController.new, (c) => c.index()),
       ),
@@ -24,7 +24,7 @@ class PlanRoutes extends RouteGroup {
 
     // GET /plans/:id
     app.get(
-      '/plans/:id',
+      '/:id',
       auth.handle(
         useController(PlanController.new, (c) => c.show()),
       ),
@@ -32,7 +32,7 @@ class PlanRoutes extends RouteGroup {
 
     // POST /plans — admin only
     app.post(
-      '/plans',
+      '/',
       adminOnly.handle(
         useController(PlanController.new, (c) => c.create()),
       ),
@@ -40,7 +40,7 @@ class PlanRoutes extends RouteGroup {
 
     // PUT /plans/:id — admin only
     app.put(
-      '/plans/:id',
+      '/:id',
       adminOnly.handle(
         useController(PlanController.new, (c) => c.update()),
       ),
@@ -48,7 +48,7 @@ class PlanRoutes extends RouteGroup {
 
     // DELETE /plans/:id — admin only
     app.delete(
-      '/plans/:id',
+      '/:id',
       adminOnly.handle(
         useController(PlanController.new, (c) => c.delete()),
       ),
