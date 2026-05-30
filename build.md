@@ -23,8 +23,7 @@
 
 ```
 eupanel/
-├── backend/     # FlintDart Core API
-├── frontend/    # Next.js Dashboard
+├── fullstack/   # Flint Dart fullstack API and UI
 └── masterplan.md
 ```
 

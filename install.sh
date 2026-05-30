@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # =============================================================================
 #  EuPanel — Complete One-Shot Installer
 #  Ubuntu 22.04 / 24.04 LTS
 #
 #  Installs: nginx · PHP 8.3 · MariaDB · phpMyAdmin · PowerDNS · vsftpd
-#            Certbot · Go · Dart · Node.js 20 · Tinyfilemanager
-#            EuPanel backend (Dart/Flint) · frontend (Next.js) · agent (Go)
+#            Certbot · Go · Dart · Tinyfilemanager
+#            EuPanel fullstack backend (Flint Dart + Flint Web UI) · agent (Go)
 #
 #  Usage:
 #    curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/install.sh | sudo bash
@@ -38,13 +38,15 @@ source /etc/os-release
 
 # ── Version pins ──────────────────────────────────────────────────────────────
 GO_VERSION="1.22.3"
-NODE_MAJOR="20"
 PHP_VERSION="8.3"
 PMA_VERSION="5.2.1"
 REPO_URL="https://github.com/Eulogia-Technologies/eupanel.git"
+FLINT_DART_REPO_URL="https://github.com/flint-dart/flint_dart.git"
+FLINT_UI_REPO_URL="https://github.com/flint-dart/flint_ui.git"
 INSTALL_DIR="/opt/eupanel"
+FLINT_DART_DIR="/opt/flint/flint_dart"
+FLINT_UI_DIR="/opt/flint/flint_ui"
 BACKEND_PORT=4054
-FRONTEND_PORT=3000
 AGENT_PORT=7820
 
 # =============================================================================
@@ -134,7 +136,7 @@ PDNS_API_KEY=$(gen_hex 16)
 PMA_TOKEN="pma_$(gen_hex 10)"
 DEPLOY_SECRET=$(gen_hex 32)
 
-# ── Resolve panel URL (needed by both backend + frontend .env) ────────────────
+# ── Resolve panel URL (needed by backend .env) ────────────────────────────────
 if [[ "${USE_SSL,,}" == "y" ]]; then
     PANEL_BASE_URL="https://${PANEL_DOMAIN}"
 else
@@ -372,9 +374,9 @@ apt-get install -y -qq certbot python3-certbot-nginx
 log "Certbot installed."
 
 # =============================================================================
-#  9. LANGUAGE RUNTIMES  (Go · Dart · Node.js)
+#  9. LANGUAGE RUNTIMES  (Go · Dart)
 # =============================================================================
-section "9 / 12 — Go, Dart, Node.js"
+section "9 / 12 — Go, Dart"
 
 # ── Go ─────────────────────────────────────────────────────────────────────
 if ! command -v go &>/dev/null || [[ "$(go version 2>/dev/null | awk '{print $3}')" != "go${GO_VERSION}" ]]; then
@@ -409,14 +411,6 @@ dart pub global activate flint_dart
 ln -sf /root/.pub-cache/bin/flint /usr/local/bin/flint
 log "Dart $(dart --version 2>&1 | head -1) — flint CLI installed."
 
-# ── Node.js ────────────────────────────────────────────────────────────────
-if ! command -v node &>/dev/null; then
-    info "Installing Node.js ${NODE_MAJOR}…"
-    curl -fsSL "https://deb.nodesource.com/setup_${NODE_MAJOR}.x" | bash - > /dev/null 2>&1
-    apt-get install -y -qq nodejs
-fi
-log "Node.js $(node --version)  npm $(npm --version)."
-
 # ── Permanent PATH for all runtimes ───────────────────────────────────────────
 cat > /etc/profile.d/eupanel-paths.sh <<'PATHFILE'
 # EuPanel runtime paths — added by installer
@@ -449,8 +443,30 @@ else
 fi
 log "Repository ready at $INSTALL_DIR"
 
+# -- Local Flint source packages -------------------------------------------
+# EuPanel depends on unpublished Flint packages by local path:
+# /opt/eupanel/fullstack -> ../../flint/flint_dart and ../../flint/flint_ui.
+mkdir -p "$(dirname "$FLINT_DART_DIR")"
+if [[ -d "$FLINT_DART_DIR/.git" ]]; then
+    info "Updating local Flint Dart source…"
+    git -C "$FLINT_DART_DIR" pull --rebase --autostash
+else
+    info "Cloning local Flint Dart source…"
+    git clone --depth 1 "$FLINT_DART_REPO_URL" "$FLINT_DART_DIR"
+fi
+log "Flint Dart source ready at $FLINT_DART_DIR"
+
+if [[ -d "$FLINT_UI_DIR/.git" ]]; then
+    info "Updating local Flint UI source…"
+    git -C "$FLINT_UI_DIR" pull --rebase --autostash
+else
+    info "Cloning local Flint UI source…"
+    git clone --depth 1 "$FLINT_UI_REPO_URL" "$FLINT_UI_DIR"
+fi
+log "Flint UI source ready at $FLINT_UI_DIR"
+
 # ── Backend (.env) ─────────────────────────────────────────────────────────
-cat > "${INSTALL_DIR}/backend/.env" <<ENV
+cat > "${INSTALL_DIR}/fullstack/.env" <<ENV
 APP_ENV=production
 APP_PORT=${BACKEND_PORT}
 
@@ -468,7 +484,7 @@ PDNS_API_KEY=${PDNS_API_KEY}
 AGENT_SECRET=${AGENT_SECRET}
 AGENT_BASE_URL=http://127.0.0.1:${AGENT_PORT}
 
-STORAGE_PATH=${INSTALL_DIR}/backend/storage
+STORAGE_PATH=${INSTALL_DIR}/fullstack/storage
 
 # GitHub OAuth (fill in after creating your OAuth App at github.com/settings/developers)
 GITHUB_CLIENT_ID=
@@ -480,26 +496,20 @@ PANEL_FRONTEND_URL=${PANEL_BASE_URL}
 # Set this as the Secret when adding the webhook in your GitHub repo settings
 DEPLOY_WEBHOOK_SECRET=${DEPLOY_SECRET}
 ENV
-chmod 600 "${INSTALL_DIR}/backend/.env"
+chmod 600 "${INSTALL_DIR}/fullstack/.env"
 
 # ── Backend: dart pub get ──────────────────────────────────────────────────
 info "Installing Dart dependencies…"
 export PATH="$PATH:/usr/lib/dart/bin"
 # Store pub cache inside install dir so www-data can access it at runtime
 export PUB_CACHE="${INSTALL_DIR}/.pub-cache"
-(cd "${INSTALL_DIR}/backend" && dart pub get)
+(cd "${INSTALL_DIR}/fullstack" && dart pub get)
 log "Dart dependencies resolved."
 
-# ── Frontend (.env.local) ──────────────────────────────────────────────────
-cat > "${INSTALL_DIR}/frontend/.env.local" <<ENV
-NEXT_PUBLIC_API_URL=${PANEL_BASE_URL}/api
-NEXT_PUBLIC_PANEL_URL=${PANEL_BASE_URL}
-ENV
-
-# ── Frontend: npm build ────────────────────────────────────────────────────
-info "Building Next.js frontend (this takes a minute)…"
-(cd "${INSTALL_DIR}/frontend" && npm ci --silent && npm run build)
-log "Frontend built."
+# ── Flint Web UI bundle ────────────────────────────────────────────────────
+info "Building Flint Web UI bundle…"
+(cd "${INSTALL_DIR}/fullstack" && dart compile js flint_ui/main.dart -o public/main.dart.js)
+log "Flint Web UI bundle built."
 
 # ── Agent: go build ────────────────────────────────────────────────────────
 info "Building eupanel-agent…"
@@ -582,8 +592,8 @@ After=network.target mariadb.service
 [Service]
 Type=simple
 User=root
-WorkingDirectory=${INSTALL_DIR}/backend
-EnvironmentFile=${INSTALL_DIR}/backend/.env
+WorkingDirectory=${INSTALL_DIR}/fullstack
+EnvironmentFile=${INSTALL_DIR}/fullstack/.env
 ExecStart=/usr/local/bin/flint run
 Restart=always
 RestartSec=5
@@ -594,42 +604,20 @@ StandardError=journal
 WantedBy=multi-user.target
 SVC
 
-# ── eupanel-frontend ───────────────────────────────────────────────────────
-cat > /etc/systemd/system/eupanel-frontend.service <<SVC
-[Unit]
-Description=EuPanel Frontend (Next.js)
-After=network.target eupanel-backend.service
-
-[Service]
-Type=simple
-User=www-data
-WorkingDirectory=${INSTALL_DIR}/frontend
-EnvironmentFile=${INSTALL_DIR}/frontend/.env.local
-ExecStart=/usr/bin/node node_modules/.bin/next start -p ${FRONTEND_PORT}
-Restart=always
-RestartSec=5
-StandardOutput=journal
-StandardError=journal
-
-[Install]
-WantedBy=multi-user.target
-SVC
-
 # ── Fix permissions ────────────────────────────────────────────────────────
-mkdir -p "${INSTALL_DIR}/backend/storage"
+mkdir -p "${INSTALL_DIR}/fullstack/storage"
 # Include .pub-cache so www-data (the service user) can access Dart packages
-chown -R www-data:www-data "${INSTALL_DIR}/backend" "${INSTALL_DIR}/frontend" "${INSTALL_DIR}/.pub-cache"
-chmod -R 755 "${INSTALL_DIR}/backend" "${INSTALL_DIR}/frontend" "${INSTALL_DIR}/.pub-cache"
-chmod 600 "${INSTALL_DIR}/backend/.env" "${INSTALL_DIR}/frontend/.env.local"
+chown -R www-data:www-data "${INSTALL_DIR}/fullstack" "${INSTALL_DIR}/.pub-cache"
+chmod -R 755 "${INSTALL_DIR}/fullstack" "${INSTALL_DIR}/.pub-cache"
+chmod 600 "${INSTALL_DIR}/fullstack/.env"
 
 # ── Stop any existing services / free up ports ─────────────────────────────
 info "Stopping any existing EuPanel services…"
 systemctl stop eupanel-agent    2>/dev/null || true
 systemctl stop eupanel-backend  2>/dev/null || true
-systemctl stop eupanel-frontend 2>/dev/null || true
 
 # Kill anything still holding the ports (previous manual runs, etc.)
-for PORT in ${BACKEND_PORT} ${FRONTEND_PORT} ${AGENT_PORT}; do
+for PORT in ${BACKEND_PORT} ${AGENT_PORT}; do
     PIDS=$(lsof -ti tcp:${PORT} 2>/dev/null || true)
     if [[ -n "$PIDS" ]]; then
         warn "Killing process(es) on port ${PORT}: $PIDS"
@@ -643,24 +631,24 @@ section "DB Migration"
 info "Creating tables in MariaDB (eupanel database)…"
 
 # Load the .env vars so Dart can connect to the database
-set -a; source "${INSTALL_DIR}/backend/.env"; set +a
+set -a; source "${INSTALL_DIR}/fullstack/.env"; set +a
 
 (
-  cd "${INSTALL_DIR}/backend"
+  cd "${INSTALL_DIR}/fullstack"
   # Flint migrate — reads table_registry.dart via isolate and syncs all tables
   flint migrate
 ) && log "Database tables created." \
   || warn "Migration had warnings — check: journalctl -u eupanel-backend -n 30"
 
 # ── Enable + start ─────────────────────────────────────────────────────────
+rm -f /etc/systemd/system/eupanel-frontend.service
 systemctl daemon-reload
 systemctl enable --now eupanel-agent
 systemctl enable --now eupanel-backend
-systemctl enable --now eupanel-frontend
 sleep 3
 
-# Verify all three are actually running
-for SVC in eupanel-agent eupanel-backend eupanel-frontend; do
+# Verify services are actually running
+for SVC in eupanel-agent eupanel-backend; do
     if systemctl is-active --quiet "$SVC"; then
         log "$SVC is running."
     else
@@ -732,9 +720,9 @@ server {
         }
     }
 
-    # ── Frontend → Next.js ──────────────────────────────────────────────
+    # ── Flint fullstack panel ───────────────────────────────────────────
     location / {
-        proxy_pass         http://127.0.0.1:${FRONTEND_PORT};
+        proxy_pass         http://127.0.0.1:${BACKEND_PORT};
         proxy_http_version 1.1;
         proxy_set_header   Upgrade           \$http_upgrade;
         proxy_set_header   Connection        "upgrade";
@@ -871,12 +859,10 @@ Server IP : ${SERVER_IP}
 
 ── Service status ───────────────────────────────────────────────
   systemctl status eupanel-backend
-  systemctl status eupanel-frontend
   systemctl status eupanel-agent
 
 ── Logs ─────────────────────────────────────────────────────────
   journalctl -u eupanel-backend  -f
-  journalctl -u eupanel-frontend -f
   journalctl -u eupanel-agent    -f
 CREDS
 
@@ -908,3 +894,4 @@ echo -e "${YELLOW}  Point your domain's A record to: ${SERVER_IP}${NC}"
 [[ "${USE_SSL,,}" != "y" ]] && \
     echo -e "${YELLOW}  Then run: certbot --nginx -d ${PANEL_DOMAIN}${NC}"
 echo ""
+

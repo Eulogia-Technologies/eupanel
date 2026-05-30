@@ -1,6 +1,6 @@
-# EuPanel
+﻿# EuPanel
 
-A lightweight hosting control panel built on Flint Dart (backend), Next.js (frontend), and a Go agent that runs on each server. Built by [Eulogia Technologies](https://github.com/Eulogia-Technologies).
+A lightweight hosting control panel built as a Flint Dart fullstack app, using Flint Web UI for the dashboard and a Go agent that runs on each server. Built by [Eulogia Technologies](https://github.com/Eulogia-Technologies).
 
 ---
 
@@ -9,14 +9,14 @@ A lightweight hosting control panel built on Flint Dart (backend), Next.js (fron
 | Feature | Details |
 |---|---|
 | **Hosting plans** | Create plans with disk, bandwidth, domain, DB, FTP limits |
-| **Subscriptions** | Users subscribe to plans — system account + FTP provisioned automatically |
-| **Domains** | Add domains → nginx vhost + SSL via Let's Encrypt, all automatic |
+| **Subscriptions** | Users subscribe to plans â€” system account + FTP provisioned automatically |
+| **Domains** | Add domains â†’ nginx vhost + SSL via Let's Encrypt, all automatic |
 | **Databases** | MySQL database creation per subscription |
 | **DNS** | PowerDNS with a full API for zone + record management |
 | **FTP** | vsftpd virtual users, one per subscription |
 | **phpMyAdmin** | Served at a secret URL, no public exposure |
 | **File Manager** | Browser-based file manager for each hosting account |
-| **Multi-role** | Admin · Reseller · Customer |
+| **Multi-role** | Admin Â· Reseller Â· Customer |
 
 ---
 
@@ -29,9 +29,9 @@ A lightweight hosting control panel built on Flint Dart (backend), Next.js (fron
 | **CPU** | 1 vCPU minimum |
 | **Disk** | 20 GB minimum |
 | **Access** | Root SSH access |
-| **Domain** | Optional — works on bare IP, domain needed for SSL |
+| **Domain** | Optional â€” works on bare IP, domain needed for SSL |
 
-> **Recommended VPS:** Hetzner CX22 (2 vCPU / 4 GB / €4 mo), DigitalOcean Droplet, or Contabo.
+> **Recommended VPS:** Hetzner CX22 (2 vCPU / 4 GB / â‚¬4 mo), DigitalOcean Droplet, or Contabo.
 
 ---
 
@@ -47,7 +47,7 @@ The script will ask you a few questions, then handle everything else.
 
 ## Update
 
-Already installed? One command updates everything — backend, frontend, and agent:
+Already installed? One command updates everything â€” fullstack backend, Flint Web UI bundle, and agent:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/update.sh | bash
@@ -94,13 +94,13 @@ The installer will ask:
 
 | Prompt | Example answer |
 |---|---|
-| Panel domain | `panel.yourdomain.com` — or press Enter to use the IP |
+| Panel domain | `panel.yourdomain.com` â€” or press Enter to use the IP |
 | Admin e-mail | `you@example.com` |
 | Admin username | `admin` |
 | Admin password | Press Enter to auto-generate a strong password |
 | Issue SSL? | `y` if you pointed a domain, `n` for IP-only |
 
-After you confirm, everything runs automatically. It takes **3–6 minutes** depending on your server.
+After you confirm, everything runs automatically. It takes **3â€“6 minutes** depending on your server.
 
 ### 5. Save your credentials
 
@@ -132,50 +132,45 @@ Log in with the admin username and password from step 5.
 ## What the installer sets up
 
 ```
-nginx            — reverse proxy (port 80 / 443)
-PHP 8.3-FPM      — for phpMyAdmin + file manager
-MariaDB          — eupanel database + PowerDNS database
-phpMyAdmin       — served at a secret random URL
-PowerDNS         — authoritative DNS server with HTTP API
-vsftpd           — FTP server with virtual users
-Certbot          — Let's Encrypt SSL + auto-renew
-Go 1.22          — builds eupanel-agent
-Dart SDK         — runs the Flint backend
-Node.js 20       — builds + serves Next.js frontend
-Tinyfilemanager  — PHP file browser
-Firewall (UFW)   — opens 22, 80, 443, 21, 53, FTP passive
+nginx            â€” reverse proxy (port 80 / 443)
+PHP 8.3-FPM      â€” for phpMyAdmin + file manager
+MariaDB          â€” eupanel database + PowerDNS database
+phpMyAdmin       â€” served at a secret random URL
+PowerDNS         â€” authoritative DNS server with HTTP API
+vsftpd           â€” FTP server with virtual users
+Certbot          â€” Let's Encrypt SSL + auto-renew
+Go 1.22          â€” builds eupanel-agent
+Dart SDK         â€” runs the Flint backend and builds Flint Web UI
+Tinyfilemanager  â€” PHP file browser
+Firewall (UFW)   â€” opens 22, 80, 443, 21, 53, FTP passive
 ```
 
-Three systemd services are created and started:
+Two systemd services are created and started:
 
 | Service | What |
 |---|---|
-| `eupanel-backend` | Flint Dart API on port 4054 |
-| `eupanel-frontend` | Next.js dashboard on port 3000 |
+| `eupanel-backend` | Flint Dart API, dashboard pages, and static UI bundle on port 4054 |
 | `eupanel-agent` | Go provisioning agent on localhost:7820 |
 
 ---
 
-## After install — useful commands
+## After install â€” useful commands
 
 **Check service status:**
 ```bash
 systemctl status eupanel-backend
-systemctl status eupanel-frontend
 systemctl status eupanel-agent
 ```
 
 **View live logs:**
 ```bash
 journalctl -u eupanel-backend  -f
-journalctl -u eupanel-frontend -f
 journalctl -u eupanel-agent    -f
 ```
 
 **Restart a service:**
 ```bash
 systemctl restart eupanel-backend
-systemctl restart eupanel-frontend
 systemctl restart eupanel-agent
 ```
 
@@ -183,7 +178,7 @@ systemctl restart eupanel-agent
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/update.sh | bash
 ```
-This pulls the latest code, rebuilds the backend, frontend, and agent, then restarts all three services automatically. If already up to date it exits immediately.
+This pulls the latest code, rebuilds the backend UI bundle and agent, then restarts the services automatically. If already up to date it exits immediately.
 
 **Issue SSL manually** (if you skipped it during install):
 ```bash
@@ -200,15 +195,14 @@ certbot --nginx -d panel.yourdomain.com
 | 80 | TCP | HTTP |
 | 443 | TCP | HTTPS |
 | 21 | TCP | FTP control |
-| 40000–50000 | TCP | FTP passive data |
+| 40000â€“50000 | TCP | FTP passive data |
 | 53 | TCP + UDP | DNS |
 
 The following ports are **localhost-only** (not exposed to the internet):
 
 | Port | Service |
 |---|---|
-| 4054 | EuPanel backend API |
-| 3000 | Next.js frontend |
+| 4054 | EuPanel fullstack backend |
 | 7820 | EuPanel agent |
 | 8081 | PowerDNS HTTP API |
 
@@ -218,13 +212,13 @@ The following ports are **localhost-only** (not exposed to the internet):
 
 ```
 /opt/eupanel/
-├── backend/          Flint Dart backend
-│   ├── lib/
-│   ├── .env          secrets — chmod 600
-│   └── storage/
-├── frontend/         Next.js dashboard
-│   └── .env.local    secrets — chmod 600
-└── eupanel-agent/    Go agent source
+â”œâ”€â”€ fullstack/        Flint Dart fullstack app
+â”‚   â”œâ”€â”€ lib/
+â”‚   â”œâ”€â”€ flint_ui/     Flint Web UI source
+â”‚   â”œâ”€â”€ public/       compiled UI assets
+â”‚   â”œâ”€â”€ .env          secrets â€” chmod 600
+â”‚   â””â”€â”€ storage/
+â””â”€â”€ eupanel-agent/    Go agent source
 
 /usr/local/bin/eupanel-agent    compiled Go binary
 /etc/eupanel/agent.env          agent secrets
@@ -239,10 +233,9 @@ The following ports are **localhost-only** (not exposed to the internet):
 
 **Panel shows 502 Bad Gateway**
 
-The backend or frontend service isn't running yet. Check logs:
+The backend service isn't running yet. Check logs:
 ```bash
 journalctl -u eupanel-backend --no-pager -n 50
-journalctl -u eupanel-frontend --no-pager -n 50
 ```
 
 **"Cannot reach agent" when creating a subscription**
@@ -252,7 +245,7 @@ The agent isn't running or the secret doesn't match:
 systemctl status eupanel-agent
 # check secret matches in both:
 cat /etc/eupanel/agent.env
-cat /opt/eupanel/backend/.env | grep AGENT_SECRET
+cat /opt/eupanel/fullstack/.env | grep AGENT_SECRET
 ```
 
 **SSL certificate failed during install**
@@ -286,28 +279,29 @@ ufw status
 
 ```
 Browser
-  │
-  ▼
+  â”‚
+  â–¼
 nginx (80/443)
-  ├── /api/*        → Flint Dart backend  :4054
-  ├── /             → Next.js frontend    :3000
-  ├── /pma_xxxxx/   → phpMyAdmin          (PHP-FPM)
-  └── /filemanager/ → Tinyfilemanager     (PHP-FPM)
+  â”œâ”€â”€ /api/*        â†’ Flint Dart fullstack app  :4054
+  â”œâ”€â”€ /             â†’ Flint fullstack app :4054
+  â”œâ”€â”€ /pma_xxxxx/   â†’ phpMyAdmin          (PHP-FPM)
+  â””â”€â”€ /filemanager/ â†’ Tinyfilemanager     (PHP-FPM)
 
-Flint Dart backend
-  ├── MariaDB         (eupanel database)
-  ├── PowerDNS API    (localhost:8081)
-  └── eupanel-agent   (localhost:7820)
-        ├── useradd / userdel    (system users)
-        ├── vsftpd virtual users (FTP accounts)
-        ├── nginx vhost files    (site provisioning)
-        └── certbot              (SSL certificates)
+Flint Dart fullstack app
+  â”œâ”€â”€ MariaDB         (eupanel database)
+  â”œâ”€â”€ PowerDNS API    (localhost:8081)
+  â””â”€â”€ eupanel-agent   (localhost:7820)
+        â”œâ”€â”€ useradd / userdel    (system users)
+        â”œâ”€â”€ vsftpd virtual users (FTP accounts)
+        â”œâ”€â”€ nginx vhost files    (site provisioning)
+        â””â”€â”€ certbot              (SSL certificates)
 ```
 
 ---
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT â€” see [LICENSE](LICENSE).
 
 Built by [Eulogia Technologies](https://github.com/Eulogia-Technologies).
+
