@@ -305,8 +305,8 @@ file:///C:/Users/Aim/AppData/Local/Pub/Cache/hosted/pub.dev/web-1.1.1/lib/src/he
 file:///C:/Users/Aim/AppData/Local/Pub/Cache/hosted/pub.dev/web-1.1.1/lib/web.dart
 file:///C:/src/flutter/bin/cache/dart-sdk/lib/_internal/dart2js_platform.dill
 file:///C:/src/flutter/bin/cache/dart-sdk/lib/libraries.json
+file:///D:/eulogia/eupanel/fullstack/.dart_tool/flint_ui/page_bundles/dashboard.dart
 file:///D:/eulogia/eupanel/fullstack/.dart_tool/package_config.json
-file:///D:/eulogia/eupanel/fullstack/lib/ui/component_registry.dart
 file:///D:/eulogia/eupanel/fullstack/lib/ui/components/components.dart
 file:///D:/eulogia/eupanel/fullstack/lib/ui/components/counter_demo.dart
 file:///D:/eulogia/eupanel/fullstack/lib/ui/components/dashboard_hero.dart
@@ -320,11 +320,7 @@ file:///D:/eulogia/eupanel/fullstack/lib/ui/components/plans_view.dart
 file:///D:/eulogia/eupanel/fullstack/lib/ui/components/subscription_metric.dart
 file:///D:/eulogia/eupanel/fullstack/lib/ui/components/subscriptions_view.dart
 file:///D:/eulogia/eupanel/fullstack/lib/ui/components/websites_domains_view.dart
-file:///D:/eulogia/eupanel/fullstack/lib/ui/main.dart
-file:///D:/eulogia/eupanel/fullstack/lib/ui/middleware/auth_middleware.dart
 file:///D:/eulogia/eupanel/fullstack/lib/ui/pages/dashboard_page.dart
-file:///D:/eulogia/eupanel/fullstack/lib/ui/pages/login_page.dart
-file:///D:/eulogia/eupanel/fullstack/lib/ui/services/auth_client.dart
 org-dartlang-sdk:///lib/_http/crypto.dart
 org-dartlang-sdk:///lib/_http/embedder_config.dart
 org-dartlang-sdk:///lib/_http/http.dart

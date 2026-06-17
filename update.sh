@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # =============================================================================
 #  EuPanel â€” One-Command Updater
 #  Usage: curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/update.sh | bash
@@ -80,7 +80,7 @@ log "Backend dependencies ready."
 # 3. Flint Web UI bundle
 section "3 / 4 â€” Flint Web UI"
 info "Building Flint Web UI bundleâ€¦"
-(cd /opt/eupanel/fullstack && dart compile js flint_ui/main.dart -o public/main.dart.js)
+(cd /opt/eupanel/fullstack && dart compile js lib/ui/main.dart -o public/main.dart.js)
 log "Flint Web UI bundle built."
 
 # â”€â”€ 4. Agent â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

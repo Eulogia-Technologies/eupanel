@@ -25,6 +25,7 @@ class FtpUserService {
     required String homeDirectory,
   }) async {
     final client = HttpClient();
+    client.connectionTimeout = const Duration(seconds: 3);
     try {
       final uri = Uri.parse('$agentBaseUrl/ftp-users');
       final request = await client.postUrl(uri);
@@ -62,6 +63,7 @@ class FtpUserService {
   /// Deletes an FTP user via the agent.
   Future<void> delete(String username) async {
     final client = HttpClient();
+    client.connectionTimeout = const Duration(seconds: 3);
     try {
       final uri = Uri.parse('$agentBaseUrl/ftp-users/$username');
       final request = await client.deleteUrl(uri);

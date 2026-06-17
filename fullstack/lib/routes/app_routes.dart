@@ -34,12 +34,8 @@ class AppRoutes extends RouteGroup {
     // Flint fullstack UI routes
     app.get('/', ui.home);
     app.get('/login', ui.login);
-    app.get('/dashboard', ui.customer);
-    app.get('/dashboard/admin', ui.admin);
-    app.get('/dashboard/admin/:section', ui.admin);
-    app.get('/dashboard/reseller', ui.reseller);
-    app.get('/dashboard/reseller/:section', ui.reseller);
-    app.get('/dashboard/:section', ui.customer);
+    app.get('/dashboard', ui.dashboard);
+    app.get('/dashboard/:section', ui.dashboard);
 
     // Auth routes
     app.routes(AuthRoutes());

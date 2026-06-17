@@ -21,14 +21,10 @@ class UiController {
   }
 
   Future<Response> home(Request req, Response res) async {
-    if (!await _hasValidUiSession(req)) return res.redirect('/login');
-
-    return _page(
-      res,
-      'Dashboard',
-      title: 'EuPanel',
-      props: await _dashboardProps(role: 'admin'),
-    );
+    if (await _hasValidUiSession(req)) {
+      return res.redirect('/dashboard');
+    }
+    return res.redirect('/login');
   }
 
   Response login(Request req, Response res) {
@@ -43,36 +39,29 @@ class UiController {
     );
   }
 
-  Future<Response> admin(Request req, Response res) async {
-    if (!await _hasValidUiSession(req)) return res.redirect('/login');
+  Future<Response> dashboard(Request req, Response res) async {
+    final user = await req.user;
+    if (user == null) return res.redirect('/login');
+
+    final role = user['role']?.toString().toLowerCase() ?? 'customer';
+    final section = req.params['section'];
+
+    // Role gate admin-only sections
+    final adminSections = const ['servers', 'jobs', 'customers'];
+    if (adminSections.contains(section) && role != 'admin') {
+      return res.redirect('/dashboard');
+    }
+
+    // Role gate reseller-only sections
+    if (section == 'plans' && role != 'admin' && role != 'reseller') {
+      return res.redirect('/dashboard');
+    }
 
     return _page(
       res,
       'Dashboard',
-      title: 'EuPanel Admin',
-      props: await _dashboardProps(role: 'admin'),
-    );
-  }
-
-  Future<Response> reseller(Request req, Response res) async {
-    if (!await _hasValidUiSession(req)) return res.redirect('/login');
-
-    return _page(
-      res,
-      'Dashboard',
-      title: 'EuPanel Reseller',
-      props: await _dashboardProps(role: 'reseller'),
-    );
-  }
-
-  Future<Response> customer(Request req, Response res) async {
-    if (!await _hasValidUiSession(req)) return res.redirect('/login');
-
-    return _page(
-      res,
-      'Dashboard',
-      title: 'EuPanel Customer',
-      props: await _dashboardProps(role: 'customer'),
+      title: 'EuPanel Dashboard',
+      props: await _dashboardProps(role: role),
     );
   }
 

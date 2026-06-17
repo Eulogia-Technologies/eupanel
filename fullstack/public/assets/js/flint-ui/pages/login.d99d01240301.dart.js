@@ -427,9 +427,6 @@
     get$hashCode$(receiver) {
       return J.getInterceptor$(receiver).get$hashCode(receiver);
     },
-    get$isEmpty$asx(receiver) {
-      return J.getInterceptor$asx(receiver).get$isEmpty(receiver);
-    },
     get$iterator$ax(receiver) {
       return J.getInterceptor$ax(receiver).get$iterator(receiver);
     },
@@ -446,13 +443,6 @@
         return a0 != null && receiver === a0;
       return J.getInterceptor$(receiver).$eq(receiver, a0);
     },
-    $index$asx(receiver, a0) {
-      if (typeof a0 === "number")
-        if (Array.isArray(receiver) || typeof receiver == "string" || A.isJsIndexable(receiver, receiver[init.dispatchPropertyName]))
-          if (a0 >>> 0 === a0 && a0 < receiver.length)
-            return receiver[a0];
-      return J.getInterceptor$asx(receiver).$index(receiver, a0);
-    },
     allMatches$1$s(receiver, a0) {
       return J.getInterceptor$s(receiver).allMatches$1(receiver, a0);
     },
@@ -467,12 +457,6 @@
     },
     toString$0$(receiver) {
       return J.getInterceptor$(receiver).toString$0(receiver);
-    },
-    where$1$ax(receiver, a0) {
-      return J.getInterceptor$ax(receiver).where$1(receiver, a0);
-    },
-    whereType$1$0$ax(receiver, $T1) {
-      return J.getInterceptor$ax(receiver).whereType$1$0(receiver, $T1);
     },
     Interceptor: function Interceptor() {
     },
@@ -523,12 +507,6 @@
     },
     LateError$fieldADI(fieldName) {
       return new A.LateError("Field '" + fieldName + "' has been assigned during initialization.");
-    },
-    LateError$fieldNI(fieldName) {
-      return new A.LateError("Field '" + fieldName + "' has not been initialized.");
-    },
-    LateError$fieldAI(fieldName) {
-      return new A.LateError("Field '" + fieldName + "' has already been initialized.");
     },
     hexDigitValue(char) {
       var letter,
@@ -619,14 +597,6 @@
       this._iterator = t0;
       this._f = t1;
       this.$ti = t2;
-    },
-    WhereTypeIterable: function WhereTypeIterable(t0, t1) {
-      this._source = t0;
-      this.$ti = t1;
-    },
-    WhereTypeIterator: function WhereTypeIterator(t0, t1) {
-      this._source = t0;
-      this.$ti = t1;
     },
     FixedLengthListMixin: function FixedLengthListMixin() {
     },
@@ -3397,11 +3367,6 @@
       }
       return B.C__StringStackTrace;
     },
-    Future_Future$microtask(computation, $T) {
-      var result = new A._Future($.Zone__current, $T._eval$1("_Future<0>"));
-      A.scheduleMicrotask(new A.Future_Future$microtask_closure(computation, result));
-      return result;
-    },
     _interceptError(error, stackTrace) {
       if ($.Zone__current === B.C__RootZone)
         return null;
@@ -3742,10 +3707,6 @@
       this.error = t0;
       this.stackTrace = t1;
     },
-    Future_Future$microtask_closure: function Future_Future$microtask_closure(t0, t1) {
-      this.computation = t0;
-      this.result = t1;
-    },
     _Completer: function _Completer() {
     },
     _AsyncCompleter: function _AsyncCompleter(t0, t1) {
@@ -3915,7 +3876,7 @@
     },
     _LinkedHashSetCell: function _LinkedHashSetCell(t0) {
       this._element = t0;
-      this._collection$_previous = this._collection$_next = null;
+      this._collection$_next = null;
     },
     _LinkedHashSetIterator: function _LinkedHashSetIterator(t0, t1, t2) {
       var _ = this;
@@ -5712,447 +5673,6 @@
       _._fragment = t6;
       _.___Uri_queryParameters_FI = _.___Uri_hashCode_FI = _.___Uri__text_FI = $;
     },
-    componentRegistry_closure: function componentRegistry_closure() {
-    },
-    componentRegistry_closure0: function componentRegistry_closure0() {
-    },
-    CounterDemo: function CounterDemo() {
-      this.count = 0;
-      this._component$_scheduleRender = null;
-    },
-    CounterDemo_build_closure: function CounterDemo_build_closure(t0) {
-      this.$this = t0;
-    },
-    CounterDemo_build__closure1: function CounterDemo_build__closure1(t0) {
-      this.$this = t0;
-    },
-    CounterDemo_build_closure0: function CounterDemo_build_closure0(t0) {
-      this.$this = t0;
-    },
-    CounterDemo_build__closure0: function CounterDemo_build__closure0(t0) {
-      this.$this = t0;
-    },
-    CounterDemo_build_closure1: function CounterDemo_build_closure1(t0) {
-      this.$this = t0;
-    },
-    CounterDemo_build__closure: function CounterDemo_build__closure(t0) {
-      this.$this = t0;
-    },
-    DashboardHero: function DashboardHero(t0) {
-      this.role = t0;
-      this._component$_scheduleRender = null;
-    },
-    DashboardModuleCard: function DashboardModuleCard(t0) {
-      this.module = t0;
-      this._component$_scheduleRender = null;
-    },
-    EuPanelDashboardShell$(brand, children, $sidebar, topbar) {
-      var t1 = A.mergeComponentProps(B.Map_empty1, null, null, B.Map_4L08s, B.Map_empty1, B.Map_empty1),
-        t2 = type$.JSArray_FlintNode,
-        t3 = A._setArrayType([], t2),
-        t4 = A._setArrayType([], t2);
-      t4.push(new A.FlintElement("div", B.Map_rqeR6, A.normalizeChildren(brand, B.List_empty0)));
-      t4.push(A.toFlintNode($sidebar));
-      t3.push(new A.FlintElement("aside", B.Map_rqLQY, t4));
-      t2 = A._setArrayType([], t2);
-      t2.push(A.toFlintNode(topbar));
-      t2.push(new A.FlintElement("main", B.Map_rqBL3, A.normalizeChildren(null, children)));
-      t3.push(new A.FlintElement("div", B.Map_rqeki, t2));
-      return new A.EuPanelDashboardShell("div", t1, t3);
-    },
-    EuPanelDashboardShell: function EuPanelDashboardShell(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    EuPanelDashboardSidebar: function EuPanelDashboardSidebar(t0) {
-      this.role = t0;
-      this._component$_scheduleRender = null;
-    },
-    EuPanelDashboardSidebar_build_closure: function EuPanelDashboardSidebar_build_closure() {
-    },
-    DashboardTopbar: function DashboardTopbar(t0) {
-      this.role = t0;
-      this._component$_scheduleRender = null;
-    },
-    DeployMetric: function DeployMetric(t0, t1) {
-      this.label = t0;
-      this.value = t1;
-      this._component$_scheduleRender = null;
-    },
-    LimitMetric: function LimitMetric(t0, t1) {
-      this.label = t0;
-      this.value = t1;
-      this._component$_scheduleRender = null;
-    },
-    PlansView: function PlansView(t0, t1, t2) {
-      var _ = this;
-      _.role = t0;
-      _.plans = t1;
-      _._createForm = t2;
-      _._formError = null;
-      _._showModal = false;
-      _._component$_scheduleRender = _._editingPlanId = null;
-    },
-    PlansView_build_closure: function PlansView_build_closure(t0) {
-      this.$this = t0;
-    },
-    PlansView_build__closure: function PlansView_build__closure() {
-    },
-    PlansView_build_closure0: function PlansView_build_closure0(t0) {
-      this.$this = t0;
-    },
-    PlansView_build_closure1: function PlansView_build_closure1(t0, t1) {
-      this.$this = t0;
-      this.isAdmin = t1;
-    },
-    PlansView__buildPlanCard_closure: function PlansView__buildPlanCard_closure(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11) {
-      var _ = this;
-      _.$this = t0;
-      _.id = t1;
-      _.name = t2;
-      _.desc = t3;
-      _.disk = t4;
-      _.bandwidth = t5;
-      _.ftp = t6;
-      _.db = t7;
-      _.domain = t8;
-      _.subdomain = t9;
-      _.ram = t10;
-      _.status = t11;
-    },
-    PlansView__buildPlanCard__closure: function PlansView__buildPlanCard__closure() {
-    },
-    PlansView__buildPlanCard_closure0: function PlansView__buildPlanCard_closure0(t0, t1) {
-      this.$this = t0;
-      this.id = t1;
-    },
-    PlansView__buildPlanModal_closure1: function PlansView__buildPlanModal_closure1(t0) {
-      this.$this = t0;
-    },
-    PlansView__buildPlanModal__closure: function PlansView__buildPlanModal__closure() {
-    },
-    PlansView__buildPlanModal_closure: function PlansView__buildPlanModal_closure(t0) {
-      this.$this = t0;
-    },
-    PlansView__buildPlanModal__closure1: function PlansView__buildPlanModal__closure1() {
-    },
-    PlansView__buildPlanModal_closure0: function PlansView__buildPlanModal_closure0(t0) {
-      this.$this = t0;
-    },
-    PlansView__buildPlanModal__closure0: function PlansView__buildPlanModal__closure0() {
-    },
-    PlansView__handleFormSubmit_closure: function PlansView__handleFormSubmit_closure(t0, t1) {
-      this.$this = t0;
-      this.body = t1;
-    },
-    PlansView__handleFormSubmit_closure1: function PlansView__handleFormSubmit_closure1(t0) {
-      this.$this = t0;
-    },
-    PlansView__handleFormSubmit__closure: function PlansView__handleFormSubmit__closure(t0) {
-      this.$this = t0;
-    },
-    PlansView__handleFormSubmit_closure0: function PlansView__handleFormSubmit_closure0(t0) {
-      this.$this = t0;
-    },
-    PlansView__handleFormSubmit__closure0: function PlansView__handleFormSubmit__closure0(t0, t1) {
-      this.$this = t0;
-      this.error = t1;
-    },
-    PlansView__handleFormSubmit_closure2: function PlansView__handleFormSubmit_closure2(t0) {
-      this.$this = t0;
-    },
-    PlansView__handleFormSubmit_closure3: function PlansView__handleFormSubmit_closure3() {
-    },
-    SubscriptionMetric: function SubscriptionMetric(t0, t1, t2) {
-      var _ = this;
-      _.label = t0;
-      _.value = t1;
-      _.copyable = t2;
-      _._component$_scheduleRender = null;
-    },
-    SubscriptionMetric_build_closure: function SubscriptionMetric_build_closure(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView: function SubscriptionsView(t0, t1, t2, t3) {
-      var _ = this;
-      _.role = t0;
-      _.plans = t1;
-      _.subscriptions = t2;
-      _._subscriptionForm = t3;
-      _._subFormError = null;
-      _._showSubModal = false;
-      _._component$_scheduleRender = null;
-    },
-    SubscriptionsView_build_closure: function SubscriptionsView_build_closure(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView_build__closure: function SubscriptionsView_build__closure() {
-    },
-    SubscriptionsView_build_closure0: function SubscriptionsView_build_closure0(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView_build_closure1: function SubscriptionsView_build_closure1(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView__buildSubscriptionCard_closure: function SubscriptionsView__buildSubscriptionCard_closure(t0, t1) {
-      this.$this = t0;
-      this.subId = t1;
-    },
-    SubscriptionsView__buildSubModal_closure1: function SubscriptionsView__buildSubModal_closure1(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView__buildSubModal__closure: function SubscriptionsView__buildSubModal__closure() {
-    },
-    SubscriptionsView__buildSubModal_closure: function SubscriptionsView__buildSubModal_closure(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView__buildSubModal__closure1: function SubscriptionsView__buildSubModal__closure1() {
-    },
-    SubscriptionsView__buildSubModal_closure0: function SubscriptionsView__buildSubModal_closure0(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView__buildSubModal__closure0: function SubscriptionsView__buildSubModal__closure0() {
-    },
-    SubscriptionsView__handleSubSubmit_closure: function SubscriptionsView__handleSubSubmit_closure(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView__handleSubSubmit_closure0: function SubscriptionsView__handleSubSubmit_closure0(t0) {
-      this.planId = t0;
-    },
-    SubscriptionsView__handleSubSubmit_closure2: function SubscriptionsView__handleSubSubmit_closure2(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView__handleSubSubmit__closure: function SubscriptionsView__handleSubSubmit__closure(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView__handleSubSubmit_closure1: function SubscriptionsView__handleSubSubmit_closure1(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView__handleSubSubmit__closure0: function SubscriptionsView__handleSubSubmit__closure0(t0, t1) {
-      this.$this = t0;
-      this.error = t1;
-    },
-    SubscriptionsView__handleSubSubmit_closure3: function SubscriptionsView__handleSubSubmit_closure3(t0) {
-      this.$this = t0;
-    },
-    SubscriptionsView__handleSubSubmit_closure4: function SubscriptionsView__handleSubSubmit_closure4() {
-    },
-    WebsitesDomainsView$(role, subscriptions) {
-      var t1 = type$.String,
-        t2 = type$.nullable_Object;
-      t2 = new A.WebsitesDomainsView(role, subscriptions, A.FormController$(A.LinkedHashMap_LinkedHashMap$_literal(["subscription_id", "", "domain", ""], t1, t2)), A.FormController$(A.LinkedHashMap_LinkedHashMap$_literal(["repo_full_name", "", "branch", "main"], t1, t2)));
-      t2.WebsitesDomainsView$2$role$subscriptions(role, subscriptions);
-      return t2;
-    },
-    WebsitesDomainsView: function WebsitesDomainsView(t0, t1, t2, t3) {
-      var _ = this;
-      _.role = t0;
-      _.subscriptions = t1;
-      _.__WebsitesDomainsView__repos_F = _.__WebsitesDomainsView__gitStatus_F = _.__WebsitesDomainsView__gitDeploys_F = _.__WebsitesDomainsView__domains_F = $;
-      _._domainForm = t2;
-      _._deployForm = t3;
-      _._showDomainModal = false;
-      _._domainFormError = null;
-      _._showDeployModal = false;
-      _._component$_scheduleRender = _._activeDeployDomainId = _._deployFormError = null;
-    },
-    WebsitesDomainsView_closure: function WebsitesDomainsView_closure() {
-    },
-    WebsitesDomainsView_closure0: function WebsitesDomainsView_closure0() {
-    },
-    WebsitesDomainsView_closure1: function WebsitesDomainsView_closure1() {
-    },
-    WebsitesDomainsView_closure2: function WebsitesDomainsView_closure2() {
-    },
-    WebsitesDomainsView__closure: function WebsitesDomainsView__closure() {
-    },
-    WebsitesDomainsView___closure: function WebsitesDomainsView___closure() {
-    },
-    WebsitesDomainsView_build_closure: function WebsitesDomainsView_build_closure(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView_build_closure0: function WebsitesDomainsView_build_closure0(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView_build__closure: function WebsitesDomainsView_build__closure() {
-    },
-    WebsitesDomainsView_build_closure1: function WebsitesDomainsView_build_closure1(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView_build_closure2: function WebsitesDomainsView_build_closure2(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__buildGithubBanner_closure: function WebsitesDomainsView__buildGithubBanner_closure(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__buildGithubBanner__closure: function WebsitesDomainsView__buildGithubBanner__closure(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__buildDomainCard_closure: function WebsitesDomainsView__buildDomainCard_closure(t0, t1) {
-      this.$this = t0;
-      this.deployId = t1;
-    },
-    WebsitesDomainsView__buildDomainCard_closure0: function WebsitesDomainsView__buildDomainCard_closure0(t0, t1) {
-      this.$this = t0;
-      this.id = t1;
-    },
-    WebsitesDomainsView__buildDomainCard__closure: function WebsitesDomainsView__buildDomainCard__closure() {
-    },
-    WebsitesDomainsView__buildDomainCard_closure1: function WebsitesDomainsView__buildDomainCard_closure1(t0, t1, t2) {
-      this.$this = t0;
-      this.id = t1;
-      this.domainName = t2;
-    },
-    WebsitesDomainsView__buildDomainModal_closure1: function WebsitesDomainsView__buildDomainModal_closure1(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__buildDomainModal__closure: function WebsitesDomainsView__buildDomainModal__closure() {
-    },
-    WebsitesDomainsView__buildDomainModal_closure: function WebsitesDomainsView__buildDomainModal_closure(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__buildDomainModal__closure1: function WebsitesDomainsView__buildDomainModal__closure1() {
-    },
-    WebsitesDomainsView__buildDomainModal_closure0: function WebsitesDomainsView__buildDomainModal_closure0(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__buildDomainModal__closure0: function WebsitesDomainsView__buildDomainModal__closure0() {
-    },
-    WebsitesDomainsView__buildDeployModal_closure1: function WebsitesDomainsView__buildDeployModal_closure1(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__buildDeployModal__closure: function WebsitesDomainsView__buildDeployModal__closure() {
-    },
-    WebsitesDomainsView__buildDeployModal_closure: function WebsitesDomainsView__buildDeployModal_closure(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__buildDeployModal__closure1: function WebsitesDomainsView__buildDeployModal__closure1(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__buildDeployModal___closure: function WebsitesDomainsView__buildDeployModal___closure() {
-    },
-    WebsitesDomainsView__buildDeployModal_closure0: function WebsitesDomainsView__buildDeployModal_closure0(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__buildDeployModal__closure0: function WebsitesDomainsView__buildDeployModal__closure0() {
-    },
-    WebsitesDomainsView__handleDomainSubmit_closure: function WebsitesDomainsView__handleDomainSubmit_closure(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDomainSubmit_closure0: function WebsitesDomainsView__handleDomainSubmit_closure0(t0, t1) {
-      this.subId = t0;
-      this.domainName = t1;
-    },
-    WebsitesDomainsView__handleDomainSubmit_closure2: function WebsitesDomainsView__handleDomainSubmit_closure2(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDomainSubmit__closure: function WebsitesDomainsView__handleDomainSubmit__closure(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDomainSubmit_closure1: function WebsitesDomainsView__handleDomainSubmit_closure1(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDomainSubmit__closure0: function WebsitesDomainsView__handleDomainSubmit__closure0(t0, t1) {
-      this.$this = t0;
-      this.error = t1;
-    },
-    WebsitesDomainsView__handleDomainSubmit_closure3: function WebsitesDomainsView__handleDomainSubmit_closure3(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDomainSubmit_closure4: function WebsitesDomainsView__handleDomainSubmit_closure4() {
-    },
-    WebsitesDomainsView__handleDeploySubmit_closure: function WebsitesDomainsView__handleDeploySubmit_closure(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDeploySubmit_closure0: function WebsitesDomainsView__handleDeploySubmit_closure0(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDeploySubmit_closure1: function WebsitesDomainsView__handleDeploySubmit_closure1(t0, t1, t2, t3) {
-      var _ = this;
-      _.subId = t0;
-      _.repo = t1;
-      _.branch = t2;
-      _.domainId = t3;
-    },
-    WebsitesDomainsView__handleDeploySubmit_closure3: function WebsitesDomainsView__handleDeploySubmit_closure3(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDeploySubmit__closure: function WebsitesDomainsView__handleDeploySubmit__closure(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDeploySubmit_closure2: function WebsitesDomainsView__handleDeploySubmit_closure2(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDeploySubmit__closure0: function WebsitesDomainsView__handleDeploySubmit__closure0(t0, t1) {
-      this.$this = t0;
-      this.error = t1;
-    },
-    WebsitesDomainsView__handleDeploySubmit_closure4: function WebsitesDomainsView__handleDeploySubmit_closure4(t0) {
-      this.$this = t0;
-    },
-    WebsitesDomainsView__handleDeploySubmit_closure5: function WebsitesDomainsView__handleDeploySubmit_closure5() {
-    },
-    DashboardPage$(props) {
-      var t1 = new A.DashboardPage(props);
-      t1.DashboardPage$1(props);
-      return t1;
-    },
-    DashboardPage: function DashboardPage(t0) {
-      var _ = this;
-      _.props = t0;
-      _.__DashboardPage__jobsSub_F = _.__DashboardPage__serversSub_F = _.__DashboardPage__usersSub_F = _.__DashboardPage__subsSub_F = _.__DashboardPage__plansSub_F = _.__DashboardPage__jobs_F = _.__DashboardPage__servers_F = _.__DashboardPage__users_F = _.__DashboardPage__subscriptions_F = _.__DashboardPage__plans_F = $;
-      _._component$_scheduleRender = null;
-    },
-    DashboardPage_closure: function DashboardPage_closure() {
-    },
-    DashboardPage_closure0: function DashboardPage_closure0() {
-    },
-    DashboardPage_closure1: function DashboardPage_closure1(t0) {
-      this.$this = t0;
-    },
-    DashboardPage__closure3: function DashboardPage__closure3() {
-    },
-    DashboardPage_closure2: function DashboardPage_closure2(t0) {
-      this.$this = t0;
-    },
-    DashboardPage__closure2: function DashboardPage__closure2() {
-    },
-    DashboardPage_closure3: function DashboardPage_closure3() {
-    },
-    DashboardPage_closure4: function DashboardPage_closure4() {
-    },
-    DashboardPage_closure5: function DashboardPage_closure5() {
-    },
-    DashboardPage_closure6: function DashboardPage_closure6(t0) {
-      this.$this = t0;
-    },
-    DashboardPage__closure1: function DashboardPage__closure1() {
-    },
-    DashboardPage_closure7: function DashboardPage_closure7(t0) {
-      this.$this = t0;
-    },
-    DashboardPage__closure0: function DashboardPage__closure0() {
-    },
-    DashboardPage_closure8: function DashboardPage_closure8(t0) {
-      this.$this = t0;
-    },
-    DashboardPage__closure: function DashboardPage__closure() {
-    },
-    DashboardPage_build_closure: function DashboardPage_build_closure() {
-    },
-    DashboardPage_build_closure0: function DashboardPage_build_closure0(t0) {
-      this.$this = t0;
-    },
-    DashboardPage_build_closure1: function DashboardPage_build_closure1(t0) {
-      this.$this = t0;
-    },
-    DashboardPage__map_closure: function DashboardPage__map_closure() {
-    },
-    DashboardPage__listOfMaps_closure: function DashboardPage__listOfMaps_closure() {
-    },
-    DashboardPage__listOfMaps__closure: function DashboardPage__listOfMaps__closure() {
-    },
     LoginPage: function LoginPage(t0, t1) {
       var _ = this;
       _.props = t0;
@@ -6301,10 +5821,6 @@
       this.type = t1;
       this.$ti = t2;
     },
-    AuthSessionManager: function AuthSessionManager(t0, t1) {
-      this.tokenKey = t0;
-      this.userKey = t1;
-    },
     FlintRoot: function FlintRoot(t0, t1) {
       var _ = this;
       _.host = t0;
@@ -6361,9 +5877,7 @@
     },
     StatefulComponent: function StatefulComponent() {
     },
-    StatelessComponent: function StatelessComponent() {
-    },
-    mergeComponentProps(props, className, dartStyle, defaultStyle, style, variantStyle) {
+    mergeComponentProps(props, className, dartStyle, defaultStyle, style) {
       var t2, t3, mergedStyle, t4, t5, t6, scopedClass, classes,
         _s9_ = "className",
         _null = null, _s5_ = "style",
@@ -6386,7 +5900,7 @@
         t3 = B.Map_empty1;
         break $label0$0;
       }
-      mergedStyle = A.mergeStyles(defaultStyle, variantStyle, t2, style, t3);
+      mergedStyle = A.mergeStyles(defaultStyle, B.Map_empty1, t2, style, t3);
       t3 = type$.String;
       t2 = type$.nullable_Object;
       t4 = A.LinkedHashMap_LinkedHashMap$of(props, t3, t2);
@@ -6395,11 +5909,8 @@
         t5 = _null;
       else {
         t5 = true;
-        t6 = true;
-        if (dartStyle.md == null) {
-          t6 = dartStyle.lg;
-          t6 = t6 != null;
-        }
+        t6 = dartStyle.md;
+        t6 = t6 != null;
         if (!t6)
           if (dartStyle.hover == null)
             if (dartStyle.focusVisible == null)
@@ -6423,7 +5934,7 @@
       if (mergedStyle.__js_helper$_length !== 0) {
         if (typeof existingStyle == "string") {
           t1 = t1 ? _null : dartStyle.toMap$0();
-          t1 = new A.WhereIterable(A._setArrayType([A.styleToCss(A.mergeStyles(defaultStyle, variantStyle, t1 == null ? B.Map_empty1 : t1, style, B.Map_empty1)), existingStyle], type$.JSArray_String), type$.bool_Function_String._as(new A.mergeComponentProps_closure()), type$.WhereIterable_String).join$1(0, "; ");
+          t1 = new A.WhereIterable(A._setArrayType([A.styleToCss(A.mergeStyles(defaultStyle, B.Map_empty1, t1 == null ? B.Map_empty1 : t1, style, B.Map_empty1)), existingStyle], type$.JSArray_String), type$.bool_Function_String._as(new A.mergeComponentProps_closure()), type$.WhereIterable_String).join$1(0, "; ");
         } else
           t1 = mergedStyle;
         t2.$indexSet(0, _s5_, t1);
@@ -6532,66 +6043,6 @@
     },
     _styleToCssImportant_closure0: function _styleToCssImportant_closure0() {
     },
-    FlintComponentRegistry: function FlintComponentRegistry(t0) {
-      this._pages = t0;
-    },
-    ResourceController$(initialData, loadImmediately, loader, $T) {
-      var t1 = initialData == null,
-        t2 = t1 ? B.ResourceStatus_0 : B.ResourceStatus_2,
-        t3 = t1 ? null : new A.DateTime(Date.now(), 0, false);
-      t3 = new A.ResourceController(loader, new A.StateSignal(new A.ResourceSnapshot(t2, initialData, null, t3, $T._eval$1("ResourceSnapshot<0>")), A.LinkedHashSet_LinkedHashSet$_empty($T._eval$1("~(ResourceSnapshot<0>)")), $T._eval$1("StateSignal<ResourceSnapshot<0>>")), $T._eval$1("ResourceController<0>"));
-      if (loadImmediately)
-        t3.load$1$silent(!t1);
-      return t3;
-    },
-    FlintModelRecord___new_tearOff(attributes) {
-      return new A.FlintModelRecord(type$.Map_String_dynamic._as(attributes));
-    },
-    FlintModelApi_FlintModelApi$records(path, $T) {
-      var t1 = $.$get$clientRouter();
-      return $T._eval$1("FlintModelApi<0>")._as(new A.FlintModelApi(path, t1, new A.FlintModelApi_FlintModelApi$records_closure(), type$.FlintModelApi_FlintModelRecord));
-    },
-    ResourceStatus: function ResourceStatus(t0, t1) {
-      this.index = t0;
-      this._name = t1;
-    },
-    ResourceSnapshot: function ResourceSnapshot(t0, t1, t2, t3, t4) {
-      var _ = this;
-      _.status = t0;
-      _.data = t1;
-      _.error = t2;
-      _.updatedAt = t3;
-      _.$ti = t4;
-    },
-    ResourceController: function ResourceController(t0, t1, t2) {
-      this.loader = t0;
-      this.state = t1;
-      this.$ti = t2;
-    },
-    ResourceView: function ResourceView(t0, t1, t2) {
-      var _ = this;
-      _.resource = t0;
-      _.builder = t1;
-      _._component$_scheduleRender = null;
-      _.$ti = t2;
-    },
-    FlintModelRecord: function FlintModelRecord(t0) {
-      this.attributes = t0;
-    },
-    FlintModelApi: function FlintModelApi(t0, t1, t2, t3) {
-      var _ = this;
-      _.path = t0;
-      _.router = t1;
-      _.fromJson = t2;
-      _.$ti = t3;
-    },
-    FlintModelApi_FlintModelApi$records_closure: function FlintModelApi_FlintModelApi$records_closure() {
-    },
-    FlintModelApi__toList_closure: function FlintModelApi__toList_closure(t0) {
-      this.$this = t0;
-    },
-    FlintModelApi__toList__closure: function FlintModelApi__toList__closure() {
-    },
     Head_meta($content, $name, property) {
       var t1 = A.LinkedHashMap_LinkedHashMap$of(B.Map_empty1, type$.String, type$.nullable_Object);
       if ($name != null)
@@ -6647,7 +6098,7 @@
         J.toString$0$(t3);
       return new A.FlintPage(t1, t2);
     },
-    createFlintApp(selector, middlewares, registry) {
+    createFlintApp(selector, pages) {
       var t2, _i, encoded, decoded, page, t3, _null = null, _box_0 = {},
         t1 = init.G,
         host = A._asJSObjectQ(A._asJSObject(t1.document).querySelector(selector));
@@ -6665,7 +6116,7 @@
         A.throwExpression(A.StateError$("Invalid Flint page payload."));
       page = A.FlintPage_FlintPage$fromJson(decoded);
       _box_0.navigationRequest = 0;
-      t2 = new A.createFlintApp_renderPage(_box_0, host, middlewares, registry, _null, _null, _null, new A.FlintRoot(host, A.LinkedHashMap_LinkedHashMap$_empty(type$.String, type$._ComponentMount)));
+      t2 = new A.createFlintApp_renderPage(_box_0, host, B.List_empty0, _null, pages, _null, _null, new A.FlintRoot(host, A.LinkedHashMap_LinkedHashMap$_empty(type$.String, type$._ComponentMount)));
       t3 = new A.createFlintApp_renderCurrentLocation(_box_0, selector, host, t2);
       t2.call$2(page, 0);
       A._asJSObject(t1.window).addEventListener("flint:navigate", A._functionToJS1(new A.createFlintApp_closure(t3)));
@@ -6715,9 +6166,7 @@
       this.component = t0;
       this.props = t1;
     },
-    FlintPageContext: function FlintPageContext(t0) {
-      this.page = t0;
-      this._stopped = false;
+    FlintPageContext: function FlintPageContext() {
     },
     createFlintApp_renderPage: function createFlintApp_renderPage(t0, t1, t2, t3, t4, t5, t6, t7) {
       var _ = this;
@@ -6757,40 +6206,11 @@
       this.page = t0;
       this.title = t1;
     },
-    StateSignal: function StateSignal(t0, t1, t2) {
-      this._state_signal$_value = t0;
-      this._state_signal$_listeners = t1;
-      this.$ti = t2;
-    },
-    StateSignal_listen_closure: function StateSignal_listen_closure(t0, t1) {
-      this.$this = t0;
-      this.listener = t1;
-    },
-    StateSignalListener: function StateSignalListener(t0, t1, t2) {
-      var _ = this;
-      _.signal = t0;
-      _.builder = t1;
-      _._component$_scheduleRender = _._unsubscribe = _._boundSignal = null;
-      _.$ti = t2;
-    },
-    StateSignalListener__bindSignal_closure: function StateSignalListener__bindSignal_closure(t0) {
-      this.$this = t0;
-    },
-    StateSignalListener__bindSignal__closure: function StateSignalListener__bindSignal__closure() {
-    },
-    BrowserStorage: function BrowserStorage() {
-    },
-    BrowserStorage_readMap_closure: function BrowserStorage_readMap_closure() {
-    },
     CookieSameSite: function CookieSameSite(t0, t1) {
       this.index = t0;
       this._name = t1;
     },
     Cookies: function Cookies() {
-    },
-    LocalStorage: function LocalStorage() {
-    },
-    WebStorageBackend: function WebStorageBackend() {
     },
     DartStyle$(active, alignItems, animation, aspectRatio, backdropFilter, background, border, borderBottom, borderLeft, borderRight, borderTop, bottom, boxSizing, checked, color, cursor, disabled, display, expanded, flex, flexBasis, flexDirection, flexGrow, flexShrink, flexWrap, $focus, focusVisible, fontFamily, fontSize, fontWeight, gap, gradient, gridTemplateColumns, height, hover, invalid, justifyContent, justifyItems, left, letterSpacing, lg, lineHeight, margin, maskImage, maxHeight, maxWidth, md, minHeight, minWidth, objectFit, opacity, overflow, padding, position, radius, resize, right, scrollBehavior, selected, shadow, sm, textAlign, textDecoration, textTransform, $top, transform, transition, width, willChange, xl, zIndex) {
       return new A.DartStyle(padding, margin, width, height, minWidth, maxWidth, minHeight, maxHeight, display, gap, alignItems, justifyItems, justifyContent, flex, flexDirection, flexWrap, flexGrow, flexShrink, flexBasis, gridTemplateColumns, position, $top, right, bottom, left, zIndex, overflow, boxSizing, scrollBehavior, aspectRatio, objectFit, transform, backdropFilter, maskImage, fontFamily, fontSize, fontWeight, lineHeight, letterSpacing, color, textAlign, textTransform, textDecoration, cursor, resize, background, radius, border, borderTop, borderRight, borderBottom, borderLeft, shadow, opacity, gradient, transition, animation, willChange, hover, $focus, focusVisible, active, disabled, checked, selected, expanded, invalid, sm, md, lg, xl);
@@ -6991,13 +6411,7 @@
     Cursor: function Cursor(t0) {
       this.value = t0;
     },
-    Overflow: function Overflow() {
-    },
-    TextTransform: function TextTransform() {
-    },
     TextDecorationStyle: function TextDecorationStyle() {
-    },
-    FlexWrap: function FlexWrap() {
     },
     TransitionTiming: function TransitionTiming(t0) {
       this.value = t0;
@@ -7027,21 +6441,11 @@
       this.index = t1;
       this._name = t2;
     },
-    FlexDirection: function FlexDirection(t0, t1) {
+    AlignItems: function AlignItems(t0, t1) {
       this.index = t0;
       this._name = t1;
     },
-    AlignItems: function AlignItems(t0, t1, t2) {
-      this.css = t0;
-      this.index = t1;
-      this._name = t2;
-    },
-    JustifyContent: function JustifyContent(t0, t1, t2) {
-      this.css = t0;
-      this.index = t1;
-      this._name = t2;
-    },
-    Position: function Position(t0, t1) {
+    JustifyContent: function JustifyContent(t0, t1) {
       this.index = t0;
       this._name = t1;
     },
@@ -7049,148 +6453,41 @@
       this.index = t0;
       this._name = t1;
     },
-    Button$(child, className, dartStyle, disabled, loading, onPressed, props, tone, variant) {
-      var t1 = A.LinkedHashMap_LinkedHashMap$of(props, type$.String, type$.nullable_Object),
-        t2 = props.$index(0, "type");
-      t1.$indexSet(0, "type", t2 == null ? "button" : t2);
-      t2 = !disabled;
-      if (!t2 || loading)
-        t1.$indexSet(0, "disabled", true);
+    Button$(child, className, dartStyle, disabled, loading, onPressed, props) {
+      var t5,
+        t1 = type$.String,
+        t2 = type$.nullable_Object,
+        t3 = A.LinkedHashMap_LinkedHashMap$of(props, t1, t2),
+        t4 = props.$index(0, "type");
+      t3.$indexSet(0, "type", t4 == null ? "button" : t4);
+      t4 = !disabled;
+      if (!t4 || loading)
+        t3.$indexSet(0, "disabled", true);
       if (loading)
-        t1.$indexSet(0, "aria-busy", "true");
-      if (onPressed != null && t2 && !loading)
-        t1.$indexSet(0, "onClick", onPressed);
-      t1 = A.mergeComponentProps(t1, className, A.buttonComponentStyle(disabled, loading, B.ComponentSize_2, tone, variant).merge$1(dartStyle), B.Map_empty1, B.Map_empty1, B.Map_empty1);
-      t2 = A._setArrayType([], type$.JSArray_FlintNode);
-      if (loading)
-        t2.push(A.Spinner$(B.ComponentSize_0, tone));
-      B.JSArray_methods.addAll$1(t2, A.normalizeChildren(child, B.List_empty0));
-      return new A.Button("button", t1, t2);
+        t3.$indexSet(0, "aria-busy", "true");
+      if (onPressed != null && t4 && !loading)
+        t3.$indexSet(0, "onClick", onPressed);
+      t3 = A.mergeComponentProps(t3, className, A.buttonComponentStyle(disabled, loading, B.ComponentSize_2, B.Tone_1, B.ButtonVariant_0).merge$1(dartStyle), B.Map_empty1, B.Map_empty1);
+      t4 = A._setArrayType([], type$.JSArray_FlintNode);
+      if (loading) {
+        t5 = A.LinkedHashMap_LinkedHashMap$of(B.Map_empty1, t1, t2);
+        t5.$indexSet(0, "role", "status");
+        t5.$indexSet(0, "aria-label", "Loading");
+        t1 = A.mergeComponentProps(t5, null, null, A.LinkedHashMap_LinkedHashMap$_literal(["display", "inline-block", "width", A.spinnerSize(B.ComponentSize_0), "height", A.spinnerSize(B.ComponentSize_0), "border", "2px solid " + A.toneSoft(B.Tone_1), "border-top-color", A.toneSolid(B.Tone_1), "border-radius", "999px", "animation", A.cssValue(A.StyleAnimation_StyleAnimation$named("flint-spin", B.C_AnimationIteration, 800, B.TransitionTiming_linear), false), "will-change", A.cssValue(B.C_WillChange, false), "flex-shrink", 0], t1, t2), B.Map_empty1);
+        t4.push(new A.Spinner("span", t1, B.List_empty3));
+      }
+      B.JSArray_methods.addAll$1(t4, A.normalizeChildren(child, B.List_empty1));
+      return new A.Button("button", t3, t4);
     },
     Button: function Button(t0, t1, t2) {
       this.tag = t0;
       this.props = t1;
       this.children = t2;
     },
-    DataTable$(columns, loading, rows) {
-      var _null = null,
-        t1 = A.EmptyState$("There are no records to show yet.", "No data"),
-        t2 = type$.JSArray_FlintNode,
-        t3 = new A.FlintElement("div", B.Map_rqNPN, A._setArrayType([A.Spinner$(B.ComponentSize_2, B.Tone_1), B.FlintText_luB], t2)),
-        t4 = A.mergeComponentProps(B.Map_empty1, _null, _null, B.Map_FH8Es, B.Map_empty1, B.Map_empty1),
-        t5 = A._setArrayType([], t2);
-      if (loading)
-        t5.push(A.toFlintNode(t3));
-      else if (rows.length === 0)
-        t5.push(A.toFlintNode(t1));
-      else
-        t5.push(new A.FlintElement("table", A.mergeComponentProps(B.Map_empty1, _null, _null, B.Map_4eYRj, B.Map_empty1, B.Map_empty1), A._setArrayType([A.Table__thead(columns, _null, _null, B.Map_empty1), A.Table__tbody(columns, rows, _null, _null, _null, B.Map_empty1, _null, _null, B.Map_empty1, _null, _null, B.Map_empty1)], t2)));
-      return new A.DataTable("div", t4, t5);
-    },
-    DataTable: function DataTable(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    Table__thead(columns, headerClassName, headerDartStyle, headerStyle) {
-      var t3, t4, t5, _i, column, t6, t7, t8, t9,
-        t1 = type$.JSArray_FlintNode,
-        t2 = A._setArrayType([], t1);
-      for (t3 = type$.String, t4 = type$.nullable_Object, t5 = type$.JSArray_nullable_String, _i = 0; _i < 3; ++_i) {
-        column = columns[_i];
-        t6 = A.LinkedHashMap_LinkedHashMap$_literal(["scope", "col"], t3, t4);
-        t7 = A.joinClassNames(A._setArrayType([headerClassName, null], t5));
-        t8 = A.LinkedHashMap_LinkedHashMap$_literal(["padding", "12px", "text-align", "left", "font-size", "12px", "font-weight", 700, "color", "#475467", "border-bottom", "1px solid #e4e7ec", "background", "#f9fafb"], t3, t4);
-        t9 = A.LinkedHashMap_LinkedHashMap(t3, t4);
-        t9.addAll$1(0, headerStyle);
-        t9.addAll$1(0, B.Map_empty1);
-        t9 = A.mergeComponentProps(t6, t7, headerDartStyle, t8, t9, B.Map_empty1);
-        t2.push(new A.FlintElement("th", t9, A.normalizeChildren(column.label, B.List_empty0)));
-      }
-      return new A.FlintElement("thead", B.Map_empty1, A._setArrayType([new A.FlintElement("tr", B.Map_empty1, t2)], t1));
-    },
-    Table__tbody(columns, rows, onRowClick, cellClassName, cellDartStyle, cellStyle, rowClassName, rowDartStyle, rowStyle, selectedRowClassName, selectedRowDartStyle, selectedRowStyle) {
-      var t3, t4, t5, t6, _i, row, t7, t8, t9, t10, _i0, column, t11, t12,
-        t1 = type$.JSArray_FlintNode,
-        t2 = A._setArrayType([], t1);
-      for (t3 = rows.length, t4 = type$.String, t5 = type$.nullable_Object, t6 = type$.JSArray_nullable_String, _i = 0; _i < rows.length; rows.length === t3 || (0, A.throwConcurrentModificationError)(rows), ++_i) {
-        row = rows[_i];
-        t7 = A.LinkedHashMap_LinkedHashMap(t4, t5);
-        t7.addAll$1(0, B.Map_empty1);
-        t8 = A._setArrayType([rowClassName], t6);
-        t8.push(null);
-        t8 = A.joinClassNames(t8);
-        t9 = A.LinkedHashMap_LinkedHashMap$_literal(["cursor", "default", "background", "#ffffff"], t4, t5);
-        t10 = A.LinkedHashMap_LinkedHashMap(t4, t5);
-        t10.addAll$1(0, rowStyle);
-        t10.addAll$1(0, B.Map_empty1);
-        t10 = A.mergeComponentProps(t7, t8, rowDartStyle, t9, t10, B.Map_empty1);
-        t9 = A._setArrayType([], t1);
-        for (t7 = row.cells, _i0 = 0; _i0 < 3; ++_i0) {
-          column = columns[_i0];
-          t8 = A.joinClassNames(A._setArrayType([cellClassName, null], t6));
-          t11 = A.LinkedHashMap_LinkedHashMap$_literal(["padding", "12px", "text-align", "left", "border-bottom", "1px solid #f2f4f7"], t4, t5);
-          t12 = A.LinkedHashMap_LinkedHashMap(t4, t5);
-          t12.addAll$1(0, cellStyle);
-          t12.addAll$1(0, B.Map_empty1);
-          t12 = A.mergeComponentProps(B.Map_empty1, t8, cellDartStyle, t11, t12, B.Map_empty1);
-          t11 = t7.$index(0, column.key);
-          t9.push(new A.FlintElement("td", t12, A.normalizeChildren(t11 == null ? "" : t11, B.List_empty0)));
-        }
-        t2.push(new A.FlintElement("tr", t10, t9));
-      }
-      return new A.FlintElement("tbody", B.Map_empty1, t2);
-    },
-    TableColumn: function TableColumn(t0, t1) {
-      this.key = t0;
-      this.label = t1;
-    },
-    TableRowData: function TableRowData(t0) {
-      this.cells = t0;
-    },
-    Table: function Table() {
-    },
-    Alert$(message, title, tone) {
-      var t1 = type$.String,
-        t2 = type$.nullable_Object,
-        t3 = A.LinkedHashMap_LinkedHashMap$of(B.Map_empty1, t1, t2);
-      t3.$indexSet(0, "role", "alert");
-      t1 = A.mergeComponentProps(t3, null, null, A.LinkedHashMap_LinkedHashMap$_literal(["display", "grid", "gap", "6px", "border", "1px solid " + A.toneBorder(tone), "border-radius", "8px", "padding", "12px 14px", "background", A.toneSoft(tone), "color", A.toneText(tone)], t1, t2), B.Map_empty1, B.Map_empty1);
-      t2 = A._setArrayType([], type$.JSArray_FlintNode);
-      t2.push(new A.FlintElement("strong", B.Map_rq4lA, A.normalizeChildren(title, B.List_empty0)));
-      t2.push(new A.FlintElement("p", B.Map_rq7pM, A.normalizeChildren(message, B.List_empty0)));
-      B.JSArray_methods.addAll$1(t2, A.normalizeChildren(null, B.List_empty0));
-      return new A.Alert("div", t1, t2);
-    },
-    Alert: function Alert(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    Spinner$(size, tone) {
-      var t1 = type$.String,
-        t2 = type$.nullable_Object,
-        t3 = A.LinkedHashMap_LinkedHashMap$of(B.Map_empty1, t1, t2);
-      t3.$indexSet(0, "role", "status");
-      t3.$indexSet(0, "aria-label", "Loading");
-      t1 = A.mergeComponentProps(t3, null, null, A.LinkedHashMap_LinkedHashMap$_literal(["display", "inline-block", "width", A.spinnerSize(size), "height", A.spinnerSize(size), "border", "2px solid " + A.toneSoft(tone), "border-top-color", A.toneSolid(tone), "border-radius", "999px", "animation", A.cssValue(A.StyleAnimation_StyleAnimation$named("flint-spin", B.C_AnimationIteration, 800, B.TransitionTiming_linear), false), "will-change", A.cssValue(B.C_WillChange, false), "flex-shrink", 0], t1, t2), B.Map_empty1, B.Map_empty1);
-      return new A.Spinner("span", t1, B.List_empty2);
-    },
     Spinner: function Spinner(t0, t1, t2) {
       this.tag = t0;
       this.props = t1;
       this.children = t2;
-    },
-    StatusBadge: function StatusBadge(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    FormController$(initialValues) {
-      var t1 = type$.String,
-        t2 = A._setArrayType([], type$.JSArray_of_void_Function),
-        t3 = type$.nullable_Object;
-      return new A.FormController(A.LinkedHashMap_LinkedHashMap$from(initialValues, t1, t3), A.LinkedHashMap_LinkedHashMap$from(initialValues, t1, t3), A.LinkedHashMap_LinkedHashMap$_empty(t1, type$.TextEditingController), t2, B.FormErrors_Map_empty);
     },
     TextEditingController: function TextEditingController(t0, t1) {
       this._text = t0;
@@ -7214,76 +6511,46 @@
       this.key = t1;
       this.controller = t2;
     },
-    Form$(children, className, dartStyle, onSubmit) {
-      var t1 = A.LinkedHashMap_LinkedHashMap$of(B.Map_empty1, type$.String, type$.nullable_Object);
-      t1.$indexSet(0, "onSubmit", onSubmit);
-      return new A.Form("form", A.mergeComponentProps(t1, className, dartStyle, B.Map_CKyJ0, B.Map_empty1, B.Map_empty1), A.normalizeChildren(null, children));
-    },
     Form: function Form(t0, t1, t2) {
       this.tag = t0;
       this.props = t1;
       this.children = t2;
     },
-    Select$(disabled, label, $name, onChanged, options, selectProps, value) {
-      var _null = null;
-      return new A.Select("div", A.mergeComponentProps(B.Map_empty1, _null, _null, B.Map_CKAM1, B.Map_empty1, B.Map_empty1), A.Select__children(disabled, A.resolveFieldError(_null, _null, $name), _null, label, $name, onChanged, options, _null, false, _null, selectProps, B.Map_empty1, B.ComponentSize_2, value, B.InputVariant_0));
-    },
-    Select__children(disabled, error, helpText, label, $name, onChanged, options, placeholder, required, selectDartStyle, selectProps, selectStyle, size, value, variant) {
-      var t2, t3, t4, t5, t6, _i, option, t7, t8,
-        id = A.fieldId("select", $name, selectProps),
-        t1 = selectProps.$index(0, "aria-describedby"),
-        ariaDescribedBy = A.describedBy(t1 == null ? null : B.JSString_methods.toString$0(t1), error, helpText, id);
-      t1 = type$.JSArray_FlintNode;
-      t2 = A._setArrayType([], t1);
-      t2.push(A.fieldLabel(id, label, false));
-      t3 = type$.String;
-      t4 = type$.nullable_Object;
-      t5 = A.LinkedHashMap_LinkedHashMap$of(A.controlProps(ariaDescribedBy, disabled, error, id, $name, selectProps, false), t3, t4);
-      t5.$indexSet(0, "onChange", onChanged);
-      t5 = A.mergeComponentProps(t5, null, A.inputComponentStyle(disabled, false, size, variant).merge$1(selectDartStyle), B.Map_empty1, selectStyle, B.Map_empty1);
-      t1 = A._setArrayType([], t1);
-      for (t6 = options.length, _i = 0; _i < options.length; options.length === t6 || (0, A.throwConcurrentModificationError)(options), ++_i) {
-        option = options[_i];
-        t7 = A.LinkedHashMap_LinkedHashMap$_empty(t3, t4);
-        t8 = option.value;
-        t7.$indexSet(0, "value", t8);
-        if (value === t8)
-          t7.$indexSet(0, "selected", true);
-        t1.push(new A.FlintElement("option", t7, A.normalizeChildren(option.label, B.List_empty0)));
-      }
-      t2.push(new A.FlintElement("select", t5, t1));
-      B.JSArray_methods.addAll$1(t2, A.fieldMessages(error, helpText, id));
-      return t2;
-    },
-    SelectOption: function SelectOption(t0, t1) {
-      this.label = t0;
-      this.value = t1;
-    },
-    Select: function Select(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
     TextField$(controller, disabled, inputStyle, label, $name, placeholder, required, type) {
-      var t6, _null = null,
-        t1 = A.mergeComponentProps(B.Map_empty1, _null, _null, B.Map_CKAM1, B.Map_empty1, B.Map_empty1),
-        t2 = controller._text,
-        t3 = A.resolveFieldError(_null, _null, $name),
-        t4 = A.TextField__controlledOnChanged(controller, _null),
-        id = A.fieldId("field", $name, B.Map_empty1),
-        ariaDescribedBy = A.describedBy(_null, t3, _null, id),
-        t5 = A._setArrayType([], type$.JSArray_FlintNode);
-      t5.push(A.fieldLabel(id, label, required));
-      t6 = A.LinkedHashMap_LinkedHashMap$of(A.controlProps(ariaDescribedBy, disabled, t3, id, $name, B.Map_empty1, required), type$.String, type$.nullable_Object);
+      var t3, id, t4, ariaDescribedBy, t5, t6, t7, t8, t9, _null = null,
+        t1 = A.mergeComponentProps(B.Map_empty1, _null, _null, B.Map_CKAM1, B.Map_empty1),
+        t2 = controller._text;
+      A.resolveFieldError(_null, _null, $name);
+      t3 = A.TextField__controlledOnChanged(controller, _null);
+      id = A.fieldId("field", $name, B.Map_empty1);
+      t4 = A._setArrayType([], type$.JSArray_String);
+      ariaDescribedBy = t4.length === 0 ? _null : B.JSArray_methods.join$1(t4, " ");
+      t4 = type$.JSArray_FlintNode;
+      t5 = A._setArrayType([], t4);
+      t6 = type$.String;
+      t7 = type$.nullable_Object;
+      t8 = A.LinkedHashMap_LinkedHashMap$_literal(["for", id, "style", B.Map_szNRN], t6, t7);
+      t9 = A._setArrayType([new A.FlintText(label)], t4);
+      t9.push(B.FlintText_ED0);
+      t5.push(new A.FlintElement("label", t8, t9));
+      t8 = A.LinkedHashMap_LinkedHashMap$of(B.Map_empty1, t6, t7);
+      t8.$indexSet(0, "id", id);
+      t8.$indexSet(0, "name", $name);
+      t8.$indexSet(0, "required", true);
+      if (disabled)
+        t8.$indexSet(0, "disabled", true);
+      if (ariaDescribedBy != null)
+        t8.$indexSet(0, "aria-describedby", ariaDescribedBy);
+      t6 = A.LinkedHashMap_LinkedHashMap$of(t8, t6, t7);
       t6.$indexSet(0, "type", type);
-      if (t2 != null)
+      if (t2 !== null)
         t6.$indexSet(0, "value", t2);
-      if (placeholder != null)
-        t6.$indexSet(0, "placeholder", placeholder);
-      if (t4 != null)
-        t6.$indexSet(0, "onInput", t4);
-      t5.push(new A.FlintElement("input", A.mergeComponentProps(t6, _null, A.inputComponentStyle(disabled, false, B.ComponentSize_2, B.InputVariant_0).merge$1(_null), B.Map_empty1, inputStyle, B.Map_empty1), B.List_empty2));
-      B.JSArray_methods.addAll$1(t5, A.fieldMessages(t3, _null, id));
+      t6.$indexSet(0, "placeholder", placeholder);
+      if (t3 != null)
+        t6.$indexSet(0, "onInput", t3);
+      t5.push(new A.FlintElement("input", A.mergeComponentProps(t6, _null, A.inputComponentStyle(disabled, false, B.ComponentSize_2, B.InputVariant_0).merge$1(_null), B.Map_empty1, inputStyle), B.List_empty3));
+      t2 = A._setArrayType([], t4);
+      B.JSArray_methods.addAll$1(t5, t2);
       return new A.TextField("div", t1, t5);
     },
     TextField__controlledOnChanged(controller, onChanged) {
@@ -7332,7 +6599,7 @@
     _normalizeMessages(value) {
       var t1, t2, item;
       if (value == null)
-        return B.List_empty1;
+        return B.List_empty2;
       if (typeof value == "string")
         return A._setArrayType([value], type$.JSArray_String);
       if (type$.Iterable_dynamic._is(value)) {
@@ -7352,198 +6619,7 @@
     FormErrors_without_closure: function FormErrors_without_closure(t0) {
       this.keys = t0;
     },
-    EmptyState$(message, title) {
-      var t1 = A.mergeComponentProps(B.Map_empty1, null, null, B.Map_NFtUj, B.Map_empty1, B.Map_empty1),
-        t2 = A._setArrayType([], type$.JSArray_FlintNode);
-      t2.push(new A.FlintElement("h2", B.Map_rq4Z8, A.normalizeChildren(title, B.List_empty0)));
-      t2.push(new A.FlintElement("p", B.Map_rqTB8, A.normalizeChildren(message, B.List_empty0)));
-      return new A.EmptyState("div", t1, t2);
-    },
-    EmptyState: function EmptyState(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    Grid$(children, dartStyle) {
-      var t1 = A.LinkedHashMap_LinkedHashMap$_empty(type$.String, type$.nullable_Object);
-      t1.$indexSet(0, "display", "grid");
-      return new A.Grid("div", A.mergeComponentProps(B.Map_empty1, null, dartStyle, t1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(null, children));
-    },
-    Grid: function Grid(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    Panel$(actions, child, children, className, dartStyle, description, title) {
-      var t5, t6, t7,
-        t1 = A.mergeComponentProps(B.Map_empty1, className, dartStyle, B.Map_E5pp5, B.Map_empty1, B.Map_empty1),
-        t2 = type$.JSArray_FlintNode,
-        t3 = A._setArrayType([], t2),
-        t4 = title == null;
-      if (!t4 || description != null || actions != null) {
-        t5 = A.mergeComponentProps(B.Map_empty1, null, null, B.Map_w66QC, B.Map_empty1, B.Map_empty1);
-        t6 = A._setArrayType([], t2);
-        if (!t4 || description != null || actions != null) {
-          t7 = A._setArrayType([], t2);
-          if (!t4)
-            t7.push(new A.FlintElement("h2", B.Map_rq4Z8, A.normalizeChildren(title, B.List_empty0)));
-          if (description != null)
-            t7.push(new A.FlintElement("p", B.Map_rqTB8, A.normalizeChildren(description, B.List_empty0)));
-          t2 = A._setArrayType([new A.FlintElement("div", B.Map_empty1, t7)], t2);
-          if (actions != null)
-            t2.push(A.toFlintNode(actions));
-          t6.push(new A.FlintElement("header", B.Map_rqwWH, t2));
-        }
-        B.JSArray_methods.addAll$1(t6, A.normalizeChildren(null, B.List_empty0));
-        t3.push(new A.Section("section", t5, t6));
-      }
-      B.JSArray_methods.addAll$1(t3, A.normalizeChildren(child, children));
-      return new A.Panel("section", t1, t3);
-    },
     Panel: function Panel(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    Section: function Section(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    Sidebar$(activeItemDartStyle, activePath, itemDartStyle, items, style) {
-      var t4, t5, t6, t7, _i, item, t8, t9, t10, t11, t12, _null = null,
-        t1 = type$.String,
-        t2 = type$.nullable_Object,
-        t3 = A.LinkedHashMap_LinkedHashMap$of(B.Map_empty1, t1, t2);
-      t3.$indexSet(0, "aria-label", "Sidebar");
-      t3 = A.mergeComponentProps(t3, _null, _null, B.Map_mCUgh, style, B.Map_empty1);
-      t4 = type$.JSArray_FlintNode;
-      t5 = A._setArrayType([], t4);
-      for (t6 = items.length, t7 = type$.JSArray_nullable_String, _i = 0; _i < items.length; items.length === t6 || (0, A.throwConcurrentModificationError)(items), ++_i) {
-        item = items[_i];
-        t8 = item.href;
-        t9 = t8 === activePath;
-        t10 = A.LinkedHashMap_LinkedHashMap(t1, t2);
-        t10.addAll$1(0, B.Map_empty1);
-        t10.$indexSet(0, "href", t8);
-        if (t9)
-          t10.$indexSet(0, "aria-current", "page");
-        t8 = A._setArrayType([null], t7);
-        if (t9)
-          t8.push(_null);
-        t8.push(_null);
-        t8 = A.joinClassNames(t8);
-        t11 = t9 ? "#1849a9" : "#344054";
-        t12 = t9 ? "#eff4ff" : "transparent";
-        t11 = A.LinkedHashMap_LinkedHashMap$_literal(["display", "flex", "align-items", "center", "gap", "10px", "min-height", "38px", "border-radius", "8px", "padding", "0 12px", "text-decoration", "none", "color", t11, "background", t12, "font-weight", t9 ? 700 : 500], t1, t2);
-        if (t9)
-          t9 = activeItemDartStyle;
-        else
-          t9 = itemDartStyle;
-        t12 = A.LinkedHashMap_LinkedHashMap(t1, t2);
-        t12.addAll$1(0, B.Map_empty1);
-        t12.addAll$1(0, B.Map_empty1);
-        t12 = A.mergeComponentProps(t10, t8, t9, t11, t12, B.Map_empty1);
-        t11 = A._setArrayType([], t4);
-        t11.push(new A.FlintText(item.label));
-        t5.push(new A.FlintElement("a", t12, t11));
-      }
-      return new A.Sidebar("nav", t3, t5);
-    },
-    SidebarItem: function SidebarItem(t0, t1) {
-      this.label = t0;
-      this.href = t1;
-    },
-    Sidebar: function Sidebar(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    StatCard$(dartStyle, icon, label, tone, trend, value) {
-      var t4,
-        t1 = A.mergeComponentProps(B.Map_empty1, null, A.cardComponentStyle(tone, B.CardVariant_0).merge$1(dartStyle), B.Map_empty1, B.Map_empty1, B.Map_empty1),
-        t2 = type$.JSArray_FlintNode,
-        t3 = A._setArrayType([new A.FlintElement("span", B.Map_rqxoQ, A.normalizeChildren(label, B.List_empty0))], t2);
-      t3.push(A.toFlintNode(icon));
-      t3 = A._setArrayType([new A.FlintElement("div", B.Map_rqzGG, t3), new A.FlintElement("strong", B.Map_rqhq3, A.normalizeChildren(value, B.List_empty0))], t2);
-      t4 = A.mergeComponentProps(B.Map_empty1, null, A.badgeComponentStyle(B.ComponentSize_1, tone, B.BadgeVariant_0).merge$1(null), B.Map_empty1, B.Map_empty1, B.Map_empty1);
-      t2 = A._setArrayType([], t2);
-      t2.push(new A.FlintText(trend));
-      t3.push(new A.StatusBadge("span", t4, t2));
-      return new A.StatCard("article", t1, t3);
-    },
-    StatCard: function StatCard(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    Topbar$(actions, dartStyle, subtitle, title) {
-      var t1 = A.mergeComponentProps(B.Map_empty1, null, dartStyle, B.Map_ZK33s, B.Map_empty1, B.Map_empty1),
-        t2 = type$.JSArray_FlintNode,
-        t3 = A._setArrayType([], t2),
-        t4 = A._setArrayType([], t2);
-      t4.push(new A.FlintElement("h1", B.Map_rq1Xi, A.normalizeChildren(title, B.List_empty0)));
-      t4.push(new A.FlintElement("p", B.Map_rqIEX, A.normalizeChildren(subtitle, B.List_empty0)));
-      t3.push(new A.FlintElement("div", B.Map_rqgKW, t4));
-      t4 = A._setArrayType([], t2);
-      t4.push(A.toFlintNode(actions));
-      return new A.Topbar("header", t1, A._setArrayType([new A.FlintElement("div", B.Map_rqrqv, t3), new A.FlintElement("div", B.Map_rqJnd, t4)], t2));
-    },
-    Topbar: function Topbar(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    Modal$(child, onClose, $open, title) {
-      var t4, t5, t6, t7,
-        t1 = type$.String,
-        t2 = type$.nullable_Object,
-        t3 = A.LinkedHashMap_LinkedHashMap$of(B.Map_empty1, t1, t2);
-      if (!$open)
-        t3.$indexSet(0, "hidden", true);
-      t3.$indexSet(0, "role", "dialog");
-      t3.$indexSet(0, "aria-modal", "true");
-      t3.$indexSet(0, "aria-label", title);
-      t3 = A.mergeComponentProps(t3, null, null, B.Map_1N6JZ, B.Map_empty1, B.Map_empty1);
-      t4 = A.LinkedHashMap_LinkedHashMap$_literal(["style", A.LinkedHashMap_LinkedHashMap$_literal(["width", "100%", "max-width", A._modalWidth("md"), "border-radius", "8px", "background", "#ffffff", "box-shadow", "0 20px 40px rgba(16, 24, 40, 0.18)", "overflow", "hidden"], t1, t1)], t1, t2);
-      t5 = type$.JSArray_FlintNode;
-      t6 = A._setArrayType([], t5);
-      t7 = A._setArrayType([], t5);
-      t7.push(new A.FlintText(title));
-      t7.push(new A.FlintElement("button", A.LinkedHashMap_LinkedHashMap$_literal(["type", "button", "aria-label", "Close", "onClick", onClose], t1, t2), B.List_FlintText_x));
-      t6.push(new A.FlintElement("header", B.Map_rqO9H, t7));
-      t6.push(new A.FlintElement("div", B.Map_rqgMz, A.normalizeChildren(child, B.List_empty0)));
-      return new A.Modal("div", t3, A._setArrayType([new A.FlintElement("section", t4, t6)], t5));
-    },
-    _modalWidth(size) {
-      var t1;
-      $label0$0: {
-        if ("sm" === size) {
-          t1 = "360px";
-          break $label0$0;
-        }
-        if ("lg" === size) {
-          t1 = "720px";
-          break $label0$0;
-        }
-        if ("xl" === size) {
-          t1 = "960px";
-          break $label0$0;
-        }
-        t1 = "520px";
-        break $label0$0;
-      }
-      return t1;
-    },
-    Modal: function Modal(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    Column$(children, dartStyle) {
-      return new A.Column("div", A.mergeComponentProps(B.Map_empty1, null, dartStyle, B.Map_IwXTo, B.Map_empty1, B.Map_empty1), A.normalizeChildren(null, children));
-    },
-    Column: function Column(t0, t1, t2) {
       this.tag = t0;
       this.props = t1;
       this.children = t2;
@@ -7553,20 +6629,7 @@
       this.props = t1;
       this.children = t2;
     },
-    Link$(child, children, className, dartStyle, href, props) {
-      var t1 = A.LinkedHashMap_LinkedHashMap$of(props, type$.String, type$.nullable_Object);
-      t1.$indexSet(0, "href", href);
-      return new A.Link("a", A.mergeComponentProps(t1, className, dartStyle, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(child, children));
-    },
     Link: function Link(t0, t1, t2) {
-      this.tag = t0;
-      this.props = t1;
-      this.children = t2;
-    },
-    Row$(children, dartStyle) {
-      return new A.Row("div", A.mergeComponentProps(B.Map_empty1, null, dartStyle, B.Map_IwAaL, B.Map_empty1, B.Map_empty1), A.normalizeChildren(null, children));
-    },
-    Row: function Row(t0, t1, t2) {
       this.tag = t0;
       this.props = t1;
       this.children = t2;
@@ -7577,17 +6640,8 @@
     Text_p(value, className, dartStyle) {
       return A._element("p", value, className, B.Map_empty1, B.Map_empty1, dartStyle);
     },
-    Text_span(value, dartStyle) {
-      return A._element("span", value, null, B.Map_empty1, B.Map_empty1, dartStyle);
-    },
-    Text_strong(value, dartStyle) {
-      return A._element("strong", value, null, B.Map_empty1, B.Map_empty1, dartStyle);
-    },
-    Text_small(value, dartStyle) {
-      return A._element("small", value, null, B.Map_empty1, B.Map_empty1, dartStyle);
-    },
     _element(tag, value, className, props, style, dartStyle) {
-      return new A.FlintElement(tag, A.mergeComponentProps(props, className, dartStyle, B.Map_empty1, style, B.Map_empty1), A.normalizeChildren(value, B.List_empty0));
+      return new A.FlintElement(tag, A.mergeComponentProps(props, className, dartStyle, B.Map_empty1, style), A.normalizeChildren(value, B.List_empty1));
     },
     Text: function Text(t0) {
       this.value = t0;
@@ -7617,26 +6671,6 @@
           break;
         case 3:
           t1 = B.DartStyle_3Yk;
-          break;
-        default:
-          t1 = null;
-      }
-      return t1;
-    },
-    badgeSizeStyle(size) {
-      var t1;
-      switch (size.index) {
-        case 0:
-          t1 = B.DartStyle_4Zy;
-          break;
-        case 1:
-          t1 = B.DartStyle_abj;
-          break;
-        case 2:
-          t1 = B.DartStyle_MjM;
-          break;
-        case 3:
-          t1 = B.DartStyle_Ws6;
           break;
         default:
           t1 = null;
@@ -7682,53 +6716,6 @@
           t1 = _null;
       }
       return t1;
-    },
-    badgeComponentStyle(size, tone, variant) {
-      var t2, _null = null, _s5_ = "solid",
-        t1 = B.DartStyle_vQn.merge$1(A.badgeSizeStyle(size));
-      switch (variant.index) {
-        case 0:
-          t2 = A.toneBorder(tone);
-          t2 = A.DartStyle$(_null, _null, _null, _null, _null, A.toneSoft(tone), new A.Border(1, t2, _s5_), _null, _null, _null, _null, _null, _null, _null, A.toneText(tone), _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null);
-          break;
-        case 1:
-          t2 = A.DartStyle$(_null, _null, _null, _null, _null, B.Color_transparent, new A.Border(1, A.toneBorder(tone), _s5_), _null, _null, _null, _null, _null, _null, _null, A.toneText(tone), _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null);
-          break;
-        case 2:
-          t2 = A.toneSolid(tone);
-          t2 = A.DartStyle$(_null, _null, _null, _null, _null, A.toneSolid(tone), new A.Border(1, t2, _s5_), _null, _null, _null, _null, _null, _null, _null, A.toneOnSolid(tone), _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null);
-          break;
-        default:
-          t2 = _null;
-      }
-      return t1.merge$1(t2);
-    },
-    cardComponentStyle(tone, variant) {
-      var _null = null, _s5_ = "solid",
-        _s13_ = "color.surface",
-        t1 = new A.TokenRef("radius.md", "8px").toCss$0(),
-        t2 = new A.TokenRef("space.cardPadding", "16px").toCss$0(),
-        base = A.DartStyle$(_null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, B.Display_grid_5_grid, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, 12, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, new A.EdgeInsets(t2, t2, t2, t2), _null, t1, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, A.StyleTransition_StyleTransition$colors(120), _null, _null, _null, _null);
-      switch (variant.index) {
-        case 0:
-          t1 = A.toneBorder(tone);
-          t1 = A.DartStyle$(_null, _null, _null, _null, _null, new A.TokenRef(_s13_, "#ffffff").toCss$0(), new A.Border(1, t1, _s5_), _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null);
-          break;
-        case 1:
-          t1 = new A.TokenRef("color.surfaceBorder", "#e4e7ec").toCss$0();
-          t1 = A.DartStyle$(_null, _null, _null, _null, _null, new A.TokenRef(_s13_, "#ffffff").toCss$0(), new A.Border(1, t1, _s5_), _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, new A.Shadow(8, 24, -8, new A.TokenRef("shadow.card", "rgba(16, 24, 40, 0.18)").toCss$0()), _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null);
-          break;
-        case 2:
-          t1 = A.toneBorder(tone);
-          t1 = A.DartStyle$(_null, _null, _null, _null, _null, A.toneSoft(tone), new A.Border(1, t1, _s5_), _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null);
-          break;
-        case 3:
-          t1 = A.DartStyle$(_null, _null, _null, _null, _null, B.Color_transparent, B.Border_1_Color_transparent_solid, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null);
-          break;
-        default:
-          t1 = _null;
-      }
-      return base.merge$1(t1);
     },
     inputComponentStyle(disabled, invalid, size, variant) {
       var _null = null, _s5_ = "solid",
@@ -8007,14 +6994,6 @@
       this.index = t0;
       this._name = t1;
     },
-    BadgeVariant: function BadgeVariant(t0, t1) {
-      this.index = t0;
-      this._name = t1;
-    },
-    CardVariant: function CardVariant(t0, t1) {
-      this.index = t0;
-      this._name = t1;
-    },
     InputVariant: function InputVariant(t0, t1) {
       this.index = t0;
       this._name = t1;
@@ -8054,11 +7033,10 @@
     _EventStreamSubscription_closure: function _EventStreamSubscription_closure(t0) {
       this.onData = t0;
     },
-    throwLateFieldNI(fieldName) {
-      throw A.initializeExceptionWrapper(A.LateError$fieldNI(fieldName), new Error());
+    main() {
+      A.createFlintApp("#app", A.LinkedHashMap_LinkedHashMap$_literal(["Login", new A.main_closure()], type$.String, type$.FlintComponent_Function_Map_String_dynamic));
     },
-    throwLateFieldAI(fieldName) {
-      throw A.initializeExceptionWrapper(A.LateError$fieldAI(fieldName), new Error());
+    main_closure: function main_closure() {
     },
     throwLateFieldADI(fieldName) {
       throw A.initializeExceptionWrapper(A.LateError$fieldADI(fieldName), new Error());
@@ -8080,19 +7058,6 @@
       if (A._asInt($length) >= 1)
         return callback.call$1(arg1);
       return callback.call$0();
-    },
-    main() {
-      var t1 = $.$get$componentRegistry();
-      A.createFlintApp("#app", A._setArrayType([A.auth_middleware__requireAuth$closure()], type$.JSArray_of_void_Function_FlintPageContext), t1);
-    },
-    requireAuth(context) {
-      type$.FlintPageContext._as(context);
-      if (context.page.component !== "Dashboard")
-        return;
-      if (B.AuthSessionManager_KSt.get$token() != null)
-        return;
-      A._asJSObject(A._asJSObject(init.G.window).location).replace("/login");
-      context._stopped = true;
     },
     registerRootDesign(design) {
       var cssText, t2, head, element,
@@ -8127,44 +7092,13 @@
       $._registeredStyleSheets.add$1(0, stylesheet.get$name());
     },
     fieldId(prefix, $name, props) {
-      var base, t1, t2,
-        explicit = props.$index(0, "id");
-      if (explicit == null)
-        explicit = null;
-      if (explicit != null && explicit.length !== 0)
-        return explicit;
+      var base, t1, t2;
+      props.$index(0, "id");
       base = $name.length === 0 ? prefix : $name;
       t1 = A.RegExp_RegExp("[^a-z0-9_-]+", true, false);
       t1 = A.stringReplaceAllUnchecked(base.toLowerCase(), t1, "-");
       t2 = A.RegExp_RegExp("^-+|-+$", true, false);
       return "flint-" + prefix + "-" + A.stringReplaceAllUnchecked(t1, t2, "");
-    },
-    describedBy(describedBy, error, helpText, id) {
-      var t1 = A._setArrayType([], type$.JSArray_String);
-      return t1.length === 0 ? null : B.JSArray_methods.join$1(t1, " ");
-    },
-    fieldMessages(error, helpText, id) {
-      var t1 = A._setArrayType([], type$.JSArray_FlintNode);
-      return t1;
-    },
-    fieldLabel(id, label, required) {
-      var t1 = A.LinkedHashMap_LinkedHashMap$_literal(["for", id, "style", B.Map_szNRN], type$.String, type$.nullable_Object),
-        t2 = A._setArrayType([new A.FlintText(label)], type$.JSArray_FlintNode);
-      if (required)
-        t2.push(B.FlintText_ED0);
-      return new A.FlintElement("label", t1, t2);
-    },
-    controlProps(describedBy, disabled, error, id, $name, props, required) {
-      var t1 = A.LinkedHashMap_LinkedHashMap$of(props, type$.String, type$.nullable_Object);
-      t1.$indexSet(0, "id", id);
-      t1.$indexSet(0, "name", $name);
-      if (required)
-        t1.$indexSet(0, "required", true);
-      if (disabled)
-        t1.$indexSet(0, "disabled", true);
-      if (describedBy != null)
-        t1.$indexSet(0, "aria-describedby", describedBy);
-      return t1;
     }
   },
   B = {};
@@ -8253,10 +7187,6 @@
       receiver.$flags & 1 && A.throwUnsupportedOperation(receiver, 29);
       receiver.push(value);
     },
-    where$1(receiver, f) {
-      var t1 = A._arrayInstanceType(receiver);
-      return new A.WhereIterable(receiver, t1._eval$1("bool(1)")._as(f), t1._eval$1("WhereIterable<1>"));
-    },
     addAll$1(receiver, collection) {
       var t1;
       A._arrayInstanceType(receiver)._eval$1("Iterable<1>")._as(collection);
@@ -8341,9 +7271,6 @@
           return true;
       return false;
     },
-    get$isEmpty(receiver) {
-      return receiver.length === 0;
-    },
     get$isNotEmpty(receiver) {
       return receiver.length !== 0;
     },
@@ -8372,9 +7299,6 @@
       if (index >= t1)
         throw A.wrapException(A.diagnoseIndexError(receiver, index));
       receiver[index] = value;
-    },
-    whereType$1$0(receiver, $T) {
-      return new A.WhereTypeIterable(receiver, $T._eval$1("WhereTypeIterable<0>"));
     },
     $isEfficientLengthIterable: 1,
     $isIterable: 1,
@@ -8769,14 +7693,8 @@
       return new A.MappedListIterable(this, t1._bind$1($T)._eval$1("1(ListIterable.E)")._as(toElement), t1._eval$1("@<ListIterable.E>")._bind$1($T)._eval$1("MappedListIterable<1,2>"));
     },
     toList$1$growable(_, growable) {
-      var t1 = A._instanceType(this)._eval$1("ListIterable.E");
-      if (growable)
-        t1 = A.List_List$_of(this, t1);
-      else {
-        t1 = A.List_List$_of(this, t1);
-        t1.$flags = 1;
-        t1 = t1;
-      }
+      var t1 = A.List_List$_of(this, A._instanceType(this)._eval$1("ListIterable.E"));
+      t1.$flags = 1;
       return t1;
     }
   };
@@ -8856,24 +7774,6 @@
     },
     get$current() {
       return this._iterator.get$current();
-    },
-    $isIterator: 1
-  };
-  A.WhereTypeIterable.prototype = {
-    get$iterator(_) {
-      return new A.WhereTypeIterator(J.get$iterator$ax(this._source), this.$ti._eval$1("WhereTypeIterator<1>"));
-    }
-  };
-  A.WhereTypeIterator.prototype = {
-    moveNext$0() {
-      var t1, t2;
-      for (t1 = this._source, t2 = this.$ti._precomputed1; t1.moveNext$0();)
-        if (t2._is(t1.get$current()))
-          return true;
-      return false;
-    },
-    get$current() {
-      return this.$ti._precomputed1._as(this._source.get$current());
     },
     $isIterator: 1
   };
@@ -9078,7 +7978,7 @@
     call$0() {
       return B.JSNumber_methods.floor$0(1000 * this.performance.now());
     },
-    $signature: 19
+    $signature: 16
   };
   A.SafeToStringHook.prototype = {};
   A.TypeErrorDecoder.prototype = {
@@ -9450,9 +8350,6 @@
     get$iterator(_) {
       var t1 = this._map;
       return new A.LinkedHashMapKeyIterator(t1, t1._modifications, t1._first, this.$ti._eval$1("LinkedHashMapKeyIterator<1>"));
-    },
-    contains$1(_, element) {
-      return this._map.containsKey$1(element);
     }
   };
   A.LinkedHashMapKeyIterator.prototype = {
@@ -9557,19 +8454,19 @@
     call$1(o) {
       return this.getTag(o);
     },
-    $signature: 20
+    $signature: 10
   };
   A.initHooks_closure0.prototype = {
     call$2(o, tag) {
       return this.getUnknownTag(o, tag);
     },
-    $signature: 40
+    $signature: 44
   };
   A.initHooks_closure1.prototype = {
     call$1(tag) {
       return this.prototypeForTag(A._asString(tag));
     },
-    $signature: 41
+    $signature: 31
   };
   A.JSSyntaxRegExp.prototype = {
     toString$0(_) {
@@ -9918,7 +8815,7 @@
       t1.storedCallback = null;
       f.call$0();
     },
-    $signature: 14
+    $signature: 8
   };
   A._AsyncRun__initializeScheduleImmediate_closure.prototype = {
     call$1(callback) {
@@ -9928,19 +8825,19 @@
       t2 = this.span;
       t1.firstChild ? t1.removeChild(t2) : t1.appendChild(t2);
     },
-    $signature: 33
+    $signature: 30
   };
   A._AsyncRun__scheduleImmediateJsOverride_internalCallback.prototype = {
     call$0() {
       this.callback.call$0();
     },
-    $signature: 15
+    $signature: 9
   };
   A._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback.prototype = {
     call$0() {
       this.callback.call$0();
     },
-    $signature: 15
+    $signature: 9
   };
   A._TimerImpl.prototype = {
     _TimerImpl$2(milliseconds, callback) {
@@ -9996,19 +8893,19 @@
     call$1(result) {
       return this.bodyFunction.call$2(0, result);
     },
-    $signature: 42
+    $signature: 28
   };
   A._awaitOnObject_closure0.prototype = {
     call$2(error, stackTrace) {
       this.bodyFunction.call$2(1, new A.ExceptionAndStackTrace(error, type$.StackTrace._as(stackTrace)));
     },
-    $signature: 43
+    $signature: 27
   };
   A._wrapJsFunctionForAsync_closure.prototype = {
     call$2(errorCode, result) {
       this.$protected(A._asInt(errorCode), result);
     },
-    $signature: 59
+    $signature: 24
   };
   A._SyncStarIterator.prototype = {
     get$current() {
@@ -10117,25 +9014,6 @@
     get$stackTrace() {
       return this.stackTrace;
     }
-  };
-  A.Future_Future$microtask_closure.prototype = {
-    call$0() {
-      var e, s, exception, t1, t2, t3, computationResult = null;
-      try {
-        computationResult = this.computation.call$0();
-      } catch (exception) {
-        e = A.unwrapException(exception);
-        s = A.getTraceFromException(exception);
-        t1 = e;
-        t2 = s;
-        t3 = A._interceptError(t1, t2);
-        t1 = new A.AsyncError(t1, t2);
-        this.result._completeErrorObject$1(t1);
-        return;
-      }
-      this.result._complete$1(computationResult);
-    },
-    $signature: 0
   };
   A._Completer.prototype = {
     completeError$2(error, stackTrace) {
@@ -10440,7 +9318,7 @@
     call$1(__wc0_formal) {
       this.joinedResult._completeWithResultOf$1(this.originalSource);
     },
-    $signature: 14
+    $signature: 8
   };
   A._Future__propagateToListeners_handleWhenCompleteCallback_closure0.prototype = {
     call$2(e, s) {
@@ -10448,7 +9326,7 @@
       type$.StackTrace._as(s);
       this.joinedResult._completeErrorObject$1(new A.AsyncError(e, s));
     },
-    $signature: 22
+    $signature: 12
   };
   A._Future__propagateToListeners_handleValueCallback.prototype = {
     call$0() {
@@ -10548,7 +9426,7 @@
         this._future._completeErrorObject$1(new A.AsyncError(e, s));
       }
     },
-    $signature: 22
+    $signature: 12
   };
   A._AsyncCallbackEntry.prototype = {};
   A.Stream.prototype = {
@@ -10724,39 +9602,6 @@
       }
       return true;
     },
-    remove$1(_, object) {
-      var _this = this;
-      if (typeof object == "string" && object !== "__proto__")
-        return _this._collection$_removeHashTableEntry$2(_this._collection$_strings, object);
-      else if (typeof object == "number" && (object & 1073741823) === object)
-        return _this._collection$_removeHashTableEntry$2(_this._collection$_nums, object);
-      else
-        return _this._remove$1(object);
-    },
-    _remove$1(object) {
-      var hash, bucket, index, cell,
-        rest = this._collection$_rest;
-      if (rest == null)
-        return false;
-      hash = J.get$hashCode$(object) & 1073741823;
-      bucket = rest[hash];
-      index = this._findBucketIndex$2(bucket, object);
-      if (index < 0)
-        return false;
-      cell = bucket.splice(index, 1)[0];
-      if (0 === bucket.length)
-        delete rest[hash];
-      this._collection$_unlinkCell$1(cell);
-      return true;
-    },
-    clear$0(_) {
-      var _this = this;
-      if (_this._collection$_length > 0) {
-        _this._collection$_strings = _this._collection$_nums = _this._collection$_rest = _this._collection$_first = _this._collection$_last = null;
-        _this._collection$_length = 0;
-        _this._collection$_modified$0();
-      }
-    },
     _collection$_addHashTableEntry$2(table, element) {
       this.$ti._precomputed1._as(element);
       if (type$.nullable__LinkedHashSetCell._as(table[element]) != null)
@@ -10764,49 +9609,16 @@
       table[element] = this._collection$_newLinkedCell$1(element);
       return true;
     },
-    _collection$_removeHashTableEntry$2(table, element) {
-      var cell;
-      if (table == null)
-        return false;
-      cell = type$.nullable__LinkedHashSetCell._as(table[element]);
-      if (cell == null)
-        return false;
-      this._collection$_unlinkCell$1(cell);
-      delete table[element];
-      return true;
-    },
-    _collection$_modified$0() {
-      this._collection$_modifications = this._collection$_modifications + 1 & 1073741823;
-    },
     _collection$_newLinkedCell$1(element) {
-      var t1, _this = this,
+      var _this = this,
         cell = new A._LinkedHashSetCell(_this.$ti._precomputed1._as(element));
       if (_this._collection$_first == null)
         _this._collection$_first = _this._collection$_last = cell;
-      else {
-        t1 = _this._collection$_last;
-        t1.toString;
-        cell._collection$_previous = t1;
-        _this._collection$_last = t1._collection$_next = cell;
-      }
+      else
+        _this._collection$_last = _this._collection$_last._collection$_next = cell;
       ++_this._collection$_length;
-      _this._collection$_modified$0();
+      _this._collection$_modifications = _this._collection$_modifications + 1 & 1073741823;
       return cell;
-    },
-    _collection$_unlinkCell$1(cell) {
-      var _this = this,
-        previous = cell._collection$_previous,
-        next = cell._collection$_next;
-      if (previous == null)
-        _this._collection$_first = next;
-      else
-        previous._collection$_next = next;
-      if (next == null)
-        _this._collection$_last = previous;
-      else
-        next._collection$_previous = previous;
-      --_this._collection$_length;
-      _this._collection$_modified$0();
     },
     _findBucketIndex$2(bucket, element) {
       var $length, i;
@@ -10846,7 +9658,7 @@
     call$2(k, v) {
       this.result.$indexSet(0, this.K._as(k), this.V._as(v));
     },
-    $signature: 37
+    $signature: 23
   };
   A.ListBase.prototype = {
     get$iterator(receiver) {
@@ -10855,23 +9667,8 @@
     elementAt$1(receiver, index) {
       return this.$index(receiver, index);
     },
-    get$isEmpty(receiver) {
-      return this.get$length(receiver) === 0;
-    },
     get$isNotEmpty(receiver) {
       return this.get$length(receiver) !== 0;
-    },
-    get$first(receiver) {
-      if (this.get$length(receiver) === 0)
-        throw A.wrapException(A.IterableElementError_noElement());
-      return this.$index(receiver, 0);
-    },
-    where$1(receiver, test) {
-      var t1 = A.instanceType(receiver);
-      return new A.WhereIterable(receiver, t1._eval$1("bool(ListBase.E)")._as(test), t1._eval$1("WhereIterable<ListBase.E>"));
-    },
-    whereType$1$0(receiver, $T) {
-      return new A.WhereTypeIterable(receiver, $T._eval$1("WhereTypeIterable<0>"));
     },
     map$1$1(receiver, f, $T) {
       var t1 = A.instanceType(receiver);
@@ -10932,9 +9729,6 @@
       for (t1 = keysToRemove.length, _i = 0; _i < keysToRemove.length; keysToRemove.length === t1 || (0, A.throwConcurrentModificationError)(keysToRemove), ++_i)
         _this.remove$1(0, keysToRemove[_i]);
     },
-    containsKey$1(key) {
-      return this.get$keys().contains$1(0, key);
-    },
     get$length(_) {
       var t1 = this.get$keys();
       return t1.get$length(t1);
@@ -10979,7 +9773,7 @@
       t2 = A.S(v);
       t1._contents += t2;
     },
-    $signature: 24
+    $signature: 14
   };
   A._UnmodifiableMapMixin.prototype = {
     $indexSet(_, key, value) {
@@ -10996,9 +9790,6 @@
     $indexSet(_, key, value) {
       var t1 = A._instanceType(this);
       this._collection$_map.$indexSet(0, t1._precomputed1._as(key), t1._rest[1]._as(value));
-    },
-    containsKey$1(key) {
-      return this._collection$_map.containsKey$1(key);
     },
     forEach$1(_, action) {
       this._collection$_map.forEach$1(0, A._instanceType(this)._eval$1("~(1,2)")._as(action));
@@ -11170,9 +9961,6 @@
         t1 = new J.ArrayIterator(t1, t1.length, A._arrayInstanceType(t1)._eval$1("ArrayIterator<1>"));
       }
       return t1;
-    },
-    contains$1(_, key) {
-      return this._parent.containsKey$1(key);
     }
   };
   A._Utf8Decoder__decoder_closure.prototype = {
@@ -11185,7 +9973,7 @@
       }
       return null;
     },
-    $signature: 25
+    $signature: 15
   };
   A._Utf8Decoder__decoderNonfatal_closure.prototype = {
     call$0() {
@@ -11197,7 +9985,7 @@
       }
       return null;
     },
-    $signature: 25
+    $signature: 15
   };
   A.Base64Codec.prototype = {
     normalize$3(source, start, end) {
@@ -11559,7 +10347,7 @@
       B.JSArray_methods.$indexSet(t1, t2.i++, key);
       B.JSArray_methods.$indexSet(t1, t2.i++, value);
     },
-    $signature: 24
+    $signature: 14
   };
   A._JsonStringStringifier.prototype = {
     get$_partialResult() {
@@ -11894,7 +10682,7 @@
             A._asStringQ(value);
         }
     },
-    $signature: 18
+    $signature: 17
   };
   A.DateTime.prototype = {
     $eq(_, other) {
@@ -12186,14 +10974,8 @@
       return t1.charCodeAt(0) == 0 ? t1 : t1;
     },
     toList$1$growable(_, growable) {
-      var t1 = A._instanceType(this)._eval$1("Iterable.E");
-      if (growable)
-        t1 = A.List_List$_of(this, t1);
-      else {
-        t1 = A.List_List$_of(this, t1);
-        t1.$flags = 1;
-        t1 = t1;
-      }
+      var t1 = A.List_List$_of(this, A._instanceType(this)._eval$1("Iterable.E"));
+      t1.$flags = 1;
       return t1;
     },
     get$length(_) {
@@ -12293,13 +11075,13 @@
       }
       return map;
     },
-    $signature: 58
+    $signature: 22
   };
   A.Uri_parseIPv6Address_error.prototype = {
     call$2(msg, position) {
       throw A.wrapException(A.FormatException$("Illegal IPv6 address, " + msg, this.host, position));
     },
-    $signature: 57
+    $signature: 20
   };
   A._Uri.prototype = {
     get$_core$_text() {
@@ -12470,7 +11252,7 @@
         t1._contents += t2;
       }
     },
-    $signature: 32
+    $signature: 18
   };
   A._Uri__makeQueryFromParametersDefault_closure.prototype = {
     call$2(key, value) {
@@ -12482,7 +11264,7 @@
         for (t1 = J.get$iterator$ax(type$.Iterable_dynamic._as(value)), t2 = this.writeParameter; t1.moveNext$0();)
           t2.call$2(key, A._asString(t1.get$current()));
     },
-    $signature: 18
+    $signature: 17
   };
   A.UriData.prototype = {
     get$uri() {
@@ -12637,2401 +11419,24 @@
     $isUri: 1
   };
   A._DataUri.prototype = {};
-  A.componentRegistry_closure.prototype = {
-    call$1(props) {
-      return A.DashboardPage$(type$.Map_String_dynamic._as(props));
-    },
-    $signature: 29
-  };
-  A.componentRegistry_closure0.prototype = {
-    call$1(props) {
-      return new A.LoginPage(type$.Map_String_dynamic._as(props), A.FormController$(A.LinkedHashMap_LinkedHashMap$_literal(["email", "", "password", ""], type$.String, type$.nullable_Object)));
-    },
-    $signature: 30
-  };
-  A.CounterDemo.prototype = {
-    build$0() {
-      var _this = this, _null = null,
-        t1 = A.Text_p("Use this as a simple proof that EuPanel can mix server data with reactive Flint UI components.", _null, B.DartStyle_NdJ),
-        t2 = A.Text_span(_this.count, B.DartStyle_ONb);
-      return A.Panel$(_null, A.Column$([A.Row$([t1, new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_9Sc, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t2, B.List_empty0))], B.DartStyle_x8p), A.Row$([A.Button$("Decrease", _null, _null, false, false, new A.CounterDemo_build_closure(_this), B.Map_empty1, B.Tone_0, B.ButtonVariant_2), A.Button$("Reset", _null, _null, false, false, new A.CounterDemo_build_closure0(_this), B.Map_empty1, B.Tone_0, B.ButtonVariant_1), A.Button$("Increase", _null, _null, false, false, new A.CounterDemo_build_closure1(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0)], B.DartStyle_yfD)], B.DartStyle_yrU), B.List_empty0, _null, B.DartStyle_Tm1, "A small browser-side state island rendered without custom CSS.", "Flint UI counter demo");
-    }
-  };
-  A.CounterDemo_build_closure.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      return t1.setState$1(new A.CounterDemo_build__closure1(t1));
-    },
-    $signature: 1
-  };
-  A.CounterDemo_build__closure1.prototype = {
-    call$0() {
-      return this.$this.count--;
-    },
-    $signature: 0
-  };
-  A.CounterDemo_build_closure0.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      return t1.setState$1(new A.CounterDemo_build__closure0(t1));
-    },
-    $signature: 1
-  };
-  A.CounterDemo_build__closure0.prototype = {
-    call$0() {
-      return this.$this.count = 0;
-    },
-    $signature: 0
-  };
-  A.CounterDemo_build_closure1.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      return t1.setState$1(new A.CounterDemo_build__closure(t1));
-    },
-    $signature: 1
-  };
-  A.CounterDemo_build__closure.prototype = {
-    call$0() {
-      return this.$this.count++;
-    },
-    $signature: 0
-  };
-  A.DashboardHero.prototype = {
-    build$0() {
-      var _null = null,
-        t1 = A.Column$([A._element("h2", "Hosting Operations Dashboard", _null, B.Map_empty1, B.Map_empty1, B.DartStyle_NAu), A.Text_p("Plans, subscriptions, users, servers, and provisioning work in one EuPanel control surface.", _null, B.DartStyle_8OC)], B.DartStyle_Jww),
-        t2 = A.Row$([A.Link$("Admin view", B.List_empty0, _null, B.DartStyle_UeV, "/dashboard/admin", B.Map_empty1), A.Link$("Reseller view", B.List_empty0, _null, B.DartStyle_EvM, "/dashboard/reseller", B.Map_empty1)], B.DartStyle_Ue1);
-      return new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_StC, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, [t1, t2]));
-    }
-  };
-  A.DashboardModuleCard.prototype = {
-    build$0() {
-      var body, emoji, t2, _this = this, _null = null,
-        t1 = _this.module.$index(0, "title"),
-        title = t1 == null ? _null : J.toString$0$(t1);
-      if (title == null)
-        title = "Module";
-      t1 = _this.module.$index(0, "body");
-      body = t1 == null ? _null : J.toString$0$(t1);
-      if (body == null)
-        body = "";
-      emoji = _this._getEmoji$1(title);
-      t1 = _this.module.$index(0, "href");
-      t1 = t1 == null ? _null : J.toString$0$(t1);
-      if (t1 == null)
-        t1 = "#";
-      t2 = A.Text$(emoji);
-      return A.Link$(_null, [new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_4gs, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t2, B.List_empty0)), A.Column$([A.Text_strong(title, B.DartStyle_jv5), A.Text_p(body, _null, B.DartStyle_CUR)], B.DartStyle_VIj)], _null, B.DartStyle_oiT, t1, B.Map_empty1);
-    },
-    _getEmoji$1(title) {
-      var t = title.toLowerCase();
-      if (B.JSString_methods.contains$1(t, "plan"))
-        return "\ud83d\udce6";
-      if (B.JSString_methods.contains$1(t, "subscription"))
-        return "\ud83d\ude80";
-      if (B.JSString_methods.contains$1(t, "website") || B.JSString_methods.contains$1(t, "domain"))
-        return "\ud83c\udf10";
-      if (B.JSString_methods.contains$1(t, "dns"))
-        return "\ud83d\udd0c";
-      if (B.JSString_methods.contains$1(t, "database") || B.JSString_methods.contains$1(t, "db"))
-        return "\ud83d\uddc4\ufe0f";
-      if (B.JSString_methods.contains$1(t, "ssl") || B.JSString_methods.contains$1(t, "cert"))
-        return "\ud83d\udee1\ufe0f";
-      if (B.JSString_methods.contains$1(t, "backup"))
-        return "\ud83d\udcbe";
-      if (B.JSString_methods.contains$1(t, "server"))
-        return "\ud83d\udda5\ufe0f";
-      if (B.JSString_methods.contains$1(t, "customer"))
-        return "\ud83d\udc65";
-      if (B.JSString_methods.contains$1(t, "job"))
-        return "\u26a1";
-      return "\u2699\ufe0f";
-    }
-  };
-  A.EuPanelDashboardShell.prototype = {};
-  A.EuPanelDashboardSidebar.prototype = {
-    build$0() {
-      var initials, t3, t4, t5, _null = null,
-        activePath = this._dashboard_sidebar$_normalizePath$1(A.Uri_parse(A._asString(A._asJSObject(A._asJSObject(init.G.window).location).href), 0, _null).get$path()),
-        t1 = B.AuthSessionManager_SGS.get$token(),
-        t2 = B.C_LocalStorage.readMap$1("auth.user").$index(0, "name"),
-        $name = t2 == null ? _null : J.toString$0$(t2);
-      if ($name == null)
-        $name = "Admin User";
-      initials = $name.length !== 0 ? B.JSString_methods.substring$2($name, 0, 1).toUpperCase() : "A";
-      t2 = type$.JSArray_SidebarItem;
-      t3 = A._setArrayType([B.SidebarItem_JIW, B.SidebarItem_jVi, B.SidebarItem_vnp, B.SidebarItem_HGn, B.SidebarItem_51v, B.SidebarItem_7Gc, B.SidebarItem_yI1, B.SidebarItem_3a8], t2);
-      t4 = this.role;
-      if (t4 === "admin")
-        B.JSArray_methods.addAll$1(t3, A._setArrayType([B.SidebarItem_rye, B.SidebarItem_AAa, B.SidebarItem_MFW, B.SidebarItem_Jqq], t2));
-      if (t4 === "reseller")
-        B.JSArray_methods.addAll$1(t3, A._setArrayType([B.SidebarItem_AAa], t2));
-      t2 = [A.Sidebar$(B.DartStyle_3Pi, activePath, B.DartStyle_j8E, t3, B.Map_bTCWm)];
-      if (t1 != null) {
-        t1 = A.Text$(initials);
-        t3 = A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_NpQ, B.Map_empty1, B.Map_empty1, B.Map_empty1);
-        t1 = A.normalizeChildren(t1, B.List_empty0);
-        t4 = A.Column$([A.Text_strong($name, B.DartStyle_vC9), A.Text_span(t4.toUpperCase(), B.DartStyle_e28)], B.DartStyle_rqn0);
-        t5 = A.Link$("Logout", B.List_empty0, _null, B.DartStyle_YtG, "/login", A.LinkedHashMap_LinkedHashMap$_literal(["onClick", new A.EuPanelDashboardSidebar_build_closure()], type$.String, type$.nullable_Object));
-        t2.push(new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_qeu, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, [new A.Container("div", t3, t1), t4, t5])));
-      } else
-        t2.push(A.Link$("Sign in", B.List_empty0, _null, B.DartStyle_1I2, "/login", B.Map_empty1));
-      return A.Column$(t2, B.DartStyle_vxi);
-    },
-    _dashboard_sidebar$_normalizePath$1(path) {
-      var t1 = path.length;
-      if (t1 > 1 && B.JSString_methods.endsWith$1(path, "/"))
-        return B.JSString_methods.substring$2(path, 0, t1 - 1);
-      return t1 === 0 ? "/" : path;
-    }
-  };
-  A.EuPanelDashboardSidebar_build_closure.prototype = {
-    call$1(_) {
-      B.C_LocalStorage.remove$1(0, "auth.token");
-      B.C_LocalStorage.remove$1(0, "auth.user");
-    },
-    $signature: 14
-  };
-  A.DashboardTopbar.prototype = {
-    build$0() {
-      var _null = null,
-        t1 = A.Text_strong("Hosting Control Center", B.DartStyle_f4M),
-        t2 = this.role,
-        t3 = t2 === "admin",
-        t4 = t3 ? "#eff6ff" : "#f0fdf4";
-      t4 = A.DartStyle$(_null, _null, _null, _null, _null, t4, _null, _null, _null, _null, _null, _null, _null, _null, t3 ? "#1d4ed8" : "#15803d", _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, 11, 700, _null, _null, _null, _null, _null, _null, _null, _null, _null, 0.5, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, B.EdgeInsets_4_10_4_10, _null, 999, _null, _null, _null, _null, _null, _null, _null, _null, B.C_TextTransform, _null, _null, _null, _null, _null, _null, _null);
-      t2 = A.Text$(t2);
-      t2 = A.Column$([A.Row$([t1, new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, t4, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t2, B.List_empty0))], B.DartStyle_WDb), A.Text_span("EuPanel Node Overview", B.DartStyle_OE3)], B.DartStyle_VIj);
-      t4 = A.Link$("API Docs", B.List_empty0, _null, B.DartStyle_dxt, "/docs", B.Map_empty1);
-      return new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_04A, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, [t2, t4]));
-    }
-  };
-  A.DeployMetric.prototype = {
-    build$0() {
-      var t1 = A.Text_span(this.label, B.DartStyle_yce),
-        t2 = A.Text_strong(this.value, B.DartStyle_Fr5);
-      return new A.Container("div", A.mergeComponentProps(B.Map_empty1, null, B.DartStyle_WRd, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(null, [t1, t2]));
-    }
-  };
-  A.LimitMetric.prototype = {
-    build$0() {
-      var t1 = A.Text_span(this.label, B.DartStyle_yce),
-        t2 = A.Text_strong(this.value, B.DartStyle_pTF);
-      return new A.Container("div", A.mergeComponentProps(B.Map_empty1, null, B.DartStyle_WRd, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(null, [t1, t2]));
-    }
-  };
-  A.PlansView.prototype = {
-    build$0() {
-      var t3, t4, _this = this, _null = null,
-        t1 = _this.role,
-        isAdmin = t1 === "admin",
-        t2 = A.Text$("EP");
-      t2 = A.Row$([new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_xpG, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t2, B.List_empty0)), A.Column$([A.Text_strong("EuPanel", B.DartStyle_kiP), A.Text_span("Flint control node", B.DartStyle_3Ff)], B.DartStyle_rqn)], B.DartStyle_HFz);
-      t3 = isAdmin ? "Manage global shared hosting and reseller plan offerings" : "View available subscription packages";
-      t3 = A.Topbar$(A.Link$("API Docs", B.List_empty0, _null, B.DartStyle_fUZ, "/docs", B.Map_empty1), B.DartStyle_04A, t3, "Hosting Plans & Packages");
-      t4 = [];
-      if (isAdmin)
-        t4.push(A.Button$(A.Text$("Create Package"), _null, B.DartStyle_ugb, false, false, new A.PlansView_build_closure(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0));
-      t4.push(A.Button$("Refresh", _null, B.DartStyle_fUZ, false, false, new A.PlansView_build_closure0(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0));
-      t4 = [A.Grid$([A.Panel$(A.Row$(t4, B.DartStyle_WDb), new A.ResourceView(_this.plans, new A.PlansView_build_closure1(_this, isAdmin), type$.ResourceView_List_FlintModelRecord), B.List_empty0, _null, B.DartStyle_5VO, "Configure resource quotas, capacity, and limits.", "Active Service Plans")], B.DartStyle_tCx)];
-      if (_this._showModal)
-        t4.push(_this._buildPlanModal$1(isAdmin));
-      return A.EuPanelDashboardShell$(t2, t4, new A.EuPanelDashboardSidebar(t1), t3);
-    },
-    _buildPlanCard$2(plan, isAdmin) {
-      var $name, desc, $status, isActive, t1, t2, disk, bandwidth, ram, db, domain, subdomain, ftp, planEmoji, t3, t4, _null = null, _s1_ = "0",
-        id = plan.string$1("id");
-      if (id == null)
-        id = "";
-      $name = plan.string$1("name");
-      if ($name == null)
-        $name = "Hosting Plan";
-      desc = plan.string$1("description");
-      if (desc == null)
-        desc = "";
-      $status = plan.string$1("status");
-      if ($status == null)
-        $status = "active";
-      isActive = $status === "active";
-      t1 = plan.attributes;
-      t2 = t1.$index(0, "disk_limit");
-      disk = t2 == null ? t1.$index(0, "disk") : t2;
-      if (disk == null)
-        disk = _s1_;
-      t2 = t1.$index(0, "bandwidth_limit");
-      bandwidth = t2 == null ? t1.$index(0, "bandwidth") : t2;
-      if (bandwidth == null)
-        bandwidth = _s1_;
-      ram = t1.$index(0, "ram_limit");
-      db = t1.$index(0, "database_limit");
-      if (db == null)
-        db = _s1_;
-      domain = t1.$index(0, "domain_limit");
-      if (domain == null)
-        domain = _s1_;
-      subdomain = t1.$index(0, "subdomain_limit");
-      if (subdomain == null)
-        subdomain = _s1_;
-      ftp = t1.$index(0, "ftp_accounts_limit");
-      if (ftp == null)
-        ftp = _s1_;
-      if (B.JSString_methods.contains$1($name.toLowerCase(), "dev"))
-        planEmoji = "\u26a1";
-      else
-        planEmoji = B.JSString_methods.contains$1($name.toLowerCase(), "pro") || B.JSString_methods.contains$1($name.toLowerCase(), "premium") || B.JSString_methods.contains$1($name.toLowerCase(), "business") ? "\ud83d\udcbc" : "\ud83d\udce6";
-      t1 = A.Text$(planEmoji);
-      t2 = A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_4gs, B.Map_empty1, B.Map_empty1, B.Map_empty1);
-      t1 = A.normalizeChildren(t1, B.List_empty0);
-      t3 = [A.Text_strong($name, B.DartStyle_Lvq)];
-      if (desc.length !== 0)
-        t3.push(A.Text_span(desc, B.DartStyle_OQA));
-      t1 = A.Row$([new A.Container("div", t2, t1), A.Column$(t3, B.DartStyle_VIj)], B.DartStyle_Ue1);
-      t2 = isActive ? "#ecfdf5" : "#fef2f2";
-      t2 = A.DartStyle$(_null, _null, _null, _null, _null, t2, _null, _null, _null, _null, _null, _null, _null, _null, isActive ? "#059669" : "#dc2626", _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, 11, 700, _null, _null, _null, _null, _null, _null, _null, _null, _null, 0.5, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, B.EdgeInsets_4_10_4_10, _null, 999, _null, _null, _null, _null, _null, _null, _null, _null, B.C_TextTransform, _null, _null, _null, _null, _null, _null, _null);
-      t3 = A.Text$($status);
-      t3 = A.Row$([t1, new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, t2, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t3, B.List_empty0))], B.DartStyle_KKN);
-      t2 = A.S(disk);
-      t1 = A.S(bandwidth);
-      t4 = ram == null || J.toString$0$(ram) === "0" ? "Unlimited" : A.S(ram) + " MB";
-      t4 = A.Grid$([new A.LimitMetric("Disk", t2 + " MB"), new A.LimitMetric("Bandwidth", t1 + " MB"), new A.LimitMetric("RAM", t4), new A.LimitMetric("Domains", A.S(domain)), new A.LimitMetric("Subdomains", A.S(subdomain)), new A.LimitMetric("Databases", A.S(db)), new A.LimitMetric("FTP Accounts", A.S(ftp))], B.DartStyle_ra2);
-      t1 = [A.Text_small("ID: " + id, B.DartStyle_5sJ)];
-      if (isAdmin)
-        t1.push(A.Row$([A.Button$(A.Text$("Edit Plan"), _null, B.DartStyle_oFy, false, false, new A.PlansView__buildPlanCard_closure(this, id, $name, desc, disk, bandwidth, ftp, db, domain, subdomain, ram, $status), B.Map_empty1, B.Tone_1, B.ButtonVariant_0), A.Button$(A.Text$("Delete Plan"), _null, B.DartStyle_7bl, false, false, new A.PlansView__buildPlanCard_closure0(this, id), B.Map_empty1, B.Tone_1, B.ButtonVariant_0)], B.DartStyle_WDb));
-      t1 = A.Row$(t1, B.DartStyle_KKN);
-      return new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_xog, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, [t3, t4, t1]));
-    },
-    _buildPlanModal$1(isAdmin) {
-      var _this = this, _null = null,
-        _s11_ = "description",
-        _s10_ = "disk_limit",
-        _s6_ = "number",
-        _s15_ = "bandwidth_limit",
-        _s9_ = "ram_limit",
-        _s18_ = "ftp_accounts_limit",
-        _s14_ = "database_limit",
-        _s12_ = "domain_limit",
-        _s15_0 = "subdomain_limit",
-        t1 = _this._showModal,
-        t2 = _this._editingPlanId == null ? "Create Hosting Package" : "Edit Hosting Package",
-        t3 = _this._createForm,
-        t4 = A.TextField$(t3.controller$1("name"), t3.processing, B.Map_jCawv, "Package Name *", "name", "e.g. Developer Pro", true, "text"),
-        t5 = A.TextField$(t3.controller$1(_s11_), t3.processing, B.Map_jCawv, "Description", _s11_, "e.g. Best for production apps with high traffic", false, "text"),
-        t6 = A.Row$([A.TextField$(t3.controller$1(_s10_), t3.processing, B.Map_jCawv, "Disk Limit (MB) *", _s10_, _null, true, _s6_), A.TextField$(t3.controller$1(_s15_), t3.processing, B.Map_jCawv, "Bandwidth Limit (MB) *", _s15_, _null, true, _s6_)], B.DartStyle_Zk2),
-        t7 = A.Row$([A.TextField$(t3.controller$1(_s9_), t3.processing, B.Map_jCawv, "RAM Limit (MB)", _s9_, "Unlimited", false, _s6_), A.TextField$(t3.controller$1(_s18_), t3.processing, B.Map_jCawv, "FTP Accounts Limit *", _s18_, _null, true, _s6_)], B.DartStyle_Zk2),
-        t8 = A.Row$([A.TextField$(t3.controller$1(_s14_), t3.processing, B.Map_jCawv, "Databases *", _s14_, _null, true, _s6_), A.TextField$(t3.controller$1(_s12_), t3.processing, B.Map_jCawv, "Domains *", _s12_, _null, true, _s6_), A.TextField$(t3.controller$1(_s15_0), t3.processing, B.Map_jCawv, "Subdomains *", _s15_0, _null, true, _s6_)], B.DartStyle_v3d),
-        t9 = t3.string$1("status");
-      t9 = A.Select$(t3.processing, "Status", "status", new A.PlansView__buildPlanModal_closure(_this), B.List_hG4, B.Map_rqER6, t9);
-      t9 = [new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_Mto, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, [t4, t5, t6, t7, t8, t9]))];
-      t4 = _this._formError;
-      if (t4 != null)
-        t9.push(A.Alert$(t4, "Submission Failed", B.Tone_4));
-      t4 = A.Button$(A.Text$("Cancel"), _null, B.DartStyle_b4s, false, false, new A.PlansView__buildPlanModal_closure0(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0);
-      t3 = t3.processing;
-      if (t3)
-        t5 = "Saving...";
-      else
-        t5 = _this._editingPlanId == null ? "Create Package" : "Save Changes";
-      t9.push(A.Row$([t4, A.Button$(A.Text$(t5), _null, B.DartStyle_lvA, t3, t3, _null, B.Map_eXYEy, B.Tone_1, B.ButtonVariant_0)], B.DartStyle_tIl));
-      return A.Modal$(A.Form$(t9, _null, B.DartStyle_tXT, _this.get$_handleFormSubmit()), new A.PlansView__buildPlanModal_closure1(_this), t1, t2);
-    },
-    _handleFormSubmit$1($event) {
-      return this._handleFormSubmit$body$PlansView(A._asObject($event));
-    },
-    _handleFormSubmit$body$PlansView($event) {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.void),
-        $async$self = this, t1, $name, description, diskLimit, bandwidthLimit, ftpAccountsLimit, databaseLimit, domainLimit, subdomainLimit, ramLimit, $status, t2, submit;
-      var $async$_handleFormSubmit$1 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              if (type$.JSObject._is($event))
-                $event.preventDefault();
-              t1 = $async$self._createForm;
-              $name = B.JSString_methods.trim$0(t1.string$1("name"));
-              description = B.JSString_methods.trim$0(t1.string$1("description"));
-              diskLimit = B.JSString_methods.trim$0(t1.string$1("disk_limit"));
-              bandwidthLimit = B.JSString_methods.trim$0(t1.string$1("bandwidth_limit"));
-              ftpAccountsLimit = B.JSString_methods.trim$0(t1.string$1("ftp_accounts_limit"));
-              databaseLimit = B.JSString_methods.trim$0(t1.string$1("database_limit"));
-              domainLimit = B.JSString_methods.trim$0(t1.string$1("domain_limit"));
-              subdomainLimit = B.JSString_methods.trim$0(t1.string$1("subdomain_limit"));
-              ramLimit = B.JSString_methods.trim$0(t1.string$1("ram_limit"));
-              $status = t1.string$1("status");
-              t2 = description.length === 0 ? null : description;
-              submit = t1.submit$1$3$onError$onSuccess(new A.PlansView__handleFormSubmit_closure($async$self, A.LinkedHashMap_LinkedHashMap$_literal(["name", $name, "description", t2, "disk_limit", diskLimit, "bandwidth_limit", bandwidthLimit, "ftp_accounts_limit", ftpAccountsLimit, "database_limit", databaseLimit, "domain_limit", domainLimit, "subdomain_limit", subdomainLimit, "ram_limit", ramLimit.length === 0 ? null : ramLimit, "status", $status], type$.String, type$.nullable_String)), new A.PlansView__handleFormSubmit_closure0($async$self), new A.PlansView__handleFormSubmit_closure1($async$self), type$.FlintResponse_Map_String_dynamic);
-              $async$self.setState$1(new A.PlansView__handleFormSubmit_closure2($async$self));
-              $async$goto = 2;
-              return A._asyncAwait(submit, $async$_handleFormSubmit$1);
-            case 2:
-              // returning from await.
-              $async$self.setState$1(new A.PlansView__handleFormSubmit_closure3());
-              // implicit return
-              return A._asyncReturn(null, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$_handleFormSubmit$1, $async$completer);
-    },
-    _handleDeletePlan$1(id) {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.void),
-        $async$returnValue, $async$self = this, response, t2, t1;
-      var $async$_handleDeletePlan$1 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              t1 = init.G;
-              if (!A._asBool(A._asJSObject(t1.window).confirm("Are you sure you want to delete this plan?"))) {
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$goto = 3;
-              return A._asyncAwait($.$get$clientRouter().delete$1$1("/plans/" + id, type$.Map_String_dynamic), $async$_handleDeletePlan$1);
-            case 3:
-              // returning from await.
-              response = $async$result;
-              if (response.isError) {
-                t1 = A._asJSObject(t1.window);
-                t2 = response.error;
-                t1.alert(J.toString$0$(t2 == null ? "Failed to delete plan." : t2));
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$self.plans.load$1$silent(false);
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$_handleDeletePlan$1, $async$completer);
-    },
-    _plans_view$_friendlyError$1(error) {
-      var message = J.toString$0$(error);
-      if (B.JSString_methods.contains$1(message, "ClientResponseException") || B.JSString_methods.contains$1(message, "Exception:"))
-        return B.JSString_methods.replaceFirst$2(B.JSString_methods.replaceFirst$2(message, "Exception: ", ""), "ClientResponseException: ", "");
-      return message;
-    }
-  };
-  A.PlansView_build_closure.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      t1._editingPlanId = null;
-      t1._createForm.reset$0();
-      t1._formError = null;
-      t1._showModal = true;
-      t1.setState$1(new A.PlansView_build__closure());
-    },
-    $signature: 1
-  };
-  A.PlansView_build__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.PlansView_build_closure0.prototype = {
-    call$1(_) {
-      A._asObject(_);
-      return this.$this.plans.load$1$silent(true);
-    },
-    $signature: 1
-  };
-  A.PlansView_build_closure1.prototype = {
-    call$1(snapshot) {
-      var list, t1, t2, t3, t4;
-      type$.ResourceSnapshot_List_FlintModelRecord._as(snapshot);
-      list = snapshot.data;
-      if (list == null)
-        list = B.List_empty4;
-      t1 = snapshot.status;
-      if (t1 === B.ResourceStatus_1 && J.get$isEmpty$asx(list)) {
-        t1 = A.Text$("Loading packages...");
-        return new A.Container("div", A.mergeComponentProps(B.Map_empty1, null, B.DartStyle_vl3, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t1, B.List_empty0));
-      }
-      t2 = J.getInterceptor$asx(list);
-      if (t2.get$isEmpty(list)) {
-        t1 = t1 === B.ResourceStatus_3;
-        t2 = t1 ? "Could not load plans" : "No plans found";
-        if (t1)
-          t1 = J.toString$0$(snapshot.error);
-        else
-          t1 = this.isAdmin ? "Get started by creating your first hosting package using the Create Package button above." : "No plans have been configured yet by the system administrator.";
-        return A.EmptyState$(t1, t2);
-      }
-      t3 = [];
-      if (t1 === B.ResourceStatus_3)
-        t3.push(A.Alert$(J.toString$0$(snapshot.error), "Showing cached plans", B.Tone_3));
-      for (t1 = t2.get$iterator(list), t2 = this.$this, t4 = this.isAdmin; t1.moveNext$0();)
-        t3.push(t2._buildPlanCard$2(t1.get$current(), t4));
-      return A.Column$(t3, B.DartStyle_tXT);
-    },
-    $signature: 8
-  };
-  A.PlansView__buildPlanCard_closure.prototype = {
-    call$1(_) {
-      var t1, t2, t3, _this = this;
-      A._asObject(_);
-      t1 = _this.$this;
-      t1._editingPlanId = _this.id;
-      t2 = t1._createForm;
-      t2.setField$2("name", _this.name);
-      t2.setField$2("description", _this.desc);
-      t2.setField$2("disk_limit", J.toString$0$(_this.disk));
-      t2.setField$2("bandwidth_limit", J.toString$0$(_this.bandwidth));
-      t2.setField$2("ftp_accounts_limit", J.toString$0$(_this.ftp));
-      t2.setField$2("database_limit", J.toString$0$(_this.db));
-      t2.setField$2("domain_limit", J.toString$0$(_this.domain));
-      t2.setField$2("subdomain_limit", J.toString$0$(_this.subdomain));
-      t3 = _this.ram;
-      t2.setField$2("ram_limit", t3 == null ? "" : J.toString$0$(t3));
-      t2.setField$2("status", _this.status);
-      t1._formError = null;
-      t1._showModal = true;
-      t1.setState$1(new A.PlansView__buildPlanCard__closure());
-    },
-    $signature: 1
-  };
-  A.PlansView__buildPlanCard__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.PlansView__buildPlanCard_closure0.prototype = {
-    call$1(_) {
-      A._asObject(_);
-      return this.$this._handleDeletePlan$1(this.id);
-    },
-    $signature: 1
-  };
-  A.PlansView__buildPlanModal_closure1.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      t1._showModal = false;
-      t1.setState$1(new A.PlansView__buildPlanModal__closure());
-    },
-    $signature: 1
-  };
-  A.PlansView__buildPlanModal__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.PlansView__buildPlanModal_closure.prototype = {
-    call$1($event) {
-      var t1 = this.$this;
-      t1._createForm.setField$2("status", A._asObject($event).get$target().get$value().toString$0(0));
-      t1.setState$1(new A.PlansView__buildPlanModal__closure1());
-    },
-    $signature: 1
-  };
-  A.PlansView__buildPlanModal__closure1.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.PlansView__buildPlanModal_closure0.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      t1._showModal = false;
-      t1.setState$1(new A.PlansView__buildPlanModal__closure0());
-    },
-    $signature: 1
-  };
-  A.PlansView__buildPlanModal__closure0.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.PlansView__handleFormSubmit_closure.prototype = {
-    call$1(_) {
-      var t1, t2, t3, t4, _null = null;
-      type$.Map_of_String_and_nullable_Object._as(_);
-      t1 = this.$this._editingPlanId;
-      t2 = this.body;
-      t3 = type$.Map_String_dynamic;
-      if (t1 == null)
-        return $.$get$clientRouter().post$1$2$body("/plans", t2, t3);
-      else {
-        t4 = $.$get$clientRouter();
-        return t4.client.request$1$9$body$headers$onDone$onError$parser$queryParameters$requestTimeout("PUT", t4._path$1("/plans/" + t1), t2, _null, _null, _null, _null, _null, _null, t3);
-      }
-    },
-    $signature: 9
-  };
-  A.PlansView__handleFormSubmit_closure1.prototype = {
-    call$1(result) {
-      var t1;
-      type$.FlintResponse_Map_String_dynamic._as(result);
-      t1 = this.$this;
-      t1._createForm.reset$0();
-      t1.plans.load$1$silent(false);
-      t1.setState$1(new A.PlansView__handleFormSubmit__closure(t1));
-    },
-    $signature: 10
-  };
-  A.PlansView__handleFormSubmit__closure.prototype = {
-    call$0() {
-      var t1 = this.$this;
-      t1._formError = null;
-      t1._showModal = false;
-    },
-    $signature: 0
-  };
-  A.PlansView__handleFormSubmit_closure0.prototype = {
-    call$1(error) {
-      var t1 = this.$this;
-      t1.setState$1(new A.PlansView__handleFormSubmit__closure0(t1, error));
-    },
-    $signature: 1
-  };
-  A.PlansView__handleFormSubmit__closure0.prototype = {
-    call$0() {
-      var t1 = this.$this;
-      t1._formError = t1._plans_view$_friendlyError$1(this.error);
-    },
-    $signature: 0
-  };
-  A.PlansView__handleFormSubmit_closure2.prototype = {
-    call$0() {
-      this.$this._formError = null;
-    },
-    $signature: 0
-  };
-  A.PlansView__handleFormSubmit_closure3.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.SubscriptionMetric.prototype = {
-    build$0() {
-      var t2, _this = this,
-        t1 = [A.Text_span(_this.label, B.DartStyle_yce)];
-      if (_this.copyable) {
-        t2 = _this.value;
-        t2 = t2.length !== 0 && t2 !== "********" && t2 !== "pending";
-      } else
-        t2 = false;
-      if (t2)
-        t1.push(A.Button$(A.Text$("Copy"), null, B.DartStyle_TgC, false, false, new A.SubscriptionMetric_build_closure(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0));
-      t1 = A.Row$(t1, B.DartStyle_KKN);
-      t2 = A.Text_strong(_this.value, B.DartStyle_Fr5);
-      return new A.Container("div", A.mergeComponentProps(B.Map_empty1, null, B.DartStyle_Q4a, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(null, [t1, t2]));
-    }
-  };
-  A.SubscriptionMetric_build_closure.prototype = {
-    call$1(_) {
-      var t1, t2;
-      A._asObject(_);
-      t1 = this.$this.value;
-      t2 = init.G;
-      A._asJSObject(A._asJSObject(t2.window).navigator).get$clipboard().writeText$1(t1);
-      A._asJSObject(t2.window).alert("Copied to clipboard!");
-    },
-    $signature: 1
-  };
-  A.SubscriptionsView.prototype = {
-    build$0() {
-      var t2, t3, _this = this, _null = null,
-        t1 = A.Text$("EP");
-      t1 = A.Row$([new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_xpG, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t1, B.List_empty0)), A.Column$([A.Text_strong("EuPanel", B.DartStyle_kiP), A.Text_span("Flint control node", B.DartStyle_3Ff)], B.DartStyle_rqn)], B.DartStyle_HFz);
-      t2 = A.Topbar$(A.Row$([A.Button$(A.Text$("New Subscription"), _null, B.DartStyle_ugb, false, false, new A.SubscriptionsView_build_closure(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0), A.Button$("Refresh", _null, B.DartStyle_fUZ, false, false, new A.SubscriptionsView_build_closure0(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0)], B.DartStyle_WDb), B.DartStyle_04A, "Manage active environments, credentials, and package limits", "Hosting Subscriptions");
-      t3 = [A.Grid$([A.Panel$(_null, new A.ResourceView(_this.subscriptions, new A.SubscriptionsView_build_closure1(_this), type$.ResourceView_List_FlintModelRecord), B.List_empty0, _null, B.DartStyle_5VO, "Select your subscription to view details, FTP credentials, and cancel service.", "Active Environments")], B.DartStyle_tCx)];
-      if (_this._showSubModal)
-        t3.push(_this._buildSubModal$0());
-      return A.EuPanelDashboardShell$(t1, t3, new A.EuPanelDashboardSidebar(_this.role), t2);
-    },
-    _buildSubscriptionCard$3(sub, plansList, role) {
-      var planId, plan, t1, t2, planName, $status, provStatus, subId, sysUsername, ftpUsername, ftpPassword, homeDir, provLog, isFailed, isProvisioning, isCancelled, statusLabel, statusBg, statusColor, host, t3, _null = null,
-        _s7_ = "pending";
-      type$.List_FlintModelRecord._as(plansList);
-      planId = sub.string$1("plan_id");
-      if (planId == null)
-        planId = "";
-      t1 = J.get$iterator$ax(plansList);
-      for (;;) {
-        if (!t1.moveNext$0()) {
-          plan = _null;
-          break;
-        }
-        plan = t1.get$current();
-        t2 = plan.attributes.$index(0, "id");
-        if ((t2 == null ? _null : J.toString$0$(t2)) === planId)
-          break;
-      }
-      planName = plan == null ? _null : plan.string$1("name");
-      if (planName == null)
-        planName = "Hosting Plan (" + planId + ")";
-      $status = sub.string$1("status");
-      if ($status == null)
-        $status = _s7_;
-      provStatus = sub.string$1("provisioning_status");
-      if (provStatus == null)
-        provStatus = _s7_;
-      subId = sub.string$1("id");
-      if (subId == null)
-        subId = "";
-      sysUsername = sub.string$1("system_username");
-      if (sysUsername == null)
-        sysUsername = _s7_;
-      ftpUsername = sub.string$1("ftp_username");
-      if (ftpUsername == null)
-        ftpUsername = _s7_;
-      ftpPassword = sub.string$1("ftp_password");
-      if (ftpPassword == null)
-        ftpPassword = "********";
-      homeDir = sub.string$1("home_directory");
-      if (homeDir == null)
-        homeDir = _s7_;
-      provLog = sub.string$1("provisioning_log");
-      if (provLog == null)
-        provLog = "";
-      isFailed = provStatus === "failed";
-      isProvisioning = provStatus === "provisioning" || provStatus === "pending";
-      isCancelled = $status === "cancelled";
-      if (isFailed) {
-        statusLabel = "Failed";
-        statusBg = "#fef2f2";
-        statusColor = "#dc2626";
-      } else if (isProvisioning) {
-        statusLabel = "Provisioning";
-        statusBg = "#fef3c7";
-        statusColor = "#d97706";
-      } else if (isCancelled) {
-        statusLabel = "Cancelled";
-        statusBg = "#f1f5f9";
-        statusColor = "#475569";
-      } else {
-        statusLabel = "Active";
-        statusBg = "#ecfdf5";
-        statusColor = "#059669";
-      }
-      host = A._asString(A._asJSObject(A._asJSObject(init.G.window).location).hostname);
-      t1 = A.Text$(B.JSString_methods.contains$1(planName.toLowerCase(), "pro") || B.JSString_methods.contains$1(planName.toLowerCase(), "business") ? "\u26a1" : "\ud83d\ude80");
-      t1 = A.Row$([new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_4ci, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t1, B.List_empty0)), A.Column$([A.Row$([A.Text_strong(planName, B.DartStyle_Lvq), A.Text_span("Subscription", B.DartStyle_Vsm)], B.DartStyle_WDb), A.Text_span("ID: " + subId, B.DartStyle_uHk)], B.DartStyle_VIj)], B.DartStyle_Ue1);
-      t2 = A.DartStyle$(_null, _null, _null, _null, _null, statusBg, _null, _null, _null, _null, _null, _null, _null, _null, statusColor, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, 11, 700, _null, _null, _null, _null, _null, _null, _null, _null, _null, 0.5, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, B.EdgeInsets_4_10_4_10, _null, 999, _null, _null, _null, _null, _null, _null, _null, _null, B.C_TextTransform, _null, _null, _null, _null, _null, _null, _null);
-      t3 = A.Text$(statusLabel);
-      t3 = [A.Row$([t1, new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, t2, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t3, B.List_empty0))], B.DartStyle_KKN), A.Grid$([new A.SubscriptionMetric("FTP / SFTP Host", host, true), new A.SubscriptionMetric("System Username", sysUsername, true), new A.SubscriptionMetric("Home Directory", homeDir, false), new A.SubscriptionMetric("FTP Username", ftpUsername, true), new A.SubscriptionMetric("FTP Password", ftpPassword, true)], B.DartStyle_cmj)];
-      if (isFailed && provLog.length !== 0)
-        t3.push(A.Alert$(provLog, "Provisioning Log", B.Tone_4));
-      t1 = [];
-      if (!isCancelled)
-        t1.push(A.Button$(A.Text$("Cancel Subscription"), _null, B.DartStyle_7bl, false, false, new A.SubscriptionsView__buildSubscriptionCard_closure(this, subId), B.Map_empty1, B.Tone_1, B.ButtonVariant_0));
-      t3.push(A.Row$(t1, B.DartStyle_xQ3));
-      return new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_xog, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, t3));
-    },
-    _buildSubModal$0() {
-      var plan, t6, t7, t8, _this = this, _null = null,
-        t1 = _this._showSubModal,
-        t2 = _this._subscriptionForm,
-        t3 = t2.string$1("plan_id"),
-        t4 = A._setArrayType([], type$.JSArray_SelectOption),
-        t5 = _this.plans.state._state_signal$_value.data;
-      t5 = J.get$iterator$ax(t5 == null ? [] : t5);
-      while (t5.moveNext$0()) {
-        plan = t5.get$current();
-        t6 = plan.string$1("name");
-        if (t6 == null)
-          t6 = "Plan";
-        t7 = plan.string$1("price");
-        if (t7 == null)
-          t7 = "0";
-        t8 = plan.string$1("id");
-        if (t8 == null)
-          t8 = "";
-        t4.push(new A.SelectOption(t6 + " - $" + t7 + "/mo", t8));
-      }
-      t3 = [A.Select$(t2.processing, "Select Service Plan *", "plan_id", new A.SubscriptionsView__buildSubModal_closure(_this), t4, B.Map_rqER6, t3)];
-      t4 = _this._subFormError;
-      if (t4 != null)
-        t3.push(A.Alert$(t4, "Subscription Failed", B.Tone_4));
-      t4 = A.Button$(A.Text$("Cancel"), _null, B.DartStyle_b4s, false, false, new A.SubscriptionsView__buildSubModal_closure0(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0);
-      t2 = t2.processing;
-      t3.push(A.Row$([t4, A.Button$(A.Text$(t2 ? "Provisioning..." : "Subscribe Now"), _null, B.DartStyle_lvA, t2, t2, _null, B.Map_eXYEy, B.Tone_1, B.ButtonVariant_0)], B.DartStyle_tIl));
-      return A.Modal$(A.Form$(t3, _null, B.DartStyle_tXT, _this.get$_handleSubSubmit()), new A.SubscriptionsView__buildSubModal_closure1(_this), t1, "New Hosting Subscription");
-    },
-    _handleSubSubmit$1($event) {
-      return this._handleSubSubmit$body$SubscriptionsView(A._asObject($event));
-    },
-    _handleSubSubmit$body$SubscriptionsView($event) {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.void),
-        $async$returnValue, $async$self = this, t1, planId, submit;
-      var $async$_handleSubSubmit$1 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              if (type$.JSObject._is($event))
-                $event.preventDefault();
-              t1 = $async$self._subscriptionForm;
-              planId = B.JSString_methods.trim$0(t1.string$1("plan_id"));
-              if (planId.length === 0) {
-                $async$self.setState$1(new A.SubscriptionsView__handleSubSubmit_closure($async$self));
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              submit = t1.submit$1$3$onError$onSuccess(new A.SubscriptionsView__handleSubSubmit_closure0(planId), new A.SubscriptionsView__handleSubSubmit_closure1($async$self), new A.SubscriptionsView__handleSubSubmit_closure2($async$self), type$.FlintResponse_Map_String_dynamic);
-              $async$self.setState$1(new A.SubscriptionsView__handleSubSubmit_closure3($async$self));
-              $async$goto = 3;
-              return A._asyncAwait(submit, $async$_handleSubSubmit$1);
-            case 3:
-              // returning from await.
-              $async$self.setState$1(new A.SubscriptionsView__handleSubSubmit_closure4());
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$_handleSubSubmit$1, $async$completer);
-    },
-    _handleCancelSubscription$1(id) {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.void),
-        $async$returnValue, $async$self = this, response, t2, t1;
-      var $async$_handleCancelSubscription$1 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              t1 = init.G;
-              if (!A._asBool(A._asJSObject(t1.window).confirm("Are you sure you want to cancel this subscription? This will delete all files and databases!"))) {
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$goto = 3;
-              return A._asyncAwait($.$get$clientRouter().delete$1$1("/subscriptions/" + id, type$.Map_String_dynamic), $async$_handleCancelSubscription$1);
-            case 3:
-              // returning from await.
-              response = $async$result;
-              if (response.isError) {
-                t1 = A._asJSObject(t1.window);
-                t2 = response.error;
-                t1.alert(J.toString$0$(t2 == null ? "Failed to cancel subscription." : t2));
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$self.subscriptions.load$1$silent(false);
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$_handleCancelSubscription$1, $async$completer);
-    },
-    _subscriptions_view$_friendlyError$1(error) {
-      var message = J.toString$0$(error);
-      if (B.JSString_methods.contains$1(message, "ClientResponseException") || B.JSString_methods.contains$1(message, "Exception:"))
-        return B.JSString_methods.replaceFirst$2(B.JSString_methods.replaceFirst$2(message, "Exception: ", ""), "ClientResponseException: ", "");
-      return message;
-    }
-  };
-  A.SubscriptionsView_build_closure.prototype = {
-    call$1(_) {
-      var t1, t2, plansList, t3;
-      A._asObject(_);
-      t1 = this.$this;
-      t2 = t1._subscriptionForm;
-      t2.reset$0();
-      plansList = t1.plans.state._state_signal$_value.data;
-      if (plansList == null)
-        plansList = A._setArrayType([], type$.JSArray_FlintModelRecord);
-      t3 = J.getInterceptor$asx(plansList);
-      if (t3.get$isNotEmpty(plansList)) {
-        t3 = t3.get$first(plansList).string$1("id");
-        t2.setField$2("plan_id", t3 == null ? "" : t3);
-      }
-      t1._subFormError = null;
-      t1._showSubModal = true;
-      t1.setState$1(new A.SubscriptionsView_build__closure());
-    },
-    $signature: 1
-  };
-  A.SubscriptionsView_build__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.SubscriptionsView_build_closure0.prototype = {
-    call$1(_) {
-      A._asObject(_);
-      return this.$this.subscriptions.load$1$silent(true);
-    },
-    $signature: 1
-  };
-  A.SubscriptionsView_build_closure1.prototype = {
-    call$1(snapshot) {
-      var subs, t1, plansList, t2, t3, t4;
-      type$.ResourceSnapshot_List_FlintModelRecord._as(snapshot);
-      subs = snapshot.data;
-      if (subs == null)
-        subs = B.List_empty4;
-      t1 = this.$this;
-      plansList = t1.plans.state._state_signal$_value.data;
-      if (plansList == null)
-        plansList = B.List_empty4;
-      t2 = snapshot.status;
-      if (t2 === B.ResourceStatus_1 && J.get$isEmpty$asx(subs)) {
-        t1 = A.Text$("Loading subscriptions...");
-        return new A.Container("div", A.mergeComponentProps(B.Map_empty1, null, B.DartStyle_vl3, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t1, B.List_empty0));
-      }
-      t3 = J.getInterceptor$asx(subs);
-      if (t3.get$isEmpty(subs)) {
-        t1 = t2 === B.ResourceStatus_3;
-        t2 = t1 ? "Could not load subscriptions" : "No active subscriptions";
-        return A.EmptyState$(t1 ? J.toString$0$(snapshot.error) : "You don't have any active hosting subscriptions. Create a new subscription package using the button above.", t2);
-      }
-      t4 = [];
-      if (t2 === B.ResourceStatus_3)
-        t4.push(A.Alert$(J.toString$0$(snapshot.error), "Showing cached subscriptions", B.Tone_3));
-      for (t2 = t3.get$iterator(subs), t3 = t1.role; t2.moveNext$0();)
-        t4.push(t1._buildSubscriptionCard$3(t2.get$current(), plansList, t3));
-      return A.Column$(t4, B.DartStyle_tXT);
-    },
-    $signature: 8
-  };
-  A.SubscriptionsView__buildSubscriptionCard_closure.prototype = {
-    call$1(_) {
-      A._asObject(_);
-      return this.$this._handleCancelSubscription$1(this.subId);
-    },
-    $signature: 1
-  };
-  A.SubscriptionsView__buildSubModal_closure1.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      t1._showSubModal = false;
-      t1.setState$1(new A.SubscriptionsView__buildSubModal__closure());
-    },
-    $signature: 1
-  };
-  A.SubscriptionsView__buildSubModal__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.SubscriptionsView__buildSubModal_closure.prototype = {
-    call$1($event) {
-      var t1 = this.$this;
-      t1._subscriptionForm.setField$2("plan_id", A._asObject($event).get$target().get$value().toString$0(0));
-      t1.setState$1(new A.SubscriptionsView__buildSubModal__closure1());
-    },
-    $signature: 1
-  };
-  A.SubscriptionsView__buildSubModal__closure1.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.SubscriptionsView__buildSubModal_closure0.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      t1._showSubModal = false;
-      t1.setState$1(new A.SubscriptionsView__buildSubModal__closure0());
-    },
-    $signature: 1
-  };
-  A.SubscriptionsView__buildSubModal__closure0.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.SubscriptionsView__handleSubSubmit_closure.prototype = {
-    call$0() {
-      this.$this._subFormError = "Please select a hosting package.";
-    },
-    $signature: 0
-  };
-  A.SubscriptionsView__handleSubSubmit_closure0.prototype = {
-    call$1(_) {
-      var t1;
-      type$.Map_of_String_and_nullable_Object._as(_);
-      t1 = type$.String;
-      return $.$get$clientRouter().post$1$2$body("/subscriptions", A.LinkedHashMap_LinkedHashMap$_literal(["plan_id", this.planId], t1, t1), type$.Map_String_dynamic);
-    },
-    $signature: 9
-  };
-  A.SubscriptionsView__handleSubSubmit_closure2.prototype = {
-    call$1(result) {
-      var t1;
-      type$.FlintResponse_Map_String_dynamic._as(result);
-      t1 = this.$this;
-      t1._subscriptionForm.reset$0();
-      t1.subscriptions.load$1$silent(false);
-      t1.setState$1(new A.SubscriptionsView__handleSubSubmit__closure(t1));
-    },
-    $signature: 10
-  };
-  A.SubscriptionsView__handleSubSubmit__closure.prototype = {
-    call$0() {
-      var t1 = this.$this;
-      t1._subFormError = null;
-      t1._showSubModal = false;
-    },
-    $signature: 0
-  };
-  A.SubscriptionsView__handleSubSubmit_closure1.prototype = {
-    call$1(error) {
-      var t1 = this.$this;
-      t1.setState$1(new A.SubscriptionsView__handleSubSubmit__closure0(t1, error));
-    },
-    $signature: 1
-  };
-  A.SubscriptionsView__handleSubSubmit__closure0.prototype = {
-    call$0() {
-      var t1 = this.$this;
-      t1._subFormError = t1._subscriptions_view$_friendlyError$1(this.error);
-    },
-    $signature: 0
-  };
-  A.SubscriptionsView__handleSubSubmit_closure3.prototype = {
-    call$0() {
-      this.$this._subFormError = null;
-    },
-    $signature: 0
-  };
-  A.SubscriptionsView__handleSubSubmit_closure4.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView.prototype = {
-    WebsitesDomainsView$2$role$subscriptions(role, subscriptions) {
-      var _this = this, _null = null,
-        t1 = type$.List_FlintModelRecord,
-        t2 = type$.ResourceController_List_FlintModelRecord,
-        t3 = t2._as(A.ResourceController$(_null, true, new A.WebsitesDomainsView_closure(), t1));
-      _this.__WebsitesDomainsView__domains_F !== $ && A.throwLateFieldAI("_domains");
-      _this.__WebsitesDomainsView__domains_F = t3;
-      t1 = t2._as(A.ResourceController$(_null, true, new A.WebsitesDomainsView_closure0(), t1));
-      _this.__WebsitesDomainsView__gitDeploys_F !== $ && A.throwLateFieldAI("_gitDeploys");
-      _this.__WebsitesDomainsView__gitDeploys_F = t1;
-      t1 = type$.ResourceController_Map_String_dynamic._as(A.ResourceController$(_null, true, new A.WebsitesDomainsView_closure1(), type$.Map_String_dynamic));
-      _this.__WebsitesDomainsView__gitStatus_F !== $ && A.throwLateFieldAI("_gitStatus");
-      _this.__WebsitesDomainsView__gitStatus_F = t1;
-      t1 = type$.ResourceController_List_Map_String_dynamic._as(A.ResourceController$(_null, false, new A.WebsitesDomainsView_closure2(), type$.List_Map_String_dynamic));
-      _this.__WebsitesDomainsView__repos_F !== $ && A.throwLateFieldAI("_repos");
-      _this.__WebsitesDomainsView__repos_F = t1;
-    },
-    get$_repos() {
-      var t1 = this.__WebsitesDomainsView__repos_F;
-      t1 === $ && A.throwLateFieldNI("_repos");
-      return t1;
-    },
-    willUnmount$0() {
-      var _this = this,
-        t1 = _this.__WebsitesDomainsView__domains_F;
-      t1 === $ && A.throwLateFieldNI("_domains");
-      t1.state._state_signal$_listeners.clear$0(0);
-      t1 = _this.__WebsitesDomainsView__gitDeploys_F;
-      t1 === $ && A.throwLateFieldNI("_gitDeploys");
-      t1.state._state_signal$_listeners.clear$0(0);
-      t1 = _this.__WebsitesDomainsView__gitStatus_F;
-      t1 === $ && A.throwLateFieldNI("_gitStatus");
-      t1.state._state_signal$_listeners.clear$0(0);
-      _this.get$_repos().state._state_signal$_listeners.clear$0(0);
-    },
-    build$0() {
-      var t1, t2, t3, t4, _this = this, _null = null;
-      if (A.Uri_parse(A._asString(A._asJSObject(A._asJSObject(init.G.window).location).href), 0, _null).get$queryParameters().$index(0, "github") === "connected") {
-        t1 = _this.__WebsitesDomainsView__gitStatus_F;
-        t1 === $ && A.throwLateFieldNI("_gitStatus");
-        t1 = t1.state._state_signal$_value.data;
-        t1 = !J.$eq$(t1 == null ? _null : J.$index$asx(t1, "connected"), true);
-      } else
-        t1 = false;
-      if (t1)
-        A.Future_Future$microtask(new A.WebsitesDomainsView_build_closure(_this), type$.Null);
-      t1 = A.Text$("EP");
-      t1 = A.Row$([new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_xpG, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t1, B.List_empty0)), A.Column$([A.Text_strong("EuPanel", B.DartStyle_kiP), A.Text_span("Flint control node", B.DartStyle_3Ff)], B.DartStyle_rqn)], B.DartStyle_HFz);
-      t2 = A.Topbar$(A.Row$([A.Button$(A.Text$("Add Website"), _null, B.DartStyle_ugb, false, false, new A.WebsitesDomainsView_build_closure0(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0), A.Button$("Refresh", _null, B.DartStyle_fUZ, false, false, new A.WebsitesDomainsView_build_closure1(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0)], B.DartStyle_WDb), B.DartStyle_04A, "Manage domains, paths, Let's Encrypt SSL, and Git deployments", "Websites & Domains");
-      t3 = _this._buildGithubBanner$0();
-      t4 = _this.__WebsitesDomainsView__domains_F;
-      t4 === $ && A.throwLateFieldNI("_domains");
-      t4 = [t3, A.Grid$([A.Panel$(_null, new A.ResourceView(t4, new A.WebsitesDomainsView_build_closure2(_this), type$.ResourceView_List_FlintModelRecord), B.List_empty0, _null, B.DartStyle_5VO, "Create and connect domains to your server environment.", "Hosted Domains")], B.DartStyle_tCx)];
-      if (_this._showDomainModal)
-        t4.push(_this._buildDomainModal$0());
-      if (_this._showDeployModal)
-        t4.push(_this._buildDeployModal$0());
-      return A.EuPanelDashboardShell$(t1, t4, new A.EuPanelDashboardSidebar(_this.role), t2);
-    },
-    _buildGithubBanner$0() {
-      var t1 = this.__WebsitesDomainsView__gitStatus_F;
-      t1 === $ && A.throwLateFieldNI("_gitStatus");
-      return new A.ResourceView(t1, new A.WebsitesDomainsView__buildGithubBanner_closure(this), type$.ResourceView_Map_String_dynamic);
-    },
-    _handleGithubDisconnect$0() {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.void),
-        $async$returnValue, $async$self = this, response, t2, t1;
-      var $async$_handleGithubDisconnect$0 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              t1 = init.G;
-              if (!A._asBool(A._asJSObject(t1.window).confirm("Disconnect your GitHub account?"))) {
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$goto = 3;
-              return A._asyncAwait($.$get$clientRouter().delete$1$1("/github/disconnect", type$.Map_String_dynamic), $async$_handleGithubDisconnect$0);
-            case 3:
-              // returning from await.
-              response = $async$result;
-              if (response.isError) {
-                t1 = A._asJSObject(t1.window);
-                t2 = response.error;
-                t1.alert(J.toString$0$(t2 == null ? "Failed to disconnect." : t2));
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              t1 = $async$self.__WebsitesDomainsView__gitStatus_F;
-              t1 === $ && A.throwLateFieldNI("_gitStatus");
-              t1.load$1$silent(false);
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$_handleGithubDisconnect$0, $async$completer);
-    },
-    _buildDomainCard$3(domain, deploys, subs) {
-      var id, domainName, $status, sslStatus, rootPath, subId, sub, t2, subName, deploy, isProvisioning, statusLabel, statusBg, statusColor, hasDeploy, repoName, branchName, deployId, githubConnected, t3, t4, _this = this, _null = null,
-        _s12_ = "Subscription",
-        _s3_ = "div",
-        t1 = type$.List_FlintModelRecord;
-      t1._as(deploys);
-      t1._as(subs);
-      id = domain.string$1("id");
-      if (id == null)
-        id = "";
-      domainName = domain.string$1("domain");
-      if (domainName == null)
-        domainName = "Domain";
-      $status = domain.string$1("status");
-      if ($status == null)
-        $status = "pending";
-      sslStatus = domain.string$1("ssl_status");
-      if (sslStatus == null)
-        sslStatus = "pending";
-      rootPath = domain.string$1("root_path");
-      if (rootPath == null)
-        rootPath = "-";
-      subId = domain.string$1("subscription_id");
-      if (subId == null)
-        subId = "";
-      t1 = J.get$iterator$ax(subs);
-      for (;;) {
-        if (!t1.moveNext$0()) {
-          sub = _null;
-          break;
-        }
-        sub = t1.get$current();
-        t2 = sub.attributes.$index(0, "id");
-        if ((t2 == null ? _null : J.toString$0$(t2)) === subId)
-          break;
-      }
-      if (sub != null) {
-        t1 = sub.string$1("system_username");
-        subName = t1 == null ? _s12_ : t1;
-      } else
-        subName = _s12_;
-      t1 = J.get$iterator$ax(deploys);
-      for (;;) {
-        if (!t1.moveNext$0()) {
-          deploy = _null;
-          break;
-        }
-        deploy = t1.get$current();
-        t2 = deploy.attributes.$index(0, "domain_id");
-        if ((t2 == null ? _null : J.toString$0$(t2)) === id)
-          break;
-      }
-      isProvisioning = $status === "provisioning" || $status === "pending";
-      if ($status === "failed") {
-        statusLabel = "Failed";
-        statusBg = "#fef2f2";
-        statusColor = "#dc2626";
-      } else if (isProvisioning) {
-        statusLabel = "Provisioning";
-        statusBg = "#fef3c7";
-        statusColor = "#d97706";
-      } else {
-        statusLabel = "Active";
-        statusBg = "#ecfdf5";
-        statusColor = "#059669";
-      }
-      t1 = deploy == null;
-      hasDeploy = !t1;
-      repoName = t1 ? _null : deploy.string$1("repo_full_name");
-      if (repoName == null)
-        repoName = "";
-      branchName = t1 ? _null : deploy.string$1("branch");
-      if (branchName == null)
-        branchName = "main";
-      deployId = t1 ? _null : deploy.string$1("id");
-      if (deployId == null)
-        deployId = "";
-      t1 = _this.__WebsitesDomainsView__gitStatus_F;
-      t1 === $ && A.throwLateFieldNI("_gitStatus");
-      t1 = t1.state._state_signal$_value.data;
-      githubConnected = J.$eq$(t1 == null ? _null : J.$index$asx(t1, "connected"), true);
-      t1 = A.Text_span("\ud83c\udf10", B.DartStyle_7OO);
-      t2 = A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_PB9, B.Map_empty1, B.Map_empty1, B.Map_empty1);
-      t1 = A.normalizeChildren(t1, B.List_empty0);
-      t3 = [A.Text_strong(domainName, B.DartStyle_cUu)];
-      if (sslStatus === "active") {
-        t4 = A.Text$("SSL Secured");
-        t3.push(new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_G1V, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t4, B.List_empty0)));
-      } else {
-        t4 = A.Text$("HTTP Only");
-        t3.push(new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_H14, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t4, B.List_empty0)));
-      }
-      t1 = A.Row$([new A.Container(_s3_, t2, t1), A.Column$([A.Row$(t3, B.DartStyle_WDb), A.Text_span("Linked Subscription: " + subName + "  |  Root: " + rootPath, B.DartStyle_OQA)], B.DartStyle_VIj)], B.DartStyle_ygT);
-      t2 = A.DartStyle$(_null, _null, _null, _null, _null, statusBg, _null, _null, _null, _null, _null, _null, _null, _null, statusColor, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, 11, 700, _null, _null, _null, _null, _null, _null, _null, _null, _null, 0.5, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, B.EdgeInsets_4_10_4_10, _null, 999, _null, _null, _null, _null, _null, _null, _null, _null, B.C_TextTransform, _null, _null, _null, _null, _null, _null, _null);
-      t3 = A.Text$(statusLabel);
-      t3 = A.Row$([t1, new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, t2, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t3, B.List_empty0))], B.DartStyle_KKN);
-      t2 = [A.Text_span("\ud83d\udc19", B.DartStyle_S1A), A.Text_strong("GitHub Auto-Deployment", B.DartStyle_hUB)];
-      if (hasDeploy) {
-        t1 = A.Text$("Active");
-        t2.push(new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_cS8, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t1, B.List_empty0)));
-      }
-      t1 = [A.Row$(t2, B.DartStyle_WmN)];
-      if (hasDeploy)
-        t1.push(A.Button$(A.Text$("Disconnect"), _null, B.DartStyle_kB9, false, false, new A.WebsitesDomainsView__buildDomainCard_closure(_this, deployId), B.Map_empty1, B.Tone_1, B.ButtonVariant_0));
-      else {
-        t2 = githubConnected ? B.Cursor_pointer : B.Cursor_Yvp;
-        t4 = githubConnected ? "#24292f" : "#cbd5e1";
-        t2 = A.DartStyle$(_null, _null, _null, _null, _null, t4, _null, _null, _null, _null, _null, _null, _null, _null, "#ffffff", t2, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, 12, 700, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, B.EdgeInsets_8_14_8_14, _null, 8, _null, _null, _null, _null, githubConnected ? B.Shadow_6a0 : _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null);
-        t1.push(A.Button$(A.Text$(githubConnected ? "Link Repository" : "Link Repository (Connect GitHub First)"), _null, t2, !githubConnected, false, new A.WebsitesDomainsView__buildDomainCard_closure0(_this, id), B.Map_empty1, B.Tone_1, B.ButtonVariant_0));
-      }
-      t1 = [A.Row$(t1, B.DartStyle_KKN)];
-      if (hasDeploy)
-        t1.push(A.Row$([new A.DeployMetric("Repository", repoName), new A.DeployMetric("Branch", branchName)], B.DartStyle_w63));
-      else
-        t1.push(A.Text_span("No Git repository linked to this domain. Code must be uploaded manually via FTP/SFTP.", B.DartStyle_vn5));
-      t2 = A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_V4h, B.Map_empty1, B.Map_empty1, B.Map_empty1);
-      t1 = A.normalizeChildren(_null, t1);
-      t4 = A.Row$([A.Button$(A.Text$("Delete Website"), _null, B.DartStyle_3Zj, false, false, new A.WebsitesDomainsView__buildDomainCard_closure1(_this, id, domainName), B.Map_empty1, B.Tone_1, B.ButtonVariant_0)], B.DartStyle_xQ3);
-      return new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_Egi, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, [t3, new A.Container(_s3_, t2, t1), t4]));
-    },
-    _buildDomainModal$0() {
-      var sub, t6, t7, t8, _this = this,
-        _s15_ = "subscription_id",
-        _null = null,
-        t1 = _this._showDomainModal,
-        t2 = _this._domainForm,
-        t3 = t2.string$1(_s15_),
-        t4 = A._setArrayType([], type$.JSArray_SelectOption),
-        t5 = _this.subscriptions.state._state_signal$_value.data;
-      t5 = J.get$iterator$ax(t5 == null ? [] : t5);
-      while (t5.moveNext$0()) {
-        sub = t5.get$current();
-        t6 = sub.string$1("system_username");
-        if (t6 == null)
-          t6 = "Subscription";
-        t7 = sub.string$1("id");
-        if (t7 == null)
-          t7 = "";
-        t8 = sub.string$1("id");
-        if (t8 == null)
-          t8 = "";
-        t4.push(new A.SelectOption(t6 + " (" + t7 + ")", t8));
-      }
-      t3 = [A.Select$(t2.processing, "Select Subscription *", _s15_, new A.WebsitesDomainsView__buildDomainModal_closure(_this), t4, B.Map_rqER6, t3), A.TextField$(t2.controller$1("domain"), t2.processing, B.Map_jCawv, "Domain Name *", "domain", "e.g. my-app.com or sub.example.com", true, "text")];
-      t4 = _this._domainFormError;
-      if (t4 != null)
-        t3.push(A.Alert$(t4, "Adding Domain Failed", B.Tone_4));
-      t4 = A.Button$(A.Text$("Cancel"), _null, B.DartStyle_b4s, false, false, new A.WebsitesDomainsView__buildDomainModal_closure0(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0);
-      t2 = t2.processing;
-      t3.push(A.Row$([t4, A.Button$(A.Text$(t2 ? "Provisioning..." : "Add Website"), _null, B.DartStyle_lvA, t2, t2, _null, B.Map_eXYEy, B.Tone_1, B.ButtonVariant_0)], B.DartStyle_tIl));
-      return A.Modal$(A.Form$(t3, _null, B.DartStyle_tXT, _this.get$_handleDomainSubmit()), new A.WebsitesDomainsView__buildDomainModal_closure1(_this), t1, "Add New Website Mapping");
-    },
-    _buildDeployModal$0() {
-      var _this = this, _null = null,
-        t1 = _this._showDeployModal,
-        t2 = _this._deployForm,
-        t3 = [new A.ResourceView(_this.get$_repos(), new A.WebsitesDomainsView__buildDeployModal_closure(_this), type$.ResourceView_List_Map_String_dynamic), A.TextField$(t2.controller$1("branch"), t2.processing, B.Map_jCawv, "Deployment Branch *", "branch", "e.g. main or production", true, "text")],
-        t4 = _this._deployFormError;
-      if (t4 != null)
-        t3.push(A.Alert$(t4, "Linking Repository Failed", B.Tone_4));
-      t4 = A.Button$(A.Text$("Cancel"), _null, B.DartStyle_b4s, false, false, new A.WebsitesDomainsView__buildDeployModal_closure0(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0);
-      t2 = t2.processing;
-      t3.push(A.Row$([t4, A.Button$(A.Text$(t2 ? "Linking..." : "Link Repository"), _null, B.DartStyle_lvA, t2, t2, _null, B.Map_eXYEy, B.Tone_1, B.ButtonVariant_0)], B.DartStyle_tIl));
-      return A.Modal$(A.Form$(t3, _null, B.DartStyle_tXT, _this.get$_handleDeploySubmit()), new A.WebsitesDomainsView__buildDeployModal_closure1(_this), t1, "Link GitHub Repository");
-    },
-    _handleDomainSubmit$1($event) {
-      return this._handleDomainSubmit$body$WebsitesDomainsView(A._asObject($event));
-    },
-    _handleDomainSubmit$body$WebsitesDomainsView($event) {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.void),
-        $async$returnValue, $async$self = this, t1, subId, domainName, submit;
-      var $async$_handleDomainSubmit$1 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              if (type$.JSObject._is($event))
-                $event.preventDefault();
-              t1 = $async$self._domainForm;
-              subId = B.JSString_methods.trim$0(t1.string$1("subscription_id"));
-              domainName = B.JSString_methods.trim$0(t1.string$1("domain"));
-              if (subId.length === 0 || domainName.length === 0) {
-                $async$self.setState$1(new A.WebsitesDomainsView__handleDomainSubmit_closure($async$self));
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              submit = t1.submit$1$3$onError$onSuccess(new A.WebsitesDomainsView__handleDomainSubmit_closure0(subId, domainName), new A.WebsitesDomainsView__handleDomainSubmit_closure1($async$self), new A.WebsitesDomainsView__handleDomainSubmit_closure2($async$self), type$.FlintResponse_Map_String_dynamic);
-              $async$self.setState$1(new A.WebsitesDomainsView__handleDomainSubmit_closure3($async$self));
-              $async$goto = 3;
-              return A._asyncAwait(submit, $async$_handleDomainSubmit$1);
-            case 3:
-              // returning from await.
-              $async$self.setState$1(new A.WebsitesDomainsView__handleDomainSubmit_closure4());
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$_handleDomainSubmit$1, $async$completer);
-    },
-    _handleDeploySubmit$1($event) {
-      return this._handleDeploySubmit$body$WebsitesDomainsView(A._asObject($event));
-    },
-    _handleDeploySubmit$body$WebsitesDomainsView($event) {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.void),
-        $async$returnValue, $async$self = this, t1, repo, branch, domainId, t2, domain, t3, subId, submit;
-      var $async$_handleDeploySubmit$1 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              if (type$.JSObject._is($event))
-                $event.preventDefault();
-              t1 = $async$self._deployForm;
-              repo = B.JSString_methods.trim$0(t1.string$1("repo_full_name"));
-              branch = B.JSString_methods.trim$0(t1.string$1("branch"));
-              domainId = $async$self._activeDeployDomainId;
-              if (repo.length === 0 || branch.length === 0 || domainId == null) {
-                $async$self.setState$1(new A.WebsitesDomainsView__handleDeploySubmit_closure($async$self));
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              t2 = $async$self.__WebsitesDomainsView__domains_F;
-              t2 === $ && A.throwLateFieldNI("_domains");
-              t2 = t2.state._state_signal$_value.data;
-              t2 = J.get$iterator$ax(t2 == null ? A._setArrayType([], type$.JSArray_FlintModelRecord) : t2);
-              for (;;) {
-                if (!t2.moveNext$0()) {
-                  domain = null;
-                  break;
-                }
-                domain = t2.get$current();
-                t3 = domain.attributes.$index(0, "id");
-                if ((t3 == null ? null : J.toString$0$(t3)) === domainId)
-                  break;
-              }
-              if (domain == null) {
-                $async$self.setState$1(new A.WebsitesDomainsView__handleDeploySubmit_closure0($async$self));
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              subId = domain.string$1("subscription_id");
-              submit = t1.submit$1$3$onError$onSuccess(new A.WebsitesDomainsView__handleDeploySubmit_closure1(subId == null ? "" : subId, repo, branch, domainId), new A.WebsitesDomainsView__handleDeploySubmit_closure2($async$self), new A.WebsitesDomainsView__handleDeploySubmit_closure3($async$self), type$.FlintResponse_Map_String_dynamic);
-              $async$self.setState$1(new A.WebsitesDomainsView__handleDeploySubmit_closure4($async$self));
-              $async$goto = 3;
-              return A._asyncAwait(submit, $async$_handleDeploySubmit$1);
-            case 3:
-              // returning from await.
-              $async$self.setState$1(new A.WebsitesDomainsView__handleDeploySubmit_closure5());
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$_handleDeploySubmit$1, $async$completer);
-    },
-    _handleDeleteDomain$2(id, $name) {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.void),
-        $async$returnValue, $async$self = this, response, t2, t1;
-      var $async$_handleDeleteDomain$2 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              t1 = init.G;
-              if (!A._asBool(A._asJSObject(t1.window).confirm("Are you sure you want to remove the website " + $name + "? This will delete Nginx config files!"))) {
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$goto = 3;
-              return A._asyncAwait($.$get$clientRouter().delete$1$1("/domains/" + id, type$.Map_String_dynamic), $async$_handleDeleteDomain$2);
-            case 3:
-              // returning from await.
-              response = $async$result;
-              if (response.isError) {
-                t1 = A._asJSObject(t1.window);
-                t2 = response.error;
-                t1.alert(J.toString$0$(t2 == null ? "Failed to delete domain." : t2));
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              t1 = $async$self.__WebsitesDomainsView__domains_F;
-              t1 === $ && A.throwLateFieldNI("_domains");
-              t1.load$1$silent(false);
-              t1 = $async$self.__WebsitesDomainsView__gitDeploys_F;
-              t1 === $ && A.throwLateFieldNI("_gitDeploys");
-              t1.load$1$silent(false);
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$_handleDeleteDomain$2, $async$completer);
-    },
-    _handleDisconnectGit$1(deployId) {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.void),
-        $async$returnValue, $async$self = this, response, t2, t1;
-      var $async$_handleDisconnectGit$1 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              t1 = init.G;
-              if (!A._asBool(A._asJSObject(t1.window).confirm("Disconnect GitHub repository deployment?"))) {
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$goto = 3;
-              return A._asyncAwait($.$get$clientRouter().delete$1$1("/github/deploys/" + deployId, type$.Map_String_dynamic), $async$_handleDisconnectGit$1);
-            case 3:
-              // returning from await.
-              response = $async$result;
-              if (response.isError) {
-                t1 = A._asJSObject(t1.window);
-                t2 = response.error;
-                t1.alert(J.toString$0$(t2 == null ? "Failed to disconnect repository." : t2));
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              t1 = $async$self.__WebsitesDomainsView__gitDeploys_F;
-              t1 === $ && A.throwLateFieldNI("_gitDeploys");
-              t1.load$1$silent(false);
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$_handleDisconnectGit$1, $async$completer);
-    },
-    _websites_domains_view$_friendlyError$1(error) {
-      var message = J.toString$0$(error);
-      if (B.JSString_methods.contains$1(message, "ClientResponseException") || B.JSString_methods.contains$1(message, "Exception:"))
-        return B.JSString_methods.replaceFirst$2(B.JSString_methods.replaceFirst$2(message, "Exception: ", ""), "ClientResponseException: ", "");
-      return message;
-    }
-  };
-  A.WebsitesDomainsView_closure.prototype = {
-    call$0() {
-      return A.FlintModelApi_FlintModelApi$records("/domains", type$.FlintModelRecord).list$0();
-    },
-    $signature: 2
-  };
-  A.WebsitesDomainsView_closure0.prototype = {
-    call$0() {
-      return A.FlintModelApi_FlintModelApi$records("/github/deploys", type$.FlintModelRecord).list$0();
-    },
-    $signature: 2
-  };
-  A.WebsitesDomainsView_closure1.prototype = {
-    call$0() {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.Map_String_dynamic),
-        $async$returnValue, t1, response;
-      var $async$call$0 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              $async$goto = 3;
-              return A._asyncAwait($.$get$clientRouter().$get$1$1("/github/status", type$.Map_String_dynamic), $async$call$0);
-            case 3:
-              // returning from await.
-              response = $async$result;
-              if (response.isError) {
-                $async$returnValue = B.Map_W9pIe;
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              t1 = response.data;
-              $async$returnValue = t1 == null ? B.Map_W9pIe : t1;
-              // goto return
-              $async$goto = 1;
-              break;
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$call$0, $async$completer);
-    },
-    $signature: 27
-  };
-  A.WebsitesDomainsView_closure2.prototype = {
-    call$0() {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter(type$.List_Map_String_dynamic),
-        $async$returnValue, t2, list, t3, t1, response;
-      var $async$call$0 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              t1 = type$.Map_String_dynamic;
-              $async$goto = 3;
-              return A._asyncAwait($.$get$clientRouter().$get$1$1("/github/repos", t1), $async$call$0);
-            case 3:
-              // returning from await.
-              response = $async$result;
-              if (response.isError) {
-                $async$returnValue = B.List_empty3;
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              t2 = response.data;
-              list = t2 == null ? null : t2.$index(0, "data");
-              if (type$.List_dynamic._is(list)) {
-                t2 = J.whereType$1$0$ax(list, type$.Map_dynamic_dynamic);
-                t3 = t2.$ti;
-                t1 = A.MappedIterable_MappedIterable(t2, t3._eval$1("Map<String,@>(Iterable.E)")._as(new A.WebsitesDomainsView__closure()), t3._eval$1("Iterable.E"), t1);
-                t1 = A.List_List$_of(t1, A._instanceType(t1)._eval$1("Iterable.E"));
-                $async$returnValue = t1;
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$returnValue = B.List_empty3;
-              // goto return
-              $async$goto = 1;
-              break;
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$call$0, $async$completer);
-    },
-    $signature: 28
-  };
-  A.WebsitesDomainsView__closure.prototype = {
-    call$1(m) {
-      return type$.Map_dynamic_dynamic._as(m).map$2$1(0, new A.WebsitesDomainsView___closure(), type$.String, type$.dynamic);
-    },
-    $signature: 21
-  };
-  A.WebsitesDomainsView___closure.prototype = {
-    call$2(k, v) {
-      return new A.MapEntry(J.toString$0$(k), v, type$.MapEntry_String_dynamic);
-    },
-    $signature: 3
-  };
-  A.WebsitesDomainsView_build_closure.prototype = {
-    call$0() {
-      var t1 = this.$this.__WebsitesDomainsView__gitStatus_F;
-      t1 === $ && A.throwLateFieldNI("_gitStatus");
-      t1.load$1$silent(false);
-    },
-    $signature: 15
-  };
-  A.WebsitesDomainsView_build_closure0.prototype = {
-    call$1(_) {
-      var t1, t2, subsList, t3;
-      A._asObject(_);
-      t1 = this.$this;
-      t2 = t1._domainForm;
-      t2.reset$0();
-      subsList = t1.subscriptions.state._state_signal$_value.data;
-      if (subsList == null)
-        subsList = A._setArrayType([], type$.JSArray_FlintModelRecord);
-      t3 = J.getInterceptor$asx(subsList);
-      if (t3.get$isNotEmpty(subsList)) {
-        t3 = t3.get$first(subsList).string$1("id");
-        t2.setField$2("subscription_id", t3 == null ? "" : t3);
-      }
-      t1._domainFormError = null;
-      t1._showDomainModal = true;
-      t1.setState$1(new A.WebsitesDomainsView_build__closure());
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView_build__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView_build_closure1.prototype = {
-    call$1(_) {
-      var t1, t2;
-      A._asObject(_);
-      t1 = this.$this;
-      t2 = t1.__WebsitesDomainsView__domains_F;
-      t2 === $ && A.throwLateFieldNI("_domains");
-      t2.load$1$silent(true);
-      t2 = t1.__WebsitesDomainsView__gitDeploys_F;
-      t2 === $ && A.throwLateFieldNI("_gitDeploys");
-      t2.load$1$silent(true);
-      t1 = t1.__WebsitesDomainsView__gitStatus_F;
-      t1 === $ && A.throwLateFieldNI("_gitStatus");
-      t1.load$1$silent(true);
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView_build_closure2.prototype = {
-    call$1(snapshot) {
-      var list, t1, t2, t3, t4, deploys, subs;
-      type$.ResourceSnapshot_List_FlintModelRecord._as(snapshot);
-      list = snapshot.data;
-      if (list == null)
-        list = B.List_empty4;
-      t1 = snapshot.status;
-      if (t1 === B.ResourceStatus_1 && J.get$isEmpty$asx(list)) {
-        t1 = A.Text$("Loading websites...");
-        return new A.Container("div", A.mergeComponentProps(B.Map_empty1, null, B.DartStyle_vl3, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t1, B.List_empty0));
-      }
-      t2 = J.getInterceptor$asx(list);
-      if (t2.get$isEmpty(list)) {
-        t1 = t1 === B.ResourceStatus_3;
-        t2 = t1 ? "Could not load websites" : "No websites hosted";
-        return A.EmptyState$(t1 ? J.toString$0$(snapshot.error) : "Get started by adding your first website/domain mapping.", t2);
-      }
-      t3 = this.$this;
-      t4 = t3.__WebsitesDomainsView__gitDeploys_F;
-      t4 === $ && A.throwLateFieldNI("_gitDeploys");
-      deploys = t4.state._state_signal$_value.data;
-      if (deploys == null)
-        deploys = B.List_empty4;
-      subs = t3.subscriptions.state._state_signal$_value.data;
-      if (subs == null)
-        subs = B.List_empty4;
-      t4 = [];
-      if (t1 === B.ResourceStatus_3)
-        t4.push(A.Alert$(J.toString$0$(snapshot.error), "Showing cached domains", B.Tone_3));
-      for (t1 = t2.get$iterator(list); t1.moveNext$0();)
-        t4.push(t3._buildDomainCard$3(t1.get$current(), deploys, subs));
-      return A.Column$(t4, B.DartStyle_tXT);
-    },
-    $signature: 8
-  };
-  A.WebsitesDomainsView__buildGithubBanner_closure.prototype = {
-    call$1(snapshot) {
-      var username, _null = null, _s3_ = "div",
-        t1 = type$.ResourceSnapshot_Map_String_dynamic._as(snapshot).data,
-        t2 = t1 == null,
-        connected = J.$eq$(t2 ? _null : t1.$index(0, "connected"), true);
-      if (t2)
-        username = _null;
-      else {
-        t1 = t1.$index(0, "github_username");
-        t1 = t1 == null ? _null : J.toString$0$(t1);
-        username = t1;
-      }
-      if (username == null)
-        username = "";
-      if (connected) {
-        t1 = A.Text_span("\ud83d\ude80", B.DartStyle_9hQ);
-        t1 = A.Row$([new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_Nfa, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t1, B.List_empty0)), A.Column$([A.Text_strong("GitHub Integration Active", B.DartStyle_lyt), A.Text_span("Successfully linked to @" + username + ". Webhooks are configured.", B.DartStyle_Pe3)], B.DartStyle_rqn)], B.DartStyle_ygT);
-        t2 = A.Button$(A.Text$("Disconnect"), _null, B.DartStyle_fBG, false, false, new A.WebsitesDomainsView__buildGithubBanner__closure(this.$this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0);
-        return new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_IA9, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, [t1, t2]));
-      }
-      t1 = A.Text_span("\ud83d\udc19", B.DartStyle_9hQ);
-      t1 = A.Row$([new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_Nfa, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t1, B.List_empty0)), A.Column$([A.Text_strong("Link GitHub Account", B.DartStyle_H9h), A.Text_span("Enable automated Git-to-Web deployments on your server in one click.", B.DartStyle_OLq)], B.DartStyle_rqn)], B.DartStyle_ygT);
-      t2 = A.Link$("Connect GitHub", B.List_empty0, _null, B.DartStyle_Ez0, "/github/connect", B.Map_empty1);
-      return new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_b5O, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, [t1, t2]));
-    },
-    $signature: 31
-  };
-  A.WebsitesDomainsView__buildGithubBanner__closure.prototype = {
-    call$1(_) {
-      A._asObject(_);
-      return this.$this._handleGithubDisconnect$0();
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__buildDomainCard_closure.prototype = {
-    call$1(_) {
-      A._asObject(_);
-      return this.$this._handleDisconnectGit$1(this.deployId);
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__buildDomainCard_closure0.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      t1._activeDeployDomainId = this.id;
-      t1._deployForm.reset$0();
-      t1._deployFormError = null;
-      t1._showDeployModal = true;
-      t1.get$_repos().load$1$silent(true);
-      t1.setState$1(new A.WebsitesDomainsView__buildDomainCard__closure());
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__buildDomainCard__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__buildDomainCard_closure1.prototype = {
-    call$1(_) {
-      A._asObject(_);
-      return this.$this._handleDeleteDomain$2(this.id, this.domainName);
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__buildDomainModal_closure1.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      t1._showDomainModal = false;
-      t1.setState$1(new A.WebsitesDomainsView__buildDomainModal__closure());
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__buildDomainModal__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__buildDomainModal_closure.prototype = {
-    call$1($event) {
-      var t1 = this.$this;
-      t1._domainForm.setField$2("subscription_id", A._asObject($event).get$target().get$value().toString$0(0));
-      t1.setState$1(new A.WebsitesDomainsView__buildDomainModal__closure1());
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__buildDomainModal__closure1.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__buildDomainModal_closure0.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      t1._showDomainModal = false;
-      t1.setState$1(new A.WebsitesDomainsView__buildDomainModal__closure0());
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__buildDomainModal__closure0.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__buildDeployModal_closure1.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      t1._showDeployModal = false;
-      t1.setState$1(new A.WebsitesDomainsView__buildDeployModal__closure());
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__buildDeployModal__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__buildDeployModal_closure.prototype = {
-    call$1(snapshot) {
-      var reposList, t1, t2, t3, t4, t5, t6, t7, _null = null,
-        _s14_ = "repo_full_name",
-        _s9_ = "full_name";
-      type$.ResourceSnapshot_List_Map_String_dynamic._as(snapshot);
-      reposList = snapshot.data;
-      if (reposList == null)
-        reposList = B.List_empty3;
-      t1 = snapshot.status;
-      if (t1 === B.ResourceStatus_1 && J.get$isEmpty$asx(reposList)) {
-        t1 = A.Text$("Loading repositories from GitHub...");
-        return new A.Container("div", A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_6Xc, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t1, B.List_empty0));
-      }
-      t2 = J.getInterceptor$asx(reposList);
-      if (t2.get$isEmpty(reposList))
-        return A.EmptyState$(t1 === B.ResourceStatus_3 ? J.toString$0$(snapshot.error) : "Ensure your GitHub account has public or private repositories available.", "No repositories found");
-      t1 = this.$this;
-      t3 = t1._deployForm;
-      if (t3.string$1(_s14_).length === 0 && t2.get$isNotEmpty(reposList)) {
-        t4 = J.$index$asx(t2.get$first(reposList), _s9_);
-        t4 = t4 == null ? _null : J.toString$0$(t4);
-        t3.setField$2(_s14_, t4 == null ? "" : t4);
-      }
-      t4 = t3.string$1(_s14_);
-      t5 = A._setArrayType([], type$.JSArray_SelectOption);
-      for (t2 = t2.get$iterator(reposList); t2.moveNext$0();) {
-        t6 = t2.get$current();
-        t7 = t6.$index(0, _s9_);
-        t7 = t7 == null ? _null : J.toString$0$(t7);
-        if (t7 == null)
-          t7 = "Repo";
-        t6 = t6.$index(0, _s9_);
-        t6 = t6 == null ? _null : J.toString$0$(t6);
-        t5.push(new A.SelectOption(t7, t6 == null ? "" : t6));
-      }
-      return A.Select$(t3.processing, "Select Repository *", _s14_, new A.WebsitesDomainsView__buildDeployModal__closure1(t1), t5, B.Map_rqER6, t4);
-    },
-    $signature: 26
-  };
-  A.WebsitesDomainsView__buildDeployModal__closure1.prototype = {
-    call$1($event) {
-      var t1 = this.$this;
-      t1._deployForm.setField$2("repo_full_name", A._asObject($event).get$target().get$value().toString$0(0));
-      t1.setState$1(new A.WebsitesDomainsView__buildDeployModal___closure());
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__buildDeployModal___closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__buildDeployModal_closure0.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this;
-      t1._showDeployModal = false;
-      t1.setState$1(new A.WebsitesDomainsView__buildDeployModal__closure0());
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__buildDeployModal__closure0.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDomainSubmit_closure.prototype = {
-    call$0() {
-      this.$this._domainFormError = "All fields are required.";
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDomainSubmit_closure0.prototype = {
-    call$1(_) {
-      var t1;
-      type$.Map_of_String_and_nullable_Object._as(_);
-      t1 = type$.String;
-      return $.$get$clientRouter().post$1$2$body("/domains", A.LinkedHashMap_LinkedHashMap$_literal(["subscription_id", this.subId, "domain", this.domainName], t1, t1), type$.Map_String_dynamic);
-    },
-    $signature: 9
-  };
-  A.WebsitesDomainsView__handleDomainSubmit_closure2.prototype = {
-    call$1(result) {
-      var t1, t2;
-      type$.FlintResponse_Map_String_dynamic._as(result);
-      t1 = this.$this;
-      t1._domainForm.reset$0();
-      t2 = t1.__WebsitesDomainsView__domains_F;
-      t2 === $ && A.throwLateFieldNI("_domains");
-      t2.load$1$silent(false);
-      t1.setState$1(new A.WebsitesDomainsView__handleDomainSubmit__closure(t1));
-    },
-    $signature: 10
-  };
-  A.WebsitesDomainsView__handleDomainSubmit__closure.prototype = {
-    call$0() {
-      var t1 = this.$this;
-      t1._domainFormError = null;
-      t1._showDomainModal = false;
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDomainSubmit_closure1.prototype = {
-    call$1(error) {
-      var t1 = this.$this;
-      t1.setState$1(new A.WebsitesDomainsView__handleDomainSubmit__closure0(t1, error));
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__handleDomainSubmit__closure0.prototype = {
-    call$0() {
-      var t1 = this.$this;
-      t1._domainFormError = t1._websites_domains_view$_friendlyError$1(this.error);
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDomainSubmit_closure3.prototype = {
-    call$0() {
-      this.$this._domainFormError = null;
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDomainSubmit_closure4.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDeploySubmit_closure.prototype = {
-    call$0() {
-      this.$this._deployFormError = "All fields are required.";
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDeploySubmit_closure0.prototype = {
-    call$0() {
-      this.$this._deployFormError = "Domain not found.";
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDeploySubmit_closure1.prototype = {
-    call$1(_) {
-      var t1, _this = this;
-      type$.Map_of_String_and_nullable_Object._as(_);
-      t1 = type$.String;
-      return $.$get$clientRouter().post$1$2$body("/github/deploys", A.LinkedHashMap_LinkedHashMap$_literal(["subscription_id", _this.subId, "repo_full_name", _this.repo, "branch", _this.branch, "domain_id", _this.domainId], t1, t1), type$.Map_String_dynamic);
-    },
-    $signature: 9
-  };
-  A.WebsitesDomainsView__handleDeploySubmit_closure3.prototype = {
-    call$1(result) {
-      var t1, t2;
-      type$.FlintResponse_Map_String_dynamic._as(result);
-      t1 = this.$this;
-      t1._deployForm.reset$0();
-      t2 = t1.__WebsitesDomainsView__gitDeploys_F;
-      t2 === $ && A.throwLateFieldNI("_gitDeploys");
-      t2.load$1$silent(false);
-      t1.setState$1(new A.WebsitesDomainsView__handleDeploySubmit__closure(t1));
-    },
-    $signature: 10
-  };
-  A.WebsitesDomainsView__handleDeploySubmit__closure.prototype = {
-    call$0() {
-      var t1 = this.$this;
-      t1._deployFormError = null;
-      t1._showDeployModal = false;
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDeploySubmit_closure2.prototype = {
-    call$1(error) {
-      var t1 = this.$this;
-      t1.setState$1(new A.WebsitesDomainsView__handleDeploySubmit__closure0(t1, error));
-    },
-    $signature: 1
-  };
-  A.WebsitesDomainsView__handleDeploySubmit__closure0.prototype = {
-    call$0() {
-      var t1 = this.$this;
-      t1._deployFormError = t1._websites_domains_view$_friendlyError$1(this.error);
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDeploySubmit_closure4.prototype = {
-    call$0() {
-      this.$this._deployFormError = null;
-    },
-    $signature: 0
-  };
-  A.WebsitesDomainsView__handleDeploySubmit_closure5.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.DashboardPage.prototype = {
-    DashboardPage$1(props) {
-      var t2, t3, t4, _this = this, _null = null,
-        _s8_ = "_servers",
-        _s9_ = "_usersSub",
-        _s11_ = "_serversSub",
-        _s8_0 = "_jobsSub",
-        t1 = _this.props.$index(0, "role"),
-        role = t1 == null ? _null : J.toString$0$(t1);
-      if (role == null)
-        role = "customer";
-      t1 = _this._listOfMaps$1(_this.props.$index(0, "plans"));
-      t2 = A._arrayInstanceType(t1);
-      t3 = t2._eval$1("MappedListIterable<1,FlintModelRecord>");
-      t1 = A.List_List$_of(new A.MappedListIterable(t1, t2._eval$1("FlintModelRecord(1)")._as(A.resource_FlintModelRecord___new_tearOff$closure()), t3), t3._eval$1("ListIterable.E"));
-      t2 = type$.List_FlintModelRecord;
-      t3 = type$.ResourceController_List_FlintModelRecord;
-      t1 = t3._as(A.ResourceController$(t1, true, new A.DashboardPage_closure(), t2));
-      _this.__DashboardPage__plans_F !== $ && A.throwLateFieldAI("_plans");
-      _this.__DashboardPage__plans_F = t1;
-      t3 = t3._as(A.ResourceController$(_null, true, new A.DashboardPage_closure0(), t2));
-      _this.__DashboardPage__subscriptions_F !== $ && A.throwLateFieldAI("_subscriptions");
-      _this.__DashboardPage__subscriptions_F = t3;
-      t4 = type$.void_Function;
-      t1 = t4._as(t1.state.listen$1(new A.DashboardPage_closure1(_this)));
-      _this.__DashboardPage__plansSub_F !== $ && A.throwLateFieldAI("_plansSub");
-      _this.__DashboardPage__plansSub_F = t1;
-      t3 = t4._as(t3.state.listen$1(new A.DashboardPage_closure2(_this)));
-      _this.__DashboardPage__subsSub_F !== $ && A.throwLateFieldAI("_subsSub");
-      _this.__DashboardPage__subsSub_F = t3;
-      if (role === "admin") {
-        t1 = type$.nullable_ResourceController_List_FlintModelRecord;
-        t3 = t1._as(A.ResourceController$(_null, true, new A.DashboardPage_closure3(), t2));
-        _this.__DashboardPage__users_F !== $ && A.throwLateFieldAI("_users");
-        _this.__DashboardPage__users_F = t3;
-        t4 = t1._as(A.ResourceController$(_null, true, new A.DashboardPage_closure4(), t2));
-        _this.__DashboardPage__servers_F !== $ && A.throwLateFieldAI(_s8_);
-        _this.__DashboardPage__servers_F = t4;
-        t2 = t1._as(A.ResourceController$(_null, true, new A.DashboardPage_closure5(), t2));
-        _this.__DashboardPage__jobs_F !== $ && A.throwLateFieldAI("_jobs");
-        _this.__DashboardPage__jobs_F = t2;
-        t1 = type$.nullable_void_Function;
-        t3 = t1._as(t3.state.listen$1(new A.DashboardPage_closure6(_this)));
-        _this.__DashboardPage__usersSub_F !== $ && A.throwLateFieldAI(_s9_);
-        _this.__DashboardPage__usersSub_F = t3;
-        t4 = t1._as(t4.state.listen$1(new A.DashboardPage_closure7(_this)));
-        _this.__DashboardPage__serversSub_F !== $ && A.throwLateFieldAI(_s11_);
-        _this.__DashboardPage__serversSub_F = t4;
-        t2 = t1._as(t2.state.listen$1(new A.DashboardPage_closure8(_this)));
-        _this.__DashboardPage__jobsSub_F !== $ && A.throwLateFieldAI(_s8_0);
-        _this.__DashboardPage__jobsSub_F = t2;
-      } else {
-        _this.__DashboardPage__users_F !== $ && A.throwLateFieldAI("_users");
-        _this.__DashboardPage__users_F = null;
-        _this.__DashboardPage__servers_F !== $ && A.throwLateFieldAI(_s8_);
-        _this.__DashboardPage__servers_F = null;
-        _this.__DashboardPage__jobs_F !== $ && A.throwLateFieldAI("_jobs");
-        _this.__DashboardPage__jobs_F = null;
-        _this.__DashboardPage__usersSub_F !== $ && A.throwLateFieldAI(_s9_);
-        _this.__DashboardPage__usersSub_F = null;
-        _this.__DashboardPage__serversSub_F !== $ && A.throwLateFieldAI(_s11_);
-        _this.__DashboardPage__serversSub_F = null;
-        _this.__DashboardPage__jobsSub_F !== $ && A.throwLateFieldAI(_s8_0);
-        _this.__DashboardPage__jobsSub_F = null;
-      }
-    },
-    get$_plansSub() {
-      var t1 = this.__DashboardPage__plansSub_F;
-      t1 === $ && A.throwLateFieldNI("_plansSub");
-      return t1;
-    },
-    get$_subsSub() {
-      var t1 = this.__DashboardPage__subsSub_F;
-      t1 === $ && A.throwLateFieldNI("_subsSub");
-      return t1;
-    },
-    willUnmount$0() {
-      var t1, _this = this;
-      _this._plansSub$0();
-      _this._subsSub$0();
-      t1 = _this.__DashboardPage__usersSub_F;
-      t1 === $ && A.throwLateFieldNI("_usersSub");
-      if (t1 != null)
-        t1.call$0();
-      t1 = _this.__DashboardPage__serversSub_F;
-      t1 === $ && A.throwLateFieldNI("_serversSub");
-      if (t1 != null)
-        t1.call$0();
-      t1 = _this.__DashboardPage__jobsSub_F;
-      t1 === $ && A.throwLateFieldNI("_jobsSub");
-      if (t1 != null)
-        t1.call$0();
-      t1 = _this.__DashboardPage__plans_F;
-      t1 === $ && A.throwLateFieldNI("_plans");
-      t1.state._state_signal$_listeners.clear$0(0);
-      t1 = _this.__DashboardPage__subscriptions_F;
-      t1 === $ && A.throwLateFieldNI("_subscriptions");
-      t1.state._state_signal$_listeners.clear$0(0);
-      t1 = _this.__DashboardPage__users_F;
-      t1 === $ && A.throwLateFieldNI("_users");
-      if (t1 != null)
-        t1.state._state_signal$_listeners.clear$0(0);
-      t1 = _this.__DashboardPage__servers_F;
-      t1 === $ && A.throwLateFieldNI("_servers");
-      if (t1 != null)
-        t1.state._state_signal$_listeners.clear$0(0);
-      t1 = _this.__DashboardPage__jobs_F;
-      t1 === $ && A.throwLateFieldNI("_jobs");
-      if (t1 != null)
-        t1.state._state_signal$_listeners.clear$0(0);
-    },
-    build$0() {
-      var path, t2, initialStats, plansCount, t3, subsCount, activeSubsCount, usersCount, serversCount, jobsCount, modules, t4, t5, t6, t7, t8, _i, _this = this, _null = null, _s6_ = "_plans",
-        _s14_ = "_subscriptions",
-        _s3_ = "div",
-        t1 = _this.props.$index(0, "role"),
-        role = t1 == null ? _null : J.toString$0$(t1);
-      if (role == null)
-        role = "customer";
-      path = _this._normalizePath$1(A.Uri_parse(A._asString(A._asJSObject(A._asJSObject(init.G.window).location).href), 0, _null).get$path());
-      if (path === "/dashboard/plans") {
-        t1 = _this.__DashboardPage__plans_F;
-        t1 === $ && A.throwLateFieldNI(_s6_);
-        return new A.PlansView(role, t1, A.FormController$(A.LinkedHashMap_LinkedHashMap$_literal(["name", "", "description", "", "disk_limit", "1000", "bandwidth_limit", "5000", "ftp_accounts_limit", "5", "database_limit", "5", "domain_limit", "3", "subdomain_limit", "10", "ram_limit", "512", "status", "active"], type$.String, type$.nullable_Object)));
-      }
-      if (path === "/dashboard/subscriptions") {
-        t1 = _this.__DashboardPage__plans_F;
-        t1 === $ && A.throwLateFieldNI(_s6_);
-        t2 = _this.__DashboardPage__subscriptions_F;
-        t2 === $ && A.throwLateFieldNI(_s14_);
-        return new A.SubscriptionsView(role, t1, t2, A.FormController$(A.LinkedHashMap_LinkedHashMap$_literal(["plan_id", ""], type$.String, type$.nullable_Object)));
-      }
-      if (path === "/dashboard/websites-domains") {
-        t1 = _this.__DashboardPage__subscriptions_F;
-        t1 === $ && A.throwLateFieldNI(_s14_);
-        return A.WebsitesDomainsView$(role, t1);
-      }
-      initialStats = _this._dashboard_page$_map$1(_this.props.$index(0, "stats"));
-      t1 = _this.__DashboardPage__plans_F;
-      t1 === $ && A.throwLateFieldNI(_s6_);
-      t2 = t1.state._state_signal$_value.data;
-      t2 = t2 == null ? _null : J.get$length$asx(t2);
-      plansCount = t2 == null ? initialStats.$index(0, "plans") : t2;
-      if (plansCount == null)
-        plansCount = 0;
-      t2 = _this.__DashboardPage__subscriptions_F;
-      t2 === $ && A.throwLateFieldNI(_s14_);
-      t3 = t2.state._state_signal$_value.data;
-      t3 = t3 == null ? _null : J.get$length$asx(t3);
-      subsCount = t3 == null ? initialStats.$index(0, "subscriptions") : t3;
-      if (subsCount == null)
-        subsCount = 0;
-      t3 = initialStats.$index(0, "activeSubscriptions");
-      activeSubsCount = A._asInt(t3 == null ? 0 : t3);
-      t2 = t2.state._state_signal$_value.data;
-      if (t2 != null)
-        activeSubsCount = J.where$1$ax(t2, new A.DashboardPage_build_closure()).get$length(0);
-      t2 = _this.__DashboardPage__users_F;
-      t2 === $ && A.throwLateFieldNI("_users");
-      if (t2 == null)
-        t2 = _null;
-      else {
-        t2 = t2.state._state_signal$_value.data;
-        t2 = t2 == null ? _null : J.get$length$asx(t2);
-      }
-      usersCount = t2 == null ? initialStats.$index(0, "users") : t2;
-      if (usersCount == null)
-        usersCount = 0;
-      t2 = _this.__DashboardPage__servers_F;
-      t2 === $ && A.throwLateFieldNI("_servers");
-      if (t2 == null)
-        t2 = _null;
-      else {
-        t2 = t2.state._state_signal$_value.data;
-        t2 = t2 == null ? _null : J.get$length$asx(t2);
-      }
-      serversCount = t2 == null ? initialStats.$index(0, "servers") : t2;
-      if (serversCount == null)
-        serversCount = 1;
-      t2 = _this.__DashboardPage__jobs_F;
-      t2 === $ && A.throwLateFieldNI("_jobs");
-      if (t2 == null)
-        t2 = _null;
-      else {
-        t2 = t2.state._state_signal$_value.data;
-        t2 = t2 == null ? _null : J.get$length$asx(t2);
-      }
-      jobsCount = t2 == null ? initialStats.$index(0, "jobs") : t2;
-      if (jobsCount == null)
-        jobsCount = 0;
-      modules = _this._listOfMaps$1(_this.props.$index(0, "modules"));
-      t2 = A.Text$("EP");
-      t2 = A.Row$([new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_xpG, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t2, B.List_empty0)), A.Column$([A.Text_strong("EuPanel", B.DartStyle_kiP), A.Text_span("Flint control node", B.DartStyle_3Ff)], B.DartStyle_rqn)], B.DartStyle_HFz);
-      t3 = A.Text$("\ud83d\udce6");
-      t3 = A.StatCard$(B.DartStyle_s38, new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_eiE, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t3, B.List_empty0)), "Plans", B.Tone_0, "Shared hosting packages", plansCount);
-      t4 = A.Text$("\ud83d\ude80");
-      t4 = A.StatCard$(B.DartStyle_s38, new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_eiE, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t4, B.List_empty0)), "Subscriptions", B.Tone_0, "All customer subscriptions", subsCount);
-      t5 = A.Text$("\u26a1");
-      t5 = A.StatCard$(B.DartStyle_s38, new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_IuS, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t5, B.List_empty0)), "Active", B.Tone_2, "Provisioned and running", activeSubsCount);
-      t6 = A.Text$("\ud83d\udc65");
-      t6 = A.StatCard$(B.DartStyle_s38, new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_eiE, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t6, B.List_empty0)), "Users", B.Tone_0, "Admins, resellers, customers", usersCount);
-      t7 = A.Text$("\ud83d\udda5\ufe0f");
-      t7 = A.StatCard$(B.DartStyle_s38, new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_eiE, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t7, B.List_empty0)), "Servers", B.Tone_0, "Connected agents", serversCount);
-      t8 = A.Text$("\u2699\ufe0f");
-      t8 = A.Grid$([t3, t4, t5, t6, t7, A.StatCard$(B.DartStyle_s38, new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_GRw, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(t8, B.List_empty0)), "Jobs", B.Tone_5, "Queued provisioning work", jobsCount)], B.DartStyle_oEv);
-      t7 = [];
-      for (t3 = modules.length, _i = 0; _i < modules.length; modules.length === t3 || (0, A.throwConcurrentModificationError)(modules), ++_i)
-        t7.push(new A.DashboardModuleCard(modules[_i]));
-      return A.EuPanelDashboardShell$(t2, [new A.DashboardHero(role), new A.CounterDemo(), t8, A.Grid$([A.Panel$(_null, A.Grid$(t7, B.DartStyle_Cnn), B.List_empty0, _null, B.DartStyle_5VO, "Role-aware EuPanel workspaces", "Modules"), A.Panel$(A.Button$("Refresh", _null, _null, false, false, new A.DashboardPage_build_closure0(_this), B.Map_empty1, B.Tone_0, B.ButtonVariant_1), new A.ResourceView(t1, new A.DashboardPage_build_closure1(_this), type$.ResourceView_List_FlintModelRecord), B.List_empty0, _null, B.DartStyle_5VO, "Server props first, FlintDart API refresh after mount", "Hosting plans")], B.DartStyle_BWT)], new A.EuPanelDashboardSidebar(role), new A.DashboardTopbar(role));
-    },
-    _dashboard_page$_map$1(value) {
-      if (type$.Map_String_dynamic._is(value))
-        return value;
-      if (type$.Map_dynamic_dynamic._is(value))
-        return value.map$2$1(0, new A.DashboardPage__map_closure(), type$.String, type$.dynamic);
-      return B.Map_empty;
-    },
-    _listOfMaps$1(value) {
-      var t1, t2;
-      if (!type$.List_dynamic._is(value))
-        return B.List_empty3;
-      t1 = J.whereType$1$0$ax(value, type$.Map_dynamic_dynamic);
-      t2 = t1.$ti;
-      t2 = A.MappedIterable_MappedIterable(t1, t2._eval$1("Map<String,@>(Iterable.E)")._as(new A.DashboardPage__listOfMaps_closure()), t2._eval$1("Iterable.E"), type$.Map_String_dynamic);
-      t1 = A.List_List$_of(t2, A._instanceType(t2)._eval$1("Iterable.E"));
-      return t1;
-    },
-    _normalizePath$1(path) {
-      var t1 = path.length;
-      if (t1 > 1 && B.JSString_methods.endsWith$1(path, "/"))
-        return B.JSString_methods.substring$2(path, 0, t1 - 1);
-      return t1 === 0 ? "/" : path;
-    },
-    _plansSub$0() {
-      return this.get$_plansSub().call$0();
-    },
-    _subsSub$0() {
-      return this.get$_subsSub().call$0();
-    }
-  };
-  A.DashboardPage_closure.prototype = {
-    call$0() {
-      return A.FlintModelApi_FlintModelApi$records("/plans", type$.FlintModelRecord).list$0();
-    },
-    $signature: 2
-  };
-  A.DashboardPage_closure0.prototype = {
-    call$0() {
-      return A.FlintModelApi_FlintModelApi$records("/subscriptions", type$.FlintModelRecord).list$0();
-    },
-    $signature: 2
-  };
-  A.DashboardPage_closure1.prototype = {
-    call$1(_) {
-      type$.ResourceSnapshot_List_FlintModelRecord._as(_);
-      this.$this.setState$1(new A.DashboardPage__closure3());
-    },
-    $signature: 5
-  };
-  A.DashboardPage__closure3.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.DashboardPage_closure2.prototype = {
-    call$1(_) {
-      type$.ResourceSnapshot_List_FlintModelRecord._as(_);
-      this.$this.setState$1(new A.DashboardPage__closure2());
-    },
-    $signature: 5
-  };
-  A.DashboardPage__closure2.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.DashboardPage_closure3.prototype = {
-    call$0() {
-      return A.FlintModelApi_FlintModelApi$records("/users", type$.FlintModelRecord).list$0();
-    },
-    $signature: 2
-  };
-  A.DashboardPage_closure4.prototype = {
-    call$0() {
-      return A.FlintModelApi_FlintModelApi$records("/servers", type$.FlintModelRecord).list$0();
-    },
-    $signature: 2
-  };
-  A.DashboardPage_closure5.prototype = {
-    call$0() {
-      return A.FlintModelApi_FlintModelApi$records("/jobs", type$.FlintModelRecord).list$0();
-    },
-    $signature: 2
-  };
-  A.DashboardPage_closure6.prototype = {
-    call$1(_) {
-      type$.ResourceSnapshot_List_FlintModelRecord._as(_);
-      this.$this.setState$1(new A.DashboardPage__closure1());
-    },
-    $signature: 5
-  };
-  A.DashboardPage__closure1.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.DashboardPage_closure7.prototype = {
-    call$1(_) {
-      type$.ResourceSnapshot_List_FlintModelRecord._as(_);
-      this.$this.setState$1(new A.DashboardPage__closure0());
-    },
-    $signature: 5
-  };
-  A.DashboardPage__closure0.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.DashboardPage_closure8.prototype = {
-    call$1(_) {
-      type$.ResourceSnapshot_List_FlintModelRecord._as(_);
-      this.$this.setState$1(new A.DashboardPage__closure());
-    },
-    $signature: 5
-  };
-  A.DashboardPage__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.DashboardPage_build_closure.prototype = {
-    call$1(item) {
-      var t1 = type$.FlintModelRecord._as(item).string$1("status"),
-        $status = t1 == null ? null : t1.toLowerCase();
-      return $status == null || $status === "active";
-    },
-    $signature: 34
-  };
-  A.DashboardPage_build_closure0.prototype = {
-    call$1(_) {
-      var t1;
-      A._asObject(_);
-      t1 = this.$this.__DashboardPage__plans_F;
-      t1 === $ && A.throwLateFieldNI("_plans");
-      return t1.load$1$silent(true);
-    },
-    $signature: 1
-  };
-  A.DashboardPage_build_closure1.prototype = {
-    call$1(snapshot) {
-      var plans, t1, t2, t3, t4, t5, t6, t7, t8, t9;
-      type$.ResourceSnapshot_List_FlintModelRecord._as(snapshot);
-      plans = snapshot.data;
-      if (plans == null)
-        plans = B.List_empty4;
-      t1 = snapshot.status;
-      if (t1 === B.ResourceStatus_1 && J.get$isEmpty$asx(plans))
-        return A.DataTable$(B.List_xbk, true, B.List_empty5);
-      t2 = J.getInterceptor$asx(plans);
-      if (t2.get$isEmpty(plans)) {
-        t1 = t1 === B.ResourceStatus_3;
-        t2 = t1 ? "Could not load plans" : "No plans found";
-        return A.EmptyState$(t1 ? J.toString$0$(snapshot.error) : "Create plans through the API or seed data to populate this panel.", t2);
-      }
-      t3 = [];
-      if (t1 === B.ResourceStatus_3)
-        t3.push(A.Alert$(J.toString$0$(snapshot.error), "Showing cached plans", B.Tone_3));
-      t1 = A._setArrayType([], type$.JSArray_TableRowData);
-      for (t2 = t2.get$iterator(plans), t4 = type$.String, t5 = type$.nullable_Object; t2.moveNext$0();) {
-        t6 = t2.get$current().attributes;
-        t7 = t6.$index(0, "name");
-        t7 = t7 == null ? null : J.toString$0$(t7);
-        if (t7 == null)
-          t7 = "Hosting Plan";
-        t8 = t6.$index(0, "disk_limit");
-        if (t8 == null)
-          t8 = t6.$index(0, "disk");
-        t8 = A.S(t8 == null ? "-" : t8);
-        t9 = t6.$index(0, "bandwidth_limit");
-        if (t9 == null)
-          t9 = t6.$index(0, "bandwidth");
-        t9 = A.S(t9 == null ? "-" : t9);
-        t6 = t6.$index(0, "price");
-        t6 = t6 == null ? null : J.toString$0$(t6);
-        if (t6 == null)
-          t6 = "0";
-        t1.push(new A.TableRowData(A.LinkedHashMap_LinkedHashMap$_literal(["name", t7, "resources", "Disk " + t8 + " / Bandwidth " + t9, "price", t6], t4, t5)));
-      }
-      t3.push(A.DataTable$(B.List_xbk, false, t1));
-      return A.Column$(t3, null);
-    },
-    $signature: 8
-  };
-  A.DashboardPage__map_closure.prototype = {
-    call$2(key, entryValue) {
-      return new A.MapEntry(J.toString$0$(key), entryValue, type$.MapEntry_String_dynamic);
-    },
-    $signature: 3
-  };
-  A.DashboardPage__listOfMaps_closure.prototype = {
-    call$1(item) {
-      return type$.Map_dynamic_dynamic._as(item).map$2$1(0, new A.DashboardPage__listOfMaps__closure(), type$.String, type$.dynamic);
-    },
-    $signature: 21
-  };
-  A.DashboardPage__listOfMaps__closure.prototype = {
-    call$2(key, entryValue) {
-      return new A.MapEntry(J.toString$0$(key), entryValue, type$.MapEntry_String_dynamic);
-    },
-    $signature: 3
-  };
   A.LoginPage.prototype = {
     build$0() {
-      var t4, t5, t6, t7, t8, t9, _this = this, _null = null, _s3_ = "div", _s5_ = "email",
+      var t4, t5, t6, t7, t8, t9, t10, t11, _this = this, _null = null, _s3_ = "div", _s5_ = "email",
         _s8_ = "Password",
         _s8_0 = "password",
         t1 = A._setArrayType([A.Head_meta("Sign in to EuPanel to manage hosting, DNS, SSL, databases, and provisioning.", "description", _null)], type$.JSArray_HeadTag),
         t2 = A.Text$("EP"),
-        t3 = A.mergeComponentProps(B.Map_empty1, "brand-mark", B.DartStyle_TKA, B.Map_empty1, B.Map_empty1, B.Map_empty1);
-      t2 = A.normalizeChildren(t2, B.List_empty0);
-      t4 = A.Text_strong("EuPanel", B.DartStyle_iue);
-      t5 = A.Text_small("Control center", B.DartStyle_kLM);
-      t6 = A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_7Am, B.Map_empty1, B.Map_empty1, B.Map_empty1);
+        t3 = A.mergeComponentProps(B.Map_empty1, "brand-mark", B.DartStyle_6TH, B.Map_empty1, B.Map_empty1);
+      t2 = A.normalizeChildren(t2, B.List_empty1);
+      t4 = A._element("strong", "EuPanel", _null, B.Map_empty1, B.Map_empty1, B.DartStyle_iue);
+      t5 = A._element("small", "Control center", _null, B.Map_empty1, B.Map_empty1, B.DartStyle_kLM);
+      t6 = A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_7Am, B.Map_empty1, B.Map_empty1);
       t5 = A.normalizeChildren(_null, [t4, t5]);
-      t4 = A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_P57, B.Map_empty1, B.Map_empty1, B.Map_empty1);
+      t4 = A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_ONN, B.Map_empty1, B.Map_empty1);
       t5 = A.normalizeChildren(_null, [new A.Container(_s3_, t3, t2), new A.Container(_s3_, t6, t5)]);
       t6 = A._element("h1", "Welcome back", _null, B.Map_empty1, B.Map_empty1, B.DartStyle_nGp);
       t2 = A.Text_p("Sign in to manage hosting, DNS, SSL, databases, and provisioning from one workspace.", "muted", B.DartStyle_9cM);
-      t3 = A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_94c, B.Map_empty1, B.Map_empty1, B.Map_empty1);
+      t3 = A.mergeComponentProps(B.Map_empty1, _null, B.DartStyle_94c, B.Map_empty1, B.Map_empty1);
       t2 = A.normalizeChildren(_null, [t6, t2]);
       t6 = A.Text_p("Secure admin access", _null, B.DartStyle_svf);
       t7 = _this._form;
@@ -15040,12 +11445,21 @@
       if (t9 != null)
         t8.push(A.Text_p(t9, "auth-error", B.DartStyle_VpT));
       t9 = t7.processing;
-      t8.push(A.Button$(A.Text$(t9 ? "Signing in..." : "Sign in"), "primary-button", B.DartStyle_zJF, t9, t9, _null, B.Map_eXYEy, B.Tone_1, B.ButtonVariant_0));
-      t1 = [new A.Head(t1, "EuPanel Logins"), new A.Container(_s3_, t4, t5), new A.Container(_s3_, t3, t2), t6, A.Form$(t8, "auth-form", B.DartStyle_QYo, _this.get$_handleSubmit()), A.Button$(A.Text$("Use demo admin"), "secondary-button full-button", B.DartStyle_zSq, t7.processing, false, new A.LoginPage_build_closure(_this), B.Map_empty1, B.Tone_1, B.ButtonVariant_0)];
-      if (J.$eq$(_this.props.$index(0, "demoSeedEnabled"), true))
-        t1.push(A.Link$("Prepare demo users", B.List_empty0, "text-link", B.DartStyle_L1z, "/auth/seed-default-users", B.Map_empty1));
-      t1 = A.Panel$(_null, _null, t1, "auth-panel", B.DartStyle_GGw, _null, _null);
-      return new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, "auth-shell", B.DartStyle_l8Y, B.Map_empty1, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, [t1]));
+      t8.push(A.Button$(A.Text$(t9 ? "Signing in..." : "Sign in"), "primary-button", B.DartStyle_zJF, t9, t9, _null, B.Map_eXYEy));
+      t9 = type$.String;
+      t10 = type$.nullable_Object;
+      t11 = A.LinkedHashMap_LinkedHashMap$of(B.Map_empty1, t9, t10);
+      t11.$indexSet(0, "onSubmit", _this.get$_handleSubmit());
+      t1 = [new A.Head(t1, "EuPanel Logins"), new A.Container(_s3_, t4, t5), new A.Container(_s3_, t3, t2), t6, new A.Form("form", A.mergeComponentProps(t11, "auth-form", B.DartStyle_QYo, B.Map_CKyJ0, B.Map_empty1), A.normalizeChildren(_null, t8)), A.Button$(A.Text$("Use demo admin"), "secondary-button full-button", B.DartStyle_zSq, t7.processing, false, new A.LoginPage_build_closure(_this), B.Map_empty1)];
+      if (J.$eq$(_this.props.$index(0, "demoSeedEnabled"), true)) {
+        t2 = A.LinkedHashMap_LinkedHashMap$of(B.Map_empty1, t9, t10);
+        t2.$indexSet(0, "href", "/auth/seed-default-users");
+        t1.push(new A.Link("a", A.mergeComponentProps(t2, "text-link", B.DartStyle_L1z, B.Map_empty1, B.Map_empty1), A.normalizeChildren("Prepare demo users", B.List_empty1)));
+      }
+      t2 = A.mergeComponentProps(B.Map_empty1, "auth-panel", B.DartStyle_GGw, B.Map_E5pp5, B.Map_empty1);
+      t3 = A._setArrayType([], type$.JSArray_FlintNode);
+      B.JSArray_methods.addAll$1(t3, A.normalizeChildren(_null, t1));
+      return new A.Container(_s3_, A.mergeComponentProps(B.Map_empty1, "auth-shell", B.DartStyle_goq, B.Map_empty1, B.Map_empty1), A.normalizeChildren(_null, [new A.Panel("section", t2, t3)]));
     },
     _handleSubmit$1($event) {
       return this._handleSubmit$body$LoginPage(A._asObject($event));
@@ -15120,7 +11534,7 @@
       A._asObject(_);
       this.$this._fillDemoCredentials$2$email$password("admin@eupanel.local", "Admin@12345");
     },
-    $signature: 1
+    $signature: 7
   };
   A.LoginPage__handleSubmit_closure.prototype = {
     call$0() {
@@ -15135,21 +11549,21 @@
       t1 = this.$this.get$_authBase();
       return new A.AuthClient(B.JSString_methods.endsWith$1(t1, "/") ? B.JSString_methods.substring$2(t1, 0, t1.length - 1) : t1).login$2$email$password(this.email, this.password);
     },
-    $signature: 35
+    $signature: 21
   };
   A.LoginPage__handleSubmit_closure2.prototype = {
     call$1(session) {
       var t1 = type$.AuthSession._as(session).get$dashboardPath();
       A._asJSObject(A._asJSObject(init.G.window).location).assign(t1);
     },
-    $signature: 36
+    $signature: 45
   };
   A.LoginPage__handleSubmit_closure1.prototype = {
     call$1(error) {
       var t1 = this.$this;
       t1.setState$1(new A.LoginPage__handleSubmit__closure(t1, error));
     },
-    $signature: 1
+    $signature: 7
   };
   A.LoginPage__handleSubmit__closure.prototype = {
     call$0() {
@@ -15178,7 +11592,7 @@
     login$2$email$password(email, password) {
       var $async$goto = 0,
         $async$completer = A._makeAsyncAwaitCompleter(type$.AuthSession),
-        $async$returnValue, $async$self = this, payload, data, user, token, t1, t2, t3, response;
+        $async$returnValue, $async$self = this, t3, t4, response, payload, data, user, token, t1, t2;
       var $async$login$2$email$password = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return A._asyncRethrow($async$result, $async$completer);
@@ -15187,10 +11601,13 @@
             case 0:
               // Function start
               t1 = $.$get$clientRouter();
-              t2 = type$.String;
-              t3 = type$.Map_String_dynamic;
+              t2 = t1.client;
+              t1 = t1._join$2(t1.prefix, $async$self.authBase);
+              t3 = type$.String;
+              t3 = A.LinkedHashMap_LinkedHashMap$_literal(["email", email, "password", password], t3, t3);
+              t4 = type$.Map_String_dynamic;
               $async$goto = 3;
-              return A._asyncAwait(new A.ClientRouter(t1.client, t1._join$2(t1.prefix, $async$self.authBase)).post$1$2$body("/login", A.LinkedHashMap_LinkedHashMap$_literal(["email", email, "password", password], t2, t2), t3), $async$login$2$email$password);
+              return A._asyncAwait(t2.request$1$9$body$headers$onDone$onError$parser$queryParameters$requestTimeout("POST", new A.ClientRouter(t2, t1)._path$1("/login"), t3, null, null, null, null, null, null, t4), $async$login$2$email$password);
             case 3:
               // returning from await.
               response = $async$result;
@@ -15207,7 +11624,7 @@
                 throw A.wrapException(B.AuthException_6G4);
               B.C_Cookies.write$4$maxAge$sameSite("auth.token", token, B.Duration_604800000000, B.CookieSameSite_0);
               B.C_Cookies.write$4$maxAge$sameSite("eupanel.token", token, B.Duration_604800000000, B.CookieSameSite_0);
-              t3._as(user);
+              t4._as(user);
               t1 = init.G;
               A._asJSObject(A._asJSObject(t1.window).localStorage).setItem("eupanel.token", token);
               t2 = B.C_JsonCodec.encode$2$toEncodable(user, null);
@@ -15235,7 +11652,7 @@
     call$2(key, entryValue) {
       return new A.MapEntry(J.toString$0$(key), entryValue, type$.MapEntry_String_dynamic);
     },
-    $signature: 3
+    $signature: 13
   };
   A.AuthSession.prototype = {
     get$dashboardPath() {
@@ -15298,9 +11715,6 @@
   A.FlintClient.prototype = {
     request$1$9$body$headers$onDone$onError$parser$queryParameters$requestTimeout(method, path, body, headers, onDone, onError, parser, queryParameters, requestTimeout, $T) {
       return this.request$body$FlintClient(method, path, body, headers, onDone, onError, parser, queryParameters, requestTimeout, $T, $T._eval$1("FlintResponse<0>"));
-    },
-    request$1$8$headers$onDone$onError$parser$queryParameters$requestTimeout(method, path, headers, onDone, onError, parser, queryParameters, requestTimeout, $T) {
-      return this.request$1$9$body$headers$onDone$onError$parser$queryParameters$requestTimeout(method, path, null, headers, onDone, onError, parser, queryParameters, requestTimeout, $T);
     },
     request$body$FlintClient(method, path, body, headers, onDone, onError, parser, queryParameters, requestTimeout, $T, $async$type) {
       var $async$goto = 0,
@@ -15435,8 +11849,6 @@
     },
     _flint_client_web$_body$2(body, headers) {
       type$.Map_String_String._as(headers);
-      if (body == null)
-        return null;
       headers.putIfAbsent$2("Content-Type", new A.FlintClient__body_closure());
       return B.C_JsonCodec.encode$2$toEncodable(body, null);
     },
@@ -15492,14 +11904,14 @@
       else
         t2.completeError$1(A.FlintError$("HTTP " + t1, response.data, B.FlintErrorKind_4, t6, _null, t1, _null, A.Uri_parse(t3, 0, _null)));
     },
-    $signature: 6
+    $signature: 2
   };
   A.FlintClient__send_closure0.prototype = {
     call$1(__wc1_formal) {
       var _null = null;
       this.completer.completeError$1(A.FlintError$("Network request failed", _null, B.FlintErrorKind_3, this.method, _null, _null, _null, A.Uri_parse(this.url, 0, _null)));
     },
-    $signature: 6
+    $signature: 2
   };
   A.FlintClient__send_closure1.prototype = {
     call$0() {
@@ -15507,23 +11919,15 @@
       _this.xhr.abort();
       throw A.wrapException(A.FlintError$("Request timed out after " + _this.timeout.get$inMilliseconds() + "ms", _null, B.FlintErrorKind_1, _this.method, _null, _null, _null, A.Uri_parse(_this.url, 0, _null)));
     },
-    $signature: 38
+    $signature: 25
   };
   A.FlintClient__body_closure.prototype = {
     call$0() {
       return "application/json";
     },
-    $signature: 49
+    $signature: 26
   };
   A._ParsedResponse.prototype = {};
-  A.AuthSessionManager.prototype = {
-    get$token() {
-      var value = A._asStringQ(A._asJSObject(A._asJSObject(init.G.window).localStorage).getItem(this.tokenKey));
-      if (value == null || value.length === 0)
-        return null;
-      return value;
-    }
-  };
   A.FlintRoot.prototype = {
     _scheduleRender$0() {
       if (this._renderQueued)
@@ -15656,7 +12060,6 @@
       var t1;
       for (t1 = mount.childSlots, t1 = new A.LinkedHashMapValueIterator(t1, t1._modifications, t1._first, A._instanceType(t1)._eval$1("LinkedHashMapValueIterator<2>")); t1.moveNext$0();)
         this._unmountComponentTree$1(t1.__js_helper$_current);
-      mount.component.willUnmount$0();
     },
     _applyProps$2(element, props) {
       type$.Map_of_String_and_nullable_Object._as(props).forEach$1(0, new A.FlintRoot__applyProps_closure(this, element));
@@ -15693,13 +12096,7 @@
       element.addEventListener(eventName, A._functionToJS1(new A.FlintRoot__listen_closure(handler)));
     },
     _normalize$1(node) {
-      var t1;
-      if (node instanceof A.FlintNode)
-        return node;
-      if (node instanceof A.FlintComponent)
-        return new A.FlintComponentNode(node);
-      t1 = node == null ? null : J.toString$0$(node);
-      return new A.FlintText(t1 == null ? "" : t1);
+      return node;
     }
   };
   A.FlintRoot__scheduleRender_closure.prototype = {
@@ -15755,26 +12152,26 @@
       }
       _this.element.setAttribute($name, t1.toString$0(value));
     },
-    $signature: 23
+    $signature: 11
   };
   A.FlintRoot__applyStyle_closure.prototype = {
     call$1(entry) {
       return type$.MapEntry_of_String_and_nullable_Object._as(entry).value != null;
     },
-    $signature: 11
+    $signature: 4
   };
   A.FlintRoot__applyStyle_closure0.prototype = {
     call$1(entry) {
       type$.MapEntry_of_String_and_nullable_Object._as(entry);
       return entry.key + ": " + A.S(entry.value);
     },
-    $signature: 7
+    $signature: 1
   };
   A.FlintRoot__listen_closure.prototype = {
     call$1($event) {
       this.handler.call$1(A._asJSObject($event));
     },
-    $signature: 16
+    $signature: 6
   };
   A._ComponentMount.prototype = {
     set$childSlots(childSlots) {
@@ -15782,21 +12179,6 @@
     }
   };
   A.ClientRouter.prototype = {
-    $get$1$2$query(path, query, $T) {
-      var _null = null;
-      return this.client.request$1$9$body$headers$onDone$onError$parser$queryParameters$requestTimeout("GET", this._path$1(path), _null, _null, _null, _null, _null, query, _null, $T);
-    },
-    $get$1$1(path, $T) {
-      return this.$get$1$2$query(path, null, $T);
-    },
-    post$1$2$body(path, body, $T) {
-      var _null = null;
-      return this.client.request$1$9$body$headers$onDone$onError$parser$queryParameters$requestTimeout("POST", this._path$1(path), body, _null, _null, _null, _null, _null, _null, $T);
-    },
-    delete$1$1(path, $T) {
-      var _null = null;
-      return this.client.request$1$8$headers$onDone$onError$parser$queryParameters$requestTimeout("DELETE", this._path$1(path), _null, _null, _null, _null, _null, _null, $T);
-    },
     _path$1(path) {
       var value = B.JSString_methods.trim$0(path),
         uri = A.Uri_tryParse(value);
@@ -15832,24 +12214,21 @@
     didMount$0() {
     },
     didUpdate$0() {
-    },
-    willUnmount$0() {
     }
   };
   A.StatefulComponent.prototype = {};
-  A.StatelessComponent.prototype = {};
   A.mergeComponentProps_closure.prototype = {
     call$1(value) {
       return B.JSString_methods.trim$0(A._asString(value)).length !== 0;
     },
-    $signature: 12
+    $signature: 3
   };
   A.joinClassNames_closure.prototype = {
     call$1(value) {
       A._asStringQ(value);
       return value != null && B.JSString_methods.trim$0(value).length !== 0;
     },
-    $signature: 45
+    $signature: 32
   };
   A.joinClassNames_closure0.prototype = {
     call$1(value) {
@@ -15857,216 +12236,49 @@
       value.toString;
       return B.JSString_methods.trim$0(value);
     },
-    $signature: 46
+    $signature: 33
   };
   A.styleToCss_closure.prototype = {
     call$1(entry) {
       type$.MapEntry_of_String_and_nullable_Object._as(entry);
       return entry.value != null && entry.key !== "_cssText";
     },
-    $signature: 11
+    $signature: 4
   };
   A.styleToCss_closure0.prototype = {
     call$1(entry) {
       type$.MapEntry_of_String_and_nullable_Object._as(entry);
       return entry.key + ": " + A.S(entry.value);
     },
-    $signature: 7
+    $signature: 1
   };
   A._scopedCssBody_closure.prototype = {
     call$1(entry) {
       type$.MapEntry_String_DartStyle._as(entry);
       return entry.key + ":" + A.styleToCss(entry.value.toMap$0());
     },
-    $signature: 47
+    $signature: 34
   };
   A._scopedCssBody_closure0.prototype = {
     call$1(entry) {
       type$.MapEntry_Breakpoint_DartStyle._as(entry);
       return entry.key._name + ":" + A.styleToCss(entry.value.toMap$0());
     },
-    $signature: 48
+    $signature: 35
   };
   A._styleToCssImportant_closure.prototype = {
     call$1(entry) {
       type$.MapEntry_of_String_and_nullable_Object._as(entry);
       return entry.value != null && entry.key !== "_cssText";
     },
-    $signature: 11
+    $signature: 4
   };
   A._styleToCssImportant_closure0.prototype = {
     call$1(entry) {
       type$.MapEntry_of_String_and_nullable_Object._as(entry);
       return entry.key + ": " + A.S(entry.value) + " !important";
     },
-    $signature: 7
-  };
-  A.FlintComponentRegistry.prototype = {};
-  A.ResourceStatus.prototype = {
-    _enumToString$0() {
-      return "ResourceStatus." + this._name;
-    }
-  };
-  A.ResourceSnapshot.prototype = {};
-  A.ResourceController.prototype = {
-    load$1$silent(silent) {
-      return this.load$body$ResourceController(silent, this.$ti._eval$1("1?"));
-    },
-    load$body$ResourceController(silent, $async$type) {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter($async$type),
-        $async$returnValue, $async$handler = 2, $async$errorStack = [], $async$self = this, loaded, error, t1, t2, exception, $async$exception;
-      var $async$load$1$silent = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1) {
-          $async$errorStack.push($async$result);
-          $async$goto = $async$handler;
-        }
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              if (!silent) {
-                t1 = $async$self.state;
-                t2 = t1._state_signal$_value;
-                t1._state_signal$_value = t1.$ti._precomputed1._as(new A.ResourceSnapshot(B.ResourceStatus_1, t2.data, null, t2.updatedAt, t2.$ti));
-                t1.notifyListeners$0();
-              }
-              $async$handler = 4;
-              $async$goto = 7;
-              return A._asyncAwait($async$self.loader.call$0(), $async$load$1$silent);
-            case 7:
-              // returning from await.
-              loaded = $async$result;
-              t1 = $async$self.$ti;
-              t2 = $async$self.state;
-              t2._state_signal$_value = t2.$ti._precomputed1._as(new A.ResourceSnapshot(B.ResourceStatus_2, t1._precomputed1._as(loaded), null, new A.DateTime(Date.now(), 0, false), t1._eval$1("ResourceSnapshot<1>")));
-              t2.notifyListeners$0();
-              $async$returnValue = loaded;
-              // goto return
-              $async$goto = 1;
-              break;
-              $async$handler = 2;
-              // goto after finally
-              $async$goto = 6;
-              break;
-            case 4:
-              // catch
-              $async$handler = 3;
-              $async$exception = $async$errorStack.pop();
-              error = A.unwrapException($async$exception);
-              t1 = A._asObject(error);
-              t2 = $async$self.state;
-              t2._state_signal$_value = t2.$ti._precomputed1._as(new A.ResourceSnapshot(B.ResourceStatus_3, t2._state_signal$_value.data, t1, new A.DateTime(Date.now(), 0, false), $async$self.$ti._eval$1("ResourceSnapshot<1>")));
-              t2.notifyListeners$0();
-              $async$returnValue = null;
-              // goto return
-              $async$goto = 1;
-              break;
-              // goto after finally
-              $async$goto = 6;
-              break;
-            case 3:
-              // uncaught
-              // goto rethrow
-              $async$goto = 2;
-              break;
-            case 6:
-              // after finally
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-            case 2:
-              // rethrow
-              return A._asyncRethrow($async$errorStack.at(-1), $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$load$1$silent, $async$completer);
-    }
-  };
-  A.ResourceView.prototype = {
-    build$0() {
-      return new A.StateSignalListener(this.resource.state, this.builder, this.$ti._eval$1("StateSignalListener<ResourceSnapshot<1>>"));
-    }
-  };
-  A.FlintModelRecord.prototype = {
-    string$1(key) {
-      var t1 = this.attributes.$index(0, key);
-      return t1 == null ? null : J.toString$0$(t1);
-    }
-  };
-  A.FlintModelApi.prototype = {
-    list$0() {
-      return this.list$body$FlintModelApi(this.$ti._eval$1("List<1>"));
-    },
-    list$body$FlintModelApi($async$type) {
-      var $async$goto = 0,
-        $async$completer = A._makeAsyncAwaitCompleter($async$type),
-        $async$returnValue, $async$self = this, t1, response;
-      var $async$list$0 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return A._asyncRethrow($async$result, $async$completer);
-        for (;;)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              $async$goto = 3;
-              return A._asyncAwait($async$self.router.$get$1$2$query($async$self.path, null, type$.Map_String_dynamic), $async$list$0);
-            case 3:
-              // returning from await.
-              response = $async$result;
-              if (response.isError) {
-                t1 = response.error;
-                t1.toString;
-                throw A.wrapException(t1);
-              }
-              $async$returnValue = $async$self._toList$1($async$self._unwrap$1(response.data));
-              // goto return
-              $async$goto = 1;
-              break;
-            case 1:
-              // return
-              return A._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return A._asyncStartSync($async$list$0, $async$completer);
-    },
-    _unwrap$1(payload) {
-      if (type$.Map_dynamic_dynamic._is(payload) && payload.containsKey$1("data"))
-        return payload.$index(0, "data");
-      return payload;
-    },
-    _toList$1(payload) {
-      var t1, t2, t3;
-      if (type$.List_dynamic._is(payload)) {
-        t1 = J.whereType$1$0$ax(payload, type$.Map_dynamic_dynamic);
-        t2 = this.$ti._precomputed1;
-        t3 = t1.$ti;
-        t2 = A.MappedIterable_MappedIterable(t1, t3._bind$1(t2)._eval$1("1(Iterable.E)")._as(new A.FlintModelApi__toList_closure(this)), t3._eval$1("Iterable.E"), t2);
-        t1 = A.List_List$_of(t2, A._instanceType(t2)._eval$1("Iterable.E"));
-        return t1;
-      }
-      return B.List_empty6;
-    }
-  };
-  A.FlintModelApi_FlintModelApi$records_closure.prototype = {
-    call$1(json) {
-      return new A.FlintModelRecord(type$.Map_String_dynamic._as(json));
-    },
-    $signature: 17
-  };
-  A.FlintModelApi__toList_closure.prototype = {
-    call$1(item) {
-      return this.$this.fromJson.call$1(type$.Map_dynamic_dynamic._as(item).map$2$1(0, new A.FlintModelApi__toList__closure(), type$.String, type$.dynamic));
-    },
-    $signature() {
-      return this.$this.$ti._eval$1("1(Map<@,@>)");
-    }
-  };
-  A.FlintModelApi__toList__closure.prototype = {
-    call$2(key, value) {
-      return new A.MapEntry(J.toString$0$(key), value, type$.MapEntry_String_dynamic);
-    },
-    $signature: 3
+    $signature: 1
   };
   A.HeadTag.prototype = {
     get$key() {
@@ -16097,7 +12309,7 @@
       type$.MapEntry_of_String_and_nullable_Object._as(entry);
       return entry.key + "=" + A.S(entry.value);
     },
-    $signature: 7
+    $signature: 1
   };
   A.Head.prototype = {
     build$0() {
@@ -16205,7 +12417,7 @@
       }
       this.element.setAttribute($name, t1.toString$0(value));
     },
-    $signature: 23
+    $signature: 11
   };
   A.FlintNode.prototype = {};
   A.FlintText.prototype = {};
@@ -16218,64 +12430,53 @@
     call$2(page, requestId) {
       var $async$goto = 0,
         $async$completer = A._makeAsyncAwaitCompleter(type$.void),
-        $async$returnValue, $async$self = this, t1, _i, t2, builder, component, context;
+        $async$returnValue, $async$self = this, t1, _i, builder, component, context;
       var $async$call$2 = A._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return A._asyncRethrow($async$result, $async$completer);
         for (;;)
-          $async$outer:
-            switch ($async$goto) {
-              case 0:
-                // Function start
-                context = new A.FlintPageContext(page);
-                for (t1 = $async$self.middlewares, _i = 0; _i < 1; ++_i) {
-                  t1[_i].call$1(context);
-                  if (context._stopped) {
-                    // goto return
-                    $async$goto = 1;
-                    break $async$outer;
-                  }
-                }
-                t1 = page.component;
-                t2 = $async$self.registry._pages.$index(0, t1);
-                if (t2 == null)
-                  builder = null;
-                else
-                  builder = t2;
-                $async$goto = builder == null ? 3 : 4;
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              context = new A.FlintPageContext();
+              for (t1 = $async$self.middlewares, _i = 0; false; ++_i)
+                t1[_i].call$1(context);
+              t1 = $async$self.pages.$index(0, page.component);
+              builder = t1;
+              $async$goto = builder == null ? 3 : 4;
+              break;
+            case 3:
+              // then
+              t1 = new A._Future($.Zone__current, type$._Future_of_nullable_FlintComponent_Function_Map_String_dynamic);
+              t1._state = 8;
+              $async$goto = 5;
+              return A._asyncAwait(t1, $async$call$2);
+            case 5:
+              // returning from await.
+              builder = $async$result;
+            case 4:
+              // join
+              if (requestId !== $async$self._box_0.navigationRequest) {
+                // goto return
+                $async$goto = 1;
                 break;
-              case 3:
-                // then
-                t2 = new A._Future($.Zone__current, type$._Future_of_nullable_FlintComponent_Function_Map_String_dynamic);
-                t2._state = 8;
-                $async$goto = 5;
-                return A._asyncAwait(t2, $async$call$2);
-              case 5:
-                // returning from await.
-                builder = $async$result;
-              case 4:
-                // join
-                if (requestId !== $async$self._box_0.navigationRequest) {
-                  // goto return
-                  $async$goto = 1;
-                  break;
-                }
-                if (builder == null)
-                  throw A.wrapException(A.StateError$('Flint page "' + t1 + '" was not registered.'));
-                component = builder.call$1(page.props);
-                if (component == null)
-                  component = $async$self.missingPage.call$1(t1);
-                t1 = $async$self.root;
-                t1._node = t1._normalize$1(component);
-                t1._scheduleRender$0();
-              case 1:
-                // return
-                return A._asyncReturn($async$returnValue, $async$completer);
-            }
+              }
+              if (builder == null)
+                throw A.wrapException(A.StateError$('Flint page "' + page.component + '" was not registered.'));
+              component = builder.call$1(page.props);
+              if (component == null)
+                component = $async$self.missingPage.call$1(page.component);
+              t1 = $async$self.root;
+              t1._node = t1._normalize$1(component);
+              t1._scheduleRender$0();
+            case 1:
+              // return
+              return A._asyncReturn($async$returnValue, $async$completer);
+          }
       });
       return A._asyncStartSync($async$call$2, $async$completer);
     },
-    $signature: 50
+    $signature: 36
   };
   A.createFlintApp_renderCurrentLocation.prototype = {
     call$0() {
@@ -16345,27 +12546,27 @@
       });
       return A._asyncStartSync($async$call$0, $async$completer);
     },
-    $signature: 51
+    $signature: 37
   };
   A.createFlintApp_closure.prototype = {
     call$1(__wc1_formal) {
       A._asJSObject(__wc1_formal);
       this.renderCurrentLocation.call$0();
     },
-    $signature: 16
+    $signature: 6
   };
   A.createFlintApp_closure0.prototype = {
     call$1(__wc2_formal) {
       A._asJSObject(__wc2_formal);
       this.renderCurrentLocation.call$0();
     },
-    $signature: 16
+    $signature: 6
   };
   A._asStringKeyedMap_closure.prototype = {
     call$2(key, entryValue) {
       return new A.MapEntry(J.toString$0$(key), entryValue, type$.MapEntry_String_dynamic);
     },
-    $signature: 3
+    $signature: 13
   };
   A._fetchPageForCurrentLocation_closure.prototype = {
     call$1(__wc0_formal) {
@@ -16394,99 +12595,15 @@
         _this.completer.completeError$1(error);
       }
     },
-    $signature: 6
+    $signature: 2
   };
   A._fetchPageForCurrentLocation_closure0.prototype = {
     call$1(__wc1_formal) {
       this.completer.completeError$1(new A.StateError("Navigation request failed."));
     },
-    $signature: 6
+    $signature: 2
   };
   A._FetchedFlintPage.prototype = {};
-  A.StateSignal.prototype = {
-    listen$1(listener) {
-      this.$ti._eval$1("~(1)")._as(listener);
-      this._state_signal$_listeners.add$1(0, listener);
-      return new A.StateSignal_listen_closure(this, listener);
-    },
-    notifyListeners$0() {
-      var t1, t2, _i;
-      for (t1 = A.List_List$from(this._state_signal$_listeners, true, this.$ti._eval$1("~(1)")), t2 = t1.length, _i = 0; _i < t2; ++_i)
-        t1[_i].call$1(this._state_signal$_value);
-    }
-  };
-  A.StateSignal_listen_closure.prototype = {
-    call$0() {
-      return this.$this._state_signal$_listeners.remove$1(0, this.listener);
-    },
-    $signature: 0
-  };
-  A.StateSignalListener.prototype = {
-    build$0() {
-      var t1 = this.signal._state_signal$_value;
-      return this.builder.call$1(t1);
-    },
-    didMount$0() {
-      this._bindSignal$0();
-    },
-    didUpdate$0() {
-      this._bindSignal$0();
-    },
-    willUnmount$0() {
-      var t1 = this._unsubscribe;
-      if (t1 != null)
-        t1.call$0();
-      this._boundSignal = this._unsubscribe = null;
-    },
-    _bindSignal$0() {
-      var t1, _this = this;
-      if (_this._boundSignal === _this.signal)
-        return;
-      t1 = _this._unsubscribe;
-      if (t1 != null)
-        t1.call$0();
-      t1 = _this.signal;
-      _this._boundSignal = t1;
-      _this._unsubscribe = t1.listen$1(new A.StateSignalListener__bindSignal_closure(_this));
-    }
-  };
-  A.StateSignalListener__bindSignal_closure.prototype = {
-    call$1(__wc0_formal) {
-      var t1 = this.$this;
-      t1.$ti._precomputed1._as(__wc0_formal);
-      t1.setState$1(new A.StateSignalListener__bindSignal__closure());
-    },
-    $signature() {
-      return this.$this.$ti._eval$1("~(1)");
-    }
-  };
-  A.StateSignalListener__bindSignal__closure.prototype = {
-    call$0() {
-    },
-    $signature: 0
-  };
-  A.BrowserStorage.prototype = {
-    readJson$1(key) {
-      var value = A._asStringQ(A._asJSObject(A._asJSObject(init.G.window).localStorage).getItem(key));
-      if (value == null || value.length === 0)
-        return null;
-      return B.C_JsonCodec.decode$2$reviver(value, null);
-    },
-    readMap$1(key) {
-      var decoded = this.readJson$1(key);
-      if (type$.Map_String_dynamic._is(decoded))
-        return decoded;
-      if (type$.Map_dynamic_dynamic._is(decoded))
-        return decoded.map$2$1(0, new A.BrowserStorage_readMap_closure(), type$.String, type$.dynamic);
-      return B.Map_empty;
-    }
-  };
-  A.BrowserStorage_readMap_closure.prototype = {
-    call$2(key, value) {
-      return new A.MapEntry(J.toString$0$(key), value, type$.MapEntry_String_dynamic);
-    },
-    $signature: 3
-  };
   A.CookieSameSite.prototype = {
     _enumToString$0() {
       return "CookieSameSite." + this._name;
@@ -16519,15 +12636,6 @@
       return t1;
     }
   };
-  A.LocalStorage.prototype = {};
-  A.WebStorageBackend.prototype = {
-    remove$1(_, key) {
-      var t1 = init.G,
-        value = A._asStringQ(A._asJSObject(A._asJSObject(t1.window).localStorage).getItem(key));
-      A._asJSObject(A._asJSObject(t1.window).localStorage).removeItem(key);
-      return value;
-    }
-  };
   A.Color.prototype = {
     toString$0(_) {
       return this.value;
@@ -16535,7 +12643,7 @@
   };
   A.DartStyle.prototype = {
     toMap$0() {
-      var t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32, t33, t34, t35, t36, t37, t38, t39, t40, t41, t42, t43, t44, t45, t46, t47, t48, t49, t50, _this = this, _null = null,
+      var t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32, t33, t34, t35, t36, t37, t38, t39, t40, t41, t42, t43, t44, t45, t46, _this = this, _null = null, _s6_ = "center",
         t1 = _this.padding;
       t1 = t1 == null ? _null : t1.toCss$0();
       t2 = _this.margin;
@@ -16549,63 +12657,52 @@
       t9 = _this.display;
       t9 = t9 == null ? _null : t9.css;
       t10 = A.cssValue(_this.gap, false);
-      t11 = _this.alignItems;
-      t11 = t11 == null ? _null : t11.css;
+      t11 = _this.alignItems == null ? _null : _s6_;
       t12 = A.cssValue(_this.justifyItems, true);
-      t13 = _this.justifyContent;
-      t13 = t13 == null ? _null : t13.css;
+      t13 = _this.justifyContent == null ? _null : _s6_;
       t14 = A.cssValue(_this.flex, true);
-      t15 = _this.flexDirection == null ? _null : "column";
-      t16 = A.cssValue(_this.flexWrap, true);
-      t17 = A.cssValue(_this.flexGrow, true);
-      t18 = A.cssValue(_this.flexShrink, true);
-      t19 = A.cssValue(_this.flexBasis, false);
-      t20 = A.cssValue(_this.gridTemplateColumns, true);
-      t21 = _this.position == null ? _null : "relative";
-      t22 = A.cssValue(_this.top, false);
-      t23 = A.cssValue(_this.right, false);
-      t24 = A.cssValue(_this.bottom, false);
-      t25 = A.cssValue(_this.left, false);
-      t26 = A.cssValue(_this.overflow, true);
-      t27 = A.cssValue(_this.boxSizing, true);
-      t28 = A.cssValue(_this.scrollBehavior, true);
-      t29 = A.cssValue(_this.aspectRatio, true);
-      t30 = A.cssValue(_this.objectFit, true);
-      t31 = A.cssValue(_this.transform, true);
-      t32 = A.cssValue(_this.backdropFilter, true);
-      t33 = A.cssValue(_this.maskImage, true);
-      t34 = A.cssValue(_this.fontFamily, true);
-      t35 = A.cssValue(_this.fontSize, false);
-      t36 = A.cssValue(_this.fontWeight, true);
-      t37 = A.cssValue(_this.lineHeight, true);
-      t38 = A.cssValue(_this.letterSpacing, false);
-      t39 = A.cssValue(_this.color, false);
-      t40 = _this.textAlign == null ? _null : "center";
-      t41 = A.cssValue(_this.textTransform, true);
-      t42 = A.cssValue(_this.textDecoration, true);
-      t43 = A.cssValue(_this.cursor, true);
-      t44 = A.cssValue(_this.resize, true);
-      t45 = _this.gradient;
-      t45 = A.cssValue(t45 == null ? _this.background : t45, false);
-      t46 = A.cssValue(_this.radius, false);
-      t47 = _this.border;
-      t47 = t47 == null ? _null : t47.toCss$0();
-      t48 = _this.borderTop;
-      t48 = t48 == null ? _null : t48.toCss$0();
-      t49 = _this.borderBottom;
-      t49 = t49 == null ? _null : t49.toCss$0();
-      t50 = _this.shadow;
-      t50 = t50 instanceof A.Shadow ? t50.toCss$0() : A.cssValue(t50, false);
-      return A._withoutNulls(A.LinkedHashMap_LinkedHashMap$_literal(["padding", t1, "margin", t2, "width", t3, "height", t4, "min-width", t5, "max-width", t6, "min-height", t7, "max-height", t8, "display", t9, "gap", t10, "align-items", t11, "justify-items", t12, "justify-content", t13, "flex", t14, "flex-direction", t15, "flex-wrap", t16, "flex-grow", t17, "flex-shrink", t18, "flex-basis", t19, "grid-template-columns", t20, "position", t21, "top", t22, "right", t23, "bottom", t24, "left", t25, "z-index", _this.zIndex, "overflow", t26, "box-sizing", t27, "scroll-behavior", t28, "aspect-ratio", t29, "object-fit", t30, "transform", t31, "backdrop-filter", t32, "mask-image", t33, "font-family", t34, "font-size", t35, "font-weight", t36, "line-height", t37, "letter-spacing", t38, "color", t39, "text-align", t40, "text-transform", t41, "text-decoration", t42, "cursor", t43, "resize", t44, "background", t45, "border-radius", t46, "border", t47, "border-top", t48, "border-right", null, "border-bottom", t49, "border-left", null, "box-shadow", t50, "opacity", _this.opacity, "transition", A.cssValue(_this.transition, true), "animation", A.cssValue(_this.animation, true), "will-change", A.cssValue(_this.willChange, true)], type$.String, type$.nullable_Object));
+      t15 = A.cssValue(_this.flexWrap, true);
+      t16 = A.cssValue(_this.flexGrow, true);
+      t17 = A.cssValue(_this.flexShrink, true);
+      t18 = A.cssValue(_this.flexBasis, false);
+      t19 = A.cssValue(_this.gridTemplateColumns, true);
+      t20 = A.cssValue(_this.top, false);
+      t21 = A.cssValue(_this.right, false);
+      t22 = A.cssValue(_this.bottom, false);
+      t23 = A.cssValue(_this.left, false);
+      t24 = A.cssValue(_this.overflow, true);
+      t25 = A.cssValue(_this.boxSizing, true);
+      t26 = A.cssValue(_this.scrollBehavior, true);
+      t27 = A.cssValue(_this.aspectRatio, true);
+      t28 = A.cssValue(_this.objectFit, true);
+      t29 = A.cssValue(_this.transform, true);
+      t30 = A.cssValue(_this.backdropFilter, true);
+      t31 = A.cssValue(_this.maskImage, true);
+      t32 = A.cssValue(_this.fontFamily, true);
+      t33 = A.cssValue(_this.fontSize, false);
+      t34 = A.cssValue(_this.fontWeight, true);
+      t35 = A.cssValue(_this.lineHeight, true);
+      t36 = A.cssValue(_this.letterSpacing, false);
+      t37 = A.cssValue(_this.color, false);
+      t38 = _this.textAlign == null ? _null : _s6_;
+      t39 = A.cssValue(_this.textTransform, true);
+      t40 = A.cssValue(_this.textDecoration, true);
+      t41 = A.cssValue(_this.cursor, true);
+      t42 = A.cssValue(_this.resize, true);
+      t43 = _this.gradient;
+      t43 = A.cssValue(t43 == null ? _this.background : t43, false);
+      t44 = A.cssValue(_this.radius, false);
+      t45 = _this.border;
+      t45 = t45 == null ? _null : t45.toCss$0();
+      t46 = _this.shadow;
+      t46 = t46 instanceof A.Shadow ? t46.toCss$0() : A.cssValue(t46, false);
+      return A._withoutNulls(A.LinkedHashMap_LinkedHashMap$_literal(["padding", t1, "margin", t2, "width", t3, "height", t4, "min-width", t5, "max-width", t6, "min-height", t7, "max-height", t8, "display", t9, "gap", t10, "align-items", t11, "justify-items", t12, "justify-content", t13, "flex", t14, "flex-direction", null, "flex-wrap", t15, "flex-grow", t16, "flex-shrink", t17, "flex-basis", t18, "grid-template-columns", t19, "position", null, "top", t20, "right", t21, "bottom", t22, "left", t23, "z-index", _this.zIndex, "overflow", t24, "box-sizing", t25, "scroll-behavior", t26, "aspect-ratio", t27, "object-fit", t28, "transform", t29, "backdrop-filter", t30, "mask-image", t31, "font-family", t32, "font-size", t33, "font-weight", t34, "line-height", t35, "letter-spacing", t36, "color", t37, "text-align", t38, "text-transform", t39, "text-decoration", t40, "cursor", t41, "resize", t42, "background", t43, "border-radius", t44, "border", t45, "border-top", null, "border-right", null, "border-bottom", null, "border-left", null, "box-shadow", t46, "opacity", _this.opacity, "transition", A.cssValue(_this.transition, true), "animation", A.cssValue(_this.animation, true), "will-change", A.cssValue(_this.willChange, true)], type$.String, type$.nullable_Object));
     },
     get$breakpointStyles() {
       var t1 = A.LinkedHashMap_LinkedHashMap$_empty(type$.Breakpoint, type$.DartStyle),
         t2 = this.md;
       if (t2 != null)
         t1.$indexSet(0, B.Breakpoint_768_1_md, t2);
-      t2 = this.lg;
-      if (t2 != null)
-        t1.$indexSet(0, B.Breakpoint_1024_2_lg, t2);
       return t1;
     },
     get$stateStyles() {
@@ -16632,7 +12729,7 @@
       return t1;
     },
     merge$1(override) {
-      var t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32, t33, t34, t35, t36, t37, t38, t39, t40, t41, t42, t43, t44, t45, t46, _this = this;
+      var t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32, t33, _this = this;
       if (override == null)
         return _this;
       t1 = override.padding;
@@ -16647,133 +12744,94 @@
       t4 = override.height;
       if (t4 == null)
         t4 = _this.height;
-      t5 = override.minWidth;
+      t5 = override.maxWidth;
       if (t5 == null)
-        t5 = _this.minWidth;
-      t6 = override.maxWidth;
+        t5 = _this.maxWidth;
+      t6 = override.minHeight;
       if (t6 == null)
-        t6 = _this.maxWidth;
-      t7 = override.minHeight;
+        t6 = _this.minHeight;
+      t7 = override.display;
       if (t7 == null)
-        t7 = _this.minHeight;
-      t8 = override.maxHeight;
+        t7 = _this.display;
+      t8 = override.gap;
       if (t8 == null)
-        t8 = _this.maxHeight;
-      t9 = override.display;
+        t8 = _this.gap;
+      t9 = override.alignItems;
       if (t9 == null)
-        t9 = _this.display;
-      t10 = override.gap;
+        t9 = _this.alignItems;
+      t10 = override.justifyContent;
       if (t10 == null)
-        t10 = _this.gap;
-      t11 = override.alignItems;
+        t10 = _this.justifyContent;
+      t11 = override.transform;
       if (t11 == null)
-        t11 = _this.alignItems;
-      t12 = override.justifyContent;
+        t11 = _this.transform;
+      t12 = override.backdropFilter;
       if (t12 == null)
-        t12 = _this.justifyContent;
-      t13 = override.flex;
+        t12 = _this.backdropFilter;
+      t13 = override.fontFamily;
       if (t13 == null)
-        t13 = _this.flex;
-      t14 = override.flexDirection;
+        t13 = _this.fontFamily;
+      t14 = override.fontSize;
       if (t14 == null)
-        t14 = _this.flexDirection;
-      t15 = override.flexWrap;
+        t14 = _this.fontSize;
+      t15 = override.fontWeight;
       if (t15 == null)
-        t15 = _this.flexWrap;
-      t16 = override.gridTemplateColumns;
+        t15 = _this.fontWeight;
+      t16 = override.lineHeight;
       if (t16 == null)
-        t16 = _this.gridTemplateColumns;
-      t17 = override.position;
+        t16 = _this.lineHeight;
+      t17 = override.color;
       if (t17 == null)
-        t17 = _this.position;
-      t18 = override.overflow;
+        t17 = _this.color;
+      t18 = override.textAlign;
       if (t18 == null)
-        t18 = _this.overflow;
-      t19 = override.transform;
+        t18 = _this.textAlign;
+      t19 = override.textDecoration;
       if (t19 == null)
-        t19 = _this.transform;
-      t20 = override.backdropFilter;
+        t19 = _this.textDecoration;
+      t20 = override.cursor;
       if (t20 == null)
-        t20 = _this.backdropFilter;
-      t21 = override.fontFamily;
+        t20 = _this.cursor;
+      t21 = override.background;
       if (t21 == null)
-        t21 = _this.fontFamily;
-      t22 = override.fontSize;
+        t21 = _this.background;
+      t22 = override.radius;
       if (t22 == null)
-        t22 = _this.fontSize;
-      t23 = override.fontWeight;
+        t22 = _this.radius;
+      t23 = override.border;
       if (t23 == null)
-        t23 = _this.fontWeight;
-      t24 = override.lineHeight;
+        t23 = _this.border;
+      t24 = override.shadow;
       if (t24 == null)
-        t24 = _this.lineHeight;
-      t25 = override.letterSpacing;
+        t24 = _this.shadow;
+      t25 = override.opacity;
       if (t25 == null)
-        t25 = _this.letterSpacing;
-      t26 = override.color;
+        t25 = _this.opacity;
+      t26 = override.gradient;
       if (t26 == null)
-        t26 = _this.color;
-      t27 = override.textAlign;
+        t26 = _this.gradient;
+      t27 = override.transition;
       if (t27 == null)
-        t27 = _this.textAlign;
-      t28 = override.textTransform;
+        t27 = _this.transition;
+      t28 = override.hover;
       if (t28 == null)
-        t28 = _this.textTransform;
-      t29 = override.textDecoration;
+        t28 = _this.hover;
+      t29 = override.focusVisible;
       if (t29 == null)
-        t29 = _this.textDecoration;
-      t30 = override.cursor;
+        t29 = _this.focusVisible;
+      t30 = override.active;
       if (t30 == null)
-        t30 = _this.cursor;
-      t31 = override.background;
+        t30 = _this.active;
+      t31 = override.disabled;
       if (t31 == null)
-        t31 = _this.background;
-      t32 = override.radius;
+        t31 = _this.disabled;
+      t32 = override.invalid;
       if (t32 == null)
-        t32 = _this.radius;
-      t33 = override.border;
+        t32 = _this.invalid;
+      t33 = override.md;
       if (t33 == null)
-        t33 = _this.border;
-      t34 = override.borderTop;
-      if (t34 == null)
-        t34 = _this.borderTop;
-      t35 = override.borderBottom;
-      if (t35 == null)
-        t35 = _this.borderBottom;
-      t36 = override.shadow;
-      if (t36 == null)
-        t36 = _this.shadow;
-      t37 = override.opacity;
-      if (t37 == null)
-        t37 = _this.opacity;
-      t38 = override.gradient;
-      if (t38 == null)
-        t38 = _this.gradient;
-      t39 = override.transition;
-      if (t39 == null)
-        t39 = _this.transition;
-      t40 = override.hover;
-      if (t40 == null)
-        t40 = _this.hover;
-      t41 = override.focusVisible;
-      if (t41 == null)
-        t41 = _this.focusVisible;
-      t42 = override.active;
-      if (t42 == null)
-        t42 = _this.active;
-      t43 = override.disabled;
-      if (t43 == null)
-        t43 = _this.disabled;
-      t44 = override.invalid;
-      if (t44 == null)
-        t44 = _this.invalid;
-      t45 = override.md;
-      if (t45 == null)
-        t45 = _this.md;
-      t46 = override.lg;
-      if (t46 == null)
-        t46 = _this.lg;
-      return A.DartStyle$(t42, t11, _this.animation, _this.aspectRatio, t20, t31, t33, t35, _this.borderLeft, _this.borderRight, t34, _this.bottom, _this.boxSizing, _this.checked, t26, t30, t43, t9, _this.expanded, t13, _this.flexBasis, t14, _this.flexGrow, _this.flexShrink, t15, _this.focus, t41, t21, t22, t23, t10, t38, t16, t4, t40, t44, t12, _this.justifyItems, _this.left, t25, t46, t24, t2, _this.maskImage, t8, t6, t45, t7, t5, _this.objectFit, t37, t18, t1, t17, t32, _this.resize, _this.right, _this.scrollBehavior, _this.selected, t36, _this.sm, t27, t29, t28, _this.top, t19, t39, t3, _this.willChange, _this.xl, _this.zIndex);
+        t33 = _this.md;
+      return A.DartStyle$(t30, t9, _this.animation, _this.aspectRatio, t12, t21, t23, _this.borderBottom, _this.borderLeft, _this.borderRight, _this.borderTop, _this.bottom, _this.boxSizing, _this.checked, t17, t20, t31, t7, _this.expanded, _this.flex, _this.flexBasis, _this.flexDirection, _this.flexGrow, _this.flexShrink, _this.flexWrap, _this.focus, t29, t13, t14, t15, t8, t26, _this.gridTemplateColumns, t4, t28, t32, t10, _this.justifyItems, _this.left, _this.letterSpacing, _this.lg, t16, t2, _this.maskImage, _this.maxHeight, t5, t33, t6, _this.minWidth, _this.objectFit, t25, _this.overflow, t1, _this.position, t22, _this.resize, _this.right, _this.scrollBehavior, _this.selected, t24, _this.sm, t18, t19, _this.textTransform, _this.top, t11, t27, t3, _this.willChange, _this.xl, _this.zIndex);
     }
   };
   A.Gradient.prototype = {
@@ -16826,13 +12884,13 @@
         return "";
       return "  " + step.get$selector() + " { " + stepBody + "; }";
     },
-    $signature: 52
+    $signature: 38
   };
   A.StyleKeyframes_cssText_closure0.prototype = {
     call$1(chunk) {
       return A._asString(chunk).length !== 0;
     },
-    $signature: 12
+    $signature: 3
   };
   A.RootDesign.prototype = {
     get$cssText() {
@@ -16857,14 +12915,14 @@
     call$1(chunk) {
       return B.JSString_methods.trim$0(A._asString(chunk)).length !== 0;
     },
-    $signature: 12
+    $signature: 3
   };
   A.rootStyleToCss_closure.prototype = {
     call$1(entry) {
       type$.MapEntry_of_String_and_nullable_Object._as(entry);
       return entry.value != null && entry.key !== "_cssText";
     },
-    $signature: 11
+    $signature: 4
   };
   A.rootStyleToCss_closure0.prototype = {
     call$1(entry) {
@@ -16873,19 +12931,17 @@
       t1 = entry.key;
       return t1 + ": " + A.cssValue(entry.value, B.Set_a02Zq.contains$1(0, t1));
     },
-    $signature: 7
+    $signature: 1
   };
   A.EdgeInsets.prototype = {
     toCss$0() {
-      var t2, t3, t4, values, _this = this,
+      var t2, t3, values, _this = this,
         t1 = _this.top;
       t1 = A.cssValue(t1 == null ? 0 : t1, false);
-      t2 = _this.right;
-      t2 = A.cssValue(t2 == null ? 0 : t2, false);
+      t2 = A.cssValue(_this.right, false);
       t3 = _this.bottom;
       t3 = A.cssValue(t3 == null ? 0 : t3, false);
-      t4 = _this.left;
-      values = A._setArrayType([t1, t2, t3, A.cssValue(t4 == null ? 0 : t4, false)], type$.JSArray_String);
+      values = A._setArrayType([t1, t2, t3, A.cssValue(_this.left, false)], type$.JSArray_String);
       if (B.JSArray_methods.every$1(values, new A.EdgeInsets_toCss_closure(values)))
         return B.JSArray_methods.get$first(values);
       t1 = values[0];
@@ -16902,7 +12958,7 @@
     call$1(value) {
       return A._asString(value) === B.JSArray_methods.get$first(this.values);
     },
-    $signature: 12
+    $signature: 3
   };
   A.SizeValue.prototype = {
     toString$0(_) {
@@ -16941,24 +12997,9 @@
       return this.value;
     }
   };
-  A.Overflow.prototype = {
-    toString$0(_) {
-      return "auto";
-    }
-  };
-  A.TextTransform.prototype = {
-    toString$0(_) {
-      return "uppercase";
-    }
-  };
   A.TextDecorationStyle.prototype = {
     toString$0(_) {
       return "none";
-    }
-  };
-  A.FlexWrap.prototype = {
-    toString$0(_) {
-      return "wrap";
     }
   };
   A.TransitionTiming.prototype = {
@@ -16975,7 +13016,7 @@
     call$1(item) {
       return type$.StyleTransition._as(item).value;
     },
-    $signature: 53
+    $signature: 39
   };
   A.AnimationDirection.prototype = {
     toString$0(_) {
@@ -17006,7 +13047,7 @@
     call$1(item) {
       return J.toString$0$(A._asObject(item));
     },
-    $signature: 54
+    $signature: 40
   };
   A.WillChange.prototype = {
     toString$0(_) {
@@ -17016,11 +13057,6 @@
   A.Display.prototype = {
     _enumToString$0() {
       return "Display." + this._name;
-    }
-  };
-  A.FlexDirection.prototype = {
-    _enumToString$0() {
-      return "FlexDirection." + this._name;
     }
   };
   A.AlignItems.prototype = {
@@ -17033,24 +13069,13 @@
       return "JustifyContent." + this._name;
     }
   };
-  A.Position.prototype = {
-    _enumToString$0() {
-      return "Position." + this._name;
-    }
-  };
   A.TextAlign.prototype = {
     _enumToString$0() {
       return "TextAlign." + this._name;
     }
   };
   A.Button.prototype = {};
-  A.DataTable.prototype = {};
-  A.TableColumn.prototype = {};
-  A.TableRowData.prototype = {};
-  A.Table.prototype = {};
-  A.Alert.prototype = {};
   A.Spinner.prototype = {};
-  A.StatusBadge.prototype = {};
   A.TextEditingController.prototype = {
     set$text(value) {
       if (this._text === value)
@@ -17102,7 +13127,7 @@
       _this._notifyListeners$0();
     },
     clearErrors$0() {
-      return this.clearErrors$1(B.List_empty1);
+      return this.clearErrors$1(B.List_empty2);
     },
     reset$0() {
       var t2, t3,
@@ -17111,7 +13136,7 @@
         t3 = t2.get$current();
         this.setField$2(t3, t1.$index(0, t3));
       }
-      t1 = A._setArrayType(B.List_empty1.slice(0), type$.JSArray_String);
+      t1 = A._setArrayType(B.List_empty2.slice(0), type$.JSArray_String);
       this.clearErrors$1(t1);
     },
     submit$1$3$onError$onSuccess(action, onError, onSuccess, $T) {
@@ -17220,7 +13245,7 @@
       B.JSArray_methods.add$1(t4, type$.void_Function._as(new A.FormController_controller__closure(t1, t2, controller)));
       return controller;
     },
-    $signature: 55
+    $signature: 41
   };
   A.FormController_controller__closure.prototype = {
     call$0() {
@@ -17231,8 +13256,6 @@
     $signature: 0
   };
   A.Form.prototype = {};
-  A.SelectOption.prototype = {};
-  A.Select.prototype = {};
   A.TextField.prototype = {};
   A.TextField__controlledOnChanged_closure.prototype = {
     call$1($event) {
@@ -17243,7 +13266,7 @@
       if (t1._is(target))
         this.controller.set$text(A._asString(target.value));
     },
-    $signature: 1
+    $signature: 7
   };
   A.FormErrors.prototype = {
     without$1(keys) {
@@ -17271,21 +13294,11 @@
       type$.List_String._as(__wc0_formal);
       return B.JSArray_methods.contains$1(this.keys, key);
     },
-    $signature: 56
+    $signature: 42
   };
-  A.EmptyState.prototype = {};
-  A.Grid.prototype = {};
   A.Panel.prototype = {};
-  A.Section.prototype = {};
-  A.SidebarItem.prototype = {};
-  A.Sidebar.prototype = {};
-  A.StatCard.prototype = {};
-  A.Topbar.prototype = {};
-  A.Modal.prototype = {};
-  A.Column.prototype = {};
   A.Container.prototype = {};
   A.Link.prototype = {};
-  A.Row.prototype = {};
   A.Text.prototype = {};
   A.Tone.prototype = {
     _enumToString$0() {
@@ -17302,16 +13315,6 @@
       return "ButtonVariant." + this._name;
     }
   };
-  A.BadgeVariant.prototype = {
-    _enumToString$0() {
-      return "BadgeVariant." + this._name;
-    }
-  };
-  A.CardVariant.prototype = {
-    _enumToString$0() {
-      return "CardVariant." + this._name;
-    }
-  };
   A.InputVariant.prototype = {
     _enumToString$0() {
       return "InputVariant." + this._name;
@@ -17324,7 +13327,19 @@
     call$1(e) {
       return this.onData.call$1(A._asJSObject(e));
     },
-    $signature: 6
+    $signature: 2
+  };
+  A.main_closure.prototype = {
+    call$1(props) {
+      var t1, t2, t3, t4;
+      type$.Map_String_dynamic._as(props);
+      t1 = type$.String;
+      t2 = type$.nullable_Object;
+      t3 = A.LinkedHashMap_LinkedHashMap$_literal(["email", "", "password", ""], t1, t2);
+      t4 = A._setArrayType([], type$.JSArray_of_void_Function);
+      return new A.LoginPage(props, new A.FormController(A.LinkedHashMap_LinkedHashMap$from(t3, t1, t2), A.LinkedHashMap_LinkedHashMap$from(t3, t1, t2), A.LinkedHashMap_LinkedHashMap$_empty(t1, type$.TextEditingController), t4, B.FormErrors_Map_empty));
+    },
+    $signature: 43
   };
   (function aliases() {
     var _ = J.LegacyJavaScriptObject.prototype;
@@ -17337,31 +13352,23 @@
       _static_1 = hunkHelpers._static_1,
       _instance_1_u = hunkHelpers._instance_1u,
       _instance_0_u = hunkHelpers._instance_0u;
-    _static_0(A, "_js_helper_Primitives_dateNow$closure", "Primitives_dateNow", 19);
-    _static_1(A, "async__AsyncRun__scheduleImmediateJsOverride$closure", "_AsyncRun__scheduleImmediateJsOverride", 13);
-    _static_1(A, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 13);
-    _static_1(A, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 13);
+    _static_0(A, "_js_helper_Primitives_dateNow$closure", "Primitives_dateNow", 16);
+    _static_1(A, "async__AsyncRun__scheduleImmediateJsOverride$closure", "_AsyncRun__scheduleImmediateJsOverride", 5);
+    _static_1(A, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 5);
+    _static_1(A, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 5);
     _static_0(A, "async___startMicrotaskLoop$closure", "_startMicrotaskLoop", 0);
-    _static_1(A, "convert___defaultToEncodable$closure", "_defaultToEncodable", 20);
-    _instance_1_u(A.PlansView.prototype, "get$_handleFormSubmit", "_handleFormSubmit$1", 4);
-    _instance_1_u(A.SubscriptionsView.prototype, "get$_handleSubSubmit", "_handleSubSubmit$1", 4);
-    var _;
-    _instance_1_u(_ = A.WebsitesDomainsView.prototype, "get$_handleDomainSubmit", "_handleDomainSubmit$1", 4);
-    _instance_1_u(_, "get$_handleDeploySubmit", "_handleDeploySubmit$1", 4);
-    _instance_1_u(A.LoginPage.prototype, "get$_handleSubmit", "_handleSubmit$1", 4);
+    _static_1(A, "convert___defaultToEncodable$closure", "_defaultToEncodable", 10);
+    _instance_1_u(A.LoginPage.prototype, "get$_handleSubmit", "_handleSubmit$1", 19);
     _instance_0_u(A.FlintComponent.prototype, "get$didMount", "didMount$0", 0);
-    _static_1(A, "component_props__toFlintNode$closure", "toFlintNode", 44);
-    _static_1(A, "resource_FlintModelRecord___new_tearOff$closure", "FlintModelRecord___new_tearOff", 17);
+    _static_1(A, "component_props__toFlintNode$closure", "toFlintNode", 29);
     _instance_0_u(A.Head.prototype, "get$didMount", "didMount$0", 0);
-    _instance_0_u(A.StateSignalListener.prototype, "get$didMount", "didMount$0", 0);
-    _static_1(A, "auth_middleware__requireAuth$closure", "requireAuth", 39);
   })();
   (function inheritance() {
     var _mixin = hunkHelpers.mixin,
       _inherit = hunkHelpers.inherit,
       _inheritMany = hunkHelpers.inheritMany;
     _inherit(A.Object, null);
-    _inheritMany(A.Object, [A.JS_CONST, J.Interceptor, A.SafeToStringHook, J.ArrayIterator, A.Error, A.ListBase, A.SentinelValue, A.Iterable, A.ListIterator, A.MappedIterator, A.WhereIterator, A.WhereTypeIterator, A.FixedLengthListMixin, A.UnmodifiableListMixin, A.MapView, A.ConstantMap, A.Closure, A._KeysOrValuesOrElementsIterator, A.SetBase, A.TypeErrorDecoder, A.NullThrownFromJavaScriptException, A.ExceptionAndStackTrace, A._StackTrace, A.MapBase, A.LinkedHashMapCell, A.LinkedHashMapKeyIterator, A.LinkedHashMapValueIterator, A.LinkedHashMapEntryIterator, A.JSSyntaxRegExp, A._MatchImplementation, A._AllMatchesIterator, A.StringMatch, A._StringAllMatchesIterator, A.Rti, A._FunctionParameters, A._Type, A._TimerImpl, A._AsyncAwaitCompleter, A._SyncStarIterator, A.AsyncError, A._Completer, A._FutureListener, A._Future, A._AsyncCallbackEntry, A.Stream, A._StreamIterator, A._Zone, A._LinkedHashSetCell, A._LinkedHashSetIterator, A._UnmodifiableMapMixin, A.Codec, A.Converter, A._JsonStringifier, A._Utf8Encoder, A._Utf8Decoder, A.DateTime, A.Duration, A._Enum, A.OutOfMemoryError, A.StackOverflowError, A._Exception, A.FormatException, A.MapEntry, A.Null, A._StringStackTrace, A.Stopwatch, A.StringBuffer, A._Uri, A.UriData, A._SimpleUri, A.FlintNode, A.AuthClient, A.AuthSession, A.AuthException, A.StatusCodeConfig, A.FlintError, A.FlintResponse, A.FlintClient, A._ParsedResponse, A.AuthSessionManager, A.FlintRoot, A._ComponentMount, A.ClientRouter, A.FlintComponentRegistry, A.ResourceSnapshot, A.ResourceController, A.FlintModelRecord, A.FlintModelApi, A.HeadTag, A.FlintPage, A.FlintPageContext, A._FetchedFlintPage, A.StateSignal, A.BrowserStorage, A.Cookies, A.Color, A.DartStyle, A.Gradient, A.TokenRef, A.KeyframeStep, A.StyleKeyframes, A.RootDesign, A.EdgeInsets, A.SizeValue, A.Border, A.Shadow, A.StyleTransform, A.FontFamily, A.Cursor, A.Overflow, A.TextTransform, A.TextDecorationStyle, A.FlexWrap, A.TransitionTiming, A.StyleTransition, A.AnimationDirection, A.AnimationFillMode, A.AnimationPlayState, A.AnimationIteration, A.StyleAnimation, A.WillChange, A.TableColumn, A.TableRowData, A.TextEditingController, A.FormController, A.SelectOption, A.FormErrors, A.SidebarItem, A.EventStreamProvider, A._EventStreamSubscription]);
+    _inheritMany(A.Object, [A.JS_CONST, J.Interceptor, A.SafeToStringHook, J.ArrayIterator, A.Error, A.ListBase, A.SentinelValue, A.Iterable, A.ListIterator, A.MappedIterator, A.WhereIterator, A.FixedLengthListMixin, A.UnmodifiableListMixin, A.MapView, A.ConstantMap, A.Closure, A._KeysOrValuesOrElementsIterator, A.SetBase, A.TypeErrorDecoder, A.NullThrownFromJavaScriptException, A.ExceptionAndStackTrace, A._StackTrace, A.MapBase, A.LinkedHashMapCell, A.LinkedHashMapKeyIterator, A.LinkedHashMapValueIterator, A.LinkedHashMapEntryIterator, A.JSSyntaxRegExp, A._MatchImplementation, A._AllMatchesIterator, A.StringMatch, A._StringAllMatchesIterator, A.Rti, A._FunctionParameters, A._Type, A._TimerImpl, A._AsyncAwaitCompleter, A._SyncStarIterator, A.AsyncError, A._Completer, A._FutureListener, A._Future, A._AsyncCallbackEntry, A.Stream, A._StreamIterator, A._Zone, A._LinkedHashSetCell, A._LinkedHashSetIterator, A._UnmodifiableMapMixin, A.Codec, A.Converter, A._JsonStringifier, A._Utf8Encoder, A._Utf8Decoder, A.DateTime, A.Duration, A._Enum, A.OutOfMemoryError, A.StackOverflowError, A._Exception, A.FormatException, A.MapEntry, A.Null, A._StringStackTrace, A.Stopwatch, A.StringBuffer, A._Uri, A.UriData, A._SimpleUri, A.FlintNode, A.AuthClient, A.AuthSession, A.AuthException, A.StatusCodeConfig, A.FlintError, A.FlintResponse, A.FlintClient, A._ParsedResponse, A.FlintRoot, A._ComponentMount, A.ClientRouter, A.HeadTag, A.FlintPage, A.FlintPageContext, A._FetchedFlintPage, A.Cookies, A.Color, A.DartStyle, A.Gradient, A.TokenRef, A.KeyframeStep, A.StyleKeyframes, A.RootDesign, A.EdgeInsets, A.SizeValue, A.Border, A.Shadow, A.StyleTransform, A.FontFamily, A.Cursor, A.TextDecorationStyle, A.TransitionTiming, A.StyleTransition, A.AnimationDirection, A.AnimationFillMode, A.AnimationPlayState, A.AnimationIteration, A.StyleAnimation, A.WillChange, A.TextEditingController, A.FormController, A.FormErrors, A.EventStreamProvider, A._EventStreamSubscription]);
     _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JavaScriptBigInt, J.JavaScriptSymbol, J.JSNumber, J.JSString]);
     _inheritMany(J.JavaScriptObject, [J.LegacyJavaScriptObject, J.JSArray, A.NativeByteBuffer, A.NativeTypedData]);
     _inheritMany(J.LegacyJavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject, J.JavaScriptFunction]);
@@ -17371,19 +13378,19 @@
     _inheritMany(A.Error, [A.LateError, A.TypeError, A.JsNoSuchMethodError, A.UnknownJsTypeError, A.RuntimeError, A._Error, A.JsonUnsupportedObjectError, A.AssertionError, A.ArgumentError, A.UnsupportedError, A.UnimplementedError, A.StateError, A.ConcurrentModificationError]);
     _inherit(A.UnmodifiableListBase, A.ListBase);
     _inherit(A.CodeUnits, A.UnmodifiableListBase);
-    _inheritMany(A.Iterable, [A.EfficientLengthIterable, A.MappedIterable, A.WhereIterable, A.WhereTypeIterable, A._KeysOrValues, A._AllMatchesIterable, A._StringAllMatchesIterable, A._SyncStarIterable]);
+    _inheritMany(A.Iterable, [A.EfficientLengthIterable, A.MappedIterable, A.WhereIterable, A._KeysOrValues, A._AllMatchesIterable, A._StringAllMatchesIterable, A._SyncStarIterable]);
     _inheritMany(A.EfficientLengthIterable, [A.ListIterable, A.LinkedHashMapKeysIterable, A.LinkedHashMapValuesIterable, A.LinkedHashMapEntriesIterable]);
     _inherit(A.EfficientLengthMappedIterable, A.MappedIterable);
     _inheritMany(A.ListIterable, [A.MappedListIterable, A._JsonMapKeyIterable]);
     _inherit(A._UnmodifiableMapView_MapView__UnmodifiableMapMixin, A.MapView);
     _inherit(A.UnmodifiableMapView, A._UnmodifiableMapView_MapView__UnmodifiableMapMixin);
     _inherit(A.ConstantMapView, A.UnmodifiableMapView);
-    _inheritMany(A.Closure, [A.Closure2Args, A.Closure0Args, A.TearOffClosure, A.initHooks_closure, A.initHooks_closure1, A._AsyncRun__initializeScheduleImmediate_internalCallback, A._AsyncRun__initializeScheduleImmediate_closure, A._awaitOnObject_closure, A._Future__propagateToListeners_handleWhenCompleteCallback_closure, A._Future_timeout_closure0, A.Stream_length_closure, A._RootZone_bindUnaryCallbackGuarded_closure, A.MapBase_entries_closure, A.componentRegistry_closure, A.componentRegistry_closure0, A.CounterDemo_build_closure, A.CounterDemo_build_closure0, A.CounterDemo_build_closure1, A.EuPanelDashboardSidebar_build_closure, A.PlansView_build_closure, A.PlansView_build_closure0, A.PlansView_build_closure1, A.PlansView__buildPlanCard_closure, A.PlansView__buildPlanCard_closure0, A.PlansView__buildPlanModal_closure1, A.PlansView__buildPlanModal_closure, A.PlansView__buildPlanModal_closure0, A.PlansView__handleFormSubmit_closure, A.PlansView__handleFormSubmit_closure1, A.PlansView__handleFormSubmit_closure0, A.SubscriptionMetric_build_closure, A.SubscriptionsView_build_closure, A.SubscriptionsView_build_closure0, A.SubscriptionsView_build_closure1, A.SubscriptionsView__buildSubscriptionCard_closure, A.SubscriptionsView__buildSubModal_closure1, A.SubscriptionsView__buildSubModal_closure, A.SubscriptionsView__buildSubModal_closure0, A.SubscriptionsView__handleSubSubmit_closure0, A.SubscriptionsView__handleSubSubmit_closure2, A.SubscriptionsView__handleSubSubmit_closure1, A.WebsitesDomainsView__closure, A.WebsitesDomainsView_build_closure0, A.WebsitesDomainsView_build_closure1, A.WebsitesDomainsView_build_closure2, A.WebsitesDomainsView__buildGithubBanner_closure, A.WebsitesDomainsView__buildGithubBanner__closure, A.WebsitesDomainsView__buildDomainCard_closure, A.WebsitesDomainsView__buildDomainCard_closure0, A.WebsitesDomainsView__buildDomainCard_closure1, A.WebsitesDomainsView__buildDomainModal_closure1, A.WebsitesDomainsView__buildDomainModal_closure, A.WebsitesDomainsView__buildDomainModal_closure0, A.WebsitesDomainsView__buildDeployModal_closure1, A.WebsitesDomainsView__buildDeployModal_closure, A.WebsitesDomainsView__buildDeployModal__closure1, A.WebsitesDomainsView__buildDeployModal_closure0, A.WebsitesDomainsView__handleDomainSubmit_closure0, A.WebsitesDomainsView__handleDomainSubmit_closure2, A.WebsitesDomainsView__handleDomainSubmit_closure1, A.WebsitesDomainsView__handleDeploySubmit_closure1, A.WebsitesDomainsView__handleDeploySubmit_closure3, A.WebsitesDomainsView__handleDeploySubmit_closure2, A.DashboardPage_closure1, A.DashboardPage_closure2, A.DashboardPage_closure6, A.DashboardPage_closure7, A.DashboardPage_closure8, A.DashboardPage_build_closure, A.DashboardPage_build_closure0, A.DashboardPage_build_closure1, A.DashboardPage__listOfMaps_closure, A.LoginPage_build_closure, A.LoginPage__handleSubmit_closure0, A.LoginPage__handleSubmit_closure2, A.LoginPage__handleSubmit_closure1, A.FlintClient__send_closure, A.FlintClient__send_closure0, A.FlintRoot__applyStyle_closure, A.FlintRoot__applyStyle_closure0, A.FlintRoot__listen_closure, A.mergeComponentProps_closure, A.joinClassNames_closure, A.joinClassNames_closure0, A.styleToCss_closure, A.styleToCss_closure0, A._scopedCssBody_closure, A._scopedCssBody_closure0, A._styleToCssImportant_closure, A._styleToCssImportant_closure0, A.FlintModelApi_FlintModelApi$records_closure, A.FlintModelApi__toList_closure, A.HeadTag_key_closure, A.createFlintApp_closure, A.createFlintApp_closure0, A._fetchPageForCurrentLocation_closure, A._fetchPageForCurrentLocation_closure0, A.StateSignalListener__bindSignal_closure, A.StyleKeyframes_cssText_closure, A.StyleKeyframes_cssText_closure0, A.RootDesign_cssText_closure, A.rootStyleToCss_closure, A.rootStyleToCss_closure0, A.EdgeInsets_toCss_closure, A.StyleTransition_StyleTransition$combine_closure, A.StyleAnimation_StyleAnimation$named_closure, A.TextField__controlledOnChanged_closure, A._EventStreamSubscription_closure]);
-    _inheritMany(A.Closure2Args, [A.ConstantMap_map_closure, A.JsLinkedHashMap_addAll_closure, A.initHooks_closure0, A._awaitOnObject_closure0, A._wrapJsFunctionForAsync_closure, A._Future__propagateToListeners_handleWhenCompleteCallback_closure0, A._Future_timeout_closure1, A.LinkedHashMap_LinkedHashMap$from_closure, A.MapBase_mapToString_closure, A._JsonStringifier_writeMap_closure, A._Uri__makeQueryFromParameters_closure, A.Uri_splitQueryString_closure, A.Uri_parseIPv6Address_error, A._Uri__makeQueryFromParametersDefault_writeParameter, A._Uri__makeQueryFromParametersDefault_closure, A.WebsitesDomainsView___closure, A.DashboardPage__map_closure, A.DashboardPage__listOfMaps__closure, A.AuthClient__map_closure, A.FlintRoot__applyProps_closure, A.FlintModelApi__toList__closure, A.Head__syncProps_closure, A.createFlintApp_renderPage, A._asStringKeyedMap_closure, A.BrowserStorage_readMap_closure, A.FormErrors_without_closure]);
+    _inheritMany(A.Closure, [A.Closure2Args, A.Closure0Args, A.TearOffClosure, A.initHooks_closure, A.initHooks_closure1, A._AsyncRun__initializeScheduleImmediate_internalCallback, A._AsyncRun__initializeScheduleImmediate_closure, A._awaitOnObject_closure, A._Future__propagateToListeners_handleWhenCompleteCallback_closure, A._Future_timeout_closure0, A.Stream_length_closure, A._RootZone_bindUnaryCallbackGuarded_closure, A.MapBase_entries_closure, A.LoginPage_build_closure, A.LoginPage__handleSubmit_closure0, A.LoginPage__handleSubmit_closure2, A.LoginPage__handleSubmit_closure1, A.FlintClient__send_closure, A.FlintClient__send_closure0, A.FlintRoot__applyStyle_closure, A.FlintRoot__applyStyle_closure0, A.FlintRoot__listen_closure, A.mergeComponentProps_closure, A.joinClassNames_closure, A.joinClassNames_closure0, A.styleToCss_closure, A.styleToCss_closure0, A._scopedCssBody_closure, A._scopedCssBody_closure0, A._styleToCssImportant_closure, A._styleToCssImportant_closure0, A.HeadTag_key_closure, A.createFlintApp_closure, A.createFlintApp_closure0, A._fetchPageForCurrentLocation_closure, A._fetchPageForCurrentLocation_closure0, A.StyleKeyframes_cssText_closure, A.StyleKeyframes_cssText_closure0, A.RootDesign_cssText_closure, A.rootStyleToCss_closure, A.rootStyleToCss_closure0, A.EdgeInsets_toCss_closure, A.StyleTransition_StyleTransition$combine_closure, A.StyleAnimation_StyleAnimation$named_closure, A.TextField__controlledOnChanged_closure, A._EventStreamSubscription_closure, A.main_closure]);
+    _inheritMany(A.Closure2Args, [A.ConstantMap_map_closure, A.JsLinkedHashMap_addAll_closure, A.initHooks_closure0, A._awaitOnObject_closure0, A._wrapJsFunctionForAsync_closure, A._Future__propagateToListeners_handleWhenCompleteCallback_closure0, A._Future_timeout_closure1, A.LinkedHashMap_LinkedHashMap$from_closure, A.MapBase_mapToString_closure, A._JsonStringifier_writeMap_closure, A._Uri__makeQueryFromParameters_closure, A.Uri_splitQueryString_closure, A.Uri_parseIPv6Address_error, A._Uri__makeQueryFromParametersDefault_writeParameter, A._Uri__makeQueryFromParametersDefault_closure, A.AuthClient__map_closure, A.FlintRoot__applyProps_closure, A.Head__syncProps_closure, A.createFlintApp_renderPage, A._asStringKeyedMap_closure, A.FormErrors_without_closure]);
     _inherit(A.ConstantStringMap, A.ConstantMap);
     _inheritMany(A.SetBase, [A.ConstantSet, A._SetBase]);
     _inheritMany(A.ConstantSet, [A.ConstantStringSet, A.GeneralConstantSet]);
-    _inheritMany(A.Closure0Args, [A.Primitives_initTicker_closure, A._AsyncRun__scheduleImmediateJsOverride_internalCallback, A._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, A._TimerImpl_internalCallback, A.Future_Future$microtask_closure, A._Future__addListener_closure, A._Future__prependListeners_closure, A._Future__chainCoreFuture_closure, A._Future__asyncCompleteWithValue_closure, A._Future__asyncCompleteErrorObject_closure, A._Future__propagateToListeners_handleWhenCompleteCallback, A._Future__propagateToListeners_handleValueCallback, A._Future__propagateToListeners_handleError, A._Future_timeout_closure, A.Stream_length_closure0, A._RootZone_bindCallbackGuarded_closure, A._rootHandleError_closure, A._Utf8Decoder__decoder_closure, A._Utf8Decoder__decoderNonfatal_closure, A.CounterDemo_build__closure1, A.CounterDemo_build__closure0, A.CounterDemo_build__closure, A.PlansView_build__closure, A.PlansView__buildPlanCard__closure, A.PlansView__buildPlanModal__closure, A.PlansView__buildPlanModal__closure1, A.PlansView__buildPlanModal__closure0, A.PlansView__handleFormSubmit__closure, A.PlansView__handleFormSubmit__closure0, A.PlansView__handleFormSubmit_closure2, A.PlansView__handleFormSubmit_closure3, A.SubscriptionsView_build__closure, A.SubscriptionsView__buildSubModal__closure, A.SubscriptionsView__buildSubModal__closure1, A.SubscriptionsView__buildSubModal__closure0, A.SubscriptionsView__handleSubSubmit_closure, A.SubscriptionsView__handleSubSubmit__closure, A.SubscriptionsView__handleSubSubmit__closure0, A.SubscriptionsView__handleSubSubmit_closure3, A.SubscriptionsView__handleSubSubmit_closure4, A.WebsitesDomainsView_closure, A.WebsitesDomainsView_closure0, A.WebsitesDomainsView_closure1, A.WebsitesDomainsView_closure2, A.WebsitesDomainsView_build_closure, A.WebsitesDomainsView_build__closure, A.WebsitesDomainsView__buildDomainCard__closure, A.WebsitesDomainsView__buildDomainModal__closure, A.WebsitesDomainsView__buildDomainModal__closure1, A.WebsitesDomainsView__buildDomainModal__closure0, A.WebsitesDomainsView__buildDeployModal__closure, A.WebsitesDomainsView__buildDeployModal___closure, A.WebsitesDomainsView__buildDeployModal__closure0, A.WebsitesDomainsView__handleDomainSubmit_closure, A.WebsitesDomainsView__handleDomainSubmit__closure, A.WebsitesDomainsView__handleDomainSubmit__closure0, A.WebsitesDomainsView__handleDomainSubmit_closure3, A.WebsitesDomainsView__handleDomainSubmit_closure4, A.WebsitesDomainsView__handleDeploySubmit_closure, A.WebsitesDomainsView__handleDeploySubmit_closure0, A.WebsitesDomainsView__handleDeploySubmit__closure, A.WebsitesDomainsView__handleDeploySubmit__closure0, A.WebsitesDomainsView__handleDeploySubmit_closure4, A.WebsitesDomainsView__handleDeploySubmit_closure5, A.DashboardPage_closure, A.DashboardPage_closure0, A.DashboardPage__closure3, A.DashboardPage__closure2, A.DashboardPage_closure3, A.DashboardPage_closure4, A.DashboardPage_closure5, A.DashboardPage__closure1, A.DashboardPage__closure0, A.DashboardPage__closure, A.LoginPage__handleSubmit_closure, A.LoginPage__handleSubmit__closure, A.LoginPage__handleSubmit_closure3, A.LoginPage__handleSubmit_closure4, A.LoginPage__fillDemoCredentials_closure, A.FlintClient__send_closure1, A.FlintClient__body_closure, A.FlintRoot__scheduleRender_closure, A.FlintRoot__createComponent_closure, A.FlintRoot__scheduleComponentRender_closure, A.createFlintApp_renderCurrentLocation, A.StateSignal_listen_closure, A.StateSignalListener__bindSignal__closure, A.FormController_controller_closure, A.FormController_controller__closure]);
+    _inheritMany(A.Closure0Args, [A.Primitives_initTicker_closure, A._AsyncRun__scheduleImmediateJsOverride_internalCallback, A._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, A._TimerImpl_internalCallback, A._Future__addListener_closure, A._Future__prependListeners_closure, A._Future__chainCoreFuture_closure, A._Future__asyncCompleteWithValue_closure, A._Future__asyncCompleteErrorObject_closure, A._Future__propagateToListeners_handleWhenCompleteCallback, A._Future__propagateToListeners_handleValueCallback, A._Future__propagateToListeners_handleError, A._Future_timeout_closure, A.Stream_length_closure0, A._RootZone_bindCallbackGuarded_closure, A._rootHandleError_closure, A._Utf8Decoder__decoder_closure, A._Utf8Decoder__decoderNonfatal_closure, A.LoginPage__handleSubmit_closure, A.LoginPage__handleSubmit__closure, A.LoginPage__handleSubmit_closure3, A.LoginPage__handleSubmit_closure4, A.LoginPage__fillDemoCredentials_closure, A.FlintClient__send_closure1, A.FlintClient__body_closure, A.FlintRoot__scheduleRender_closure, A.FlintRoot__createComponent_closure, A.FlintRoot__scheduleComponentRender_closure, A.createFlintApp_renderCurrentLocation, A.FormController_controller_closure, A.FormController_controller__closure]);
     _inherit(A.NullError, A.TypeError);
     _inheritMany(A.TearOffClosure, [A.StaticClosure, A.BoundClosure]);
     _inheritMany(A.MapBase, [A.JsLinkedHashMap, A._JsonMap]);
@@ -17407,15 +13414,11 @@
     _inherit(A.Utf8Codec, A.Encoding);
     _inheritMany(A.ArgumentError, [A.RangeError, A.IndexError]);
     _inherit(A._DataUri, A._Uri);
-    _inheritMany(A.FlintNode, [A.FlintComponent, A.FlintElement, A.FlintText, A.FlintFragment, A.FlintComponentNode]);
-    _inheritMany(A.FlintComponent, [A.CounterDemo, A.DashboardHero, A.DashboardModuleCard, A.EuPanelDashboardSidebar, A.DashboardTopbar, A.DeployMetric, A.LimitMetric, A.PlansView, A.SubscriptionMetric, A.SubscriptionsView, A.WebsitesDomainsView, A.DashboardPage, A.LoginPage, A.StatefulComponent, A.StatelessComponent]);
-    _inheritMany(A.FlintElement, [A.EuPanelDashboardShell, A.Button, A.Table, A.Alert, A.Spinner, A.StatusBadge, A.Form, A.Select, A.TextField, A.EmptyState, A.Grid, A.Panel, A.Section, A.Sidebar, A.StatCard, A.Topbar, A.Modal, A.Column, A.Container, A.Link, A.Row]);
-    _inheritMany(A._Enum, [A.FlintErrorKind, A.FlintResponseType, A.ResourceStatus, A.CookieSameSite, A.Breakpoint, A.Display, A.FlexDirection, A.AlignItems, A.JustifyContent, A.Position, A.TextAlign, A.Tone, A.ComponentSize, A.ButtonVariant, A.BadgeVariant, A.CardVariant, A.InputVariant]);
-    _inherit(A.ResourceView, A.StatelessComponent);
-    _inheritMany(A.StatefulComponent, [A.Head, A.StateSignalListener]);
-    _inherit(A.WebStorageBackend, A.BrowserStorage);
-    _inherit(A.LocalStorage, A.WebStorageBackend);
-    _inherit(A.DataTable, A.Table);
+    _inheritMany(A.FlintNode, [A.FlintComponent, A.FlintText, A.FlintFragment, A.FlintElement, A.FlintComponentNode]);
+    _inheritMany(A.FlintComponent, [A.LoginPage, A.StatefulComponent]);
+    _inheritMany(A._Enum, [A.FlintErrorKind, A.FlintResponseType, A.CookieSameSite, A.Breakpoint, A.Display, A.AlignItems, A.JustifyContent, A.TextAlign, A.Tone, A.ComponentSize, A.ButtonVariant, A.InputVariant]);
+    _inherit(A.Head, A.StatefulComponent);
+    _inheritMany(A.FlintElement, [A.Button, A.Spinner, A.Form, A.TextField, A.Panel, A.Container, A.Link]);
     _inherit(A.Text, A.FlintText);
     _inherit(A._EventStream, A.Stream);
     _mixin(A.UnmodifiableListBase, A.UnmodifiableListMixin);
@@ -17430,18 +13433,16 @@
     typeUniverse: {eC: new Map(), tR: {}, eT: {}, tPV: {}, sEA: []},
     mangledGlobalNames: {int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List", Object: "Object", Map: "Map", JSObject: "JSObject"},
     mangledNames: {},
-    types: ["~()", "~(Object)", "Future<List<FlintModelRecord>>()", "MapEntry<String,@>(@,@)", "Future<~>(Object)", "~(ResourceSnapshot<List<FlintModelRecord>>)", "~(JSObject)", "String(MapEntry<String,Object?>)", "FlintElement(ResourceSnapshot<List<FlintModelRecord>>)", "Future<FlintResponse<Map<String,@>>>(Map<String,Object?>)", "~(FlintResponse<Map<String,@>>)", "bool(MapEntry<String,Object?>)", "bool(String)", "~(~())", "Null(@)", "Null()", "Null(JSObject)", "FlintModelRecord(Map<String,@>)", "~(String,@)", "int()", "@(@)", "Map<String,@>(Map<@,@>)", "Null(Object,StackTrace)", "~(String,Object?)", "~(Object?,Object?)", "@()", "FlintElement(ResourceSnapshot<List<Map<String,@>>>)", "Future<Map<String,@>>()", "Future<List<Map<String,@>>>()", "DashboardPage(Map<String,@>)", "LoginPage(Map<String,@>)", "Container(ResourceSnapshot<Map<String,@>>)", "~(String,String?)", "Null(~())", "bool(FlintModelRecord)", "Future<AuthSession>(Map<String,Object?>)", "~(AuthSession)", "~(@,@)", "0&()", "~(FlintPageContext)", "@(@,String)", "@(String)", "~(@)", "Null(@,StackTrace)", "FlintNode(Object?)", "bool(String?)", "String(String?)", "String(MapEntry<String,DartStyle>)", "String(MapEntry<Breakpoint,DartStyle>)", "String()", "Future<~>(FlintPage,int)", "Future<~>()", "String(KeyframeStep)", "String(StyleTransition)", "String(Object)", "TextEditingController()", "bool(String,List<String>)", "0&(String,int?)", "Map<String,String>(Map<String,String>,String)", "~(int,@)"],
+    types: ["~()", "String(MapEntry<String,Object?>)", "~(JSObject)", "bool(String)", "bool(MapEntry<String,Object?>)", "~(~())", "Null(JSObject)", "~(Object)", "Null(@)", "Null()", "@(@)", "~(String,Object?)", "Null(Object,StackTrace)", "MapEntry<String,@>(@,@)", "~(Object?,Object?)", "@()", "int()", "~(String,@)", "~(String,String?)", "Future<~>(Object)", "0&(String,int?)", "Future<AuthSession>(Map<String,Object?>)", "Map<String,String>(Map<String,String>,String)", "~(@,@)", "~(int,@)", "0&()", "String()", "Null(@,StackTrace)", "~(@)", "FlintNode(Object?)", "Null(~())", "@(String)", "bool(String?)", "String(String?)", "String(MapEntry<String,DartStyle>)", "String(MapEntry<Breakpoint,DartStyle>)", "Future<~>(FlintPage,int)", "Future<~>()", "String(KeyframeStep)", "String(StyleTransition)", "String(Object)", "TextEditingController()", "bool(String,List<String>)", "LoginPage(Map<String,@>)", "@(@,String)", "~(AuthSession)"],
     interceptorsByTag: null,
     leafTags: null,
     arrayRti: Symbol("$ti")
   };
-  A._Universe_addRules(init.typeUniverse, JSON.parse('{"PlainJavaScriptObject":"LegacyJavaScriptObject","UnknownJavaScriptObject":"LegacyJavaScriptObject","JavaScriptFunction":"LegacyJavaScriptObject","NativeArrayBuffer":"NativeByteBuffer","JSBool":{"bool":[],"TrustedGetRuntimeType":[]},"JSNull":{"Null":[],"TrustedGetRuntimeType":[]},"JavaScriptObject":{"JSObject":[]},"LegacyJavaScriptObject":{"JSObject":[]},"JSArray":{"List":["1"],"EfficientLengthIterable":["1"],"JSObject":[],"Iterable":["1"]},"JSArraySafeToStringHook":{"SafeToStringHook":[]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JSObject":[],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"double":[],"num":[]},"JSInt":{"double":[],"int":[],"num":[],"TrustedGetRuntimeType":[]},"JSNumNotInt":{"double":[],"num":[],"TrustedGetRuntimeType":[]},"JSString":{"String":[],"Pattern":[],"TrustedGetRuntimeType":[]},"LateError":{"Error":[]},"CodeUnits":{"ListBase":["int"],"UnmodifiableListMixin":["int"],"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"],"ListBase.E":"int","UnmodifiableListMixin.E":"int"},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"MappedListIterable":{"ListIterable":["2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"Iterable.E":"2","ListIterable.E":"2"},"WhereIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereIterator":{"Iterator":["1"]},"WhereTypeIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereTypeIterator":{"Iterator":["1"]},"UnmodifiableListBase":{"ListBase":["1"],"UnmodifiableListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"ConstantMapView":{"UnmodifiableMapView":["1","2"],"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ConstantMap":{"Map":["1","2"]},"ConstantStringMap":{"ConstantMap":["1","2"],"Map":["1","2"]},"_KeysOrValues":{"Iterable":["1"],"Iterable.E":"1"},"_KeysOrValuesOrElementsIterator":{"Iterator":["1"]},"ConstantSet":{"SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"ConstantStringSet":{"ConstantSet":["1"],"SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"GeneralConstantSet":{"ConstantSet":["1"],"SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"NullError":{"TypeError":[],"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"Closure0Args":{"Function":[]},"Closure2Args":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"JsLinkedHashMap":{"MapBase":["1","2"],"LinkedHashMap":["1","2"],"Map":["1","2"],"MapBase.K":"1","MapBase.V":"2"},"LinkedHashMapKeysIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"LinkedHashMapValuesIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapValueIterator":{"Iterator":["1"]},"LinkedHashMapEntriesIterable":{"EfficientLengthIterable":["MapEntry<1,2>"],"Iterable":["MapEntry<1,2>"],"Iterable.E":"MapEntry<1,2>"},"LinkedHashMapEntryIterator":{"Iterator":["MapEntry<1,2>"]},"JsConstantLinkedHashMap":{"JsLinkedHashMap":["1","2"],"MapBase":["1","2"],"LinkedHashMap":["1","2"],"Map":["1","2"],"MapBase.K":"1","MapBase.V":"2"},"JSSyntaxRegExp":{"RegExp":[],"Pattern":[]},"_MatchImplementation":{"RegExpMatch":[],"Match":[]},"_AllMatchesIterable":{"Iterable":["RegExpMatch"],"Iterable.E":"RegExpMatch"},"_AllMatchesIterator":{"Iterator":["RegExpMatch"]},"StringMatch":{"Match":[]},"_StringAllMatchesIterable":{"Iterable":["Match"],"Iterable.E":"Match"},"_StringAllMatchesIterator":{"Iterator":["Match"]},"NativeByteBuffer":{"JSObject":[],"TrustedGetRuntimeType":[]},"NativeTypedData":{"JSObject":[]},"NativeByteData":{"JSObject":[],"TrustedGetRuntimeType":[]},"NativeTypedArray":{"JavaScriptIndexingBehavior":["1"],"JSObject":[]},"NativeTypedArrayOfDouble":{"ListBase":["double"],"NativeTypedArray":["double"],"List":["double"],"JavaScriptIndexingBehavior":["double"],"EfficientLengthIterable":["double"],"JSObject":[],"Iterable":["double"],"FixedLengthListMixin":["double"]},"NativeTypedArrayOfInt":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"]},"NativeFloat32List":{"ListBase":["double"],"NativeTypedArray":["double"],"List":["double"],"JavaScriptIndexingBehavior":["double"],"EfficientLengthIterable":["double"],"JSObject":[],"Iterable":["double"],"FixedLengthListMixin":["double"],"TrustedGetRuntimeType":[],"ListBase.E":"double"},"NativeFloat64List":{"ListBase":["double"],"NativeTypedArray":["double"],"List":["double"],"JavaScriptIndexingBehavior":["double"],"EfficientLengthIterable":["double"],"JSObject":[],"Iterable":["double"],"FixedLengthListMixin":["double"],"TrustedGetRuntimeType":[],"ListBase.E":"double"},"NativeInt16List":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeInt32List":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeInt8List":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeUint16List":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeUint32List":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeUint8ClampedList":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeUint8List":{"Uint8List":[],"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"_Error":{"Error":[]},"_TypeError":{"TypeError":[],"Error":[]},"_SyncStarIterator":{"Iterator":["1"]},"_SyncStarIterable":{"Iterable":["1"],"Iterable.E":"1"},"AsyncError":{"Error":[]},"_AsyncCompleter":{"_Completer":["1"]},"_Future":{"Future":["1"]},"_Zone":{"Zone":[]},"_RootZone":{"_Zone":[],"Zone":[]},"_LinkedHashSet":{"SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_LinkedHashSetIterator":{"Iterator":["1"]},"ListBase":{"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"MapBase":{"Map":["1","2"]},"MapView":{"Map":["1","2"]},"UnmodifiableMapView":{"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"SetBase":{"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_SetBase":{"SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_JsonMap":{"MapBase":["String","@"],"Map":["String","@"],"MapBase.K":"String","MapBase.V":"@"},"_JsonMapKeyIterable":{"ListIterable":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"Iterable.E":"String","ListIterable.E":"String"},"Base64Codec":{"Codec":["List<int>","String"]},"Encoding":{"Codec":["String","List<int>"]},"JsonUnsupportedObjectError":{"Error":[]},"JsonCyclicError":{"Error":[]},"JsonCodec":{"Codec":["Object?","String"]},"Utf8Codec":{"Codec":["String","List<int>"]},"double":{"num":[]},"int":{"num":[]},"List":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"RegExpMatch":{"Match":[]},"String":{"Pattern":[]},"AssertionError":{"Error":[]},"TypeError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"_StringStackTrace":{"StackTrace":[]},"StringBuffer":{"StringSink":[]},"_Uri":{"Uri":[]},"_SimpleUri":{"Uri":[]},"_DataUri":{"Uri":[]},"CounterDemo":{"FlintComponent":[],"FlintNode":[]},"DashboardHero":{"FlintComponent":[],"FlintNode":[]},"DashboardModuleCard":{"FlintComponent":[],"FlintNode":[]},"EuPanelDashboardShell":{"FlintNode":[]},"EuPanelDashboardSidebar":{"FlintComponent":[],"FlintNode":[]},"DashboardTopbar":{"FlintComponent":[],"FlintNode":[]},"DeployMetric":{"FlintComponent":[],"FlintNode":[]},"LimitMetric":{"FlintComponent":[],"FlintNode":[]},"PlansView":{"FlintComponent":[],"FlintNode":[]},"SubscriptionMetric":{"FlintComponent":[],"FlintNode":[]},"SubscriptionsView":{"FlintComponent":[],"FlintNode":[]},"WebsitesDomainsView":{"FlintComponent":[],"FlintNode":[]},"DashboardPage":{"FlintComponent":[],"FlintNode":[]},"LoginPage":{"FlintComponent":[],"FlintNode":[]},"FlintComponent":{"FlintNode":[]},"StatefulComponent":{"FlintComponent":[],"FlintNode":[]},"StatelessComponent":{"FlintComponent":[],"FlintNode":[]},"ResourceView":{"FlintComponent":[],"FlintNode":[]},"Head":{"FlintComponent":[],"FlintNode":[]},"FlintElement":{"FlintNode":[]},"FlintText":{"FlintNode":[]},"FlintFragment":{"FlintNode":[]},"FlintComponentNode":{"FlintNode":[]},"StateSignalListener":{"FlintComponent":[],"FlintNode":[]},"Button":{"FlintNode":[]},"DataTable":{"FlintNode":[]},"Table":{"FlintNode":[]},"Alert":{"FlintNode":[]},"Spinner":{"FlintNode":[]},"StatusBadge":{"FlintNode":[]},"Form":{"FlintNode":[]},"Select":{"FlintNode":[]},"TextField":{"FlintNode":[]},"EmptyState":{"FlintNode":[]},"Grid":{"FlintNode":[]},"Panel":{"FlintNode":[]},"Section":{"FlintNode":[]},"Sidebar":{"FlintNode":[]},"StatCard":{"FlintNode":[]},"Topbar":{"FlintNode":[]},"Modal":{"FlintNode":[]},"Column":{"FlintNode":[]},"Container":{"FlintNode":[]},"Link":{"FlintNode":[]},"Row":{"FlintNode":[]},"Text":{"FlintNode":[]},"_EventStream":{"Stream":["1"]},"_EventStreamSubscription":{"StreamSubscription":["1"]},"Int8List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Uint8List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Uint8ClampedList":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Int16List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Uint16List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Int32List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Uint32List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Float32List":{"List":["double"],"EfficientLengthIterable":["double"],"Iterable":["double"]},"Float64List":{"List":["double"],"EfficientLengthIterable":["double"],"Iterable":["double"]}}'));
+  A._Universe_addRules(init.typeUniverse, JSON.parse('{"PlainJavaScriptObject":"LegacyJavaScriptObject","UnknownJavaScriptObject":"LegacyJavaScriptObject","JavaScriptFunction":"LegacyJavaScriptObject","NativeArrayBuffer":"NativeByteBuffer","JSBool":{"bool":[],"TrustedGetRuntimeType":[]},"JSNull":{"Null":[],"TrustedGetRuntimeType":[]},"JavaScriptObject":{"JSObject":[]},"LegacyJavaScriptObject":{"JSObject":[]},"JSArray":{"List":["1"],"EfficientLengthIterable":["1"],"JSObject":[],"Iterable":["1"]},"JSArraySafeToStringHook":{"SafeToStringHook":[]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JSObject":[],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"double":[],"num":[]},"JSInt":{"double":[],"int":[],"num":[],"TrustedGetRuntimeType":[]},"JSNumNotInt":{"double":[],"num":[],"TrustedGetRuntimeType":[]},"JSString":{"String":[],"Pattern":[],"TrustedGetRuntimeType":[]},"LateError":{"Error":[]},"CodeUnits":{"ListBase":["int"],"UnmodifiableListMixin":["int"],"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"],"ListBase.E":"int","UnmodifiableListMixin.E":"int"},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"MappedListIterable":{"ListIterable":["2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"Iterable.E":"2","ListIterable.E":"2"},"WhereIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereIterator":{"Iterator":["1"]},"UnmodifiableListBase":{"ListBase":["1"],"UnmodifiableListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"ConstantMapView":{"UnmodifiableMapView":["1","2"],"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ConstantMap":{"Map":["1","2"]},"ConstantStringMap":{"ConstantMap":["1","2"],"Map":["1","2"]},"_KeysOrValues":{"Iterable":["1"],"Iterable.E":"1"},"_KeysOrValuesOrElementsIterator":{"Iterator":["1"]},"ConstantSet":{"SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"ConstantStringSet":{"ConstantSet":["1"],"SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"GeneralConstantSet":{"ConstantSet":["1"],"SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"NullError":{"TypeError":[],"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"Closure0Args":{"Function":[]},"Closure2Args":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"JsLinkedHashMap":{"MapBase":["1","2"],"LinkedHashMap":["1","2"],"Map":["1","2"],"MapBase.K":"1","MapBase.V":"2"},"LinkedHashMapKeysIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"LinkedHashMapValuesIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapValueIterator":{"Iterator":["1"]},"LinkedHashMapEntriesIterable":{"EfficientLengthIterable":["MapEntry<1,2>"],"Iterable":["MapEntry<1,2>"],"Iterable.E":"MapEntry<1,2>"},"LinkedHashMapEntryIterator":{"Iterator":["MapEntry<1,2>"]},"JsConstantLinkedHashMap":{"JsLinkedHashMap":["1","2"],"MapBase":["1","2"],"LinkedHashMap":["1","2"],"Map":["1","2"],"MapBase.K":"1","MapBase.V":"2"},"JSSyntaxRegExp":{"RegExp":[],"Pattern":[]},"_MatchImplementation":{"RegExpMatch":[],"Match":[]},"_AllMatchesIterable":{"Iterable":["RegExpMatch"],"Iterable.E":"RegExpMatch"},"_AllMatchesIterator":{"Iterator":["RegExpMatch"]},"StringMatch":{"Match":[]},"_StringAllMatchesIterable":{"Iterable":["Match"],"Iterable.E":"Match"},"_StringAllMatchesIterator":{"Iterator":["Match"]},"NativeByteBuffer":{"JSObject":[],"TrustedGetRuntimeType":[]},"NativeTypedData":{"JSObject":[]},"NativeByteData":{"JSObject":[],"TrustedGetRuntimeType":[]},"NativeTypedArray":{"JavaScriptIndexingBehavior":["1"],"JSObject":[]},"NativeTypedArrayOfDouble":{"ListBase":["double"],"NativeTypedArray":["double"],"List":["double"],"JavaScriptIndexingBehavior":["double"],"EfficientLengthIterable":["double"],"JSObject":[],"Iterable":["double"],"FixedLengthListMixin":["double"]},"NativeTypedArrayOfInt":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"]},"NativeFloat32List":{"ListBase":["double"],"NativeTypedArray":["double"],"List":["double"],"JavaScriptIndexingBehavior":["double"],"EfficientLengthIterable":["double"],"JSObject":[],"Iterable":["double"],"FixedLengthListMixin":["double"],"TrustedGetRuntimeType":[],"ListBase.E":"double"},"NativeFloat64List":{"ListBase":["double"],"NativeTypedArray":["double"],"List":["double"],"JavaScriptIndexingBehavior":["double"],"EfficientLengthIterable":["double"],"JSObject":[],"Iterable":["double"],"FixedLengthListMixin":["double"],"TrustedGetRuntimeType":[],"ListBase.E":"double"},"NativeInt16List":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeInt32List":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeInt8List":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeUint16List":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeUint32List":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeUint8ClampedList":{"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"NativeUint8List":{"Uint8List":[],"ListBase":["int"],"NativeTypedArray":["int"],"List":["int"],"JavaScriptIndexingBehavior":["int"],"EfficientLengthIterable":["int"],"JSObject":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"TrustedGetRuntimeType":[],"ListBase.E":"int"},"_Error":{"Error":[]},"_TypeError":{"TypeError":[],"Error":[]},"_SyncStarIterator":{"Iterator":["1"]},"_SyncStarIterable":{"Iterable":["1"],"Iterable.E":"1"},"AsyncError":{"Error":[]},"_AsyncCompleter":{"_Completer":["1"]},"_Future":{"Future":["1"]},"_Zone":{"Zone":[]},"_RootZone":{"_Zone":[],"Zone":[]},"_LinkedHashSet":{"SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_LinkedHashSetIterator":{"Iterator":["1"]},"ListBase":{"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"MapBase":{"Map":["1","2"]},"MapView":{"Map":["1","2"]},"UnmodifiableMapView":{"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"SetBase":{"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_SetBase":{"SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_JsonMap":{"MapBase":["String","@"],"Map":["String","@"],"MapBase.K":"String","MapBase.V":"@"},"_JsonMapKeyIterable":{"ListIterable":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"Iterable.E":"String","ListIterable.E":"String"},"Base64Codec":{"Codec":["List<int>","String"]},"Encoding":{"Codec":["String","List<int>"]},"JsonUnsupportedObjectError":{"Error":[]},"JsonCyclicError":{"Error":[]},"JsonCodec":{"Codec":["Object?","String"]},"Utf8Codec":{"Codec":["String","List<int>"]},"double":{"num":[]},"int":{"num":[]},"List":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"RegExpMatch":{"Match":[]},"String":{"Pattern":[]},"AssertionError":{"Error":[]},"TypeError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"_StringStackTrace":{"StackTrace":[]},"StringBuffer":{"StringSink":[]},"_Uri":{"Uri":[]},"_SimpleUri":{"Uri":[]},"_DataUri":{"Uri":[]},"LoginPage":{"FlintComponent":[],"FlintNode":[]},"FlintComponent":{"FlintNode":[]},"StatefulComponent":{"FlintComponent":[],"FlintNode":[]},"Head":{"FlintComponent":[],"FlintNode":[]},"FlintText":{"FlintNode":[]},"FlintFragment":{"FlintNode":[]},"FlintElement":{"FlintNode":[]},"FlintComponentNode":{"FlintNode":[]},"Button":{"FlintNode":[]},"Spinner":{"FlintNode":[]},"Form":{"FlintNode":[]},"TextField":{"FlintNode":[]},"Panel":{"FlintNode":[]},"Container":{"FlintNode":[]},"Link":{"FlintNode":[]},"Text":{"FlintNode":[]},"_EventStream":{"Stream":["1"]},"_EventStreamSubscription":{"StreamSubscription":["1"]},"Int8List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Uint8List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Uint8ClampedList":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Int16List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Uint16List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Int32List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Uint32List":{"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"]},"Float32List":{"List":["double"],"EfficientLengthIterable":["double"],"Iterable":["double"]},"Float64List":{"List":["double"],"EfficientLengthIterable":["double"],"Iterable":["double"]}}'));
   A._Universe_addErasedTypes(init.typeUniverse, JSON.parse('{"EfficientLengthIterable":1,"UnmodifiableListBase":1,"NativeTypedArray":1,"_SetBase":1,"Converter":2}'));
   var string$ = {
     ______: "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\u03f6\x00\u0404\u03f4 \u03f4\u03f6\u01f6\u01f6\u03f6\u03fc\u01f4\u03ff\u03ff\u0584\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u05d4\u01f4\x00\u01f4\x00\u0504\u05c4\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u0400\x00\u0400\u0200\u03f7\u0200\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u03ff\u0200\u0200\u0200\u03f7\x00",
-    Error_: "Error handler must accept one Object or one Object and a StackTrace as arguments, and return a value of the returned future's type",
-    linear6: "linear-gradient(135deg, #06b6d4, #2563eb)",
-    lineare: "linear-gradient(135deg, #0ea5e9, #2563eb)"
+    Error_: "Error handler must accept one Object or one Object and a StackTrace as arguments, and return a value of the returned future's type"
   };
   var type$ = (function rtii() {
     var findType = A.findType;
@@ -17450,49 +13451,36 @@
       AuthSession: findType("AuthSession"),
       Breakpoint: findType("Breakpoint"),
       CodeUnits: findType("CodeUnits"),
-      ConstantStringMap_String_Object: findType("ConstantStringMap<String,Object>"),
       ConstantStringMap_String_String: findType("ConstantStringMap<String,String>"),
-      ConstantStringMap_String_dynamic: findType("ConstantStringMap<String,@>"),
-      ConstantStringMap_String_int: findType("ConstantStringMap<String,int>"),
       ConstantStringMap_of_String_and_nullable_Object: findType("ConstantStringMap<String,Object?>"),
       ConstantStringSet_String: findType("ConstantStringSet<String>"),
       DartStyle: findType("DartStyle"),
       EfficientLengthIterable_dynamic: findType("EfficientLengthIterable<@>"),
       Error: findType("Error"),
       FlintComponent: findType("FlintComponent"),
-      FlintModelApi_FlintModelRecord: findType("FlintModelApi<FlintModelRecord>"),
-      FlintModelRecord: findType("FlintModelRecord"),
+      FlintComponent_Function_Map_String_dynamic: findType("FlintComponent(Map<String,@>)"),
       FlintNode: findType("FlintNode"),
-      FlintPageContext: findType("FlintPageContext"),
-      FlintResponse_Map_String_dynamic: findType("FlintResponse<Map<String,@>>"),
       Function: findType("Function"),
       GeneralConstantSet_int: findType("GeneralConstantSet<int>"),
       Iterable_dynamic: findType("Iterable<@>"),
       Iterable_int: findType("Iterable<int>"),
-      JSArray_FlintModelRecord: findType("JSArray<FlintModelRecord>"),
       JSArray_FlintNode: findType("JSArray<FlintNode>"),
       JSArray_HeadTag: findType("JSArray<HeadTag>"),
       JSArray_KeyframeStep: findType("JSArray<KeyframeStep>"),
       JSArray_Object: findType("JSArray<Object>"),
-      JSArray_SelectOption: findType("JSArray<SelectOption>"),
-      JSArray_SidebarItem: findType("JSArray<SidebarItem>"),
       JSArray_String: findType("JSArray<String>"),
       JSArray_StyleKeyframes: findType("JSArray<StyleKeyframes>"),
       JSArray_StyleTransition: findType("JSArray<StyleTransition>"),
-      JSArray_TableRowData: findType("JSArray<TableRowData>"),
       JSArray_dynamic: findType("JSArray<@>"),
       JSArray_int: findType("JSArray<int>"),
       JSArray_nullable_String: findType("JSArray<String?>"),
       JSArray_of_void_Function: findType("JSArray<~()>"),
-      JSArray_of_void_Function_FlintPageContext: findType("JSArray<~(FlintPageContext)>"),
       JSNull: findType("JSNull"),
       JSObject: findType("JSObject"),
       JavaScriptFunction: findType("JavaScriptFunction"),
       JavaScriptIndexingBehavior_dynamic: findType("JavaScriptIndexingBehavior<@>"),
       KeyframeStep: findType("KeyframeStep"),
-      List_FlintModelRecord: findType("List<FlintModelRecord>"),
       List_FlintNode: findType("List<FlintNode>"),
-      List_Map_String_dynamic: findType("List<Map<String,@>>"),
       List_String: findType("List<String>"),
       List_dynamic: findType("List<@>"),
       List_int: findType("List<int>"),
@@ -17510,15 +13498,6 @@
       Object: findType("Object"),
       Record: findType("Record"),
       RegExpMatch: findType("RegExpMatch"),
-      ResourceController_List_FlintModelRecord: findType("ResourceController<List<FlintModelRecord>>"),
-      ResourceController_List_Map_String_dynamic: findType("ResourceController<List<Map<String,@>>>"),
-      ResourceController_Map_String_dynamic: findType("ResourceController<Map<String,@>>"),
-      ResourceSnapshot_List_FlintModelRecord: findType("ResourceSnapshot<List<FlintModelRecord>>"),
-      ResourceSnapshot_List_Map_String_dynamic: findType("ResourceSnapshot<List<Map<String,@>>>"),
-      ResourceSnapshot_Map_String_dynamic: findType("ResourceSnapshot<Map<String,@>>"),
-      ResourceView_List_FlintModelRecord: findType("ResourceView<List<FlintModelRecord>>"),
-      ResourceView_List_Map_String_dynamic: findType("ResourceView<List<Map<String,@>>>"),
-      ResourceView_Map_String_dynamic: findType("ResourceView<Map<String,@>>"),
       StackTrace: findType("StackTrace"),
       String: findType("String"),
       String_Function_Object: findType("String(Object)"),
@@ -17550,7 +13529,6 @@
       nullable_List_dynamic: findType("List<@>?"),
       nullable_Map_String_dynamic: findType("Map<String,@>?"),
       nullable_Object: findType("Object?"),
-      nullable_ResourceController_List_FlintModelRecord: findType("ResourceController<List<FlintModelRecord>>?"),
       nullable_String: findType("String?"),
       nullable__FutureListener_dynamic_dynamic: findType("_FutureListener<@,@>?"),
       nullable__LinkedHashSetCell: findType("_LinkedHashSetCell?"),
@@ -17579,20 +13557,13 @@
     B.NativeUint8List_methods = A.NativeUint8List.prototype;
     B.PlainJavaScriptObject_methods = J.PlainJavaScriptObject.prototype;
     B.UnknownJavaScriptObject_methods = J.UnknownJavaScriptObject.prototype;
-    B.AlignItems_center_1_center = new A.AlignItems("center", 1, "center");
+    B.AlignItems_1_center = new A.AlignItems(1, "center");
     B.AuthException_6G4 = new A.AuthException("Login succeeded, but no token was returned.");
     B.AuthException_z8Z = new A.AuthException("Login failed.");
-    B.C_LocalStorage = new A.LocalStorage();
-    B.AuthSessionManager_KSt = new A.AuthSessionManager("eupanel.token", "eupanel.user");
-    B.AuthSessionManager_SGS = new A.AuthSessionManager("auth.token", "auth.user");
-    B.BadgeVariant_0 = new A.BadgeVariant(0, "soft");
     B.Color_transparent = new A.Color("transparent");
     B.Border_1_Color_transparent_solid = new A.Border(1, B.Color_transparent, "solid");
-    B.Breakpoint_1024_2_lg = new A.Breakpoint(1024, 2, "lg");
     B.Breakpoint_768_1_md = new A.Breakpoint(768, 1, "md");
     B.ButtonVariant_0 = new A.ButtonVariant(0, "solid");
-    B.ButtonVariant_1 = new A.ButtonVariant(1, "soft");
-    B.ButtonVariant_2 = new A.ButtonVariant(2, "outline");
     B.C_AnimationDirection = new A.AnimationDirection();
     B.C_AnimationFillMode = new A.AnimationFillMode();
     B.C_AnimationIteration = new A.AnimationIteration();
@@ -17736,499 +13707,149 @@
     B.Set_CfDCg = new A.GeneralConstantSet([500, 501, 502, 503, 504], type$.GeneralConstantSet_int);
     B.C_StatusCodeConfig = new A.StatusCodeConfig();
     B.C_TextDecorationStyle = new A.TextDecorationStyle();
-    B.C_TextTransform = new A.TextTransform();
     B.C_Utf8Codec = new A.Utf8Codec();
     B.C_Utf8Encoder = new A.Utf8Encoder();
     B.C_WillChange = new A.WillChange();
     B.C__RootZone = new A._RootZone();
     B.C__StringStackTrace = new A._StringStackTrace();
-    B.CardVariant_0 = new A.CardVariant(0, "outline");
     B.ComponentSize_0 = new A.ComponentSize(0, "xs");
-    B.ComponentSize_1 = new A.ComponentSize(1, "sm");
     B.ComponentSize_2 = new A.ComponentSize(2, "md");
     B.CookieSameSite_0 = new A.CookieSameSite(0, "lax");
     B.Cursor_Yvp = new A.Cursor("not-allowed");
     B.Cursor_pointer = new A.Cursor("pointer");
-    B.EdgeInsets_null_null_24_null = new A.EdgeInsets(null, null, 24, null);
-    B.Display_flex_3_flex = new A.Display("flex", 3, "flex");
-    B.JustifyContent_P8D = new A.JustifyContent("space-between", 3, "between");
-    B.DartStyle_04A = new A.DartStyle(null, B.EdgeInsets_null_null_24_null, null, null, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_P8D, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_11_16_11_16 = new A.EdgeInsets(11, 16, 11, 16);
-    B.EdgeInsets_auto_null_null_null = new A.EdgeInsets("auto", null, null, null);
-    B.TextAlign_1_center = new A.TextAlign(1, "center");
-    B.DartStyle_I1p = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateY(-1px)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "0 6px 16px rgba(37, 99, 235, 0.3)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_1I2 = new A.DartStyle(B.EdgeInsets_11_16_11_16, B.EdgeInsets_auto_null_null_null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, 700, null, null, "#ffffff", B.TextAlign_1_center, null, null, null, null, string$.lineare, 10, null, null, null, null, null, "0 4px 12px rgba(37, 99, 235, 0.2)", null, null, "all 0.2s ease", null, null, B.DartStyle_I1p, null, null, null, null, null, null, null, null, null, null, null, null);
     B.DartStyle_1Xi = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_3Ff = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 11, 600, null, null, "#64748b", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_yku = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "scale(1.02) translateX(4px)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_3Pi = new A.DartStyle(B.EdgeInsets_11_16_11_16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, 700, null, null, "#ffffff", null, null, null, null, null, string$.lineare, 10, null, null, null, null, null, "0 8px 20px rgba(14, 165, 233, 0.25)", null, null, "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_yku, null, null, null, null, null, null, null, null, null, null, null, null);
     B.EdgeInsets_null_18_null_18 = new A.EdgeInsets(null, 18, null, 18);
     B.DartStyle_3Yk = new A.DartStyle(B.EdgeInsets_null_18_null_18, null, null, null, null, null, 46, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 15, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_10_16_10_16 = new A.EdgeInsets(10, 16, 10, 16);
-    B.Color_k4W = new A.Color("#fecaca");
-    B.Border_5wX = new A.Border(1, B.Color_k4W, "solid");
-    B.DartStyle_BVG = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#dc2626", null, null, null, null, null, "#fef2f2", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_3Zj = new A.DartStyle(B.EdgeInsets_10_16_10_16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 700, null, null, "#ef4444", null, null, null, B.Cursor_pointer, null, "#ffffff", 10, B.Border_5wX, null, null, null, null, null, null, null, null, null, null, B.DartStyle_BVG, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_null_7_null_7 = new A.EdgeInsets(null, 7, null, 7);
-    B.DartStyle_4Zy = new A.DartStyle(B.EdgeInsets_null_7_null_7, null, null, null, null, null, 20, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 11, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.JustifyContent_center_1_center = new A.JustifyContent("center", 1, "center");
-    B.DartStyle_4ci = new A.DartStyle(null, null, 44, 44, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 20, null, null, null, null, null, null, null, null, null, "#f0fdf4", 12, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_4gs = new A.DartStyle(null, null, 44, 44, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 20, null, null, null, null, null, null, null, null, null, "#eff6ff", 12, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_24_24_24_24 = new A.EdgeInsets(24, 24, 24, 24);
-    B.Color_s7T = new A.Color("#e2e8f0");
-    B.Border_kBG = new A.Border(1, B.Color_s7T, "solid");
-    B.Color_dLI = new A.Color("rgba(0, 0, 0, 0.02)");
-    B.Shadow_Ysh = new A.Shadow(4, 12, 0, B.Color_dLI);
-    B.DartStyle_5VO = new A.DartStyle(B.EdgeInsets_24_24_24_24, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#ffffff", 16, B.Border_kBG, null, null, null, null, B.Shadow_Ysh, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_O59 = new A.Color("#94a3b8");
-    B.DartStyle_5sJ = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "monospace", null, null, null, null, B.Color_O59, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_12_12_12_12 = new A.EdgeInsets(12, 12, 12, 12);
-    B.DartStyle_6Xc = new A.DartStyle(B.EdgeInsets_12_12_12_12, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.TextAlign_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Display_grid_5_grid = new A.Display("grid", 5, "grid");
-    B.DartStyle_7Am = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 2, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_7DG = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Cursor_Yvp, null, null, null, null, null, null, null, null, null, 0.55, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_7OO = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 22, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_8_14_8_14 = new A.EdgeInsets(8, 14, 8, 14);
-    B.DartStyle_qZY = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#dc2626", null, null, null, null, null, "#fee2e2", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_7bl = new A.DartStyle(B.EdgeInsets_8_14_8_14, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 600, null, null, "#ef4444", null, null, null, B.Cursor_pointer, null, "#fef2f2", 8, B.Border_5wX, null, null, null, null, null, null, null, null, null, null, B.DartStyle_qZY, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_null_14_null_14 = new A.EdgeInsets(null, 14, null, 14);
-    B.DartStyle_85X = new A.DartStyle(B.EdgeInsets_null_14_null_14, null, null, null, null, null, 40, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_8OC = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, null, 1.6, null, "#94a3b8", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_94c = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 8, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_14_22_14_22 = new A.EdgeInsets(14, 22, 14, 22);
-    B.Color_cwe = new A.Color("#eff6ff");
-    B.Color_2Oc = new A.Color("#dbeafe");
-    B.Border_JBz = new A.Border(1, B.Color_2Oc, "solid");
-    B.DartStyle_9Sc = new A.DartStyle(B.EdgeInsets_14_22_14_22, null, null, null, 104, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Color_cwe, 14, B.Border_JBz, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_0_0_0_0 = new A.EdgeInsets(0, 0, 0, 0);
-    B.Color_ejg = new A.Color("#64748b");
-    B.DartStyle_9cM = new A.DartStyle(null, B.EdgeInsets_0_0_0_0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 15, null, 1.6, null, B.Color_ejg, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_9hQ = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 20, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_JNA = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "1.5fr 0.8fr", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_BWT = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 24, null, null, null, null, null, null, null, null, null, "1fr", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.DartStyle_JNA, null);
-    B.DartStyle_CUR = new A.DartStyle(null, B.EdgeInsets_0_0_0_0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, null, 1.5, null, "#64748b", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Cnn = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 16, null, null, null, null, null, null, null, null, null, "1fr 1fr", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_20_20_20_20 = new A.EdgeInsets(20, 20, 20, 20);
-    B.FlexDirection_2_column = new A.FlexDirection(2, "column");
-    B.Color_dLI0 = new A.Color("rgba(0, 0, 0, 0.05)");
-    B.Shadow_Ysh0 = new A.Shadow(4, 12, 0, B.Color_dLI0);
-    B.Color_6FB = new A.Color("#bfdbfe");
-    B.Border_9f9 = new A.Border(1, B.Color_6FB, "solid");
-    B.Color_wDg = new A.Color("rgba(37, 99, 235, 0.05)");
-    B.Shadow_d0m = new A.Shadow(12, 24, 0, B.Color_wDg);
-    B.DartStyle_ONP = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateY(-2px)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Border_9f9, null, null, null, null, B.Shadow_d0m, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Egi = new A.DartStyle(B.EdgeInsets_20_20_20_20, null, null, null, null, null, null, null, B.Display_flex_3_flex, 16, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#ffffff", 16, B.Border_kBG, null, null, null, null, B.Shadow_Ysh0, null, null, "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_ONP, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_Jcx = new A.Color("rgba(255, 255, 255, 0.15)");
-    B.Border_HCW = new A.Border(1, B.Color_Jcx, "solid");
-    B.Color_Jcx0 = new A.Color("rgba(255, 255, 255, 0.25)");
-    B.Border_HCW0 = new A.Border(1, B.Color_Jcx0, "solid");
-    B.DartStyle_UWu = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateY(-1px)", null, null, null, null, null, null, null, null, null, null, null, null, null, "rgba(255, 255, 255, 0.15)", null, B.Border_HCW0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_EvM = new A.DartStyle(B.EdgeInsets_10_16_10_16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 700, null, null, "#f1f5f9", null, null, null, B.Cursor_pointer, null, "rgba(255, 255, 255, 0.08)", 10, B.Border_HCW, null, null, null, null, null, null, null, "all 0.2s ease", null, null, B.DartStyle_UWu, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_twM = new A.Color("rgba(36, 41, 47, 0.2)");
-    B.Shadow_QOz = new A.Shadow(4, 12, 0, B.Color_twM);
-    B.DartStyle_Ez0 = new A.DartStyle(B.EdgeInsets_10_16_10_16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 700, null, null, "#ffffff", null, null, null, B.Cursor_pointer, null, "#24292f", 10, null, null, null, null, null, B.Shadow_QOz, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_Icc = new A.Color("#0f172a");
-    B.DartStyle_Fr5 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "monospace", 13, 700, null, null, B.Color_Icc, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_3_8_3_8 = new A.EdgeInsets(3, 8, 3, 8);
-    B.DartStyle_G1V = new A.DartStyle(B.EdgeInsets_3_8_3_8, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 10, 700, null, 0.5, "#047857", null, B.C_TextTransform, null, null, null, "#ecfdf5", 6, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_34_34_34_34 = new A.EdgeInsets(34, 34, 34, 34);
-    B.SizeValue_lLc = new A.SizeValue("100%");
-    B.Color_Jcx1 = new A.Color("rgba(255, 255, 255, 0.85)");
-    B.Color_1re = new A.Color("rgba(148, 163, 184, 0.25)");
-    B.Border_KLo = new A.Border(1, B.Color_1re, "solid");
-    B.Color_9WD = new A.Color("rgba(15, 23, 42, 0.22)");
-    B.Shadow_3ej = new A.Shadow(32, 80, -20, B.Color_9WD);
-    B.DartStyle_GGw = new A.DartStyle(B.EdgeInsets_34_34_34_34, null, B.SizeValue_lLc, null, null, 460, null, null, B.Display_grid_5_grid, 22, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "blur(20px)", null, null, null, null, null, null, null, null, null, null, null, null, B.Color_Jcx1, 28, B.Border_KLo, null, null, null, null, B.Shadow_3ej, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_GRw = new A.DartStyle(null, null, 32, 32, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 16, null, null, null, null, null, null, null, null, null, "#f0f9ff", 8, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_H14 = new A.DartStyle(B.EdgeInsets_3_8_3_8, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 10, 700, null, 0.5, "#475569", null, B.C_TextTransform, null, null, null, "#f1f5f9", 6, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_HPu = new A.Color("#0369a1");
-    B.DartStyle_H9h = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 15, 700, null, null, B.Color_HPu, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_HFz = new A.DartStyle(null, null, null, null, null, null, null, null, null, 12, B.AlignItems_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_16_24_16_24 = new A.EdgeInsets(16, 24, 16, 24);
-    B.Color_xwL = new A.Color("#bbf7d0");
-    B.Border_aEp = new A.Border(1, B.Color_xwL, "solid");
-    B.Color_w7t = new A.Color("rgba(34, 197, 94, 0.05)");
-    B.Shadow_gmf = new A.Shadow(4, 12, 0, B.Color_w7t);
-    B.DartStyle_IA9 = new A.DartStyle(B.EdgeInsets_16_24_16_24, B.EdgeInsets_null_null_24_null, null, null, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_P8D, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "linear-gradient(135deg, #f0fdf4, #dcfce7)", 16, B.Border_aEp, null, null, null, null, B.Shadow_gmf, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_IuS = new A.DartStyle(null, null, 32, 32, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 16, null, null, null, null, null, null, null, null, null, "#ecfdf5", 8, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Jww = new A.DartStyle(null, null, null, null, null, 600, null, null, B.Display_flex_3_flex, 8, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_KKN = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, B.AlignItems_center_1_center, null, B.JustifyContent_P8D, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_A1z = new A.Color("#2563eb");
-    B.DartStyle_L1z = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, 800, null, null, B.Color_A1z, B.TextAlign_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Lvq = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 18, 700, null, null, B.Color_Icc, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_null_12_null_12 = new A.EdgeInsets(null, 12, null, 12);
-    B.DartStyle_MHW = new A.DartStyle(B.EdgeInsets_null_12_null_12, null, null, null, null, null, 34, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_null_10_null_10 = new A.EdgeInsets(null, 10, null, 10);
-    B.DartStyle_MjM = new A.DartStyle(B.EdgeInsets_null_10_null_10, null, null, null, null, null, 28, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_null_8_null_null = new A.EdgeInsets(null, 8, null, null);
-    B.C_Overflow = new A.Overflow();
-    B.DartStyle_Mto = new A.DartStyle(B.EdgeInsets_null_8_null_null, null, null, null, null, null, null, "60vh", B.Display_flex_3_flex, 16, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, B.C_Overflow, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_NAu = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 26, 800, null, -0.5, "#ffffff", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_sjW = new A.Color("#475467");
-    B.DartStyle_NdJ = new A.DartStyle(null, B.EdgeInsets_0_0_0_0, null, null, null, 620, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.65, null, B.Color_sjW, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Shadow_Hks = new A.Shadow(2, 8, 0, B.Color_dLI0);
-    B.DartStyle_Nfa = new A.DartStyle(null, null, 44, 44, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#ffffff", 12, null, null, null, null, null, B.Shadow_Hks, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_NpQ = new A.DartStyle(null, null, 38, 38, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, 700, null, null, "#ffffff", null, null, null, null, null, "linear-gradient(135deg, #a855f7, #ec4899)", 19, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_OE3 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, null, null, null, "#64748b", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_MFx = new A.Color("#075985");
-    B.DartStyle_OLq = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, null, null, null, B.Color_MFx, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_MOa = new A.Color("#1d4ed8");
-    B.DartStyle_ONb = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 38, 800, 1, null, B.Color_MOa, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_OQA = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, null, null, null, B.Color_ejg, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_P57 = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 14, B.AlignItems_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_PB9 = new A.DartStyle(null, null, 48, 48, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#2563eb", null, null, null, null, null, "linear-gradient(135deg, #eff6ff, #dbeafe)", 14, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_GdM = new A.Color("#166534");
-    B.DartStyle_Pe3 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, null, null, null, B.Color_GdM, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_8_10_8_10 = new A.EdgeInsets(8, 10, 8, 10);
-    B.DartStyle_Pmf = new A.DartStyle(B.EdgeInsets_8_10_8_10, null, null, null, null, null, 40, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_10_12_10_12 = new A.EdgeInsets(10, 12, 10, 12);
-    B.Position_1_relative = new A.Position(1, "relative");
-    B.Color_fwH = new A.Color("#cbd5e1");
-    B.Border_c26 = new A.Border(1, B.Color_fwH, "solid");
-    B.DartStyle_JOt = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#f1f5f9", null, B.Border_c26, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Q4a = new A.DartStyle(B.EdgeInsets_10_12_10_12, null, null, null, null, null, null, null, B.Display_flex_3_flex, 4, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, B.Position_1_relative, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#f8fafc", 10, B.Border_kBG, null, null, null, null, null, null, null, "all 0.2s ease", null, null, B.DartStyle_JOt, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_QYo = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_S1A = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_32_32_32_32 = new A.EdgeInsets(32, 32, 32, 32);
-    B.Color_qii = new A.Color("rgba(255, 255, 255, 0.08)");
-    B.Border_o5Y = new A.Border(1, B.Color_qii, "solid");
-    B.Color_Ur1 = new A.Color("rgba(15, 23, 42, 0.3)");
-    B.Shadow_9C3 = new A.Shadow(20, 40, -20, B.Color_Ur1);
-    B.DartStyle_StC = new A.DartStyle(B.EdgeInsets_32_32_32_32, B.EdgeInsets_null_null_24_null, null, null, null, null, null, null, B.Display_flex_3_flex, 24, B.AlignItems_center_1_center, null, B.JustifyContent_P8D, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)", 20, B.Border_o5Y, null, null, null, null, B.Shadow_9C3, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.Display_flex_3_flex = new A.Display("flex", 3, "flex");
+    B.JustifyContent_1_center = new A.JustifyContent(1, "center");
     B.Color_IyK = new A.Color("#ffffff");
     B.Color_8Gx = new A.Color("rgba(37, 99, 235, 0.9)");
     B.Shadow_zmc = new A.Shadow(16, 30, -14, B.Color_8Gx);
     B.Gradient_R5y = new A.Gradient("linear-gradient(135deg, #0ea5e9 0%, #2563eb 58%, #1d4ed8 100%)");
-    B.Color_wDg0 = new A.Color("rgba(37, 99, 235, 0.95)");
-    B.Shadow_L2t = new A.Shadow(20, 34, -10, B.Color_wDg0);
+    B.Color_wDg = new A.Color("rgba(37, 99, 235, 0.95)");
+    B.Shadow_L2t = new A.Shadow(20, 34, -10, B.Color_wDg);
     B.DartStyle_Xnn = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "scale(1.08)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Shadow_L2t, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     B.DartStyle_J4Y = new A.DartStyle(null, null, 52, 52, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_TKA = new A.DartStyle(null, null, 44, 44, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 800, null, null, B.Color_IyK, null, null, null, null, null, null, 16, null, null, null, null, null, B.Shadow_zmc, null, B.Gradient_R5y, "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_Xnn, null, null, null, null, null, null, null, null, null, B.DartStyle_J4Y, null, null);
-    B.EdgeInsets_2_6_2_6 = new A.EdgeInsets(2, 6, 2, 6);
-    B.DartStyle_IWf = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Color_MOa, null, null, null, null, null, "rgba(37, 99, 235, 0.08)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_TgC = new A.DartStyle(B.EdgeInsets_2_6_2_6, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 11, 700, null, null, B.Color_A1z, null, null, null, B.Cursor_pointer, null, "transparent", 4, null, null, null, null, null, null, null, null, "all 0.15s ease", null, null, B.DartStyle_IWf, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_wDg1 = new A.Color("rgba(37, 99, 235, 0.22)");
-    B.Shadow_JAd = new A.Shadow(18, 36, -24, B.Color_wDg1);
-    B.DartStyle_Tm1 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Color_IyK, null, B.Border_9f9, null, null, null, null, B.Shadow_JAd, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Ue1 = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 12, B.AlignItems_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_RiS = new A.Color("rgba(14, 165, 233, 0.3)");
-    B.Shadow_NPi = new A.Shadow(4, 12, 0, B.Color_RiS);
-    B.Color_Sdw = new A.Color("rgba(14, 165, 233, 0.45)");
-    B.Shadow_8jq = new A.Shadow(8, 20, 0, B.Color_Sdw);
-    B.DartStyle_C8U = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateY(-2px)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Shadow_8jq, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_UeV = new A.DartStyle(B.EdgeInsets_10_16_10_16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 700, null, null, "#ffffff", null, null, null, B.Cursor_pointer, null, string$.lineare, 10, null, null, null, null, null, B.Shadow_NPi, null, null, "all 0.2s ease", null, null, B.DartStyle_C8U, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_16_16_16_16 = new A.EdgeInsets(16, 16, 16, 16);
-    B.Color_YTm = new A.Color("#f1f5f9");
-    B.Border_mfN = new A.Border(1, B.Color_YTm, "solid");
-    B.DartStyle_V4h = new A.DartStyle(B.EdgeInsets_16_16_16_16, null, null, null, null, null, null, null, B.Display_flex_3_flex, 12, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#f8fafc", 12, B.Border_mfN, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_VIj = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 4, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.DartStyle_6TH = new A.DartStyle(null, null, 44, 44, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_1_center, null, B.JustifyContent_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 800, null, null, B.Color_IyK, null, null, null, null, null, null, 16, null, null, null, null, null, B.Shadow_zmc, null, B.Gradient_R5y, "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_Xnn, null, null, null, null, null, null, null, null, null, B.DartStyle_J4Y, null, null);
+    B.Display_grid_5_grid = new A.Display("grid", 5, "grid");
+    B.DartStyle_7Am = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 2, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.DartStyle_7DG = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Cursor_Yvp, null, null, null, null, null, null, null, null, null, 0.55, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.EdgeInsets_null_14_null_14 = new A.EdgeInsets(null, 14, null, 14);
+    B.DartStyle_85X = new A.DartStyle(B.EdgeInsets_null_14_null_14, null, null, null, null, null, 40, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.DartStyle_94c = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 8, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.EdgeInsets_0_0_0_0 = new A.EdgeInsets(0, 0, 0, 0);
+    B.Color_ejg = new A.Color("#64748b");
+    B.DartStyle_9cM = new A.DartStyle(null, B.EdgeInsets_0_0_0_0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 15, null, 1.6, null, B.Color_ejg, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.EdgeInsets_34_34_34_34 = new A.EdgeInsets(34, 34, 34, 34);
+    B.SizeValue_lLc = new A.SizeValue("100%");
+    B.Color_Jcx = new A.Color("rgba(255, 255, 255, 0.85)");
+    B.Color_1re = new A.Color("rgba(148, 163, 184, 0.25)");
+    B.Border_KLo = new A.Border(1, B.Color_1re, "solid");
+    B.Color_9WD = new A.Color("rgba(15, 23, 42, 0.22)");
+    B.Shadow_3ej = new A.Shadow(32, 80, -20, B.Color_9WD);
+    B.DartStyle_GGw = new A.DartStyle(B.EdgeInsets_34_34_34_34, null, B.SizeValue_lLc, null, null, 460, null, null, B.Display_grid_5_grid, 22, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "blur(20px)", null, null, null, null, null, null, null, null, null, null, null, null, B.Color_Jcx, 28, B.Border_KLo, null, null, null, null, B.Shadow_3ej, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.Color_A1z = new A.Color("#2563eb");
+    B.TextAlign_1_center = new A.TextAlign(1, "center");
+    B.DartStyle_L1z = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, 800, null, null, B.Color_A1z, B.TextAlign_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.EdgeInsets_null_12_null_12 = new A.EdgeInsets(null, 12, null, 12);
+    B.DartStyle_MHW = new A.DartStyle(B.EdgeInsets_null_12_null_12, null, null, null, null, null, 34, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.DartStyle_ONN = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 14, B.AlignItems_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.EdgeInsets_8_10_8_10 = new A.EdgeInsets(8, 10, 8, 10);
+    B.DartStyle_Pmf = new A.DartStyle(B.EdgeInsets_8_10_8_10, null, null, null, null, null, 40, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.DartStyle_QYo = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     B.EdgeInsets_11_12_11_12 = new A.EdgeInsets(11, 12, 11, 12);
     B.Color_9Ty = new A.Color("#be123c");
     B.Color_aFc = new A.Color("#fff1f2");
     B.Color_q5Y = new A.Color("#fecdd3");
     B.Border_ema = new A.Border(1, B.Color_q5Y, "solid");
     B.DartStyle_VpT = new A.DartStyle(B.EdgeInsets_11_12_11_12, B.EdgeInsets_0_0_0_0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, null, 1.45, null, B.Color_9Ty, null, null, null, null, null, B.Color_aFc, 14, B.Border_ema, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Vsm = new A.DartStyle(B.EdgeInsets_2_6_2_6, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 12, null, null, null, B.Color_ejg, null, null, null, null, null, "#f1f5f9", 4, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_WDb = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 8, B.AlignItems_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_WRd = new A.DartStyle(B.EdgeInsets_10_12_10_12, null, null, null, null, null, null, null, B.Display_flex_3_flex, 4, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#f8fafc", 10, B.Border_kBG, null, null, null, null, null, null, null, "all 0.2s ease", null, null, B.DartStyle_JOt, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_WmN = new A.DartStyle(null, null, null, null, null, null, null, null, null, 8, B.AlignItems_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Ws6 = new A.DartStyle(B.EdgeInsets_null_12_null_12, null, null, null, null, null, 32, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.EdgeInsets_10_12_10_12 = new A.EdgeInsets(10, 12, 10, 12);
     B.DartStyle_XN8 = new A.DartStyle(B.EdgeInsets_10_12_10_12, null, null, null, null, null, 46, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 15, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     B.EdgeInsets_7_9_7_9 = new A.EdgeInsets(7, 9, 7, 9);
     B.DartStyle_XPR = new A.DartStyle(B.EdgeInsets_7_9_7_9, null, null, null, null, null, 36, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_6_10_6_10 = new A.EdgeInsets(6, 10, 6, 10);
-    B.DartStyle_9cY = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "scale(1.05)", null, null, null, null, null, null, null, "#ef4444", null, null, null, null, null, "rgba(239, 68, 68, 0.2)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_YtG = new A.DartStyle(B.EdgeInsets_6_10_6_10, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 11, 700, null, null, "#f87171", null, null, null, B.Cursor_pointer, null, "rgba(239, 68, 68, 0.1)", 8, null, null, null, null, null, null, null, null, "all 0.2s ease", null, null, B.DartStyle_9cY, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Zk2 = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 12, null, null, null, null, null, null, null, null, null, "1fr 1fr", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_null_9_null_9 = new A.EdgeInsets(null, 9, null, 9);
-    B.DartStyle_abj = new A.DartStyle(B.EdgeInsets_null_9_null_9, null, null, null, null, null, 24, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 12, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_MSz = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#f1f5f9", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_b4s = new A.DartStyle(null, null, null, null, 100, null, 42, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, 600, null, null, "#475569", null, null, null, B.Cursor_pointer, null, "#ffffff", 10, B.Border_c26, null, null, null, null, null, null, null, null, null, null, B.DartStyle_MSz, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_FZY = new A.Color("#bae6fd");
-    B.Border_EuY = new A.Border(1, B.Color_FZY, "solid");
-    B.Color_Sdw0 = new A.Color("rgba(14, 165, 233, 0.05)");
-    B.Shadow_mmk = new A.Shadow(4, 12, 0, B.Color_Sdw0);
-    B.DartStyle_b5O = new A.DartStyle(B.EdgeInsets_16_24_16_24, B.EdgeInsets_null_null_24_null, null, null, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_P8D, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "linear-gradient(135deg, #f0f9ff, #e0f2fe)", 16, B.Border_EuY, null, null, null, null, B.Shadow_mmk, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_2_8_2_8 = new A.EdgeInsets(2, 8, 2, 8);
-    B.DartStyle_cS8 = new A.DartStyle(B.EdgeInsets_2_8_2_8, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 10, 700, null, null, "#0369a1", null, null, null, null, null, "#e0f2fe", 4, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_cUu = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 18, 800, null, -0.4, B.Color_Icc, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_8_null_8_null = new A.EdgeInsets(8, null, 8, null);
-    B.DartStyle_cmj = new A.DartStyle(B.EdgeInsets_8_null_8_null, null, null, null, null, null, null, null, null, 12, null, null, null, null, null, null, null, null, null, "repeat(auto-fit, minmax(200px, 1fr))", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Border_mfN, null, B.Border_mfN, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Shadow_ogT = new A.Shadow(1, 2, 0, B.Color_dLI0);
-    B.Shadow_Owx = new A.Shadow(4, 8, 0, B.Color_dLI0);
-    B.DartStyle_JKP = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateY(-1px)", null, null, null, null, null, null, null, "#0f172a", null, null, null, null, null, "#f8fafc", null, B.Border_c26, null, null, null, null, B.Shadow_Owx, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_dxt = new A.DartStyle(B.EdgeInsets_10_16_10_16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 700, null, null, "#475569", null, null, null, B.Cursor_pointer, null, "#ffffff", 10, B.Border_kBG, null, null, null, null, B.Shadow_ogT, null, null, "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_JKP, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_e28 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 10, 700, null, 0.5, "#38bdf8", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_eiE = new A.DartStyle(null, null, 32, 32, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 16, null, null, null, null, null, null, null, null, null, "#f1f5f9", 8, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_f4M = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 24, 800, null, -0.6, "#0f172a", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_RpV = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#f0fdf4", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_fBG = new A.DartStyle(B.EdgeInsets_8_14_8_14, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 12, 700, null, null, B.Color_GdM, null, null, null, B.Cursor_pointer, null, "#ffffff", 8, B.Border_aEp, null, null, null, null, null, null, null, null, null, null, B.DartStyle_RpV, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Jlp = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#0f172a", null, null, null, null, null, "#f8fafc", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_fUZ = new A.DartStyle(B.EdgeInsets_10_16_10_16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 700, null, null, "#475569", null, null, null, B.Cursor_pointer, null, "#ffffff", 10, B.Border_c26, null, null, null, null, null, null, null, null, null, null, B.DartStyle_Jlp, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_D8D = new A.Color("#334155");
-    B.DartStyle_hUB = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, 700, null, null, B.Color_D8D, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_iue = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 24, null, 1.05, null, B.Color_Icc, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_zne = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateX(6px)", null, null, null, null, null, null, null, "#ffffff", null, null, null, null, null, "rgba(255, 255, 255, 0.05)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_j8E = new A.DartStyle(B.EdgeInsets_11_16_11_16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, 500, null, null, "#94a3b8", null, null, null, null, null, "transparent", 10, null, null, null, null, null, null, null, null, "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_zne, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_jv5 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 16, 700, null, null, "#0f172a", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_6_12_6_12 = new A.EdgeInsets(6, 12, 6, 12);
-    B.DartStyle_9Kg = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#fee2e2", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_kB9 = new A.DartStyle(B.EdgeInsets_6_12_6_12, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 12, null, null, null, "#ef4444", null, null, null, B.Cursor_pointer, null, "#fef2f2", 8, B.Border_5wX, null, null, null, null, null, null, null, null, null, null, B.DartStyle_9Kg, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_kLM = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 700, null, null, B.Color_ejg, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_kiP = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 16, 800, null, -0.4, "#ffffff", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     B.EdgeInsets_36_18_36_18 = new A.EdgeInsets(36, 18, 36, 18);
     B.SizeValue_lOa = new A.SizeValue("100vh");
     B.Gradient_Uvo = new A.Gradient("radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 34%), radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.18), transparent 32%), linear-gradient(135deg, #f8fbff 0%, #eef6ff 44%, #ffffff 100%)");
-    B.DartStyle_l8Y = new A.DartStyle(B.EdgeInsets_36_18_36_18, null, null, null, null, null, B.SizeValue_lOa, null, B.Display_grid_5_grid, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Gradient_Uvo, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Border_XSB = new A.Border(1, B.Color_A1z, "solid");
-    B.Color_8Gx0 = new A.Color("rgba(37, 99, 235, 0.5)");
-    B.Shadow_6JB = new A.Shadow(8, 16, -8, B.Color_8Gx0);
-    B.DartStyle_lvA = new A.DartStyle(null, null, null, null, 140, null, 42, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14, 700, null, null, null, null, null, null, B.Cursor_pointer, null, null, 10, B.Border_XSB, null, null, null, null, B.Shadow_6JB, null, B.Gradient_R5y, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_0mF = new A.Color("#14532d");
-    B.DartStyle_lyt = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 15, 700, null, null, B.Color_0mF, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.DartStyle_goq = new A.DartStyle(B.EdgeInsets_36_18_36_18, null, null, null, null, null, B.SizeValue_lOa, null, B.Display_grid_5_grid, null, B.AlignItems_1_center, null, B.JustifyContent_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Gradient_Uvo, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.Color_Icc = new A.Color("#0f172a");
+    B.DartStyle_iue = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 24, null, 1.05, null, B.Color_Icc, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.DartStyle_kLM = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 700, null, null, B.Color_ejg, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     B.Color_oJX = new A.Color("#111827");
     B.DartStyle_nGp = new A.DartStyle(null, B.EdgeInsets_0_0_0_0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 32, 800, 1.1, null, B.Color_oJX, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     B.EdgeInsets_6_8_6_8 = new A.EdgeInsets(6, 8, 6, 8);
     B.DartStyle_nV3 = new A.DartStyle(B.EdgeInsets_6_8_6_8, null, null, null, null, null, 32, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 12, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Rpf = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "repeat(3, 1fr)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_Rpf0 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "repeat(6, 1fr)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_oEv = new A.DartStyle(null, B.EdgeInsets_null_null_24_null, null, null, null, null, null, null, B.Display_grid_5_grid, 16, null, null, null, null, null, null, null, null, null, "repeat(2, 1fr)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.DartStyle_Rpf, B.DartStyle_Rpf0, null);
-    B.DartStyle_oFy = new A.DartStyle(B.EdgeInsets_8_14_8_14, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 600, null, null, "#475569", null, null, null, B.Cursor_pointer, null, "#f8fafc", 8, B.Border_c26, null, null, null, null, null, null, null, null, null, null, B.DartStyle_MSz, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_wDg2 = new A.Color("rgba(37, 99, 235, 0.08)");
-    B.Shadow_JNe = new A.Shadow(16, 32, -8, B.Color_wDg2);
-    B.DartStyle_ftf = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateY(-4px)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Border_9f9, null, null, null, null, B.Shadow_JNe, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_oiT = new A.DartStyle(B.EdgeInsets_20_20_20_20, null, null, null, null, null, null, null, B.Display_flex_3_flex, 12, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#ffffff", 16, B.Border_kBG, null, null, null, null, B.Shadow_Ysh, null, null, "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_ftf, null, null, null, null, null, null, null, null, null, null, null, null);
     B.DartStyle_pAJ0 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     B.DartStyle_pAJ = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     B.EdgeInsets_null_8_null_8 = new A.EdgeInsets(null, 8, null, 8);
     B.DartStyle_pQ9 = new A.DartStyle(B.EdgeInsets_null_8_null_8, null, null, null, null, null, 28, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 12, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_pTF = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 700, null, null, B.Color_Icc, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Border_MbT = new A.Border(1, "rgba(255, 255, 255, 0.06)", "solid");
-    B.DartStyle_qeu = new A.DartStyle(B.EdgeInsets_12_12_12_12, B.EdgeInsets_auto_null_null_null, null, null, null, null, null, null, B.Display_flex_3_flex, 12, B.AlignItems_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "rgba(255, 255, 255, 0.03)", 12, B.Border_MbT, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_12_null_12_null = new A.EdgeInsets(12, null, 12, null);
-    B.DartStyle_ra2 = new A.DartStyle(B.EdgeInsets_12_null_12_null, null, null, null, null, null, null, null, null, 12, null, null, null, null, null, null, null, null, null, "repeat(auto-fit, minmax(110px, 1fr))", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Border_mfN, null, B.Border_mfN, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_rqn = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 2, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_rqn0 = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 2, null, null, null, 1, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_s38 = new A.DartStyle(B.EdgeInsets_20_20_20_20, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#ffffff", 16, B.Border_kBG, null, null, null, null, B.Shadow_Ysh, null, null, "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_ONP, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.EdgeInsets_6_10_6_10 = new A.EdgeInsets(6, 10, 6, 10);
     B.SizeValue_cQs = new A.SizeValue("fit-content");
     B.Display_eAD = new A.Display("inline-flex", 4, "inlineFlex");
     B.Color_4qw = new A.Color("#0e7490");
     B.Color_PUv = new A.Color("#ecfeff");
     B.DartStyle_svf = new A.DartStyle(B.EdgeInsets_6_10_6_10, B.EdgeInsets_0_0_0_0, B.SizeValue_cQs, null, null, null, null, null, B.Display_eAD, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 12, 800, 1, null, B.Color_4qw, null, null, null, null, null, B.Color_PUv, 999, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.AlignItems_sVI = new A.AlignItems("flex-start", 0, "start");
-    B.DartStyle_tCx = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 24, B.AlignItems_sVI, null, null, null, null, null, null, null, null, "1fr", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.EdgeInsets_8_null_null_null = new A.EdgeInsets(8, null, null, null);
-    B.JustifyContent_WdM = new A.JustifyContent("flex-end", 2, "end");
-    B.DartStyle_tIl = new A.DartStyle(null, B.EdgeInsets_8_null_null_null, null, null, null, null, null, null, B.Display_flex_3_flex, 12, null, null, B.JustifyContent_WdM, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_tXT = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 16, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_uHk = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "monospace", 12, null, null, null, B.Color_O59, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_8Gx1 = new A.Color("rgba(37, 99, 235, 0.2)");
-    B.Shadow_MOk = new A.Shadow(4, 12, 0, B.Color_8Gx1);
-    B.Color_8Gx2 = new A.Color("rgba(37, 99, 235, 0.3)");
-    B.Shadow_f1h = new A.Shadow(6, 16, 0, B.Color_8Gx2);
-    B.DartStyle_48x = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateY(-1px)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Shadow_f1h, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_ugb = new A.DartStyle(B.EdgeInsets_10_16_10_16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 700, null, null, "#ffffff", null, null, null, B.Cursor_pointer, null, string$.linear6, 10, null, null, null, null, null, B.Shadow_MOk, null, null, null, null, null, B.DartStyle_48x, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_v3d = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_grid_5_grid, 12, null, null, null, null, null, null, null, null, null, "1fr 1fr 1fr", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_vC9 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 13, 600, null, null, "#ffffff", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.SizeValue_Bc4 = new A.SizeValue("999px");
-    B.DartStyle_vQn = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_eAD, 6, B.AlignItems_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 600, null, null, null, null, null, null, null, null, null, B.SizeValue_Bc4, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_vl3 = new A.DartStyle(B.EdgeInsets_24_24_24_24, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.TextAlign_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_vn5 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 12, null, 1.5, null, B.Color_ejg, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_vxi = new A.DartStyle(null, null, null, "100%", null, null, null, null, B.Display_flex_3_flex, 24, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_w63 = new A.DartStyle(null, null, null, null, null, null, null, null, null, 20, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.C_FlexWrap = new A.FlexWrap();
-    B.DartStyle_x8p = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 16, B.AlignItems_center_1_center, null, B.JustifyContent_P8D, null, null, B.C_FlexWrap, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_xQ3 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, B.AlignItems_center_1_center, null, B.JustifyContent_WdM, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Color_wDg3 = new A.Color("rgba(37, 99, 235, 0.06)");
-    B.Shadow_JNe0 = new A.Shadow(16, 32, -8, B.Color_wDg3);
-    B.DartStyle_ftf0 = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateY(-3px)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Border_9f9, null, null, null, null, B.Shadow_JNe0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_xog = new A.DartStyle(B.EdgeInsets_24_24_24_24, null, null, null, null, null, null, null, B.Display_flex_3_flex, 16, null, null, null, null, B.FlexDirection_2_column, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "#ffffff", 16, B.Border_kBG, null, null, null, null, B.Shadow_Ysh, null, null, "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_ftf0, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_xpG = new A.DartStyle(null, null, 40, 40, null, null, null, null, B.Display_flex_3_flex, null, B.AlignItems_center_1_center, null, B.JustifyContent_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 16, 800, null, null, "#ffffff", null, null, null, null, null, string$.linear6, 12, null, null, null, null, null, "0 0 16px rgba(6, 182, 212, 0.45)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_yce = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 10, 700, null, 0.5, B.Color_ejg, null, B.C_TextTransform, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_yfD = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 10, null, null, null, null, null, B.C_FlexWrap, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_ygT = new A.DartStyle(null, null, null, null, null, null, null, null, B.Display_flex_3_flex, 16, B.AlignItems_center_1_center, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.DartStyle_yrU = new A.DartStyle(null, null, null, null, null, null, null, null, null, 16, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    B.Border_dMt = new A.Border(1, B.Color_8Gx2, "solid");
-    B.Shadow_sVP = new A.Shadow(12, 24, -12, B.Color_8Gx0);
+    B.Color_8Gx0 = new A.Color("rgba(37, 99, 235, 0.3)");
+    B.Border_dMt = new A.Border(1, B.Color_8Gx0, "solid");
+    B.Color_8Gx1 = new A.Color("rgba(37, 99, 235, 0.5)");
+    B.Shadow_sVP = new A.Shadow(12, 24, -12, B.Color_8Gx1);
     B.Gradient_Qj4 = new A.Gradient("linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%)");
-    B.Color_8Gx3 = new A.Color("rgba(37, 99, 235, 0.6)");
-    B.Shadow_DIe = new A.Shadow(16, 28, -10, B.Color_8Gx3);
+    B.Color_8Gx2 = new A.Color("rgba(37, 99, 235, 0.6)");
+    B.Shadow_DIe = new A.Shadow(16, 28, -10, B.Color_8Gx2);
     B.DartStyle_biX = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateY(-2px)", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, B.Shadow_DIe, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     B.DartStyle_zJF = new A.DartStyle(null, null, B.SizeValue_lLc, null, null, null, 48, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 15, 800, null, null, null, null, null, null, null, null, null, 14, B.Border_dMt, null, null, null, null, B.Shadow_sVP, null, B.Gradient_Qj4, "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_biX, null, null, null, null, null, null, null, null, null, null, null, null);
+    B.Color_D8D = new A.Color("#334155");
     B.Color_1Ts = new A.Color("#d9e2ef");
     B.Border_KaO = new A.Border(1, B.Color_1Ts, "solid");
+    B.Color_fwH = new A.Color("#cbd5e1");
+    B.Border_c26 = new A.Border(1, B.Color_fwH, "solid");
     B.DartStyle_I2r = new A.DartStyle(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "translateY(-1px)", null, null, null, null, null, null, null, B.Color_Icc, null, null, null, null, null, "#f8fafc", null, B.Border_c26, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     B.DartStyle_zSq = new A.DartStyle(null, null, B.SizeValue_lLc, null, null, null, 46, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 800, null, null, B.Color_D8D, null, null, null, null, null, B.Color_IyK, 14, B.Border_KaO, null, null, null, null, null, null, null, "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)", null, null, B.DartStyle_I2r, null, null, null, null, null, null, null, null, null, null, null, null);
     B.Duration_0 = new A.Duration(0);
     B.Duration_30000000 = new A.Duration(30000000);
     B.Duration_604800000000 = new A.Duration(6048e8);
-    B.EdgeInsets_4_10_4_10 = new A.EdgeInsets(4, 10, 4, 10);
     B.FlintErrorKind_0 = new A.FlintErrorKind(0, "unknown");
     B.FlintErrorKind_1 = new A.FlintErrorKind(1, "timeout");
     B.FlintErrorKind_2 = new A.FlintErrorKind(2, "cancelled");
     B.FlintErrorKind_3 = new A.FlintErrorKind(3, "network");
     B.FlintErrorKind_4 = new A.FlintErrorKind(4, "http");
     B.FlintErrorKind_5 = new A.FlintErrorKind(5, "parse");
-    B.List_empty2 = makeConstList([], type$.JSArray_FlintNode);
-    B.FlintFragment_List_empty = new A.FlintFragment(B.List_empty2);
+    B.List_empty3 = makeConstList([], type$.JSArray_FlintNode);
+    B.FlintFragment_List_empty = new A.FlintFragment(B.List_empty3);
     B.FlintResponseType_0 = new A.FlintResponseType(0, "json");
     B.FlintResponseType_1 = new A.FlintResponseType(1, "text");
     B.FlintResponseType_3 = new A.FlintResponseType(3, "unknown");
     B.FlintText_ED0 = new A.FlintText(" *");
-    B.FlintText_luB = new A.FlintText("Loading data...");
     B.Object_empty = {};
     B.Map_empty3 = new A.ConstantStringMap(B.Object_empty, [], A.findType("ConstantStringMap<String,List<String>>"));
     B.FormErrors_Map_empty = new A.FormErrors(B.Map_empty3);
     B.InputVariant_0 = new A.InputVariant(0, "outline");
     B.JsonDecoder_null = new A.JsonDecoder(null);
     B.JsonEncoder_null = new A.JsonEncoder(null);
-    B.FlintText_x = new A.FlintText("x");
-    B.List_FlintText_x = makeConstList([B.FlintText_x], type$.JSArray_FlintNode);
-    B.List_empty7 = makeConstList([], type$.JSArray_of_void_Function_FlintPageContext);
-    B.List_empty4 = makeConstList([], type$.JSArray_FlintModelRecord);
-    B.List_empty3 = makeConstList([], A.findType("JSArray<Map<String,@>>"));
-    B.List_empty8 = makeConstList([], type$.JSArray_SelectOption);
-    B.List_empty9 = makeConstList([], type$.JSArray_SidebarItem);
-    B.List_empty1 = makeConstList([], type$.JSArray_String);
+    B.List_empty0 = makeConstList([], A.findType("JSArray<~(FlintPageContext)>"));
+    B.List_empty2 = makeConstList([], type$.JSArray_String);
     B.List_empty = makeConstList([], A.findType("JSArray<StyleSheet>"));
-    B.List_empty5 = makeConstList([], type$.JSArray_TableRowData);
-    B.List_empty6 = makeConstList([], A.findType("JSArray<0&>"));
-    B.List_empty0 = makeConstList([], A.findType("JSArray<Object?>"));
-    B.SelectOption_Active_active = new A.SelectOption("Active", "active");
-    B.SelectOption_Inactive_inactive = new A.SelectOption("Inactive", "inactive");
-    B.List_hG4 = makeConstList([B.SelectOption_Active_active, B.SelectOption_Inactive_inactive], type$.JSArray_SelectOption);
-    B.Map_empty1 = new A.ConstantStringMap(B.Object_empty, [], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.TableColumn_name_Plan = new A.TableColumn("name", "Plan");
-    B.TableColumn_resources_Resources = new A.TableColumn("resources", "Resources");
-    B.TableColumn_price_Price = new A.TableColumn("price", "Price");
-    B.List_xbk = makeConstList([B.TableColumn_name_Plan, B.TableColumn_resources_Resources, B.TableColumn_price_Price], A.findType("JSArray<TableColumn>"));
-    B.Object_Vdf = {position: 0, inset: 1, "z-index": 2, display: 3, "place-items": 4, padding: 5, background: 6};
-    B.Map_1N6JZ = new A.ConstantStringMap(B.Object_Vdf, ["fixed", 0, 1000, "grid", "center", "20px", "rgba(16, 24, 40, 0.52)"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_O8D = {display: 0, "grid-template-columns": 1, "min-height": 2, background: 3, color: 4};
-    B.Map_4L08s = new A.ConstantStringMap(B.Object_O8D, ["grid", "280px minmax(0, 1fr)", "100vh", "#f8fafc", "#101828"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_CZW = {width: 0, "border-collapse": 1};
-    B.Map_4eYRj = new A.ConstantStringMap(B.Object_CZW, ["100%", "collapse"], type$.ConstantStringMap_of_String_and_nullable_Object);
+    B.List_empty1 = makeConstList([], A.findType("JSArray<Object?>"));
     B.Object_display_0_gap_1 = {display: 0, gap: 1};
     B.Map_CKAM1 = new A.ConstantStringMap(B.Object_display_0_gap_1, ["grid", "6px"], type$.ConstantStringMap_String_String);
     B.Map_CKyJ0 = new A.ConstantStringMap(B.Object_display_0_gap_1, ["grid", "16px"], type$.ConstantStringMap_of_String_and_nullable_Object);
     B.Object_EsS = {display: 0, gap: 1, border: 2, "border-radius": 3, padding: 4, background: 5};
     B.Map_E5pp5 = new A.ConstantStringMap(B.Object_EsS, ["grid", "14px", "1px solid #e4e7ec", "8px", "16px", "#ffffff"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_Bc9 = {"overflow-x": 0, border: 1, "border-radius": 2, background: 3};
-    B.Map_FH8Es = new A.ConstantStringMap(B.Object_Bc9, ["auto", "1px solid #e4e7ec", "8px", "#ffffff"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_Tjt = {display: 0, "flex-direction": 1};
-    B.Map_IwAaL = new A.ConstantStringMap(B.Object_Tjt, ["flex", "row"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Map_IwXTo = new A.ConstantStringMap(B.Object_Tjt, ["flex", "column"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_6M3 = {display: 0, "justify-items": 1, gap: 2, padding: 3, "text-align": 4, border: 5, "border-radius": 6, background: 7};
-    B.Map_NFtUj = new A.ConstantStringMap(B.Object_6M3, ["grid", "center", "10px", "32px 20px", "center", "1px dashed #d0d5dd", "8px", "#ffffff"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_connected_0 = {connected: 0};
-    B.Map_W9pIe = new A.ConstantStringMap(B.Object_connected_0, [false], type$.ConstantStringMap_String_dynamic);
-    B.Object_Az9 = {display: 0, "align-items": 1, "justify-content": 2, gap: 3, "min-height": 4, padding: 5, "border-bottom": 6, background: 7};
-    B.Map_ZK33s = new A.ConstantStringMap(B.Object_Az9, ["flex", "center", "space-between", "16px", "64px", "0 24px", "1px solid #e4e7ec", "#ffffff"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_width_0_padding_1 = {width: 0, padding: 1};
-    B.Map_bTCWm = new A.ConstantStringMap(B.Object_width_0_padding_1, ["100%", "0"], type$.ConstantStringMap_of_String_and_nullable_Object);
     B.Object_type_0 = {type: 0};
     B.Map_eXYEy = new A.ConstantStringMap(B.Object_type_0, ["submit"], type$.ConstantStringMap_of_String_and_nullable_Object);
     B.Map_empty0 = new A.ConstantStringMap(B.Object_empty, [], A.findType("ConstantStringMap<String,DartStyle>"));
     B.Map_empty2 = new A.ConstantStringMap(B.Object_empty, [], type$.ConstantStringMap_String_String);
-    B.Map_empty = new A.ConstantStringMap(B.Object_empty, [], type$.ConstantStringMap_String_dynamic);
+    B.Map_empty = new A.ConstantStringMap(B.Object_empty, [], A.findType("ConstantStringMap<String,@>"));
+    B.Map_empty1 = new A.ConstantStringMap(B.Object_empty, [], type$.ConstantStringMap_of_String_and_nullable_Object);
     B.Object_emR = {"border-radius": 0, padding: 1, border: 2, background: 3, "font-size": 4};
     B.Map_jCMHV = new A.ConstantStringMap(B.Object_emR, ["14px", "13px 14px", "1px solid #d9e2ef", "#f8fafc", "15px"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Map_jCawv = new A.ConstantStringMap(B.Object_emR, ["10px", "10px 12px", "1px solid #cbd5e1", "#f8fafc", "14px"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_uZi = {display: 0, gap: 1, padding: 2};
-    B.Map_mCUgh = new A.ConstantStringMap(B.Object_uZi, ["grid", "6px", "12px"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_style_0 = {style: 0};
-    B.Object_kPN = {margin: 0, "font-size": 1, "line-height": 2};
-    B.Map_fxT4r = new A.ConstantStringMap(B.Object_kPN, [0, "18px", 1.3], type$.ConstantStringMap_String_Object);
-    B.Map_rq1Xi = new A.ConstantStringMap(B.Object_style_0, [B.Map_fxT4r], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_XD3 = {margin: 0, "font-size": 1};
-    B.Map_sVD2e = new A.ConstantStringMap(B.Object_XD3, [0, "18px"], type$.ConstantStringMap_String_Object);
-    B.Map_rq4Z8 = new A.ConstantStringMap(B.Object_style_0, [B.Map_sVD2e], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_1eR = {"font-weight": 0};
-    B.Map_S3HhQ = new A.ConstantStringMap(B.Object_1eR, [700], type$.ConstantStringMap_String_int);
-    B.Map_rq4lA = new A.ConstantStringMap(B.Object_style_0, [B.Map_S3HhQ], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_margin_0 = {margin: 0};
-    B.Map_AS2T0 = new A.ConstantStringMap(B.Object_margin_0, [0], type$.ConstantStringMap_String_int);
-    B.Map_rq7pM = new A.ConstantStringMap(B.Object_style_0, [B.Map_AS2T0], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_Ilf = {"min-width": 0, padding: 1};
-    B.Map_ra5kE = new A.ConstantStringMap(B.Object_Ilf, [0, "24px"], type$.ConstantStringMap_String_Object);
-    B.Map_rqBL3 = new A.ConstantStringMap(B.Object_style_0, [B.Map_ra5kE], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Map_rqER6 = new A.ConstantStringMap(B.Object_style_0, ["border-radius: 10px; padding: 10px 12px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 14px; width: 100%;"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_BnE = {margin: 0, color: 1, "font-size": 2};
-    B.Map_vZQyy = new A.ConstantStringMap(B.Object_BnE, [0, "#667085", "13px"], type$.ConstantStringMap_String_Object);
-    B.Map_rqIEX = new A.ConstantStringMap(B.Object_style_0, [B.Map_vZQyy], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_6uQ = {display: 0, "align-items": 1, gap: 2};
-    B.Map_M6V9O = new A.ConstantStringMap(B.Object_6uQ, ["flex", "center", "10px"], type$.ConstantStringMap_String_String);
-    B.Map_rqJnd = new A.ConstantStringMap(B.Object_style_0, [B.Map_M6V9O], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_ruE = {"align-self": 0, background: 1, "border-right": 2, "box-shadow": 3, display: 4, "flex-direction": 5, height: 6, "overflow-y": 7, position: 8, top: 9};
-    B.Map_sMd81 = new A.ConstantStringMap(B.Object_ruE, ["start", "#090d16", "1px solid rgba(255, 255, 255, 0.08)", "4px 0 24px rgba(0, 0, 0, 0.15)", "flex", "column", "100vh", "auto", "sticky", 0], type$.ConstantStringMap_String_Object);
-    B.Map_rqLQY = new A.ConstantStringMap(B.Object_style_0, [B.Map_sMd81], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_IU0 = {display: 0, "align-items": 1, gap: 2, padding: 3};
-    B.Map_85t4M = new A.ConstantStringMap(B.Object_IU0, ["flex", "center", "8px", "16px"], type$.ConstantStringMap_String_String);
-    B.Map_rqNPN = new A.ConstantStringMap(B.Object_style_0, [B.Map_85t4M], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_cuF = {display: 0, "align-items": 1, "justify-content": 2, gap: 3, padding: 4, "border-bottom": 5};
-    B.Map_g5bRZ = new A.ConstantStringMap(B.Object_cuF, ["flex", "center", "space-between", "12px", "16px", "1px solid #e4e7ec"], type$.ConstantStringMap_String_String);
-    B.Map_rqO9H = new A.ConstantStringMap(B.Object_style_0, [B.Map_g5bRZ], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_margin_0_color_1 = {margin: 0, color: 1};
-    B.Map_5QC7v = new A.ConstantStringMap(B.Object_margin_0_color_1, [0, "#667085"], type$.ConstantStringMap_String_Object);
-    B.Map_rqTB8 = new A.ConstantStringMap(B.Object_style_0, [B.Map_5QC7v], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_OMp = {padding: 0, "border-bottom": 1, flex: 2, "font-weight": 3};
-    B.Map_3gwBk = new A.ConstantStringMap(B.Object_OMp, ["24px 20px", "1px solid rgba(255, 255, 255, 0.08)", "0 0 auto", 700], type$.ConstantStringMap_String_Object);
-    B.Map_rqeR6 = new A.ConstantStringMap(B.Object_style_0, [B.Map_3gwBk], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_p4a = {display: 0, "grid-template-rows": 1, "min-width": 2};
-    B.Map_FSGcp = new A.ConstantStringMap(B.Object_p4a, ["grid", "auto minmax(0, 1fr)", 0], type$.ConstantStringMap_String_Object);
-    B.Map_rqeki = new A.ConstantStringMap(B.Object_style_0, [B.Map_FSGcp], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_qHp = {"min-width": 0};
-    B.Map_CSBiZ = new A.ConstantStringMap(B.Object_qHp, [0], type$.ConstantStringMap_String_int);
-    B.Map_rqgKW = new A.ConstantStringMap(B.Object_style_0, [B.Map_CSBiZ], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_padding_0 = {padding: 0};
-    B.Map_cDZd4 = new A.ConstantStringMap(B.Object_padding_0, ["16px"], type$.ConstantStringMap_String_String);
-    B.Map_rqgMz = new A.ConstantStringMap(B.Object_style_0, [B.Map_cDZd4], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_wpI = {"font-size": 0, "line-height": 1};
-    B.Map_Z17n1 = new A.ConstantStringMap(B.Object_wpI, ["28px", 1.1], type$.ConstantStringMap_String_Object);
-    B.Map_rqhq3 = new A.ConstantStringMap(B.Object_style_0, [B.Map_Z17n1], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_7JJ = {display: 0, "align-items": 1, gap: 2, "min-width": 3};
-    B.Map_6TJLg = new A.ConstantStringMap(B.Object_7JJ, ["flex", "center", "12px", 0], type$.ConstantStringMap_String_Object);
-    B.Map_rqrqv = new A.ConstantStringMap(B.Object_style_0, [B.Map_6TJLg], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_M7F = {display: 0, "align-items": 1, "justify-content": 2, gap: 3};
-    B.Map_3WTri = new A.ConstantStringMap(B.Object_M7F, ["flex", "flex-start", "space-between", "12px"], type$.ConstantStringMap_String_String);
-    B.Map_rqwWH = new A.ConstantStringMap(B.Object_style_0, [B.Map_3WTri], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Object_Daf = {"font-size": 0, color: 1, "font-weight": 2};
-    B.Map_qgal1 = new A.ConstantStringMap(B.Object_Daf, ["13px", "#667085", 600], type$.ConstantStringMap_String_Object);
-    B.Map_rqxoQ = new A.ConstantStringMap(B.Object_style_0, [B.Map_qgal1], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.Map_3W3qx = new A.ConstantStringMap(B.Object_M7F, ["flex", "center", "space-between", "10px"], type$.ConstantStringMap_String_String);
-    B.Map_rqzGG = new A.ConstantStringMap(B.Object_style_0, [B.Map_3W3qx], type$.ConstantStringMap_of_String_and_nullable_Object);
     B.Object_UUe = {"font-size": 0, "font-weight": 1, color: 2};
-    B.Map_szNRN = new A.ConstantStringMap(B.Object_UUe, ["14px", 600, "#344054"], type$.ConstantStringMap_String_Object);
-    B.Object_fSG = {display: 0, gap: 1, "margin-bottom": 2};
-    B.Map_w66QC = new A.ConstantStringMap(B.Object_fSG, ["grid", "14px", "24px"], type$.ConstantStringMap_of_String_and_nullable_Object);
-    B.ResourceStatus_0 = new A.ResourceStatus(0, "idle");
-    B.ResourceStatus_1 = new A.ResourceStatus(1, "loading");
-    B.ResourceStatus_2 = new A.ResourceStatus(2, "success");
-    B.ResourceStatus_3 = new A.ResourceStatus(3, "error");
+    B.Map_szNRN = new A.ConstantStringMap(B.Object_UUe, ["14px", 600, "#344054"], A.findType("ConstantStringMap<String,Object>"));
     B.Object_tvd = {flex: 0, "flex-grow": 1, "flex-shrink": 2, "font-weight": 3, "line-height": 4, opacity: 5, "z-index": 6};
     B.Set_a02Zq = new A.ConstantStringSet(B.Object_tvd, 7, type$.ConstantStringSet_String);
     B.Object_edJ = {svg: 0, path: 1, line: 2, polyline: 3, polygon: 4, circle: 5, rect: 6, ellipse: 7, title: 8, g: 9};
     B.Set_ammpx = new A.ConstantStringSet(B.Object_edJ, 10, type$.ConstantStringSet_String);
-    B.Color_MEz = new A.Color("rgba(0, 0, 0, 0.1)");
-    B.Shadow_6a0 = new A.Shadow(2, 6, 0, B.Color_MEz);
-    B.SidebarItem_3a8 = new A.SidebarItem("Backups", "/dashboard/backups");
-    B.SidebarItem_51v = new A.SidebarItem("DNS", "/dashboard/dns-settings");
-    B.SidebarItem_7Gc = new A.SidebarItem("Databases", "/dashboard/databases");
-    B.SidebarItem_AAa = new A.SidebarItem("Plans", "/dashboard/plans");
-    B.SidebarItem_HGn = new A.SidebarItem("Domains", "/dashboard/domains");
-    B.SidebarItem_JIW = new A.SidebarItem("Overview", "/dashboard");
-    B.SidebarItem_Jqq = new A.SidebarItem("Jobs", "/dashboard/jobs");
-    B.SidebarItem_MFW = new A.SidebarItem("Customers", "/dashboard/customers");
-    B.SidebarItem_jVi = new A.SidebarItem("Subscriptions", "/dashboard/subscriptions");
-    B.SidebarItem_rye = new A.SidebarItem("Servers", "/dashboard/servers");
-    B.SidebarItem_vnp = new A.SidebarItem("Websites", "/dashboard/websites-domains");
-    B.SidebarItem_yI1 = new A.SidebarItem("SSL", "/dashboard/ssl-certificates");
-    B.Tone_0 = new A.Tone(0, "neutral");
     B.Tone_1 = new A.Tone(1, "primary");
-    B.Tone_2 = new A.Tone(2, "success");
     B.Tone_3 = new A.Tone(3, "warning");
-    B.Tone_4 = new A.Tone(4, "danger");
-    B.Tone_5 = new A.Tone(5, "info");
     B.TransitionTiming_ease = new A.TransitionTiming("ease");
     B.TransitionTiming_linear = new A.TransitionTiming("linear");
     B.Type_ByteBuffer_rqD = A.typeLiteral("ByteBuffer");
@@ -18327,20 +13948,13 @@
       A.Primitives_initTicker();
       return $.Primitives_timerFrequency;
     });
-    _lazyFinal($, "componentRegistry", "$get$componentRegistry", () => {
-      var t1 = type$.String,
-        t2 = A.findType("FlintComponent(Map<String,@>)"),
-        t3 = A.LinkedHashMap_LinkedHashMap$_empty(t1, t2);
-      t3.addAll$1(0, A.findType("Map<String,FlintComponent(Map<String,@>)>")._as(A.LinkedHashMap_LinkedHashMap$_literal(["Dashboard", new A.componentRegistry_closure(), "Login", new A.componentRegistry_closure0()], t1, t2)));
-      return new A.FlintComponentRegistry(t3);
-    });
     _lazyFinal($, "clientRouter", "$get$clientRouter", () => {
       var t1 = A._browserOrigin();
       return new A.ClientRouter(new A.FlintClient(t1, B.Map_empty2, B.Map_empty, B.Duration_30000000, null, false, null, B.C_StatusCodeConfig), "");
     });
     _lazyFinal($, "buttonBaseStyle", "$get$buttonBaseStyle", () => {
       var _null = null;
-      return A.DartStyle$(_null, B.AlignItems_center_1_center, _null, _null, _null, _null, A.Border$all(B.Color_transparent), _null, _null, _null, _null, _null, _null, _null, _null, B.Cursor_pointer, _null, B.Display_eAD, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, 600, 8, _null, _null, _null, _null, _null, B.JustifyContent_center_1_center, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, 8, _null, _null, _null, _null, _null, _null, _null, B.C_TextDecorationStyle, _null, _null, _null, A.StyleTransition_StyleTransition$colors(120), _null, _null, _null, _null);
+      return A.DartStyle$(_null, B.AlignItems_1_center, _null, _null, _null, _null, A.Border$all(B.Color_transparent), _null, _null, _null, _null, _null, _null, _null, _null, B.Cursor_pointer, _null, B.Display_eAD, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, 600, 8, _null, _null, _null, _null, _null, B.JustifyContent_1_center, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, _null, 8, _null, _null, _null, _null, _null, _null, _null, B.C_TextDecorationStyle, _null, _null, _null, A.StyleTransition_StyleTransition$colors(120), _null, _null, _null, _null);
     });
   })();
   (function nativeSupport() {
@@ -18397,9 +14011,6 @@
   Function.prototype.call$2$1 = function(a) {
     return this(a);
   };
-  Function.prototype.call$1$0 = function() {
-    return this();
-  };
   convertAllToFastObject(holders);
   convertToFastObject($);
   (function(callback) {
@@ -18432,4 +14043,4 @@
   });
 })();
 
-//# sourceMappingURL=main.dart.js.map
+//# sourceMappingURL=login.d99d01240301.dart.js.map

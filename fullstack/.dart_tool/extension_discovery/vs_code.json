@@ -1,1 +1,1 @@
-{"version":2,"entries":[{"package":"flint_client","rootUri":"../../../flint/flint-client/","packageUri":"lib/"},{"package":"flint_dart","rootUri":"../../../flint/flint_dart/","packageUri":"lib/"},{"package":"flint_ui","rootUri":"../../../flint/flint_ui/","packageUri":"lib/"},{"package":"backend","rootUri":"../","packageUri":"lib/"}]}
+{"version":2,"entries":[{"package":"backend","rootUri":"../","packageUri":"lib/"}]}

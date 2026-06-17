@@ -39,54 +39,6 @@
         }
       }
     },
-    "/dashboard/admin/{section}": {
-      "get": {
-        "summary": "",
-        "tags": [
-          "Default"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "parameters": [
-          {
-            "name": "section",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Path parameter: section"
-          }
-        ]
-      }
-    },
-    "/dashboard/reseller/{section}": {
-      "get": {
-        "summary": "",
-        "tags": [
-          "Default"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "parameters": [
-          {
-            "name": "section",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Path parameter: section"
-          }
-        ]
-      }
-    },
     "/auth/register": {
       "post": {
         "summary": "Register a new user",

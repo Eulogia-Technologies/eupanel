@@ -28,8 +28,9 @@ class EuPanelDashboardShell extends FlintElement {
                 props: const {
                   'style': {
                     'align-self': 'start',
-                    'background': '#ffffff',
-                    'border-right': '1px solid #e4e7ec',
+                    'background': '#090d16',
+                    'border-right': '1px solid rgba(255, 255, 255, 0.08)',
+                    'box-shadow': '4px 0 24px rgba(0, 0, 0, 0.15)',
                     'display': 'flex',
                     'flex-direction': 'column',
                     'height': '100vh',
@@ -44,8 +45,8 @@ class EuPanelDashboardShell extends FlintElement {
                       'div',
                       props: const {
                         'style': {
-                          'padding': '20px',
-                          'border-bottom': '1px solid #e4e7ec',
+                          'padding': '24px 20px',
+                          'border-bottom': '1px solid rgba(255, 255, 255, 0.08)',
                           'flex': '0 0 auto',
                           'font-weight': 700,
                         },

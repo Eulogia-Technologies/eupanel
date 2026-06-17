@@ -1,0 +1,8 @@
+{
+  "mode": "page-bundles",
+  "fallback": "/assets/js/flint-ui/main.53b7891a9080.dart.js",
+  "pages": {
+    "Dashboard": "/assets/js/flint-ui/pages/dashboard.130755b2ef60.dart.js",
+    "Login": "/assets/js/flint-ui/pages/login.d99d01240301.dart.js"
+  }
+}

@@ -7,17 +7,14 @@ environment:
   sdk: ^3.2.0
 
 dependencies:
-  flint_dart:
-    path: ../../flint/flint_dart
-  flint_ui:
-    path: ../../flint/flint_ui
+  flint_dart: ^1.1.12
+  flint_ui: ^0.1.10
   crypto: ^3.0.3
 
 
 
 dependency_overrides:
-  flint_client:
-    path: ../../flint/flint-client
+
   mysql_dart:
     git:
       url: https://github.com/Hybiekay/mysql.dart

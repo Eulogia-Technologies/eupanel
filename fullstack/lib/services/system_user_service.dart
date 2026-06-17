@@ -17,6 +17,7 @@ class SystemUserService {
     String? phpVersion,
   }) async {
     final client = HttpClient();
+    client.connectionTimeout = const Duration(seconds: 3);
     try {
       final uri = Uri.parse('$agentBaseUrl/system-users');
       final request = await client.postUrl(uri);
@@ -53,6 +54,7 @@ class SystemUserService {
   /// Used during rollback if later provisioning steps fail.
   Future<void> delete(String username) async {
     final client = HttpClient();
+    client.connectionTimeout = const Duration(seconds: 3);
     try {
       final uri = Uri.parse('$agentBaseUrl/system-users/$username');
       final request = await client.deleteUrl(uri);

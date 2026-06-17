@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # =============================================================================
 #  EuPanel — Complete One-Shot Installer
 #  Ubuntu 22.04 / 24.04 LTS
@@ -508,7 +508,7 @@ log "Dart dependencies resolved."
 
 # ── Flint Web UI bundle ────────────────────────────────────────────────────
 info "Building Flint Web UI bundle…"
-(cd "${INSTALL_DIR}/fullstack" && dart compile js flint_ui/main.dart -o public/main.dart.js)
+(cd "${INSTALL_DIR}/fullstack" && dart compile js lib/ui/main.dart -o public/main.dart.js)
 log "Flint Web UI bundle built."
 
 # ── Agent: go build ────────────────────────────────────────────────────────
