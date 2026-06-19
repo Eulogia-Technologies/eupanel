@@ -1,65 +1,147 @@
-import 'dart:convert';
 import 'dart:io';
 
-/// Calls the EuPanel Agent to issue and manage SSL certificates via certbot.
+import 'package:backend/services/internal_command_service.dart';
+import 'package:backend/services/nginx_service.dart';
+
 class SslService {
-  final String agentBaseUrl;
-  final String agentSecret;
+  final String certbotBin;
+  final InternalCommandService _commands;
 
-  SslService({required this.agentBaseUrl, required this.agentSecret});
+  /// [agentBaseUrl] and [agentSecret] are accepted for older callers.
+  SslService({
+    String? agentBaseUrl,
+    String? agentSecret,
+    this.certbotBin = '/usr/bin/certbot',
+    InternalCommandService commands = const InternalCommandService(),
+  }) : _commands = commands;
 
-  /// Issues an SSL certificate for a domain.
-  /// [email] is required by certbot for expiry notifications.
-  Future<void> issue({required String domain, required String email}) async {
-    final client = HttpClient();
-    try {
-      final uri = Uri.parse('$agentBaseUrl/ssl/$domain/issue');
-      final request = await client.postUrl(uri);
-      request.headers.set('Authorization', 'Bearer $agentSecret');
-      request.headers.contentType = ContentType.json;
-      request.write(jsonEncode({'email': email}));
+  Future<void> issue({
+    required String domain,
+    required String email,
+    String? rootPath,
+    String phpVersion = '8.3',
+  }) async {
+    _validateDomain(domain);
 
-      final response = await request.close();
-      final body = await response.transform(utf8.decoder).join();
-      final data = jsonDecode(body) as Map<String, dynamic>;
+    await _commands.run(
+      certbotBin,
+      [
+        'certonly',
+        '--nginx',
+        '--non-interactive',
+        '--agree-tos',
+        '--email',
+        email,
+        '-d',
+        domain,
+        '-d',
+        'www.$domain',
+      ],
+      timeout: const Duration(minutes: 5),
+    );
 
-      if (response.statusCode != 200) {
-        throw SslException(
-          'certbot failed for "$domain": ${data['error'] ?? body}',
-        );
-      }
-    } on SocketException catch (e) {
-      throw SslException('Cannot reach agent at $agentBaseUrl: $e');
-    } finally {
-      client.close();
+    await NginxService(commands: _commands).enableSslVhost(
+      domain: domain,
+      rootPath: rootPath ?? '/var/www/$domain/public',
+      phpVersion: phpVersion,
+    );
+  }
+
+  Future<void> renew(String domain) async {
+    _validateDomain(domain);
+    await _commands.run(
+      certbotBin,
+      ['renew', '--cert-name', domain, '--non-interactive'],
+      timeout: const Duration(minutes: 5),
+    );
+  }
+
+  Future<Map<String, dynamic>> status(String domain) async {
+    _validateDomain(domain);
+
+    final certPath = '/etc/letsencrypt/live/$domain/fullchain.pem';
+    if (!await File(certPath).exists()) {
+      return {'domain': domain, 'status': 'none', 'expiry': null};
+    }
+
+    final result = await _commands.run(
+      'openssl',
+      ['x509', '-enddate', '-noout', '-in', certPath],
+      throwOnError: false,
+    );
+
+    if (!result.succeeded) {
+      return {'domain': domain, 'status': 'unknown', 'expiry': null};
+    }
+
+    final line = result.stdout.trim();
+    final expiryText = line.contains('=') ? line.split('=').last.trim() : '';
+    final expiry = _parseOpenSslDate(expiryText);
+    if (expiry == null) {
+      return {'domain': domain, 'status': 'unknown', 'expiry': null};
+    }
+    final now = DateTime.now().toUtc();
+
+    var status = 'valid';
+    if (expiry.isBefore(now)) {
+      status = 'expired';
+    } else if (expiry.isBefore(now.add(const Duration(days: 30)))) {
+      status = 'expiring_soon';
+    }
+
+    return {
+      'domain': domain,
+      'status': status,
+      'expiry': expiry.toIso8601String(),
+    };
+  }
+
+  void _validateDomain(String domain) {
+    final valid = RegExp(r'^[a-zA-Z0-9][a-zA-Z0-9.-]{0,252}[a-zA-Z0-9]$');
+    if (!valid.hasMatch(domain) || domain.contains('..')) {
+      throw SslException('Invalid domain: $domain');
     }
   }
 
-  /// Checks the SSL status for a domain.
-  /// Returns: { status: 'valid'|'expiring_soon'|'expired'|'none', expiry: '...' }
-  Future<Map<String, dynamic>> status(String domain) async {
-    final client = HttpClient();
-    try {
-      final uri = Uri.parse('$agentBaseUrl/ssl/$domain/status');
-      final request = await client.getUrl(uri);
-      request.headers.set('Authorization', 'Bearer $agentSecret');
+  DateTime? _parseOpenSslDate(String value) {
+    final match = RegExp(
+      r'^([A-Z][a-z]{2})\s+(\d{1,2})\s+(\d{2}):(\d{2}):(\d{2})\s+(\d{4})\s+GMT$',
+    ).firstMatch(value);
+    if (match == null) return null;
 
-      final response = await request.close();
-      final body = await response.transform(utf8.decoder).join();
+    const months = {
+      'Jan': 1,
+      'Feb': 2,
+      'Mar': 3,
+      'Apr': 4,
+      'May': 5,
+      'Jun': 6,
+      'Jul': 7,
+      'Aug': 8,
+      'Sep': 9,
+      'Oct': 10,
+      'Nov': 11,
+      'Dec': 12,
+    };
 
-      if (response.statusCode != 200) return {'status': 'none'};
-      return jsonDecode(body) as Map<String, dynamic>;
-    } on SocketException {
-      return {'status': 'unknown'};
-    } finally {
-      client.close();
-    }
+    final month = months[match.group(1)];
+    if (month == null) return null;
+
+    return DateTime.utc(
+      int.parse(match.group(6)!),
+      month,
+      int.parse(match.group(2)!),
+      int.parse(match.group(3)!),
+      int.parse(match.group(4)!),
+      int.parse(match.group(5)!),
+    );
   }
 }
 
 class SslException implements Exception {
   final String message;
   SslException(this.message);
+
   @override
   String toString() => message;
 }

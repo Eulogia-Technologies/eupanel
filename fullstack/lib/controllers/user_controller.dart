@@ -5,9 +5,11 @@ import 'package:backend/models/user_model.dart';
 class UserController extends Controller {
   Future<Response> index() async {
     final users = await User().all();
+    final data = users.map((user) => user.toMap()).toList();
     return res.json({
       "message": 'List of user ',
-      "users": users.map((user) => user.toMap()).toList()
+      "users": data,
+      "data": data,
     });
   }
 
@@ -27,6 +29,7 @@ class UserController extends Controller {
       final body = await req.json();
       await Validator.validate(body, {
         'name': 'required|string|min:2|max:255',
+        'username': 'string|min:3|max:64',
         'email': 'required|email',
         'password': 'required|string|min:8',
         'role': 'string',
@@ -37,7 +40,9 @@ class UserController extends Controller {
       if (!allowedRoles.contains(role)) {
         return res.status(422).json({
           'status': 'errors',
-          'errors': {'role': ['Role must be admin, customer, or reseller.']}
+          'errors': {
+            'role': ['Role must be admin, customer, or reseller.']
+          }
         });
       }
 
@@ -48,9 +53,20 @@ class UserController extends Controller {
           'message': 'A user with this email already exists.',
         });
       }
+      final username = body['username']?.toString().trim().toLowerCase();
+      if (username != null && username.isNotEmpty) {
+        final existingUsername = await User().whereSimple('username', username);
+        if (existingUsername.isNotEmpty) {
+          return res.status(422).json({
+            'status': 'error',
+            'message': 'A user with this username already exists.',
+          });
+        }
+      }
 
       final user = await User().create({
         'name': body['name'],
+        if (username != null && username.isNotEmpty) 'username': username,
         'email': body['email'],
         'password': Hashing().hash(body['password']),
         'role': role,
@@ -78,8 +94,7 @@ class UserController extends Controller {
           final String? existingProfilePic = userToUpdate?.profilePicUrl;
           if (existingProfilePic != null) {
             // Update the existing profile picture
-            profilePicUrl = await Storage.update(
-                existingProfilePic, file,
+            profilePicUrl = await Storage.update(existingProfilePic, file,
                 subdirectory: 'profiles');
           } else {
             // Create a new profile picture
@@ -100,7 +115,9 @@ class UserController extends Controller {
       // Update the user in the database
       if (updateData.isNotEmpty) {
         if (userToUpdate == null) {
-          return res.status(404).json({"status": "error", "message": "User not found"});
+          return res
+              .status(404)
+              .json({"status": "error", "message": "User not found"});
         }
         await userToUpdate.update(id: userId, data: updateData);
       }
@@ -126,16 +143,21 @@ class UserController extends Controller {
     try {
       final userId = req.params['id'];
       if (userId == null) {
-        return res.status(400).json({'status': 'error', 'message': 'Missing user id'});
+        return res
+            .status(400)
+            .json({'status': 'error', 'message': 'Missing user id'});
       }
 
       final user = await User().find(userId);
       if (user == null) {
-        return res.status(404).json({'status': 'error', 'message': 'User not found'});
+        return res
+            .status(404)
+            .json({'status': 'error', 'message': 'User not found'});
       }
 
       await user.delete(userId);
-      return res.json({'status': 'success', 'message': 'User deleted successfully'});
+      return res
+          .json({'status': 'success', 'message': 'User deleted successfully'});
     } catch (e) {
       return res.status(500).json({'status': 'error', 'message': e.toString()});
     }

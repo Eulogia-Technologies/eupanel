@@ -1,6 +1,6 @@
 import 'package:flint_ui/flint_ui.dart';
 
-class EuPanelDashboardSidebar extends FlintComponent {
+class EuPanelDashboardSidebar extends StatelessComponent {
   EuPanelDashboardSidebar({
     required this.role,
   });
@@ -8,7 +8,7 @@ class EuPanelDashboardSidebar extends FlintComponent {
   final String role;
 
   @override
-  FlintNode build() {
+  View build() {
     final activePath = _normalizePath(currentUri.path);
     final isLoggedIn = authSession.isLoggedIn;
     final user = authSession.user;
@@ -171,22 +171,20 @@ class EuPanelDashboardSidebar extends FlintComponent {
   List<SidebarItem> get _items {
     return [
       const SidebarItem(label: 'Overview', href: '/dashboard'),
-      const SidebarItem(label: 'Subscriptions', href: '/dashboard/subscriptions'),
+      const SidebarItem(
+          label: 'Subscriptions', href: '/dashboard/subscriptions'),
       const SidebarItem(label: 'Websites', href: '/dashboard/websites-domains'),
-      const SidebarItem(label: 'Domains', href: '/dashboard/domains'),
-      const SidebarItem(label: 'DNS', href: '/dashboard/dns-settings'),
+      const SidebarItem(label: 'DNS', href: '/dashboard/dns'),
+      const SidebarItem(label: 'SSL', href: '/dashboard/ssl'),
+      const SidebarItem(label: 'File Manager', href: '/dashboard/file-manager'),
       const SidebarItem(label: 'Databases', href: '/dashboard/databases'),
-      const SidebarItem(label: 'SSL', href: '/dashboard/ssl-certificates'),
-      const SidebarItem(label: 'Backups', href: '/dashboard/backups'),
+      const SidebarItem(label: 'Mail', href: '/dashboard/mail'),
       if (role == 'admin') ...[
         const SidebarItem(label: 'Servers', href: '/dashboard/servers'),
         const SidebarItem(label: 'Plans', href: '/dashboard/plans'),
-        const SidebarItem(label: 'Customers', href: '/dashboard/customers'),
         const SidebarItem(label: 'Jobs', href: '/dashboard/jobs'),
       ],
-      if (role == 'reseller') ...[
-        const SidebarItem(label: 'Plans', href: '/dashboard/plans'),
-      ],
+      const SidebarItem(label: 'Backups', href: '/dashboard/backups'),
     ];
   }
 

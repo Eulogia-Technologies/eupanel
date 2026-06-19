@@ -1,17 +1,12 @@
 import 'package:flint_ui/flint_ui.dart';
 
-class DashboardTopbar extends FlintComponent {
-  String role;
+class DashboardTopbar extends StatelessComponent {
+  final String role;
 
   DashboardTopbar({required this.role});
 
   @override
-  void updateFrom(covariant DashboardTopbar next) {
-    role = next.role;
-  }
-
-  @override
-  FlintNode build() {
+  View build() {
     return Container(
       dartStyle: const DartStyle(
         display: Display.flex,
@@ -45,7 +40,8 @@ class DashboardTopbar extends FlintComponent {
                 ),
                 Container(
                   dartStyle: DartStyle(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     radius: 999,
                     background: role == 'admin' ? '#eff6ff' : '#f0fdf4',
                     color: role == 'admin' ? '#1d4ed8' : '#15803d',
@@ -78,14 +74,16 @@ class DashboardTopbar extends FlintComponent {
             fontSize: 13,
             fontWeight: 700,
             cursor: Cursor.pointer,
-            shadow: Shadow(x: 0, y: 1, blur: 2, color: Color.rgba(0, 0, 0, 0.05)),
+            shadow:
+                Shadow(x: 0, y: 1, blur: 2, color: Color.rgba(0, 0, 0, 0.05)),
             transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
             hover: DartStyle(
               background: '#f8fafc',
               color: '#0f172a',
               border: Border(color: Color('#cbd5e1'), width: 1),
               transform: 'translateY(-1px)',
-              shadow: Shadow(x: 0, y: 4, blur: 8, color: Color.rgba(0, 0, 0, 0.05)),
+              shadow:
+                  Shadow(x: 0, y: 4, blur: 8, color: Color.rgba(0, 0, 0, 0.05)),
             ),
           ),
           child: 'API Docs',

@@ -17,8 +17,7 @@ section() { echo -e "\n${BOLD}${CYAN}â”â”â”  $*  â”â”â
 [[ $EUID -ne 0 ]] && die "Run as root: sudo bash update.sh"
 [[ ! -d /opt/eupanel ]] && die "EuPanel is not installed. Run install.sh first."
 
-export PATH="$PATH:/usr/local/go/bin:/usr/lib/dart/bin"
-export GOPATH="/root/go"
+export PATH="$PATH:/usr/lib/dart/bin"
 # Load profile paths if available
 [[ -f /etc/profile.d/eupanel-paths.sh ]] && source /etc/profile.d/eupanel-paths.sh
 
@@ -42,7 +41,6 @@ if [[ "$CURRENT" == "$LATEST" ]]; then
     echo -e "  ${GREEN}Already up to date.${NC} Nothing to do."
     echo ""
     systemctl is-active --quiet eupanel-backend  && log "eupanel-backend  running" || true
-    systemctl is-active --quiet eupanel-agent    && log "eupanel-agent    running" || true
     exit 0
 fi
 
@@ -84,18 +82,6 @@ info "Building Flint Web UI bundleâ€¦"
 log "Flint Web UI bundle built."
 
 # â”€â”€ 4. Agent â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-section "4 / 4 â€” Agent (Go)"
-info "Compiling eupanel-agentâ€¦"
-(
-  cd /opt/eupanel/eupanel-agent
-  rm -f go.sum
-  GOPATH="/root/go" GONOSUMCHECK=* go mod tidy
-  GOPATH="/root/go" CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
-      go build -ldflags="-s -w" -o /usr/local/bin/eupanel-agent .
-)
-log "Agent binary updated."
-
-# â”€â”€ Run any new migrations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 section "DB Migration"
 info "Syncing database tablesâ€¦"
 set -a; source /opt/eupanel/fullstack/.env; set +a
@@ -109,12 +95,15 @@ chmod 600 /opt/eupanel/fullstack/.env 2>/dev/null || true
 
 info "Stopping servicesâ€¦"
 systemctl stop eupanel-backend eupanel-agent 2>/dev/null || true
-rm -f /etc/systemd/system/eupanel-frontend.service
+systemctl disable eupanel-agent 2>/dev/null || true
+rm -f /etc/systemd/system/eupanel-frontend.service \
+      /etc/systemd/system/eupanel-agent.service \
+      /usr/local/bin/eupanel-agent \
+      /etc/eupanel/agent.env
 systemctl daemon-reload
 sleep 2
 
 info "Starting servicesâ€¦"
-systemctl start eupanel-agent
 systemctl start eupanel-backend
 sleep 3
 
@@ -123,7 +112,7 @@ echo ""
 echo -e "${BOLD}${GREEN}  EuPanel updated successfully!${NC}"
 echo ""
 
-for svc in eupanel-agent eupanel-backend; do
+for svc in eupanel-backend; do
     if systemctl is-active --quiet "$svc"; then
         echo -e "  ${GREEN}â—${NC} $svc  ${GREEN}running${NC}"
     else

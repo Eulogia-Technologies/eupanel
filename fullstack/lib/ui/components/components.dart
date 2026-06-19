@@ -1,5 +1,6 @@
 export 'dashboard_shell.dart';
 export 'dashboard_sidebar.dart';
+export 'dashboard_page_topbar.dart';
 export 'counter_demo.dart';
 export 'websites_domains_view.dart';
 export 'plans_view.dart';
@@ -7,6 +8,7 @@ export 'subscriptions_view.dart';
 export 'dashboard_topbar.dart';
 export 'dashboard_hero.dart';
 export 'dashboard_module_card.dart';
+export 'enterprise_records_view.dart';
 export 'limit_metric.dart';
 export 'subscription_metric.dart';
 export 'deploy_metric.dart';

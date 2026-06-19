@@ -1,10 +1,10 @@
 import 'package:flint_ui/flint_ui.dart';
 
-class CounterDemo extends FlintComponent {
+class CounterDemo extends StatefulComponent {
   int count = 0;
 
   @override
-  FlintNode build() {
+  View build() {
     return Panel(
       title: 'Flint UI counter demo',
       description:

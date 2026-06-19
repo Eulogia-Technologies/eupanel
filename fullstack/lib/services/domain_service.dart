@@ -32,7 +32,7 @@ class DomainService {
     if (sub == null) {
       throw NotFoundException(message: 'Subscription not found.');
     }
-    if (sub.userId != userId) {
+    if (!_canAccessSubscription(sub, userId)) {
       throw NotFoundException(message: 'Subscription not found.');
     }
     if (sub.status != 'active') {
@@ -90,7 +90,7 @@ class DomainService {
   }) async {
     // Verify ownership
     final sub = await Subscription().find(subscriptionId);
-    if (sub == null || sub.userId != userId) {
+    if (sub == null || !_canAccessSubscription(sub, userId)) {
       throw NotFoundException(message: 'Subscription not found.');
     }
 
@@ -112,7 +112,7 @@ class DomainService {
 
     if (ownerId != null) {
       final sub = await Subscription().find(domainRecord.subscriptionId!);
-      if (sub == null || sub.userId != ownerId) {
+      if (sub == null || !_canAccessSubscription(sub, ownerId)) {
         throw NotFoundException(message: 'Domain not found.');
       }
     }
@@ -128,7 +128,7 @@ class DomainService {
 
     if (ownerId != null) {
       final sub = await Subscription().find(domainRecord.subscriptionId!);
-      if (sub == null || sub.userId != ownerId) {
+      if (sub == null || !_canAccessSubscription(sub, ownerId)) {
         throw NotFoundException(message: 'Domain not found.');
       }
     }
@@ -156,5 +156,9 @@ class DomainService {
       r'^(?:[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$',
     );
     return regex.hasMatch(domain);
+  }
+
+  bool _canAccessSubscription(Subscription sub, String userId) {
+    return sub.userId == userId || sub.createdByUserId == userId;
   }
 }

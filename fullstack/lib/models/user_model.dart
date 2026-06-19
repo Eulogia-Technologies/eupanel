@@ -5,6 +5,7 @@ class User extends Model<User> {
   User() : super(() => User());
 
   String? get name => getAttribute("name");
+  String? get username => getAttribute("username");
   String? get email => getAttribute("email");
   String? get password => getAttribute("password");
   String? get profilePicUrl => getAttribute("profilePicUrl");
@@ -14,6 +15,13 @@ class User extends Model<User> {
         name: 'users',
         columns: [
           Column(name: 'name', type: ColumnType.string, length: 255),
+          Column(
+            name: 'username',
+            type: ColumnType.string,
+            length: 64,
+            isUnique: true,
+            isNullable: true,
+          ),
           Column(
             name: 'email',
             type: ColumnType.string,

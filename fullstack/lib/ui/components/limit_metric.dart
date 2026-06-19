@@ -1,8 +1,8 @@
 import 'package:flint_ui/flint_ui.dart';
 
-class LimitMetric extends FlintComponent {
-  String label;
-  String value;
+class LimitMetric extends StatelessComponent {
+  final String label;
+  final String value;
 
   LimitMetric({
     required this.label,
@@ -10,13 +10,7 @@ class LimitMetric extends FlintComponent {
   });
 
   @override
-  void updateFrom(covariant LimitMetric next) {
-    label = next.label;
-    value = next.value;
-  }
-
-  @override
-  FlintNode build() {
+  View build() {
     return Container(
       dartStyle: const DartStyle(
         display: Display.flex,

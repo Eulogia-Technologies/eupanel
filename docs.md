@@ -1,4 +1,4 @@
-﻿# EuPanel Project Status
+# EuPanel Project Status
 
 ## What This App Is Meant For
 
@@ -10,11 +10,11 @@ The intended architecture is:
 
 - Backend: Flint Dart fullstack app on port `4054`
 - Frontend: Flint Web UI source inside `fullstack/flint_ui`, compiled to `fullstack/public/main.dart.js`
-- Agent: Go server agent on localhost port `7820`
+- Native provisioning: Flint Dart services run server commands through `InternalCommandService`
 - Database: MySQL/MariaDB through Flint models
 - System services: nginx, PHP-FPM, MariaDB, PowerDNS, vsftpd, Certbot, phpMyAdmin, Tinyfilemanager
 
-The big idea is that the backend stores the control panel data and exposes APIs, while the Go agent performs server-level actions like creating Linux users, FTP users, nginx virtual hosts, SSL certificates, and git deployments.
+The big idea is that the backend stores the control panel data and exposes APIs, while Flint Dart services perform server-level actions like creating Linux users, FTP users, nginx virtual hosts, SSL certificates, and git deployments.
 
 ## What Is Already Done
 
@@ -23,9 +23,8 @@ The big idea is that the backend stores the control panel data and exposes APIs,
 The project already has the main three-part structure:
 
 - `fullstack/` contains the Flint Dart API, Flint Web UI pages, and public assets.
-- `eupanel-agent/` contains the Go provisioning agent.
 - `install.sh` installs the full stack on Ubuntu.
-- `update.sh` updates the backend, Flint Web UI bundle, and agent services.
+- `update.sh` updates the backend, Flint Web UI bundle, service.
 - `README.md` explains installation, services, ports, and architecture.
 - `masterplan.md` describes the long-term product direction.
 
@@ -61,7 +60,7 @@ The backend has working controller/service logic for:
 - Seeding demo users.
 - Creating, listing, updating, and deleting plans.
 - Creating subscriptions.
-- Provisioning subscriptions through the Go agent.
+- Provisioning subscriptions through Flint Dart native command services.
 - Cancelling/deprovisioning subscriptions.
 - Managing domain records in the panel database.
 - Managing sites and subdomains.
@@ -84,13 +83,13 @@ When a subscription is created, the backend:
 - Validates the selected plan.
 - Generates a Linux-safe system username.
 - Creates a subscription record.
-- Contacts the Go agent.
+- Calls the local Dart provisioning services.
 - Creates a Linux system user.
 - Creates an FTP user.
 - Marks the subscription as active if provisioning succeeds.
 - Rolls back the system user if provisioning fails.
 
-The Go agent currently supports:
+The Flint Dart native command services currently support:
 
 - Health check.
 - Domain creation and deletion.
@@ -141,13 +140,12 @@ The installer is intended to set up:
 - PowerDNS
 - vsftpd
 - Certbot
-- Go
 - Dart SDK
 - Tinyfilemanager
 - UFW firewall rules
-- systemd services for the fullstack backend and agent
+- systemd service for the fullstack backend
 
-The update script is intended to pull the latest code, rebuild changed services, restart them, and show status.
+The update script is intended to pull the latest code, rebuild the backend UI bundle, restart the backend service, and show status.
 
 ## What Is Not Done Yet
 
@@ -176,7 +174,7 @@ Still needed:
 - Retry logic.
 - Job status transitions from `pending` to `running`, `success`, or `failed`.
 - Detailed job logs.
-- Worker connection to the Go agent for sites, DNS, SSL, backups, mail, and databases.
+- Worker execution through Dart provider services for sites, DNS, SSL, backups, mail, and databases.
 - A clear failure and rollback strategy for every job type.
 
 ### Provider Adapter Architecture
@@ -237,7 +235,7 @@ Still needed:
 
 ### SSL
 
-The Go agent can issue/renew SSL using Certbot, and the backend can create SSL job records. The full backend-to-agent SSL workflow is not finished.
+The Dart SSL service can issue/renew SSL using Certbot, and the backend can create SSL job records. The full job-driven SSL workflow is not finished.
 
 Still needed:
 
@@ -430,7 +428,8 @@ This API should handle:
 
 ## Current Summary
 
-EuPanel is already a serious scaffold for a hosting control panel. It has the correct high-level direction, a Flint fullstack backend, a dashboard UI bundle, an installer, and a Go agent that can perform some real server actions.
+EuPanel is already a serious scaffold for a hosting control panel. It has the correct high-level direction, a Flint fullstack backend, a dashboard UI bundle, an installer, and Dart command services that can perform real server actions.
 
 It is not finished as a production control panel yet. The next important work is not adding more screens. The next important work is making the existing flows reliable, secure, and fully connected: auth, permissions, job execution, provider adapters, and one complete provisioning workflow from dashboard to backend to server agent.
+
 

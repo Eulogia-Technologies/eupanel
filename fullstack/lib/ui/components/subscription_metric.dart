@@ -1,10 +1,10 @@
 import 'package:flint_ui/flint_ui.dart';
 import 'package:universal_web/web.dart' as web;
 
-class SubscriptionMetric extends FlintComponent {
-  String label;
-  String value;
-  bool copyable;
+class SubscriptionMetric extends StatelessComponent {
+  final String label;
+  final String value;
+  final bool copyable;
 
   SubscriptionMetric({
     required this.label,
@@ -13,14 +13,7 @@ class SubscriptionMetric extends FlintComponent {
   });
 
   @override
-  void updateFrom(covariant SubscriptionMetric next) {
-    label = next.label;
-    value = next.value;
-    copyable = next.copyable;
-  }
-
-  @override
-  FlintNode build() {
+  View build() {
     return Container(
       dartStyle: const DartStyle(
         display: Display.flex,
@@ -54,7 +47,10 @@ class SubscriptionMetric extends FlintComponent {
                 letterSpacing: 0.5,
               ),
             ),
-            if (copyable && value.isNotEmpty && value != '********' && value != 'pending')
+            if (copyable &&
+                value.isNotEmpty &&
+                value != '********' &&
+                value != 'pending')
               Button(
                 dartStyle: const DartStyle(
                   background: 'transparent',

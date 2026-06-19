@@ -1,6 +1,6 @@
 ﻿# EuPanel
 
-A lightweight hosting control panel built as a Flint Dart fullstack app, using Flint Web UI for the dashboard and a Go agent that runs on each server. Built by [Eulogia Technologies](https://github.com/Eulogia-Technologies).
+A lightweight hosting control panel built as a Flint Dart fullstack app, using Flint Web UI for the dashboard and Dart native command services for server provisioning. Built by [Eulogia Technologies](https://github.com/Eulogia-Technologies).
 
 ---
 
@@ -47,13 +47,13 @@ The script will ask you a few questions, then handle everything else.
 
 ## Update
 
-Already installed? One command updates everything â€” fullstack backend, Flint Web UI bundle, and agent:
+Already installed? One command updates everything: fullstack backend and Flint Web UI bundle.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/update.sh | bash
 ```
 
-It pulls the latest code, rebuilds only what changed, restarts all services, and shows the status. If you're already on the latest version it exits immediately without doing anything.
+It pulls the latest code, rebuilds only what changed, restarts the backend service, and shows the status. If you're already on the latest version it exits immediately without doing anything.
 
 ---
 
@@ -139,18 +139,16 @@ phpMyAdmin       â€” served at a secret random URL
 PowerDNS         â€” authoritative DNS server with HTTP API
 vsftpd           â€” FTP server with virtual users
 Certbot          â€” Let's Encrypt SSL + auto-renew
-Go 1.22          â€” builds eupanel-agent
 Dart SDK         â€” runs the Flint backend and builds Flint Web UI
 Tinyfilemanager  â€” PHP file browser
 Firewall (UFW)   â€” opens 22, 80, 443, 21, 53, FTP passive
 ```
 
-Two systemd services are created and started:
+One systemd service is created and started:
 
 | Service | What |
 |---|---|
 | `eupanel-backend` | Flint Dart API, dashboard pages, and static UI bundle on port 4054 |
-| `eupanel-agent` | Go provisioning agent on localhost:7820 |
 
 ---
 
@@ -159,26 +157,23 @@ Two systemd services are created and started:
 **Check service status:**
 ```bash
 systemctl status eupanel-backend
-systemctl status eupanel-agent
 ```
 
 **View live logs:**
 ```bash
 journalctl -u eupanel-backend  -f
-journalctl -u eupanel-agent    -f
 ```
 
 **Restart a service:**
 ```bash
 systemctl restart eupanel-backend
-systemctl restart eupanel-agent
 ```
 
 **Update EuPanel to the latest version:**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/update.sh | bash
 ```
-This pulls the latest code, rebuilds the backend UI bundle and agent, then restarts the services automatically. If already up to date it exits immediately.
+This pulls the latest code, rebuilds the backend UI bundle, then restarts the service automatically. If already up to date it exits immediately.
 
 **Issue SSL manually** (if you skipped it during install):
 ```bash
@@ -203,7 +198,6 @@ The following ports are **localhost-only** (not exposed to the internet):
 | Port | Service |
 |---|---|
 | 4054 | EuPanel fullstack backend |
-| 7820 | EuPanel agent |
 | 8081 | PowerDNS HTTP API |
 
 ---
@@ -218,10 +212,6 @@ The following ports are **localhost-only** (not exposed to the internet):
 â”‚   â”œâ”€â”€ public/       compiled UI assets
 â”‚   â”œâ”€â”€ .env          secrets â€” chmod 600
 â”‚   â””â”€â”€ storage/
-â””â”€â”€ eupanel-agent/    Go agent source
-
-/usr/local/bin/eupanel-agent    compiled Go binary
-/etc/eupanel/agent.env          agent secrets
 /etc/eupanel/pma_token          phpMyAdmin secret URL token
 /var/www/phpmyadmin/            phpMyAdmin files
 /var/www/filemanager/           Tinyfilemanager
@@ -238,14 +228,11 @@ The backend service isn't running yet. Check logs:
 journalctl -u eupanel-backend --no-pager -n 50
 ```
 
-**"Cannot reach agent" when creating a subscription**
+**Provisioning command failed when creating a subscription**
 
-The agent isn't running or the secret doesn't match:
+Provisioning now runs from the Flint Dart backend. Check the backend logs for the native command failure:
 ```bash
-systemctl status eupanel-agent
-# check secret matches in both:
-cat /etc/eupanel/agent.env
-cat /opt/eupanel/fullstack/.env | grep AGENT_SECRET
+journalctl -u eupanel-backend --no-pager -n 80
 ```
 
 **SSL certificate failed during install**
@@ -290,11 +277,10 @@ nginx (80/443)
 Flint Dart fullstack app
   â”œâ”€â”€ MariaDB         (eupanel database)
   â”œâ”€â”€ PowerDNS API    (localhost:8081)
-  â””â”€â”€ eupanel-agent   (localhost:7820)
-        â”œâ”€â”€ useradd / userdel    (system users)
-        â”œâ”€â”€ vsftpd virtual users (FTP accounts)
-        â”œâ”€â”€ nginx vhost files    (site provisioning)
-        â””â”€â”€ certbot              (SSL certificates)
+  â”œâ”€â”€ useradd / userdel    (system users)
+  â”œâ”€â”€ vsftpd virtual users (FTP accounts)
+  â”œâ”€â”€ nginx vhost files    (site provisioning)
+  â””â”€â”€ certbot              (SSL certificates)
 ```
 
 ---

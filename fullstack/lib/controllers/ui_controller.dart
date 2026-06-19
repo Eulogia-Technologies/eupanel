@@ -1,6 +1,14 @@
 import 'package:backend/models/plan_model.dart';
 import 'package:backend/models/subscription_model.dart';
 import 'package:backend/models/user_model.dart';
+import 'package:backend/models/server_model.dart';
+import 'package:backend/models/job_model.dart';
+import 'package:backend/models/database_model.dart';
+import 'package:backend/models/backup_model.dart';
+import 'package:backend/models/mail_account_model.dart';
+import 'package:backend/models/dns_zone_model.dart';
+import 'package:backend/models/ssl_certificate_model.dart';
+import 'package:backend/models/site_model.dart';
 import 'package:backend/config/app_config.dart';
 import 'package:flint_dart/flint_dart.dart';
 
@@ -47,7 +55,7 @@ class UiController {
     final section = req.params['section'];
 
     // Role gate admin-only sections
-    final adminSections = const ['servers', 'jobs', 'customers'];
+    final adminSections = const ['servers', 'jobs'];
     if (adminSections.contains(section) && role != 'admin') {
       return res.redirect('/dashboard');
     }
@@ -73,21 +81,30 @@ class UiController {
     final plans = await Plan().all();
     final subscriptions = await Subscription().all();
     final users = await User().all();
-
-    final activeSubscriptions = subscriptions.where((item) {
-      final status = item.getAttribute('status')?.toString().toLowerCase();
-      return status == null || status == 'active';
-    }).length;
+    final servers = await Server().all();
+    final jobs = await Job().all();
+    final databases = await DatabaseModel().all();
+    final backups = await Backup().all();
+    final mailAccounts = await MailAccount().all();
+    final dnsZones = await DnsZone().all();
+    final sslCertificates = await SslCertificate().all();
+    final sites = await Site().all();
 
     return {
       'role': role,
       'stats': {
         'plans': plans.length,
         'subscriptions': subscriptions.length,
-        'activeSubscriptions': activeSubscriptions,
+        'activeSubscriptions': 0,
         'users': users.length,
-        'servers': 1,
-        'jobs': 0,
+        'servers': servers.length,
+        'jobs': jobs.length,
+        'databases': databases.length,
+        'backups': backups.length,
+        'mailAccounts': mailAccounts.length,
+        'dnsZones': dnsZones.length,
+        'sslCertificates': sslCertificates.length,
+        'sites': sites.length,
       },
       'modules': _modulesForRole(role),
       'plans': plans
@@ -107,13 +124,23 @@ class UiController {
     final shared = [
       {
         'title': 'Websites & Domains',
-        'body': 'Manage hosted sites, domains, DNS records, and vhost status.',
+        'body': 'Connect hosted domains, SSL, and Git deployments.',
         'href': '/dashboard/websites-domains',
       },
       {
+        'title': 'DNS Zones',
+        'body': 'Manage authoritative DNS zones and records.',
+        'href': '/dashboard/dns',
+      },
+      {
         'title': 'SSL Certificates',
-        'body': 'Issue and monitor Let\'s Encrypt certificates from Flint.',
-        'href': '/dashboard/ssl-certificates',
+        'body': 'Track Let\'s Encrypt issuance for hosted websites.',
+        'href': '/dashboard/ssl',
+      },
+      {
+        'title': 'File Manager',
+        'body': 'Inspect document roots and hosted site file locations.',
+        'href': '/dashboard/file-manager',
       },
       {
         'title': 'Databases',
@@ -140,11 +167,6 @@ class UiController {
           'href': '/dashboard/plans',
         },
         {
-          'title': 'Customers',
-          'body': 'View customer accounts, owners, and account status.',
-          'href': '/dashboard/customers',
-        },
-        {
           'title': 'Jobs',
           'body': 'Provisioning queue, failed actions, and sync history.',
           'href': '/dashboard/jobs',
@@ -157,7 +179,7 @@ class UiController {
       return [
         {
           'title': 'Plans',
-          'body': 'Package plans for customers and assign subscriptions.',
+          'body': 'Review available hosting packages for subscriptions.',
           'href': '/dashboard/plans',
         },
         ...shared,

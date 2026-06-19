@@ -3,7 +3,7 @@ import 'package:universal_web/web.dart' as web;
 
 import '../services/auth_client.dart';
 
-class LoginPage extends FlintComponent {
+class LoginPage extends StatefulComponent {
   final Map<String, dynamic> props;
 
   LoginPage(this.props);
@@ -15,7 +15,7 @@ class LoginPage extends FlintComponent {
   String? _error;
 
   @override
-  FlintNode build() {
+  View build() {
     return Container(
       className: 'auth-shell',
       dartStyle: const DartStyle(
@@ -180,11 +180,10 @@ class LoginPage extends FlintComponent {
                 ),
                 children: [
                   TextField(
-                    label: 'Email',
+                    label: 'Email or username',
                     name: 'email',
                     controller: _form.controller('email'),
-                    type: 'email',
-                    placeholder: 'admin@example.com',
+                    placeholder: 'admin@example.com or examplecom',
                     required: true,
                     disabled: _form.processing,
                     inputStyle: const {
@@ -317,7 +316,7 @@ class LoginPage extends FlintComponent {
 
     if (email.isEmpty || password.isEmpty) {
       setState(() {
-        _error = 'Email and password are required.';
+        _error = 'Email or username and password are required.';
       });
       return;
     }

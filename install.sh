@@ -4,8 +4,8 @@
 #  Ubuntu 22.04 / 24.04 LTS
 #
 #  Installs: nginx · PHP 8.3 · MariaDB · phpMyAdmin · PowerDNS · vsftpd
-#            Certbot · Go · Dart · Tinyfilemanager
-#            EuPanel fullstack backend (Flint Dart + Flint Web UI) · agent (Go)
+#            Certbot · Dart · Tinyfilemanager
+#            EuPanel fullstack backend (Flint Dart + Flint Web UI)
 #
 #  Usage:
 #    curl -fsSL https://raw.githubusercontent.com/Eulogia-Technologies/eupanel/master/install.sh | sudo bash
@@ -37,7 +37,6 @@ source /etc/os-release
     warn "Tested on 22.04/24.04. Continuing on $VERSION_ID…"
 
 # ── Version pins ──────────────────────────────────────────────────────────────
-GO_VERSION="1.22.3"
 PHP_VERSION="8.3"
 PMA_VERSION="5.2.1"
 REPO_URL="https://github.com/Eulogia-Technologies/eupanel.git"
@@ -47,7 +46,6 @@ INSTALL_DIR="/opt/eupanel"
 FLINT_DART_DIR="/opt/flint/flint_dart"
 FLINT_UI_DIR="/opt/flint/flint_ui"
 BACKEND_PORT=4054
-AGENT_PORT=7820
 
 # =============================================================================
 #  COLLECT INPUT
@@ -131,7 +129,6 @@ chmod 600 /etc/eupanel/install.conf
 # ── Generate secrets ──────────────────────────────────────────────────────────
 DB_PASS=$(gen_pass)
 JWT_SECRET=$(gen_hex 32)
-AGENT_SECRET=$(gen_hex 32)
 PDNS_API_KEY=$(gen_hex 16)
 PMA_TOKEN="pma_$(gen_hex 10)"
 DEPLOY_SECRET=$(gen_hex 32)
@@ -374,22 +371,9 @@ apt-get install -y -qq certbot python3-certbot-nginx
 log "Certbot installed."
 
 # =============================================================================
-#  9. LANGUAGE RUNTIMES  (Go · Dart)
+#  9. LANGUAGE RUNTIMES  (Dart)
 # =============================================================================
-section "9 / 12 — Go, Dart"
-
-# ── Go ─────────────────────────────────────────────────────────────────────
-if ! command -v go &>/dev/null || [[ "$(go version 2>/dev/null | awk '{print $3}')" != "go${GO_VERSION}" ]]; then
-    info "Installing Go ${GO_VERSION}…"
-    GO_TAR="go${GO_VERSION}.linux-amd64.tar.gz"
-    wget -q "https://go.dev/dl/${GO_TAR}" -O "/tmp/${GO_TAR}"
-    rm -rf /usr/local/go
-    tar -C /usr/local -xzf "/tmp/${GO_TAR}"
-    rm -f "/tmp/${GO_TAR}"
-    ln -sf /usr/local/go/bin/go   /usr/local/bin/go
-    ln -sf /usr/local/go/bin/gofmt /usr/local/bin/gofmt
-fi
-log "Go $(go version | awk '{print $3}')."
+section "9 / 12 — Dart"
 
 # ── Dart ───────────────────────────────────────────────────────────────────
 if ! command -v dart &>/dev/null; then
@@ -414,17 +398,13 @@ log "Dart $(dart --version 2>&1 | head -1) — flint CLI installed."
 # ── Permanent PATH for all runtimes ───────────────────────────────────────────
 cat > /etc/profile.d/eupanel-paths.sh <<'PATHFILE'
 # EuPanel runtime paths — added by installer
-export PATH="$PATH:/usr/local/go/bin"        # Go
 export PATH="$PATH:/usr/lib/dart/bin"         # Dart
 export PATH="$PATH:$HOME/.pub-cache/bin"     # Dart global tools (flint, etc.)
-export GOPATH="$HOME/go"
-export PATH="$PATH:$GOPATH/bin"
 PATHFILE
 chmod 644 /etc/profile.d/eupanel-paths.sh
 
 # Also apply to current session right now
-export PATH="$PATH:/usr/local/go/bin:/usr/lib/dart/bin"
-export GOPATH="/root/go"
+export PATH="$PATH:/usr/lib/dart/bin"
 
 log "Runtime paths written to /etc/profile.d/eupanel-paths.sh"
 
@@ -481,9 +461,6 @@ JWT_SECRET=${JWT_SECRET}
 PDNS_API_URL=http://127.0.0.1:8081
 PDNS_API_KEY=${PDNS_API_KEY}
 
-AGENT_SECRET=${AGENT_SECRET}
-AGENT_BASE_URL=http://127.0.0.1:${AGENT_PORT}
-
 STORAGE_PATH=${INSTALL_DIR}/fullstack/storage
 
 # GitHub OAuth (fill in after creating your OAuth App at github.com/settings/developers)
@@ -510,30 +487,6 @@ log "Dart dependencies resolved."
 info "Building Flint Web UI bundle…"
 (cd "${INSTALL_DIR}/fullstack" && dart compile js lib/ui/main.dart -o public/main.dart.js)
 log "Flint Web UI bundle built."
-
-# ── Agent: go build ────────────────────────────────────────────────────────
-info "Building eupanel-agent…"
-(
-  cd "${INSTALL_DIR}/eupanel-agent"
-  # Remove any stale go.sum — let go mod tidy regenerate correct checksums
-  rm -f go.sum
-  GOPATH="/root/go" GONOSUMCHECK=* go mod tidy
-  GOPATH="/root/go" CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
-      go build -ldflags="-s -w" -o /usr/local/bin/eupanel-agent .
-)
-log "eupanel-agent built → /usr/local/bin/eupanel-agent"
-
-# ── Agent .env ─────────────────────────────────────────────────────────────
-mkdir -p /etc/eupanel
-cat > /etc/eupanel/agent.env <<ENV
-AGENT_PORT=${AGENT_PORT}
-AGENT_SECRET=${AGENT_SECRET}
-AGENT_WEBROOT=/var/www
-AGENT_NGINX_SITES=/etc/nginx/sites-available
-AGENT_NGINX_BIN=/usr/sbin/nginx
-AGENT_CERTBOT_BIN=/usr/bin/certbot
-ENV
-chmod 600 /etc/eupanel/agent.env
 
 # =============================================================================
 #  11. TINYFILEMANAGER
@@ -562,26 +515,6 @@ log "Tinyfilemanager installed at /filemanager/"
 #  12. SYSTEMD SERVICES
 # =============================================================================
 section "12 / 12 — Services & nginx"
-
-# ── eupanel-agent ──────────────────────────────────────────────────────────
-cat > /etc/systemd/system/eupanel-agent.service <<SVC
-[Unit]
-Description=EuPanel Agent
-After=network.target
-
-[Service]
-Type=simple
-User=root
-EnvironmentFile=/etc/eupanel/agent.env
-ExecStart=/usr/local/bin/eupanel-agent
-Restart=always
-RestartSec=5
-StandardOutput=journal
-StandardError=journal
-
-[Install]
-WantedBy=multi-user.target
-SVC
 
 # ── eupanel-backend ────────────────────────────────────────────────────────
 cat > /etc/systemd/system/eupanel-backend.service <<SVC
@@ -614,10 +547,12 @@ chmod 600 "${INSTALL_DIR}/fullstack/.env"
 # ── Stop any existing services / free up ports ─────────────────────────────
 info "Stopping any existing EuPanel services…"
 systemctl stop eupanel-agent    2>/dev/null || true
+systemctl disable eupanel-agent 2>/dev/null || true
 systemctl stop eupanel-backend  2>/dev/null || true
+rm -f /etc/systemd/system/eupanel-agent.service /usr/local/bin/eupanel-agent /etc/eupanel/agent.env
 
 # Kill anything still holding the ports (previous manual runs, etc.)
-for PORT in ${BACKEND_PORT} ${AGENT_PORT}; do
+for PORT in ${BACKEND_PORT}; do
     PIDS=$(lsof -ti tcp:${PORT} 2>/dev/null || true)
     if [[ -n "$PIDS" ]]; then
         warn "Killing process(es) on port ${PORT}: $PIDS"
@@ -643,12 +578,11 @@ set -a; source "${INSTALL_DIR}/fullstack/.env"; set +a
 # ── Enable + start ─────────────────────────────────────────────────────────
 rm -f /etc/systemd/system/eupanel-frontend.service
 systemctl daemon-reload
-systemctl enable --now eupanel-agent
 systemctl enable --now eupanel-backend
 sleep 3
 
 # Verify services are actually running
-for SVC in eupanel-agent eupanel-backend; do
+for SVC in eupanel-backend; do
     if systemctl is-active --quiet "$SVC"; then
         log "$SVC is running."
     else
@@ -843,10 +777,6 @@ Server IP : ${SERVER_IP}
   URL      : http://127.0.0.1:8081
   API Key  : ${PDNS_API_KEY}
 
-── EuPanel Agent ────────────────────────────────────────────────
-  URL      : http://127.0.0.1:${AGENT_PORT}  (localhost only)
-  Secret   : ${AGENT_SECRET}
-
 ── JWT Secret ───────────────────────────────────────────────────
   ${JWT_SECRET}
 
@@ -859,11 +789,9 @@ Server IP : ${SERVER_IP}
 
 ── Service status ───────────────────────────────────────────────
   systemctl status eupanel-backend
-  systemctl status eupanel-agent
 
 ── Logs ─────────────────────────────────────────────────────────
   journalctl -u eupanel-backend  -f
-  journalctl -u eupanel-agent    -f
 CREDS
 
 chmod 600 "$CREDS_FILE"

@@ -1,17 +1,12 @@
 import 'package:flint_ui/flint_ui.dart';
 
-class DashboardHero extends FlintComponent {
-  String role;
+class DashboardHero extends StatelessComponent {
+  final String role;
 
   DashboardHero({required this.role});
 
   @override
-  void updateFrom(covariant DashboardHero next) {
-    role = next.role;
-  }
-
-  @override
-  FlintNode build() {
+  View build() {
     return Container(
       dartStyle: const DartStyle(
         display: Display.flex,
@@ -67,7 +62,7 @@ class DashboardHero extends FlintComponent {
           ),
           children: [
             Link(
-              href: '/dashboard/admin',
+              href: '/dashboard/subscriptions',
               dartStyle: const DartStyle(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 radius: 10,
@@ -76,22 +71,28 @@ class DashboardHero extends FlintComponent {
                 fontSize: 13,
                 fontWeight: 700,
                 cursor: Cursor.pointer,
-                shadow: Shadow(x: 0, y: 4, blur: 12, color: Color.rgba(14, 165, 233, 0.3)),
+                shadow: Shadow(
+                    x: 0, y: 4, blur: 12, color: Color.rgba(14, 165, 233, 0.3)),
                 transition: 'all 0.2s ease',
                 hover: DartStyle(
                   transform: 'translateY(-2px)',
-                  shadow: Shadow(x: 0, y: 8, blur: 20, color: Color.rgba(14, 165, 233, 0.45)),
+                  shadow: Shadow(
+                      x: 0,
+                      y: 8,
+                      blur: 20,
+                      color: Color.rgba(14, 165, 233, 0.45)),
                 ),
               ),
-              child: 'Admin view',
+              child: 'View subscriptions',
             ),
             Link(
-              href: '/dashboard/reseller',
+              href: role == 'admin' ? '/dashboard/jobs' : '/dashboard/backups',
               dartStyle: const DartStyle(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 radius: 10,
                 background: 'rgba(255, 255, 255, 0.08)',
-                border: Border(color: Color.rgba(255, 255, 255, 0.15), width: 1),
+                border:
+                    Border(color: Color.rgba(255, 255, 255, 0.15), width: 1),
                 color: '#f1f5f9',
                 fontSize: 13,
                 fontWeight: 700,
@@ -99,11 +100,12 @@ class DashboardHero extends FlintComponent {
                 transition: 'all 0.2s ease',
                 hover: DartStyle(
                   background: 'rgba(255, 255, 255, 0.15)',
-                  border: Border(color: Color.rgba(255, 255, 255, 0.25), width: 1),
+                  border:
+                      Border(color: Color.rgba(255, 255, 255, 0.25), width: 1),
                   transform: 'translateY(-1px)',
                 ),
               ),
-              child: 'Reseller view',
+              child: role == 'admin' ? 'Provisioning jobs' : 'Backup records',
             ),
           ],
         ),

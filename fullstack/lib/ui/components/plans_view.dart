@@ -1,10 +1,9 @@
 import 'package:flint_ui/flint_ui.dart';
 import 'package:universal_web/web.dart' as web;
-import 'dashboard_shell.dart';
-import 'dashboard_sidebar.dart';
+import 'dashboard_page_topbar.dart';
 import 'limit_metric.dart';
 
-class PlansView extends FlintComponent {
+class PlansView extends StatefulComponent {
   final String role;
   final ResourceController<List<FlintModelRecord>> plans;
 
@@ -34,92 +33,35 @@ class PlansView extends FlintComponent {
   void updateFrom(covariant PlansView next) {}
 
   @override
-  FlintNode build() {
+  View build() {
     final isAdmin = role == 'admin';
 
-    return EuPanelDashboardShell(
-      brand: Row(
-        dartStyle: const DartStyle(
-          alignItems: AlignItems.center,
-          gap: 12,
-        ),
-        children: [
-          Container(
-            dartStyle: const DartStyle(
-              display: Display.flex,
-              alignItems: AlignItems.center,
-              justifyContent: JustifyContent.center,
-              width: 40,
-              height: 40,
-              radius: 12,
-              background: 'linear-gradient(135deg, #06b6d4, #2563eb)',
-              color: '#ffffff',
-              fontWeight: 800,
-              fontSize: 16,
-              shadow: '0 0 16px rgba(6, 182, 212, 0.45)',
-            ),
-            child: Text('EP'),
-          ),
-          Column(
-            dartStyle: const DartStyle(
-              display: Display.flex,
-              flexDirection: FlexDirection.column,
-              gap: 2,
-            ),
-            children: [
-              Text.strong(
-                'EuPanel',
-                dartStyle: const DartStyle(
-                  color: '#ffffff',
-                  fontWeight: 800,
-                  fontSize: 16,
-                  letterSpacing: -0.4,
-                ),
-              ),
-              Text.span(
-                'Flint control node',
-                dartStyle: const DartStyle(
-                  color: '#64748b',
-                  fontSize: 11,
-                  fontWeight: 600,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-      sidebar: EuPanelDashboardSidebar(role: role),
-      topbar: Topbar(
-        title: 'Hosting Plans & Packages',
-        subtitle: isAdmin
-            ? 'Manage global shared hosting and reseller plan offerings'
-            : 'View available subscription packages',
-        dartStyle: const DartStyle(
-          display: Display.flex,
-          alignItems: AlignItems.center,
-          justifyContent: JustifyContent.between,
-          margin: EdgeInsets.only(bottom: 24),
-        ),
-        actions: Link(
-          href: '/docs',
-          dartStyle: const DartStyle(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            radius: 10,
-            background: '#ffffff',
-            border: Border(color: Color('#cbd5e1'), width: 1),
-            color: '#475569',
-            fontSize: 13,
-            fontWeight: 700,
-            cursor: Cursor.pointer,
-            hover: DartStyle(
-              background: '#f8fafc',
-              color: '#0f172a',
-            ),
-          ),
-          child: 'API Docs',
-        ),
-      ),
+    return Column(
       children: [
+        DashboardPageTopbar(
+          title: 'Hosting Plans & Packages',
+          subtitle: isAdmin
+              ? 'Manage global shared hosting and reseller plan offerings'
+              : 'View available subscription packages',
+          actions: Link(
+            href: '/docs',
+            dartStyle: const DartStyle(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              radius: 10,
+              background: '#ffffff',
+              border: Border(color: Color('#cbd5e1'), width: 1),
+              color: '#475569',
+              fontSize: 13,
+              fontWeight: 700,
+              cursor: Cursor.pointer,
+              hover: DartStyle(
+                background: '#f8fafc',
+                color: '#0f172a',
+              ),
+            ),
+            child: 'API Docs',
+          ),
+        ),
         Grid(
           dartStyle: const DartStyle(
             display: Display.grid,
@@ -153,16 +95,25 @@ class PlansView extends FlintComponent {
                   if (isAdmin)
                     Button(
                       dartStyle: const DartStyle(
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                         radius: 10,
                         background: 'linear-gradient(135deg, #06b6d4, #2563eb)',
                         color: '#ffffff',
                         fontSize: 13,
                         fontWeight: 700,
                         cursor: Cursor.pointer,
-                        shadow: Shadow(x: 0, y: 4, blur: 12, color: Color.rgba(37, 99, 235, 0.2)),
+                        shadow: Shadow(
+                            x: 0,
+                            y: 4,
+                            blur: 12,
+                            color: Color.rgba(37, 99, 235, 0.2)),
                         hover: DartStyle(
-                          shadow: Shadow(x: 0, y: 6, blur: 16, color: Color.rgba(37, 99, 235, 0.3)),
+                          shadow: Shadow(
+                              x: 0,
+                              y: 6,
+                              blur: 16,
+                              color: Color.rgba(37, 99, 235, 0.3)),
                           transform: 'translateY(-1px)',
                         ),
                       ),
@@ -178,7 +129,8 @@ class PlansView extends FlintComponent {
                   Button(
                     child: 'Refresh',
                     dartStyle: const DartStyle(
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                       radius: 10,
                       background: '#ffffff',
                       border: Border(color: Color('#cbd5e1'), width: 1),
@@ -211,7 +163,9 @@ class PlansView extends FlintComponent {
 
                   if (list.isEmpty) {
                     return EmptyState(
-                      title: snapshot.isError ? 'Could not load plans' : 'No plans found',
+                      title: snapshot.isError
+                          ? 'Could not load plans'
+                          : 'No plans found',
                       message: snapshot.isError
                           ? snapshot.error.toString()
                           : (isAdmin
@@ -263,7 +217,9 @@ class PlansView extends FlintComponent {
 
     final planEmoji = name.toLowerCase().contains('dev')
         ? '⚡'
-        : (name.toLowerCase().contains('pro') || name.toLowerCase().contains('premium') || name.toLowerCase().contains('business')
+        : (name.toLowerCase().contains('pro') ||
+                name.toLowerCase().contains('premium') ||
+                name.toLowerCase().contains('business')
             ? '💼'
             : '📦');
 
@@ -352,7 +308,8 @@ class PlansView extends FlintComponent {
             ),
             Container(
               dartStyle: DartStyle(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 radius: 999,
                 background: isActive ? '#ecfdf5' : '#fef2f2',
                 color: isActive ? '#059669' : '#dc2626',
@@ -376,7 +333,11 @@ class PlansView extends FlintComponent {
           children: [
             LimitMetric(label: 'Disk', value: '$disk MB'),
             LimitMetric(label: 'Bandwidth', value: '$bandwidth MB'),
-            LimitMetric(label: 'RAM', value: ram == null || ram.toString() == '0' ? 'Unlimited' : '$ram MB'),
+            LimitMetric(
+                label: 'RAM',
+                value: ram == null || ram.toString() == '0'
+                    ? 'Unlimited'
+                    : '$ram MB'),
             LimitMetric(label: 'Domains', value: '$domain'),
             LimitMetric(label: 'Subdomains', value: '$subdomain'),
             LimitMetric(label: 'Databases', value: '$db'),
@@ -406,7 +367,8 @@ class PlansView extends FlintComponent {
                 children: [
                   Button(
                     dartStyle: const DartStyle(
-                      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                       radius: 8,
                       background: '#f8fafc',
                       color: '#475569',
@@ -423,12 +385,16 @@ class PlansView extends FlintComponent {
                       _createForm.setField('name', name);
                       _createForm.setField('description', desc);
                       _createForm.setField('disk_limit', disk.toString());
-                      _createForm.setField('bandwidth_limit', bandwidth.toString());
-                      _createForm.setField('ftp_accounts_limit', ftp.toString());
+                      _createForm.setField(
+                          'bandwidth_limit', bandwidth.toString());
+                      _createForm.setField(
+                          'ftp_accounts_limit', ftp.toString());
                       _createForm.setField('database_limit', db.toString());
                       _createForm.setField('domain_limit', domain.toString());
-                      _createForm.setField('subdomain_limit', subdomain.toString());
-                      _createForm.setField('ram_limit', ram == null ? '' : ram.toString());
+                      _createForm.setField(
+                          'subdomain_limit', subdomain.toString());
+                      _createForm.setField(
+                          'ram_limit', ram == null ? '' : ram.toString());
                       _createForm.setField('status', status);
                       _formError = null;
                       _showModal = true;
@@ -438,7 +404,8 @@ class PlansView extends FlintComponent {
                   ),
                   Button(
                     dartStyle: const DartStyle(
-                      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                       radius: 8,
                       background: '#fef2f2',
                       color: '#ef4444',
@@ -465,7 +432,9 @@ class PlansView extends FlintComponent {
   FlintNode _buildPlanModal(bool isAdmin) {
     return Modal(
       open: _showModal,
-      title: _editingPlanId == null ? 'Create Hosting Package' : 'Edit Hosting Package',
+      title: _editingPlanId == null
+          ? 'Create Hosting Package'
+          : 'Edit Hosting Package',
       onClose: (_) {
         _showModal = false;
         setState(() {});
@@ -664,7 +633,8 @@ class PlansView extends FlintComponent {
                 },
                 disabled: _createForm.processing,
                 selectProps: const {
-                  'style': 'border-radius: 10px; padding: 10px 12px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 14px; width: 100%;'
+                  'style':
+                      'border-radius: 10px; padding: 10px 12px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 14px; width: 100%;'
                 },
               ),
             ],
@@ -727,7 +697,9 @@ class PlansView extends FlintComponent {
                 ),
                 child: Text(_createForm.processing
                     ? 'Saving...'
-                    : (_editingPlanId == null ? 'Create Package' : 'Save Changes')),
+                    : (_editingPlanId == null
+                        ? 'Create Package'
+                        : 'Save Changes')),
               ),
             ],
           ),
@@ -770,7 +742,8 @@ class PlansView extends FlintComponent {
         if (_editingPlanId == null) {
           return clientRouter.post<Map<String, dynamic>>('/plans', body: body);
         } else {
-          return clientRouter.put<Map<String, dynamic>>('/plans/$_editingPlanId', body: body);
+          return clientRouter
+              .put<Map<String, dynamic>>('/plans/$_editingPlanId', body: body);
         }
       },
       onSuccess: (result) {
@@ -796,10 +769,12 @@ class PlansView extends FlintComponent {
   }
 
   Future<void> _handleDeletePlan(String id) async {
-    final confirmed = web.window.confirm('Are you sure you want to delete this plan?');
+    final confirmed =
+        web.window.confirm('Are you sure you want to delete this plan?');
     if (!confirmed) return;
 
-    final response = await clientRouter.delete<Map<String, dynamic>>('/plans/$id');
+    final response =
+        await clientRouter.delete<Map<String, dynamic>>('/plans/$id');
     if (response.isError) {
       web.window.alert((response.error ?? 'Failed to delete plan.').toString());
       return;
@@ -810,8 +785,11 @@ class PlansView extends FlintComponent {
 
   String _friendlyError(Object error) {
     final message = error.toString();
-    if (message.contains('ClientResponseException') || message.contains('Exception:')) {
-      return message.replaceFirst('Exception: ', '').replaceFirst('ClientResponseException: ', '');
+    if (message.contains('ClientResponseException') ||
+        message.contains('Exception:')) {
+      return message
+          .replaceFirst('Exception: ', '')
+          .replaceFirst('ClientResponseException: ', '');
     }
     return message;
   }

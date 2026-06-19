@@ -3,15 +3,15 @@ import 'dart:io';
 
 import 'package:backend/models/git_deploy_model.dart';
 import 'package:backend/models/github_token_model.dart';
-import 'package:backend/models/server_model.dart';
 import 'package:backend/models/subscription_model.dart';
+import 'package:backend/services/git_deploy_service.dart';
 import 'package:flint_dart/flint_dart.dart';
 
 /// Handles all GitHub API interactions:
 ///   - OAuth token exchange
 ///   - Listing repos
 ///   - Creating / deleting webhooks
-///   - Triggering deploys via the eupanel-agent
+///   - Triggering deploys through local Flint Dart command services
 class GithubService {
   final String clientId;
   final String clientSecret;
@@ -33,7 +33,9 @@ class GithubService {
       'scope': 'repo,user:email',
       'state': state,
     };
-    final query = params.entries.map((e) => '${e.key}=${Uri.encodeComponent(e.value)}').join('&');
+    final query = params.entries
+        .map((e) => '${e.key}=${Uri.encodeComponent(e.value)}')
+        .join('&');
     return 'https://github.com/login/oauth/authorize?$query';
   }
 
@@ -56,7 +58,11 @@ class GithubService {
       final data = jsonDecode(body) as Map<String, dynamic>;
 
       if (data['access_token'] == null) {
-        throw ValidationException({'github': ['GitHub OAuth failed: ${data['error_description'] ?? data['error']}']});
+        throw ValidationException({
+          'github': [
+            'GitHub OAuth failed: ${data['error_description'] ?? data['error']}'
+          ]
+        });
       }
       return data['access_token'].toString();
     } finally {
@@ -136,7 +142,8 @@ class GithubService {
   }) async {
     final client = HttpClient();
     try {
-      final uri = Uri.parse('https://api.github.com/repos/$repoFullName/hooks/$webhookId');
+      final uri = Uri.parse(
+          'https://api.github.com/repos/$repoFullName/hooks/$webhookId');
       final req = await client.deleteUrl(uri);
       req.headers.set('Authorization', 'Bearer $accessToken');
       req.headers.set('Accept', 'application/vnd.github+json');
@@ -164,19 +171,26 @@ class GithubService {
       throw NotFoundException(message: 'Subscription not found.');
     }
     if (sub.status != 'active') {
-      throw ValidationException({'subscription_id': ['Subscription must be active before linking a repo.']});
+      throw ValidationException({
+        'subscription_id': [
+          'Subscription must be active before linking a repo.'
+        ]
+      });
     }
 
     // 2. Get GitHub token for this user
     final tokens = await GithubToken().whereSimple('user_id', userId);
     if (tokens.isEmpty) {
-      throw ValidationException({'github': ['Connect your GitHub account first.']});
+      throw ValidationException({
+        'github': ['Connect your GitHub account first.']
+      });
     }
     final token = tokens.first;
     final accessToken = token.accessToken!;
 
     // 3. Deploy path = subscription's public_html
-    final deployPath = '${sub.homeDirectory ?? '/home/${sub.systemUsername}'}/public_html';
+    final deployPath =
+        '${sub.homeDirectory ?? '/home/${sub.systemUsername}'}/public_html';
 
     // 4. Generate webhook secret
     final webhookSecret = _generateSecret();
@@ -185,7 +199,8 @@ class GithubService {
     final repos = await listRepos(accessToken);
     final repo = repos.firstWhere(
       (r) => r['full_name'] == repoFullName,
-      orElse: () => throw NotFoundException(message: 'Repository "$repoFullName" not found.'),
+      orElse: () => throw NotFoundException(
+          message: 'Repository "$repoFullName" not found.'),
     );
 
     // 6. Register webhook on GitHub
@@ -259,7 +274,8 @@ class GithubService {
     // Only deploy if push is on the tracked branch
     final trackedBranch = deploy.branch ?? 'main';
     if (pushedBranch != trackedBranch) {
-      stdout.writeln('[GitDeploy] Skipping push on "$pushedBranch" (tracking "$trackedBranch")');
+      stdout.writeln(
+          '[GitDeploy] Skipping push on "$pushedBranch" (tracking "$trackedBranch")');
       return;
     }
 
@@ -279,38 +295,22 @@ class GithubService {
 
   // ── Internal ──────────────────────────────────────────────────────────────
 
-  /// Calls the agent to git clone / pull the repo into deploy_path.
-  Future<void> _runDeploy(String deployId, String? serverId) async {
+  /// Uses Flint Dart to git clone / pull the repo into deploy_path.
+  Future<void> _runDeploy(String deployId, String? _serverId) async {
     final deploy = await GitDeploy().find(deployId);
     if (deploy == null) return;
 
-    final agentUrl = await _resolveAgentUrl(serverId);
-    final agentSecret = await _resolveAgentSecret(serverId);
-
-    final client = HttpClient();
     try {
-      final uri = Uri.parse('$agentUrl/git/deploy');
-      final req = await client.postUrl(uri);
-      req.headers.set('Authorization', 'Bearer $agentSecret');
-      req.headers.contentType = ContentType.json;
-      req.write(jsonEncode({
-        'repo_url': deploy.repoUrl,
-        'branch': deploy.branch ?? 'main',
-        'deploy_path': deploy.deployPath,
-      }));
-
-      final res = await req.close();
-      final body = await res.transform(utf8.decoder).join();
-      final data = jsonDecode(body) as Map<String, dynamic>;
-
-      if (res.statusCode != 200) {
-        throw Exception(data['error'] ?? 'Agent deploy failed');
-      }
+      final result = await const LocalGitDeployService().deploy(
+        repoUrl: deploy.repoUrl!,
+        branch: deploy.branch ?? 'main',
+        deployPath: deploy.deployPath!,
+      );
 
       await deploy.update(id: deployId, data: {
         'deploy_status': 'success',
         'last_deployed_at': DateTime.now().toIso8601String(),
-        'deploy_log': data['log']?.toString(),
+        'deploy_log': result.log,
       });
     } catch (e) {
       await deploy.update(id: deployId, data: {
@@ -318,34 +318,12 @@ class GithubService {
         'deploy_log': e.toString(),
       });
       rethrow;
-    } finally {
-      client.close();
     }
-  }
-
-  Future<String> _resolveAgentUrl(String? serverId) async {
-    if (serverId != null) {
-      final server = await Server().find(serverId);
-      if (server != null) {
-        return 'http://${server.host}:${server.agentPort ?? '7820'}';
-      }
-    }
-    return Platform.environment['AGENT_BASE_URL'] ?? 'http://127.0.0.1:7820';
-  }
-
-  Future<String> _resolveAgentSecret(String? serverId) async {
-    if (serverId != null) {
-      final server = await Server().find(serverId);
-      if (server != null) {
-        final s = server.agentSecret;
-        if (s != null && s.isNotEmpty) return s;
-      }
-    }
-    return Platform.environment['AGENT_SECRET'] ?? 'change-me-before-production';
   }
 
   String _generateSecret() {
-    final bytes = List.generate(32, (_) => (DateTime.now().microsecondsSinceEpoch + _.hashCode) & 0xFF);
+    final bytes = List.generate(
+        32, (_) => (DateTime.now().microsecondsSinceEpoch + _.hashCode) & 0xFF);
     return bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
   }
 
@@ -374,7 +352,8 @@ class GithubService {
     }
   }
 
-  Future<Map<String, dynamic>> _githubPost(String path, String token, Map<String, dynamic> payload) async {
+  Future<Map<String, dynamic>> _githubPost(
+      String path, String token, Map<String, dynamic> payload) async {
     final client = HttpClient();
     try {
       final uri = Uri.parse('https://api.github.com$path');

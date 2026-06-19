@@ -1,79 +1,86 @@
-import 'dart:convert';
 import 'dart:io';
 
-/// Calls the EuPanel Agent to create/delete Linux system users.
-/// The agent handles all privileged operations on the server.
+import 'package:backend/services/internal_command_service.dart';
+
 class SystemUserService {
-  final String agentBaseUrl;
-  final String agentSecret;
+  final InternalCommandService _commands;
 
-  SystemUserService({required this.agentBaseUrl, required this.agentSecret});
+  /// [agentBaseUrl] and [agentSecret] are accepted for older callers.
+  SystemUserService({
+    String? agentBaseUrl,
+    String? agentSecret,
+    InternalCommandService commands = const InternalCommandService(),
+  }) : _commands = commands;
 
-  /// Creates a Linux system user via the agent.
-  /// Returns the home directory path on success.
-  /// Throws [ProvisioningException] on failure.
   Future<String> create({
     required String username,
     String? phpVersion,
   }) async {
-    final client = HttpClient();
-    client.connectionTimeout = const Duration(seconds: 3);
+    _validateUsername(username);
+
+    final homeDir = '/home/$username';
+
+    await _commands.run('useradd', [
+      '--create-home',
+      '--home-dir',
+      homeDir,
+      '--shell',
+      '/usr/sbin/nologin',
+      '--comment',
+      'EuPanel hosting account',
+      username,
+    ]);
+
     try {
-      final uri = Uri.parse('$agentBaseUrl/system-users');
-      final request = await client.postUrl(uri);
-      request.headers.set('Authorization', 'Bearer $agentSecret');
-      request.headers.contentType = ContentType.json;
-      request.write(jsonEncode({
-        'username': username,
-        'php_version': phpVersion ?? '8.3',
-      }));
+      final publicHtml = Directory('$homeDir/public_html');
+      await publicHtml.create(recursive: true);
+      await _commands.run('chown', ['-R', '$username:$username', homeDir]);
 
-      final response = await request.close();
-      final body = await response.transform(utf8.decoder).join();
-      final data = jsonDecode(body) as Map<String, dynamic>;
-
-      if (response.statusCode != 201) {
-        throw ProvisioningException(
-          'Agent failed to create system user "$username": '
-          '${data['error'] ?? body}',
+      final index = File('${publicHtml.path}/index.html');
+      if (!await index.exists()) {
+        await index.writeAsString(
+          '<!DOCTYPE html><html><head><title>$username</title></head>'
+          '<body><p>Your hosting account is ready.</p></body></html>',
         );
       }
 
-      return data['home_directory']?.toString() ??
-          '/home/$username';
-    } on SocketException catch (e) {
+      return homeDir;
+    } catch (e) {
+      await delete(username);
       throw ProvisioningException(
-        'Cannot reach agent at $agentBaseUrl — is the agent running? $e',
-      );
-    } finally {
-      client.close();
+          'Failed to prepare system user "$username": $e');
     }
   }
 
-  /// Deletes a Linux system user via the agent.
-  /// Used during rollback if later provisioning steps fail.
   Future<void> delete(String username) async {
-    final client = HttpClient();
-    client.connectionTimeout = const Duration(seconds: 3);
-    try {
-      final uri = Uri.parse('$agentBaseUrl/system-users/$username');
-      final request = await client.deleteUrl(uri);
-      request.headers.set('Authorization', 'Bearer $agentSecret');
+    _validateUsername(username);
 
-      final response = await request.close();
-      await response.drain();
+    final result = await _commands.run(
+      'userdel',
+      ['--remove', username],
+      throwOnError: false,
+    );
 
-      if (response.statusCode != 200 && response.statusCode != 404) {
-        throw ProvisioningException(
-          'Agent failed to delete system user "$username" '
-          '(HTTP ${response.statusCode})',
-        );
-      }
-    } on SocketException catch (e) {
-      // Log but don't throw during rollback — best effort cleanup
-      stderr.writeln('[SystemUserService] Rollback warning: $e');
-    } finally {
-      client.close();
+    // userdel exit code 6 means the user does not exist.
+    if (result.exitCode != 0 && result.exitCode != 6) {
+      throw ProvisioningException(
+        'Failed to delete system user "$username": ${result.combinedOutput}',
+      );
+    }
+  }
+
+  Future<bool> exists(String username) async {
+    _validateUsername(username);
+    final result = await _commands.run('id', [username], throwOnError: false);
+    return result.succeeded;
+  }
+
+  void _validateUsername(String username) {
+    final valid = RegExp(r'^[a-z][a-z0-9_]{0,31}$');
+    if (!valid.hasMatch(username)) {
+      throw ProvisioningException(
+        'Invalid username "$username". Use lowercase letters, numbers, and underscores; start with a letter.',
+      );
     }
   }
 }
@@ -81,6 +88,7 @@ class SystemUserService {
 class ProvisioningException implements Exception {
   final String message;
   ProvisioningException(this.message);
+
   @override
   String toString() => message;
 }

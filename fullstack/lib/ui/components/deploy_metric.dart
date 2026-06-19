@@ -1,8 +1,8 @@
 import 'package:flint_ui/flint_ui.dart';
 
-class DeployMetric extends FlintComponent {
-  String label;
-  String value;
+class DeployMetric extends StatelessComponent {
+  final String label;
+  final String value;
 
   DeployMetric({
     required this.label,
@@ -10,13 +10,7 @@ class DeployMetric extends FlintComponent {
   });
 
   @override
-  void updateFrom(covariant DeployMetric next) {
-    label = next.label;
-    value = next.value;
-  }
-
-  @override
-  FlintNode build() {
+  View build() {
     return Container(
       dartStyle: const DartStyle(
         display: Display.flex,

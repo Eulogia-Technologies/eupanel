@@ -1,10 +1,9 @@
 import 'package:flint_ui/flint_ui.dart';
 import 'package:universal_web/web.dart' as web;
-import 'dashboard_shell.dart';
-import 'dashboard_sidebar.dart';
+import 'dashboard_page_topbar.dart';
 import 'subscription_metric.dart';
 
-class SubscriptionsView extends FlintComponent {
+class SubscriptionsView extends StatefulComponent {
   final String role;
   final ResourceController<List<FlintModelRecord>> plans;
   final ResourceController<List<FlintModelRecord>> subscriptions;
@@ -17,133 +16,90 @@ class SubscriptionsView extends FlintComponent {
 
   final _subscriptionForm = useForm({
     'plan_id': '',
+    'domain': '',
+    'contact_email': '',
   });
 
   String? _subFormError;
+  String? _credentialNotice;
   bool _showSubModal = false;
 
   @override
   void updateFrom(covariant SubscriptionsView next) {}
 
   @override
-  FlintNode build() {
-    return EuPanelDashboardShell(
-      brand: Row(
-        dartStyle: const DartStyle(
-          alignItems: AlignItems.center,
-          gap: 12,
-        ),
-        children: [
-          Container(
+  View build() {
+    return Column(
+      children: [
+        DashboardPageTopbar(
+          title: 'Hosting Subscriptions',
+          subtitle:
+              'Manage active environments, credentials, and package limits',
+          actions: Row(
             dartStyle: const DartStyle(
               display: Display.flex,
               alignItems: AlignItems.center,
-              justifyContent: JustifyContent.center,
-              width: 40,
-              height: 40,
-              radius: 12,
-              background: 'linear-gradient(135deg, #06b6d4, #2563eb)',
-              color: '#ffffff',
-              fontWeight: 800,
-              fontSize: 16,
-              shadow: '0 0 16px rgba(6, 182, 212, 0.45)',
-            ),
-            child: Text('EP'),
-          ),
-          Column(
-            dartStyle: const DartStyle(
-              display: Display.flex,
-              flexDirection: FlexDirection.column,
-              gap: 2,
+              gap: 8,
             ),
             children: [
-              Text.strong(
-                'EuPanel',
+              Button(
                 dartStyle: const DartStyle(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  radius: 10,
+                  background: 'linear-gradient(135deg, #06b6d4, #2563eb)',
                   color: '#ffffff',
-                  fontWeight: 800,
-                  fontSize: 16,
-                  letterSpacing: -0.4,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  cursor: Cursor.pointer,
+                  shadow: Shadow(
+                      x: 0,
+                      y: 4,
+                      blur: 12,
+                      color: Color.rgba(37, 99, 235, 0.2)),
+                  hover: DartStyle(
+                    shadow: Shadow(
+                        x: 0,
+                        y: 6,
+                        blur: 16,
+                        color: Color.rgba(37, 99, 235, 0.3)),
+                    transform: 'translateY(-1px)',
+                  ),
                 ),
+                onPressed: (_) {
+                  _subscriptionForm.reset();
+                  final plansList = plans.data ?? [];
+                  if (plansList.isNotEmpty) {
+                    _subscriptionForm.setField(
+                        'plan_id', plansList.first.string('id') ?? '');
+                  }
+                  _subFormError = null;
+                  _credentialNotice = null;
+                  _showSubModal = true;
+                  setState(() {});
+                },
+                child: Text('New Subscription'),
               ),
-              Text.span(
-                'Flint control node',
+              Button(
+                child: 'Refresh',
                 dartStyle: const DartStyle(
-                  color: '#64748b',
-                  fontSize: 11,
-                  fontWeight: 600,
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  radius: 10,
+                  background: '#ffffff',
+                  border: Border(color: Color('#cbd5e1'), width: 1),
+                  color: '#475569',
+                  fontSize: 13,
+                  fontWeight: 700,
+                  cursor: Cursor.pointer,
+                  hover: DartStyle(
+                    background: '#f8fafc',
+                    color: '#0f172a',
+                  ),
                 ),
+                onPressed: (_) => subscriptions.refresh(silent: true),
               ),
             ],
           ),
-        ],
-      ),
-      sidebar: EuPanelDashboardSidebar(role: role),
-      topbar: Topbar(
-        title: 'Hosting Subscriptions',
-        subtitle: 'Manage active environments, credentials, and package limits',
-        dartStyle: const DartStyle(
-          display: Display.flex,
-          alignItems: AlignItems.center,
-          justifyContent: JustifyContent.between,
-          margin: EdgeInsets.only(bottom: 24),
         ),
-        actions: Row(
-          dartStyle: const DartStyle(
-            display: Display.flex,
-            alignItems: AlignItems.center,
-            gap: 8,
-          ),
-          children: [
-            Button(
-              dartStyle: const DartStyle(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                radius: 10,
-                background: 'linear-gradient(135deg, #06b6d4, #2563eb)',
-                color: '#ffffff',
-                fontSize: 13,
-                fontWeight: 700,
-                cursor: Cursor.pointer,
-                shadow: Shadow(x: 0, y: 4, blur: 12, color: Color.rgba(37, 99, 235, 0.2)),
-                hover: DartStyle(
-                  shadow: Shadow(x: 0, y: 6, blur: 16, color: Color.rgba(37, 99, 235, 0.3)),
-                  transform: 'translateY(-1px)',
-                ),
-              ),
-              onPressed: (_) {
-                _subscriptionForm.reset();
-                final plansList = plans.data ?? [];
-                if (plansList.isNotEmpty) {
-                  _subscriptionForm.setField('plan_id', plansList.first.string('id') ?? '');
-                }
-                _subFormError = null;
-                _showSubModal = true;
-                setState(() {});
-              },
-              child: Text('New Subscription'),
-            ),
-            Button(
-              child: 'Refresh',
-              dartStyle: const DartStyle(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                radius: 10,
-                background: '#ffffff',
-                border: Border(color: Color('#cbd5e1'), width: 1),
-                color: '#475569',
-                fontSize: 13,
-                fontWeight: 700,
-                cursor: Cursor.pointer,
-                hover: DartStyle(
-                  background: '#f8fafc',
-                  color: '#0f172a',
-                ),
-              ),
-              onPressed: (_) => subscriptions.refresh(silent: true),
-            ),
-          ],
-        ),
-      ),
-      children: [
         Grid(
           dartStyle: const DartStyle(
             display: Display.grid,
@@ -154,7 +110,8 @@ class SubscriptionsView extends FlintComponent {
           children: [
             Panel(
               title: 'Active Environments',
-              description: 'Select your subscription to view details, FTP credentials, and cancel service.',
+              description:
+                  'Select your subscription to view details, FTP credentials, and cancel service.',
               dartStyle: const DartStyle(
                 background: '#ffffff',
                 border: Border(color: Color('#e2e8f0'), width: 1),
@@ -185,7 +142,9 @@ class SubscriptionsView extends FlintComponent {
 
                   if (subs.isEmpty) {
                     return EmptyState(
-                      title: snapshot.isError ? 'Could not load subscriptions' : 'No active subscriptions',
+                      title: snapshot.isError
+                          ? 'Could not load subscriptions'
+                          : 'No active subscriptions',
                       message: snapshot.isError
                           ? snapshot.error.toString()
                           : 'You don\'t have any active hosting subscriptions. Create a new subscription package using the button above.',
@@ -205,12 +164,19 @@ class SubscriptionsView extends FlintComponent {
                           message: snapshot.error.toString(),
                           tone: Tone.warning,
                         ),
-                      for (final sub in subs) _buildSubscriptionCard(sub, plansList, role),
+                      for (final sub in subs)
+                        _buildSubscriptionCard(sub, plansList, role),
                     ],
                   );
                 },
               ),
             ),
+            if (_credentialNotice != null)
+              Alert(
+                title: 'Generated login details',
+                message: _credentialNotice!,
+                tone: Tone.success,
+              ),
           ],
         ),
         if (_showSubModal) _buildSubModal(),
@@ -218,7 +184,8 @@ class SubscriptionsView extends FlintComponent {
     );
   }
 
-  FlintNode _buildSubscriptionCard(FlintModelRecord sub, List<FlintModelRecord> plansList, String role) {
+  FlintNode _buildSubscriptionCard(
+      FlintModelRecord sub, List<FlintModelRecord> plansList, String role) {
     final planId = sub.string('plan_id') ?? '';
     FlintModelRecord? plan;
     for (final p in plansList) {
@@ -236,10 +203,12 @@ class SubscriptionsView extends FlintComponent {
     final ftpUsername = sub.string('ftp_username') ?? 'pending';
     final ftpPassword = sub.string('ftp_password') ?? '********';
     final homeDir = sub.string('home_directory') ?? 'pending';
+    final primaryDomain = sub.string('primary_domain') ?? '';
     final provLog = sub.string('provisioning_log') ?? '';
 
     final isFailed = provStatus == 'failed';
-    final isProvisioning = provStatus == 'provisioning' || provStatus == 'pending';
+    final isProvisioning =
+        provStatus == 'provisioning' || provStatus == 'pending';
     final isCancelled = status == 'cancelled';
 
     String statusLabel = 'Active';
@@ -260,9 +229,11 @@ class SubscriptionsView extends FlintComponent {
       statusColor = '#475569';
     }
 
-    final host = web.window.location.hostname;
+    final host =
+        primaryDomain.isNotEmpty ? primaryDomain : web.window.location.hostname;
 
-    final envEmoji = planName.toLowerCase().contains('pro') || planName.toLowerCase().contains('business')
+    final envEmoji = planName.toLowerCase().contains('pro') ||
+            planName.toLowerCase().contains('business')
         ? '⚡'
         : '🚀';
 
@@ -337,7 +308,7 @@ class SubscriptionsView extends FlintComponent {
                       ),
                       children: [
                         Text.strong(
-                          planName,
+                          primaryDomain.isNotEmpty ? primaryDomain : planName,
                           dartStyle: const DartStyle(
                             fontSize: 18,
                             fontWeight: 700,
@@ -350,14 +321,17 @@ class SubscriptionsView extends FlintComponent {
                             fontSize: 12,
                             color: Color('#64748b'),
                             background: '#f1f5f9',
-                            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
                             radius: 4,
                           ),
                         ),
                       ],
                     ),
                     Text.span(
-                      'ID: $subId',
+                      primaryDomain.isNotEmpty
+                          ? '$planName | ID: $subId'
+                          : 'ID: $subId',
                       dartStyle: const DartStyle(
                         fontSize: 12,
                         color: Color('#94a3b8'),
@@ -370,7 +344,8 @@ class SubscriptionsView extends FlintComponent {
             ),
             Container(
               dartStyle: DartStyle(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 radius: 999,
                 background: statusBg,
                 color: statusColor,
@@ -392,11 +367,15 @@ class SubscriptionsView extends FlintComponent {
             borderBottom: Border(color: Color('#f1f5f9'), width: 1),
           ),
           children: [
-            SubscriptionMetric(label: 'FTP / SFTP Host', value: host, copyable: true),
-            SubscriptionMetric(label: 'System Username', value: sysUsername, copyable: true),
+            SubscriptionMetric(
+                label: 'FTP / SFTP Host', value: host, copyable: true),
+            SubscriptionMetric(
+                label: 'System Username', value: sysUsername, copyable: true),
             SubscriptionMetric(label: 'Home Directory', value: homeDir),
-            SubscriptionMetric(label: 'FTP Username', value: ftpUsername, copyable: true),
-            SubscriptionMetric(label: 'FTP Password', value: ftpPassword, copyable: true),
+            SubscriptionMetric(
+                label: 'FTP Username', value: ftpUsername, copyable: true),
+            SubscriptionMetric(
+                label: 'FTP Password', value: ftpPassword, copyable: true),
           ],
         ),
         if (isFailed && provLog.isNotEmpty)
@@ -459,7 +438,8 @@ class SubscriptionsView extends FlintComponent {
             options: [
               for (final plan in (plans.data ?? []))
                 SelectOption(
-                  label: '${plan.string('name') ?? 'Plan'} - \$${plan.string('price') ?? '0'}/mo',
+                  label:
+                      '${plan.string('name') ?? 'Plan'} - \$${plan.string('price') ?? '0'}/mo',
                   value: plan.string('id') ?? '',
                 ),
             ],
@@ -470,7 +450,38 @@ class SubscriptionsView extends FlintComponent {
             },
             disabled: _subscriptionForm.processing,
             selectProps: const {
-              'style': 'border-radius: 10px; padding: 10px 12px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 14px; width: 100%;'
+              'style':
+                  'border-radius: 10px; padding: 10px 12px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 14px; width: 100%;'
+            },
+          ),
+          TextField(
+            label: 'Primary Domain *',
+            name: 'domain',
+            controller: _subscriptionForm.controller('domain'),
+            placeholder: 'example.com',
+            required: true,
+            disabled: _subscriptionForm.processing,
+            inputStyle: const {
+              'border-radius': '10px',
+              'padding': '10px 12px',
+              'border': '1px solid #cbd5e1',
+              'background': '#f8fafc',
+              'font-size': '14px',
+            },
+          ),
+          TextField(
+            label: 'Contact Email',
+            name: 'contact_email',
+            controller: _subscriptionForm.controller('contact_email'),
+            type: 'email',
+            placeholder: 'client@example.com',
+            disabled: _subscriptionForm.processing,
+            inputStyle: const {
+              'border-radius': '10px',
+              'padding': '10px 12px',
+              'border': '1px solid #cbd5e1',
+              'background': '#f8fafc',
+              'font-size': '14px',
             },
           ),
           if (_subFormError != null)
@@ -529,7 +540,9 @@ class SubscriptionsView extends FlintComponent {
                   ),
                   cursor: Cursor.pointer,
                 ),
-                child: Text(_subscriptionForm.processing ? 'Provisioning...' : 'Subscribe Now'),
+                child: Text(_subscriptionForm.processing
+                    ? 'Provisioning...'
+                    : 'Subscribe Now'),
               ),
             ],
           ),
@@ -544,9 +557,17 @@ class SubscriptionsView extends FlintComponent {
     }
 
     final planId = _subscriptionForm.string('plan_id').trim();
+    final domain = _subscriptionForm.string('domain').trim().toLowerCase();
+    final contactEmail = _subscriptionForm.string('contact_email').trim();
     if (planId.isEmpty) {
       setState(() {
         _subFormError = 'Please select a hosting package.';
+      });
+      return;
+    }
+    if (domain.isEmpty) {
+      setState(() {
+        _subFormError = 'Please enter the primary domain.';
       });
       return;
     }
@@ -554,8 +575,11 @@ class SubscriptionsView extends FlintComponent {
     final submit = _subscriptionForm.submit(
       (_) => clientRouter.post<Map<String, dynamic>>('/subscriptions', body: {
         'plan_id': planId,
+        'domain': domain,
+        if (contactEmail.isNotEmpty) 'contact_email': contactEmail,
       }),
       onSuccess: (result) {
+        _credentialNotice = _formatCredentialNotice(result.data);
         _subscriptionForm.reset();
         subscriptions.refresh();
         setState(() {
@@ -577,13 +601,39 @@ class SubscriptionsView extends FlintComponent {
     setState(() {});
   }
 
+  String _formatCredentialNotice(Object? result) {
+    final payload = _asMap(result);
+    final data = _asMap(payload['data']);
+    final panel = _asMap(data['panel_login']);
+    final ftp = _asMap(data['ftp']);
+
+    final panelUsername = panel['username']?.toString() ?? 'unknown';
+    final panelPassword = panel['password']?.toString() ?? 'not returned';
+    final ftpUsername = ftp['username']?.toString() ?? 'pending';
+    final ftpPassword = ftp['password']?.toString() ?? 'pending';
+    final ftpHost = ftp['host']?.toString() ?? 'pending';
+
+    return 'Panel username: $panelUsername | Panel password: $panelPassword | FTP host: $ftpHost | FTP username: $ftpUsername | FTP password: $ftpPassword';
+  }
+
+  Map<String, dynamic> _asMap(Object? value) {
+    if (value is Map<String, dynamic>) return value;
+    if (value is Map) {
+      return value.map((key, entry) => MapEntry(key.toString(), entry));
+    }
+    return const {};
+  }
+
   Future<void> _handleCancelSubscription(String id) async {
-    final confirmed = web.window.confirm('Are you sure you want to cancel this subscription? This will delete all files and databases!');
+    final confirmed = web.window.confirm(
+        'Are you sure you want to cancel this subscription? This will delete all files and databases!');
     if (!confirmed) return;
 
-    final response = await clientRouter.delete<Map<String, dynamic>>('/subscriptions/$id');
+    final response =
+        await clientRouter.delete<Map<String, dynamic>>('/subscriptions/$id');
     if (response.isError) {
-      web.window.alert((response.error ?? 'Failed to cancel subscription.').toString());
+      web.window.alert(
+          (response.error ?? 'Failed to cancel subscription.').toString());
       return;
     }
 
@@ -592,8 +642,11 @@ class SubscriptionsView extends FlintComponent {
 
   String _friendlyError(Object error) {
     final message = error.toString();
-    if (message.contains('ClientResponseException') || message.contains('Exception:')) {
-      return message.replaceFirst('Exception: ', '').replaceFirst('ClientResponseException: ', '');
+    if (message.contains('ClientResponseException') ||
+        message.contains('Exception:')) {
+      return message
+          .replaceFirst('Exception: ', '')
+          .replaceFirst('ClientResponseException: ', '');
     }
     return message;
   }

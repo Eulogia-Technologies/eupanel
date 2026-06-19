@@ -5,8 +5,11 @@ class Subscription extends Model<Subscription> {
   Subscription() : super(() => Subscription());
 
   String? get userId => getAttribute("user_id");
+  String? get createdByUserId => getAttribute("created_by_user_id");
   String? get planId => getAttribute("plan_id");
   String? get serverId => getAttribute("server_id");
+  String? get primaryDomain => getAttribute("primary_domain");
+  String? get panelUsername => getAttribute("panel_username");
   String? get systemUsername => getAttribute("system_username");
   String? get ftpUsername => getAttribute("ftp_username");
   String? get ftpPassword => getAttribute("ftp_password");
@@ -26,6 +29,12 @@ class Subscription extends Model<Subscription> {
             // comment: 'FK → users.id',
           ),
           Column(
+            name: 'created_by_user_id',
+            type: ColumnType.string,
+            length: 36,
+            isNullable: true,
+          ),
+          Column(
             name: 'plan_id',
             type: ColumnType.string,
             length: 36,
@@ -37,6 +46,19 @@ class Subscription extends Model<Subscription> {
             length: 36,
             isNullable: true,
             //comment: 'FK → servers.id — which server this subscription lives on',
+          ),
+          Column(
+            name: 'primary_domain',
+            type: ColumnType.string,
+            length: 253,
+            isNullable: true,
+          ),
+          Column(
+            name: 'panel_username',
+            type: ColumnType.string,
+            length: 64,
+            isUnique: true,
+            isNullable: true,
           ),
           Column(
             name: 'system_username',

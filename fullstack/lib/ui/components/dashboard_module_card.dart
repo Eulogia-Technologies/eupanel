@@ -1,17 +1,12 @@
 import 'package:flint_ui/flint_ui.dart';
 
-class DashboardModuleCard extends FlintComponent {
-  Map<String, dynamic> module;
+class DashboardModuleCard extends StatelessComponent {
+  final Map<String, dynamic> module;
 
   DashboardModuleCard({required this.module});
 
   @override
-  void updateFrom(covariant DashboardModuleCard next) {
-    module = next.module;
-  }
-
-  @override
-  FlintNode build() {
+  View build() {
     final title = module['title']?.toString() ?? 'Module';
     final body = module['body']?.toString() ?? '';
     final emoji = _getEmoji(title);

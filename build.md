@@ -77,43 +77,6 @@ npm run start
 
 ---
 
-## Eupanel Agent
-
-The agent is installed on every managed server.
-
-### Install
-
-```bash
-# On the target server
-dart compile exe agent/bin/agent.dart -o eupanel-agent
-sudo mv eupanel-agent /usr/local/bin/eupanel-agent
-```
-
-### Run as systemd service
-
-Create `/etc/systemd/system/eupanel-agent.service`:
-
-```ini
-[Unit]
-Description=Eupanel Agent
-After=network.target
-
-[Service]
-ExecStart=/usr/local/bin/eupanel-agent
-Restart=always
-User=root
-
-[Install]
-WantedBy=multi-user.target
-```
-
-```bash
-sudo systemctl enable eupanel-agent
-sudo systemctl start eupanel-agent
-```
-
----
-
 ## Environment Variables
 
 ### Backend
@@ -128,7 +91,6 @@ sudo systemctl start eupanel-agent
 | `JWT_SECRET`     | Secret for JWT token signing       |
 | `PDNS_API_URL`   | PowerDNS API URL                   |
 | `PDNS_API_KEY`   | PowerDNS API key                   |
-| `AGENT_SECRET`   | Shared secret for agent auth       |
 
 ### Frontend
 

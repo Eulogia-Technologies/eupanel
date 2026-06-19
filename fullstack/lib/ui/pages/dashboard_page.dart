@@ -1,58 +1,53 @@
 import 'package:flint_ui/flint_ui.dart';
 
-import '../components/components.dart';
+import '../components/dashboard_shell.dart';
+import 'backups_page.dart';
+import 'databases_page.dart';
+import 'dns_page.dart';
+import 'file_manager_page.dart';
+import 'jobs_page.dart';
+import 'mail_page.dart';
+import 'overview_page.dart';
+import 'plans_page.dart';
+import 'servers_page.dart';
+import 'ssl_page.dart';
+import 'subscriptions_page.dart';
+import 'websites_domains_page.dart';
 
-class DashboardPage extends FlintComponent {
+class DashboardPage extends StatefulComponent {
   Map<String, dynamic> props;
 
   DashboardPage(this.props) {
     final role = props['role']?.toString() ?? 'customer';
+    final isAdmin = role == 'admin';
 
-    _plans = ResourceController<List<FlintModelRecord>>(
-      initialData: _planRecords(props['plans']),
-      loader: () => FlintModelApi<FlintModelRecord>.records('/plans').list(),
-      loadImmediately: true,
-    );
-    _subscriptions = ResourceController<List<FlintModelRecord>>(
-      loader: () => FlintModelApi<FlintModelRecord>.records('/subscriptions').list(),
-      loadImmediately: true,
-    );
+    _plans = _records('/plans', initialData: _planRecords(props['plans']));
+    _subscriptions = _records('/subscriptions');
+    _databases = _records('/databases');
+    _mail = _records('/mail');
+    _backups = _records('/backups');
+    _dnsZones = _records('/dns/zones');
+    _sslCertificates = _records('/ssl/certificates');
+    _sites = _records('/sites');
 
-    _plansSub = _plans.state.listen((_) {
-      setState(() {});
-    });
-    _subsSub = _subscriptions.state.listen((_) {
-      setState(() {});
-    });
+    _plansSub = _listen(_plans);
+    _subsSub = _listen(_subscriptions);
+    _databasesSub = _listen(_databases);
+    _mailSub = _listen(_mail);
+    _backupsSub = _listen(_backups);
+    _dnsZonesSub = _listen(_dnsZones);
+    _sslCertificatesSub = _listen(_sslCertificates);
+    _sitesSub = _listen(_sites);
 
-    if (role == 'admin') {
-      _users = ResourceController<List<FlintModelRecord>>(
-        loader: () => FlintModelApi<FlintModelRecord>.records('/users').list(),
-        loadImmediately: true,
-      );
-      _servers = ResourceController<List<FlintModelRecord>>(
-        loader: () => FlintModelApi<FlintModelRecord>.records('/servers').list(),
-        loadImmediately: true,
-      );
-      _jobs = ResourceController<List<FlintModelRecord>>(
-        loader: () => FlintModelApi<FlintModelRecord>.records('/jobs').list(),
-        loadImmediately: true,
-      );
+    if (isAdmin) {
+      _servers = _records('/servers');
+      _jobs = _records('/jobs');
 
-      _usersSub = _users!.state.listen((_) {
-        setState(() {});
-      });
-      _serversSub = _servers!.state.listen((_) {
-        setState(() {});
-      });
-      _jobsSub = _jobs!.state.listen((_) {
-        setState(() {});
-      });
+      _serversSub = _listen(_servers!);
+      _jobsSub = _listen(_jobs!);
     } else {
-      _users = null;
       _servers = null;
       _jobs = null;
-      _usersSub = null;
       _serversSub = null;
       _jobsSub = null;
     }
@@ -60,13 +55,23 @@ class DashboardPage extends FlintComponent {
 
   late final ResourceController<List<FlintModelRecord>> _plans;
   late final ResourceController<List<FlintModelRecord>> _subscriptions;
-  late final ResourceController<List<FlintModelRecord>>? _users;
+  late final ResourceController<List<FlintModelRecord>> _databases;
+  late final ResourceController<List<FlintModelRecord>> _mail;
+  late final ResourceController<List<FlintModelRecord>> _backups;
+  late final ResourceController<List<FlintModelRecord>> _dnsZones;
+  late final ResourceController<List<FlintModelRecord>> _sslCertificates;
+  late final ResourceController<List<FlintModelRecord>> _sites;
   late final ResourceController<List<FlintModelRecord>>? _servers;
   late final ResourceController<List<FlintModelRecord>>? _jobs;
 
   late final StateSignalSubscription _plansSub;
   late final StateSignalSubscription _subsSub;
-  late final StateSignalSubscription? _usersSub;
+  late final StateSignalSubscription _databasesSub;
+  late final StateSignalSubscription _mailSub;
+  late final StateSignalSubscription _backupsSub;
+  late final StateSignalSubscription _dnsZonesSub;
+  late final StateSignalSubscription _sslCertificatesSub;
+  late final StateSignalSubscription _sitesSub;
   late final StateSignalSubscription? _serversSub;
   late final StateSignalSubscription? _jobsSub;
 
@@ -79,324 +84,110 @@ class DashboardPage extends FlintComponent {
   void willUnmount() {
     _plansSub();
     _subsSub();
-    _usersSub?.call();
+    _databasesSub();
+    _mailSub();
+    _backupsSub();
+    _dnsZonesSub();
+    _sslCertificatesSub();
+    _sitesSub();
     _serversSub?.call();
     _jobsSub?.call();
 
     _plans.dispose();
     _subscriptions.dispose();
-    _users?.dispose();
+    _databases.dispose();
+    _mail.dispose();
+    _backups.dispose();
+    _dnsZones.dispose();
+    _sslCertificates.dispose();
+    _sites.dispose();
     _servers?.dispose();
     _jobs?.dispose();
   }
 
   @override
-  FlintNode build() {
+  View build() {
     final role = props['role']?.toString() ?? 'customer';
     final path = _normalizePath(currentUri.path);
 
-    if (path == '/dashboard/plans') {
-      return PlansView(role: role, plans: _plans);
-    }
-
-    if (path == '/dashboard/subscriptions') {
-      return SubscriptionsView(role: role, plans: _plans, subscriptions: _subscriptions);
-    }
-
-    if (path == '/dashboard/websites-domains') {
-      return WebsitesDomainsView(role: role, subscriptions: _subscriptions);
-    }
-
-    final initialStats = _map(props['stats']);
-    final plansCount = _plans.data?.length ?? initialStats['plans'] ?? 0;
-    final subsCount = _subscriptions.data?.length ?? initialStats['subscriptions'] ?? 0;
-
-    int activeSubsCount = initialStats['activeSubscriptions'] ?? 0;
-    if (_subscriptions.data != null) {
-      activeSubsCount = _subscriptions.data!.where((item) {
-        final status = item.string('status')?.toLowerCase();
-        return status == null || status == 'active';
-      }).length;
-    }
-
-    final usersCount = _users?.data?.length ?? initialStats['users'] ?? 0;
-    final serversCount = _servers?.data?.length ?? initialStats['servers'] ?? 1;
-    final jobsCount = _jobs?.data?.length ?? initialStats['jobs'] ?? 0;
-
-    final modules = _listOfMaps(props['modules']);
-
     return EuPanelDashboardShell(
-      brand: Row(
-        dartStyle: const DartStyle(
-          alignItems: AlignItems.center,
-          gap: 12,
-        ),
-        children: [
-          Container(
-            dartStyle: const DartStyle(
-              display: Display.flex,
-              alignItems: AlignItems.center,
-              justifyContent: JustifyContent.center,
-              width: 40,
-              height: 40,
-              radius: 12,
-              background: 'linear-gradient(135deg, #06b6d4, #2563eb)',
-              color: '#ffffff',
-              fontWeight: 800,
-              fontSize: 16,
-              shadow: '0 0 16px rgba(6, 182, 212, 0.45)',
-            ),
-            child: Text('EP'),
-          ),
-          Column(
-            dartStyle: const DartStyle(
-              display: Display.flex,
-              flexDirection: FlexDirection.column,
-              gap: 2,
-            ),
-            children: [
-              Text.strong(
-                'EuPanel',
-                dartStyle: const DartStyle(
-                  color: '#ffffff',
-                  fontWeight: 800,
-                  fontSize: 16,
-                  letterSpacing: -0.4,
-                ),
-              ),
-              Text.span(
-                'Flint control node',
-                dartStyle: const DartStyle(
-                  color: '#64748b',
-                  fontSize: 11,
-                  fontWeight: 600,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-      sidebar: EuPanelDashboardSidebar(role: role),
-      topbar: DashboardTopbar(role: role),
-      children: [
-        DashboardHero(role: role),
-        CounterDemo(),
-        Grid(
-          dartStyle: const DartStyle(
-            display: Display.grid,
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 16,
-            margin: EdgeInsets.only(bottom: 24),
-            md: DartStyle(
-              gridTemplateColumns: 'repeat(3, 1fr)',
-            ),
-            lg: DartStyle(
-              gridTemplateColumns: 'repeat(6, 1fr)',
-            ),
-          ),
-          children: [
-            StatCard(
-              label: 'Plans',
-              value: plansCount,
-              trend: 'Shared hosting packages',
-              icon: Container(
-                dartStyle: _statIconStyle,
-                child: Text('📦'),
-              ),
-              dartStyle: _statCardStyle,
-            ),
-            StatCard(
-              label: 'Subscriptions',
-              value: subsCount,
-              trend: 'All customer subscriptions',
-              icon: Container(
-                dartStyle: _statIconStyle,
-                child: Text('🚀'),
-              ),
-              dartStyle: _statCardStyle,
-            ),
-            StatCard(
-              label: 'Active',
-              value: activeSubsCount,
-              trend: 'Provisioned and running',
-              tone: Tone.success,
-              icon: Container(
-                dartStyle: _statIconStyleSuccess,
-                child: Text('⚡'),
-              ),
-              dartStyle: _statCardStyle,
-            ),
-            StatCard(
-              label: 'Users',
-              value: usersCount,
-              trend: 'Admins, resellers, customers',
-              icon: Container(
-                dartStyle: _statIconStyle,
-                child: Text('👥'),
-              ),
-              dartStyle: _statCardStyle,
-            ),
-            StatCard(
-              label: 'Servers',
-              value: serversCount,
-              trend: 'Connected agents',
-              icon: Container(
-                dartStyle: _statIconStyle,
-                child: Text('🖥️'),
-              ),
-              dartStyle: _statCardStyle,
-            ),
-            StatCard(
-              label: 'Jobs',
-              value: jobsCount,
-              trend: 'Queued provisioning work',
-              tone: Tone.info,
-              icon: Container(
-                dartStyle: _statIconStyleInfo,
-                child: Text('⚙️'),
-              ),
-              dartStyle: _statCardStyle,
-            ),
-          ],
-        ),
-        Grid(
-          dartStyle: const DartStyle(
-            display: Display.grid,
-            gridTemplateColumns: '1fr',
-            gap: 24,
-            lg: DartStyle(
-              gridTemplateColumns: '1.5fr 0.8fr',
-            ),
-          ),
-          children: [
-            Panel(
-              title: 'Modules',
-              description: 'Role-aware EuPanel workspaces',
-              dartStyle: const DartStyle(
-                background: '#ffffff',
-                border: Border(color: Color('#e2e8f0'), width: 1),
-                radius: 16,
-                padding: EdgeInsets.all(24),
-                shadow: Shadow(
-                  x: 0,
-                  y: 4,
-                  blur: 12,
-                  spread: 0,
-                  color: Color.rgba(0, 0, 0, 0.02),
-                ),
-              ),
-              child: Grid(
-                dartStyle: const DartStyle(
-                  display: Display.grid,
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: 16,
-                ),
-                children: [
-                  for (final module in modules) DashboardModuleCard(module: module),
-                ],
-              ),
-            ),
-            Panel(
-              title: 'Hosting plans',
-              description:
-                  'Server props first, FlintDart API refresh after mount',
-              actions: Button(
-                child: 'Refresh',
-                tone: Tone.neutral,
-                variant: ButtonVariant.soft,
-                onPressed: (_) => _plans.refresh(silent: true),
-              ),
-              dartStyle: const DartStyle(
-                background: '#ffffff',
-                border: Border(color: Color('#e2e8f0'), width: 1),
-                radius: 16,
-                padding: EdgeInsets.all(24),
-                shadow: Shadow(
-                  x: 0,
-                  y: 4,
-                  blur: 12,
-                  spread: 0,
-                  color: Color.rgba(0, 0, 0, 0.02),
-                ),
-              ),
-              child: ResourceView<List<FlintModelRecord>>(
-                _plans,
-                (snapshot) {
-                  final plans = snapshot.data ?? const <FlintModelRecord>[];
-                  if (snapshot.isLoading && plans.isEmpty) {
-                    return DataTable(
-                      columns: _planColumns,
-                      loading: true,
-                    );
-                  }
-
-                  if (plans.isEmpty) {
-                    return EmptyState(
-                      title: snapshot.isError
-                          ? 'Could not load plans'
-                          : 'No plans found',
-                      message: snapshot.isError
-                          ? snapshot.error.toString()
-                          : 'Create plans through the API or seed data to populate this panel.',
-                    );
-                  }
-
-                  return Column(children: [
-                    if (snapshot.isError)
-                      Alert(
-                        title: 'Showing cached plans',
-                        message: snapshot.error.toString(),
-                        tone: Tone.warning,
-                      ),
-                    DataTable(
-                      columns: _planColumns,
-                      rows: [
-                        for (final plan in plans) _planTableRow(plan),
-                      ],
-                    ),
-                  ]);
-                },
-              ),
-            ),
-          ],
-        ),
-      ],
+      role: role,
+      children: [_pageFor(path, role)],
     );
   }
 
-  static const _planColumns = [
-    TableColumn(key: 'name', label: 'Plan'),
-    TableColumn(key: 'resources', label: 'Resources'),
-    TableColumn(key: 'price', label: 'Price'),
-  ];
+  View _pageFor(String path, String role) {
+    return switch (path) {
+      '/dashboard/subscriptions' => SubscriptionsPage(
+          role: role,
+          plans: _plans,
+          subscriptions: _subscriptions,
+        ),
+      '/dashboard/websites-domains' => WebsitesDomainsPage(
+          role: role,
+          subscriptions: _subscriptions,
+        ),
+      '/dashboard/dns' => DnsPage(zones: _dnsZones),
+      '/dashboard/ssl' => SslPage(certificates: _sslCertificates),
+      '/dashboard/file-manager' => FileManagerPage(sites: _sites),
+      '/dashboard/databases' => DatabasesPage(databases: _databases),
+      '/dashboard/mail' || '/dashboard/mails' => MailPage(mail: _mail),
+      '/dashboard/backups' => BackupsPage(backups: _backups),
+      '/dashboard/plans' when _canAccessAdminRoute(role) => PlansPage(
+          role: role,
+          plans: _plans,
+        ),
+      '/dashboard/servers' when _servers != null => ServersPage(
+          servers: _servers,
+        ),
+      '/dashboard/jobs' when _jobs != null => JobsPage(
+          jobs: _jobs,
+        ),
+      _ => OverviewPage(
+          role: role,
+          props: props,
+          plans: _plans,
+          subscriptions: _subscriptions,
+          databases: _databases,
+          mail: _mail,
+          backups: _backups,
+          dnsZones: _dnsZones,
+          sslCertificates: _sslCertificates,
+          sites: _sites,
+          servers: _servers,
+          jobs: _jobs,
+        ),
+    };
+  }
 
-  TableRowData _planTableRow(FlintModelRecord plan) {
-    return TableRowData(cells: {
-      'name': plan.string('name') ?? 'Hosting Plan',
-      'resources':
-          'Disk ${plan['disk_limit'] ?? plan['disk'] ?? '-'} / Bandwidth ${plan['bandwidth_limit'] ?? plan['bandwidth'] ?? '-'}',
-      'price': plan.string('price') ?? '0',
+  bool _canAccessAdminRoute(String role) =>
+      role == 'admin' || role == 'reseller';
+
+  ResourceController<List<FlintModelRecord>> _records(
+    String path, {
+    List<FlintModelRecord>? initialData,
+  }) {
+    return ResourceController<List<FlintModelRecord>>(
+      initialData: initialData,
+      loader: () => FlintModelApi<FlintModelRecord>.records(path).list(),
+      loadImmediately: true,
+    );
+  }
+
+  StateSignalSubscription _listen(
+    ResourceController<List<FlintModelRecord>> resource,
+  ) {
+    return resource.state.listen((_) {
+      setState(() {});
     });
   }
 
   List<FlintModelRecord> _planRecords(Object? value) {
-    return _listOfMaps(value).map(FlintModelRecord.new).toList();
-  }
-
-  Map<String, dynamic> _map(Object? value) {
-    if (value is Map<String, dynamic>) return value;
-    if (value is Map) {
-      return value
-          .map((key, entryValue) => MapEntry(key.toString(), entryValue));
-    }
-    return const {};
-  }
-
-  List<Map<String, dynamic>> _listOfMaps(Object? value) {
     if (value is! List) return const [];
     return value.whereType<Map>().map((item) {
-      return item
-          .map((key, entryValue) => MapEntry(key.toString(), entryValue));
+      return FlintModelRecord(
+        item.map((key, entryValue) => MapEntry(key.toString(), entryValue)),
+      );
     }).toList();
   }
 
@@ -406,63 +197,4 @@ class DashboardPage extends FlintComponent {
     }
     return path.isEmpty ? '/' : path;
   }
-
-  static const _statIconStyle = DartStyle(
-    display: Display.flex,
-    alignItems: AlignItems.center,
-    justifyContent: JustifyContent.center,
-    width: 32,
-    height: 32,
-    radius: 8,
-    background: '#f1f5f9',
-    fontSize: 16,
-  );
-
-  static const _statIconStyleSuccess = DartStyle(
-    display: Display.flex,
-    alignItems: AlignItems.center,
-    justifyContent: JustifyContent.center,
-    width: 32,
-    height: 32,
-    radius: 8,
-    background: '#ecfdf5',
-    fontSize: 16,
-  );
-
-  static const _statIconStyleInfo = DartStyle(
-    display: Display.flex,
-    alignItems: AlignItems.center,
-    justifyContent: JustifyContent.center,
-    width: 32,
-    height: 32,
-    radius: 8,
-    background: '#f0f9ff',
-    fontSize: 16,
-  );
-
-  static const _statCardStyle = DartStyle(
-    background: '#ffffff',
-    border: Border(color: Color('#e2e8f0'), width: 1),
-    radius: 16,
-    padding: EdgeInsets.all(20),
-    shadow: Shadow(
-      x: 0,
-      y: 4,
-      blur: 12,
-      spread: 0,
-      color: Color.rgba(0, 0, 0, 0.02),
-    ),
-    transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-    hover: DartStyle(
-      transform: 'translateY(-2px)',
-      border: Border(color: Color('#bfdbfe'), width: 1),
-      shadow: Shadow(
-        x: 0,
-        y: 12,
-        blur: 24,
-        spread: 0,
-        color: Color.rgba(37, 99, 235, 0.05),
-      ),
-    ),
-  );
 }
